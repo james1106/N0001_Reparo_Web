@@ -1,32 +1,28 @@
-import baobiao from './pages/baobiao/index.vue'
-import huoquan from './pages/huoquan/index.vue'
-import shouye from './pages/shouye/index.vue'
+import baobiao from './pages/dingdan/index.vue'
+import huoquan from './pages/yufu/index.vue'
+import shouye from './pages/cangchu/index.vue'
 import yingshou from './pages/yingshou/index.vue'
-  import chengdui from './pages/yingshou/chengdui.vue'
-  import qianfa from './pages/yingshou/qianfa.vue'
-  import tiexian from './pages/yingshou/tiexian.vue'
+  import daichengdui from './pages/yingshou/daichengdui.vue'
   import duifu from './pages/yingshou/duifu.vue'
-  import zhuanrang from './pages/yingshou/zhuanrang.vue'
-  import xinxi from './pages/yingshou/xinxi.vue'
+  import qianfa from './pages/yingshou/qianfa.vue'
+  import yingshoutiexian from './pages/yingshou/yingshoutiexian.vue'
 export default [
   {
-    path:'/baobiao',component:baobiao,
+    path:'/dingdan',component:baobiao,
   },{
-    path:'/huoquan',component:huoquan,
+    path:'/yufu',component:huoquan,
   },{
-    path:'/shouye',component:shouye,
+    path:'/cangchu',component:shouye,
   },{
     path:'/yingshou',component:yingshou,
     children:[
-      {path:'',component:chengdui},
-      {path:'chengdui',component:chengdui},
-      {path:'qianfa',component:qianfa},
-      {path:'tiexian',component:tiexian},
+      {path:'',component:daichengdui},
+      {path:'daichengdui',component:daichengdui},
       {path:'duifu',component:duifu},
-      {path:'zhuanrang',component:zhuanrang},
-      {path:'xinxi',component:xinxi},
+      {path:'qianfa',component:qianfa},
+      {path:'yingshoutiexian',component:yingshoutiexian},
     ]
   },{
-    path:'/shouye',component:shouye,
+    path:'/cangchu',component:shouye,
   }
 ]
