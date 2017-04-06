@@ -15,14 +15,14 @@ export default [
     path:'/cangchu',component:shouye,
   },{
     path:'/yingshou',component:yingshou,
-    children:[
-      {path:'',component:daichengdui},
-      {path:'daichengdui',component:daichengdui},
-      {path:'duifu',component:duifu},
-      {path:'qianfa',component:qianfa},
-      {path:'yingshoutiexian',component:yingshoutiexian},
-    ]
-  },{
+
+
+  },
+  {path:'/daichengdui',component:daichengdui},
+  {path:'/duifu',component:duifu},
+  {path:'/qianfa',component:qianfa},
+  {path:'/yingshoutiexian',component:yingshoutiexian},
+  {
     path:'/cangchu',component:shouye,
   }
 ]
