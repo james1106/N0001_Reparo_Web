@@ -24,7 +24,7 @@
   </header>
   <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
   <main>
-    <aside class="menu">
+    <aside class="main-left">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item>
           我的功能
@@ -37,10 +37,10 @@
         </el-submenu>
         <el-submenu index="/yingshou">
           <template slot="title">应收账款</template>
-          <el-menu-item index="/yinghsou/qianfa">签发</el-menu-item>
-          <el-menu-item index="/yingshou/daichengdui">待承兑的账款</el-menu-item>
-          <el-menu-item index="/yingshou/yingshoutiexian">贴现</el-menu-item>
-          <el-menu-item index="/yingshou/duifu">兑付</el-menu-item>
+          <el-menu-item index="/qianfa">签发</el-menu-item>
+          <el-menu-item index="/daichengdui">待承兑的账款</el-menu-item>
+          <el-menu-item index="/yingshoutiexian">贴现</el-menu-item>
+          <el-menu-item index="/duifu">兑付</el-menu-item>
         </el-submenu>
         <el-submenu index="/yufu">
           <template slot="title">预付款</template>
@@ -56,9 +56,11 @@
         </el-submenu>
       </el-menu>
     </aside>
+    <div class="main-right">
     <transition name="fade">
       <router-view class="view"></router-view>
     </transition>
+    </div>
   </main>
   <!--尾部信息-->
   <footer-a></footer-a>
@@ -94,7 +96,9 @@ export default {
   .userinfo {text-align: right;padding-right: 35px;float: right;}
   /* 主内容区 */
   main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 40px #E9ECF1;  background-color: #FCFCFC;  }
-  .menu{flex:0 0 230px;width: 230px;}
+  .main-left{text-align: center;-webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 200px;}
+  .main-right{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 50px 70px; }
+  .el-menu{background-color: transparent!important;}
   /* 路由切换动效 */
   .fade-enter-active, .fade-leave-active {
     transition: all .5s;
