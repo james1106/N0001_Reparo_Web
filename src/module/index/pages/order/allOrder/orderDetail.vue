@@ -10,56 +10,23 @@
         <div slot="header" class="clearfix">
           <span style="line-height: 36px;">订单详情</span>
         </div>
-        <el-form ref="xiangqing" :model="xiangqing" labelWidth="80px">
           <el-row>
-            <el-col :span="8"><el-form-item label="订单编号"><el-input v-model="xiangqing.dingdanbianhao"></el-input></el-form-item></el-col>
-            <el-col :span="8" style="float: right"><el-form-item label="发起时间"><el-input v-model="xiangqing.faqishijian"></el-input></el-form-item></el-col>
+            <el-col :span="8">订单编号：{{orderDetail.orderSequence}}</el-col>
+            <el-col :span="8" style="float: right;text-align: right">发起时间：{{orderDetail.orderTime}}</el-col>
           </el-row>
           <el-row>
-            <el-col :span="8">购买人：B企业</el-col>
-            <el-col :span="8" style="text-align: center">订单金额：20,000</el-col>
-            <el-col :span="8" style="text-align: right">付款方式：应收账款支付</el-col>
+            <el-col :span="8">购买人：{{orderDetail.purchaser}}</el-col>
+            <el-col :span="8" style="text-align: center">订单金额：{{orderDetail.orderAmount}}</el-col>
+            <el-col :span="8" style="text-align: right">付款方式：{{orderDetail.payMethod}}</el-col>
           </el-row>
           <el-row>
-            <el-col :span="8">货品名称：卡纸</el-col>
-            <el-col :span="8" style="text-align: center">货品数量：1,000（箱）</el-col>
+            <el-col :span="8">货品名称：{{orderDetail.goodName}}</el-col>
+            <el-col :span="8" style="text-align: center">货品数量：{{orderDetail.goodAmount}}（箱）</el-col>
           </el-row>
           <el-row>
-            <el-col :span="8">支付银行：中国农业银行</el-col>
-            <el-col :span="8" style="text-align: center">付款账户：123456</el-col>
+            <el-col :span="8">支付银行：{{orderDetail.payBank}}</el-col>
+            <el-col :span="8" style="text-align: center">付款账户：{{orderDetail.payAccount}}</el-col>
           </el-row>
-        </el-form>
-      </el-card>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="24">
-      <el-card class="box-card" style="width:100%">
-        <div slot="header" class="clearfix">
-          <span style="line-height: 36px;">物流信息</span>
-        </div>
-        <el-form ref="xiangqing" :model="xiangqing">
-          <el-row>
-            <el-col :span="12">运单号：1122334455</el-col>
-            <el-col :span="12" style="text-align: right">下单时间：2017-04-03 14:11:20</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="8">物流公司： ABC物流</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="8">购买人：B企业</el-col>
-            <el-col :span="8" style="text-align: center">订单金额：20,000</el-col>
-            <el-col :span="8" style="text-align: right">付款方式：应收账款支付</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="8">货品名称：卡纸</el-col>
-            <el-col :span="8" style="text-align: center">货品数量：1,000（箱）</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="8">支付银行：中国农业银行</el-col>
-            <el-col :span="8" style="text-align: center">付款账户：123456</el-col>
-          </el-row>
-        </el-form>
       </el-card>
       </el-col>
     </el-row>
@@ -70,11 +37,30 @@
     name:'index',
     data () {
       return {
-          xiangqing:{
-              dingdanbianhao:'20170403123456',
-              faqishijian:'2017-04-03 10:29:11'
+          orderDetail:{
+              orderSequence:'',
+              orderTime:'',
+              purchaser:'',
+              orderAmount:'',
+              payMethod:'',
+              goodName:'',
+              goodAmount:'',
+              payBank:'',
+              payAccount:'',
           }
       }
+    },
+    mounted() {
+      this.$http.get("http://localhost:80/server_test/getData1.php").then(
+        function (res) {
+          // 处理成功的结果
+          console.log(res.body);
+          this.orderDetail=res.body.object;
+        },function (res) {
+          // 处理失败的结果
+          console.log(res);
+        }
+      );
     }
   }
 </script>
