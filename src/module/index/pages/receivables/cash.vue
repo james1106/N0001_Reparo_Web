@@ -1,6 +1,6 @@
 <template>
   <div>
-  <el-table :data="suoyou" stripe="" style="width:100%">
+  <el-table :data="dataList" stripe="" style="width:100%">
       <el-table-column prop="yewubianhao" label="业务编号" style="width:25%"></el-table-column>
       <el-table-column prop="yewuleixing" label="业务类型" style="width:25%"></el-table-column>
       <el-table-column prop="jiaoyiduishou" label="交易对手" style="width:25%"></el-table-column>
@@ -14,9 +14,16 @@
 <script>
   export default {
     name:'duifu',
+    created: function () {
+      this.$http.get('/api/getList').then((data) => {
+          console.log(data);
+      },(err) => {
+        console.log(err);
+      })
+    },
     data () {
       return {
-        suoyou:[
+        dataList:[
           {
             yewubianhao:"20170403123456",
             yewuleixing:"待承兑",
