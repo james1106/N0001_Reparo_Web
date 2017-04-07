@@ -55,7 +55,7 @@
     methods:{
         onSubmit () {
             console.log("已提交！");
-          this.$router.push('/daiquerendingdan');
+          this.$router.push('/orderForConfirm');
    }
     }
   }

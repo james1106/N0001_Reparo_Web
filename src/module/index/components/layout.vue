@@ -31,11 +31,11 @@
         </el-menu-item>
         <el-submenu index="/dingdan">
           <template slot="title">订单管理</template>
-          <el-menu-item index="/suoyoudingdan">所有订单</el-menu-item>
-          <el-menu-item index="/faqidingdan">发起订单</el-menu-item>
-          <el-menu-item index="/daiquerendingdan">待确认</el-menu-item>
-          <el-menu-item index="/daifahuo">待发货</el-menu-item>
-          <el-menu-item index="/daishouhuo">待收货</el-menu-item>
+          <el-menu-item index="/allOrder">所有订单</el-menu-item>
+          <el-menu-item index="/launchOrder">发起订单</el-menu-item>
+          <el-menu-item index="/orderForConfirm">待确认</el-menu-item>
+          <el-menu-item index="/forDeliver">待发货</el-menu-item>
+          <el-menu-item index="/forReceive">待收货</el-menu-item>
         </el-submenu>
         <el-submenu index="/yingshou">
           <template slot="title">应收账款</template>
