@@ -117,14 +117,17 @@ export default {
   /*卡片样式*/
   .box1{
     border: 1px solid #d1dbe5;
+    width: auto;
+    /*height: auto;*/
     height: 220px;
     padding:20px 1px 0px 10px;
-    margin-right: 80px;
+    /*margin-right: 80px;*/
   }
   .box2{
     border: 1px solid #d1dbe5;
-    width: 752px;;
+    /*width: 752px;*/
     height: 250px;
+    width: auto;
     padding:20px 1px 0px 25px;
     margin-top: 20px;
   }

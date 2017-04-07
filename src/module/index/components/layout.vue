@@ -51,13 +51,14 @@
           <template slot="title">预付款</template>
           <el-menu-item index="/yufu/qianfa">签发</el-menu-item>
           <el-menu-item index="/yufu/daichengdui">待承兑的账款</el-menu-item>
-          <el-menu-item index="yufu/yufutiexian">贴现</el-menu-item>
+          <el-menu-item index="/yufu/yufutiexian">贴现</el-menu-item>
         </el-submenu>
-        <el-submenu index="/cangchu">
+        <el-submenu index="/warehousing">
           <template slot="title">仓储管理</template>
-          <el-menu-item index="/rukushenqing">入库申请</el-menu-item>
-          <el-menu-item index="/chukushenqing">出库申请</el-menu-item>
-          <el-menu-item index="/cangdanshenqing">仓单申请</el-menu-item>
+          <el-menu-item index="/allWarehousing">我的仓单</el-menu-item>
+          <el-menu-item index="/storage">入库申请</el-menu-item>
+          <el-menu-item index="/out">出库申请</el-menu-item>
+          <el-menu-item index="/receiptApplication">仓单申请</el-menu-item>
         </el-submenu>
       </el-menu>
     </aside>
