@@ -10,6 +10,9 @@
       <el-col :span="10">
       </el-col>
       <el-col :span="4" class="userinfo">
+        <!--<el-badge is-dot class="item">我的消息</el-badge>-->
+        <!--<el-badge class="item">设置</el-badge>-->
+        <!--<el-badge class="item">退出登录</el-badge>-->
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link">user</span>
           <el-dropdown-menu slot="dropdown">
@@ -52,9 +55,9 @@
         </el-submenu>
         <el-submenu index="/cangchu">
           <template slot="title">仓储管理</template>
-          <el-menu-item index="/cangchu/qianfa">签发</el-menu-item>
-          <el-menu-item index="/cangchu/daichengdui">待承兑的账款</el-menu-item>
-          <el-menu-item index="/cangchu/yufutiexian">贴现</el-menu-item>
+          <el-menu-item index="/rukushenqing">入库申请</el-menu-item>
+          <el-menu-item index="/chukushenqing">出库申请</el-menu-item>
+          <el-menu-item index="/cangdanshenqing">仓单申请</el-menu-item>
         </el-submenu>
       </el-menu>
     </aside>
@@ -115,6 +118,11 @@ export default {
   .list-enter, .list-leave-active {
     opacity: 0;
     transform: translateY(30px);
+  }
+  .item{
+    margin-top: 10px;
+    font-size: 10px;
+    margin-right: 10px
   }
 /*@import '../../../framework/avenxo/assets/fonts/font-awesome/css/font-awesome.min.css';
 @import '../../../framework/avenxo/assets/fonts/themify-icons/themify-icons.css';
