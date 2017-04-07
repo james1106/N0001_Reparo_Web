@@ -42,10 +42,10 @@
         </el-submenu>
         <el-submenu index="/yingshou">
           <template slot="title">应收账款</template>
-          <el-menu-item index="/qianfa">签发</el-menu-item>
-          <el-menu-item index="/daichengdui">待承兑的账款</el-menu-item>
-          <el-menu-item index="/yingshoutiexian">贴现</el-menu-item>
-          <el-menu-item index="/duifu">兑付</el-menu-item>
+          <el-menu-item index="/signout">签发</el-menu-item>
+          <el-menu-item index="/accept">待承兑的账款</el-menu-item>
+          <el-menu-item index="/discount">贴现</el-menu-item>
+          <el-menu-item index="/cash">兑付</el-menu-item>
         </el-submenu>
         <el-submenu index="/yufu">
           <template slot="title">预付款</template>

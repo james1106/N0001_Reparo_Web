@@ -15,11 +15,19 @@ import daishouhuo from './pages/dingdan/daishouhuo.vue'
 
 import huoquan from './pages/yufu/index.vue'
 import shouye from './pages/cangchu/index.vue'
-import yingshou from './pages/yingshou/index.vue'
-import daichengdui from './pages/yingshou/daichengdui.vue'
-import duifu from './pages/yingshou/duifu.vue'
-import qianfa from './pages/yingshou/qianfa.vue'
-import yingshoutiexian from './pages/yingshou/yingshoutiexian.vue'
+
+/*应收账款*/
+import yingshou from './pages/receivables/index.vue'
+import AcceptIndexPage from './pages/receivables/accept/index.vue'
+import AcceptPage from './pages/receivables/accept/accept.vue'
+import AcceptListPage from './pages/receivables/accept/acceptList.vue'
+import CashPage from './pages/receivables/cash.vue'
+import SignoutIndexPage from './pages/receivables/signOut/index.vue'
+import SignoutListPage from './pages/receivables/signOut/signoutList.vue'
+import SignoutPage from './pages/receivables/signOut/signout.vue'
+import DiscountPage from './pages/receivables/discount.vue'
+
+
 import HomePage from './pages/homePage/homePage.vue'
 import rukushenqing from './pages/cangchu/rukushenqing.vue'
 import chukushenqing from './pages/cangchu/chukushenqing.vue'
@@ -28,20 +36,24 @@ import cangdanshenqing from './pages/cangchu/cangdanshenqing.vue'
 export default [
   {
     path:'/dingdan',component:dingdan,
-  },{
+  },
+  {
     path:'/suoyoudingdan',component:suoyoudingdan_index,
     children:[
       {path:'',component:suoyoudingdan},
       {path:'xiangqing',component:dingdanxiangqing},
     ]
-  },{
+  },
+  {
     path:'/faqidingdan',component:faqidingdan,
-  },{
+  },
+  {
     path:'/daiquerendingdan',component:daiquerendingdan_index,
     children:[
       {path:'',component:daiquerendingdan},
       {path:'queren',component:querendingdan},
-    ]},
+    ]
+  },
   {
     path:'/',component:HomePage,
   },
@@ -51,27 +63,52 @@ export default [
       {path:'',component:daifahuo},
       {path:'fahuo',component:fahuo},
     ]
-  },{
+  },
+  {
     path:'/fahuo',component:fahuo,
-  },{
+  },
+  {
     path:'/daishouhuo',component:daishouhuo,
   },
-
   {
     path:'/yufu',component:huoquan,
-  },{
-    path:'/cangchu',component:shouye,
-  },{
-    path:'/yingshou',component:yingshou,
   },
-  {path:'/daichengdui',component:daichengdui},
-  {path:'/duifu',component:duifu},
-  {path:'/qianfa',component:qianfa},
-  {path:'/yingshoutiexian',component:yingshoutiexian},
+  {
+    path:'/cangchu',component:shouye,
+  }, //应收账款
+  {
+    path:'/receivables',component:yingshou,
+  },
+  {
+    path:'/accept',component:AcceptIndexPage,
+    children:[
+      {path:'',component:AcceptListPage},
+      {path:'accept',component:AcceptPage}
+    ]
+  },
+  {
+    path:'/cash',component:CashPage
+  },
+  {
+    path:'/signout',component:SignoutIndexPage,
+    children:[
+      {path:'',component:SignoutListPage},
+      {path:'signout',component:SignoutPage}
+    ]
+  },
+  {
+    path:'/discount',component:DiscountPage
+  },//
   {
     path:'/cangchu',component:shouye,
   },
-  {path:'/rukushenqing',component:rukushenqing},
-  {path:'/chukushenqing',component:chukushenqing},
-  {path:'/cangdanshenqing',component:cangdanshenqing},
+  {
+    path:'/rukushenqing',component:rukushenqing
+  },
+  {
+    path:'/chukushenqing',component:chukushenqing
+  },
+  {
+    path:'/cangdanshenqing',component:cangdanshenqing
+  },
 ]
