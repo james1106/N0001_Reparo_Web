@@ -1,5 +1,5 @@
 <template>
-  <div>baobiao</div>
+  <div>dingdan</div>
 </template>
 <script>
   export default {
