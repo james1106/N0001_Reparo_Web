@@ -16,10 +16,12 @@ import daishouhuo from './pages/dingdan/daishouhuo.vue'
 import huoquan from './pages/yufu/index.vue'
 import shouye from './pages/cangchu/index.vue'
 import yingshou from './pages/yingshou/index.vue'
-  import daichengdui from './pages/yingshou/daichengdui.vue'
-  import duifu from './pages/yingshou/duifu.vue'
-  import qianfa from './pages/yingshou/qianfa.vue'
-  import yingshoutiexian from './pages/yingshou/yingshoutiexian.vue'
+import daichengdui from './pages/yingshou/daichengdui.vue'
+import duifu from './pages/yingshou/duifu.vue'
+import qianfa from './pages/yingshou/qianfa.vue'
+import yingshoutiexian from './pages/yingshou/yingshoutiexian.vue'
+import HomePage from './pages/homePage/homePage.vue'
+
 export default [
   {
     path:'/dingdan',component:dingdan,
@@ -36,8 +38,11 @@ export default [
     children:[
       {path:'',component:daiquerendingdan},
       {path:'queren',component:querendingdan},
-    ]
-  },{
+    ]},
+  {
+    path:'/',component:HomePage,
+  },
+  {
     path:'/daifahuo',component:daifahuo_index,
     children:[
       {path:'',component:daifahuo},
