@@ -1,16 +1,16 @@
 /*订单相关*/
-import dingdan from './pages/dingdan/index.vue'
-import suoyoudingdan_index from './pages/dingdan/suoyoudingdan/index.vue'
-import suoyoudingdan from './pages/dingdan/suoyoudingdan/suoyoudingdan.vue'
-import dingdanxiangqing from './pages/dingdan/suoyoudingdan/dingdanxiangqing.vue'
-import faqidingdan from './pages/dingdan/faqidingdan.vue'
-import daiquerendingdan_index from './pages/dingdan/daiquerendingdan/index.vue'
-import daiquerendingdan from './pages/dingdan/daiquerendingdan/daiquerendingdan.vue'
-import querendingdan from './pages/dingdan/daiquerendingdan/querendingdan.vue'
-import daifahuo_index from './pages/dingdan/daifahuo/index.vue'
-import daifahuo from './pages/dingdan/daifahuo/daifahuo.vue'
-import fahuo from './pages/dingdan/daifahuo/fahuo.vue'
-import daishouhuo from './pages/dingdan/daishouhuo.vue'
+import order from './pages/order/index.vue'
+import allOrderIndex from './pages/order/allOrder/index.vue'
+import allOrder from './pages/order/allOrder/allOrder.vue'
+import orderDetail from './pages/order/allOrder/orderDetail.vue'
+import launchOrder from './pages/order/launchOrder.vue'
+import orderForConfirmIndex from './pages/order/orderForConfirm/index.vue'
+import orderForConfirm from './pages/order/orderForConfirm/orderForConfirm.vue'
+import orderConfirm from './pages/order/orderForConfirm/orderConfirm.vue'
+import forDeliverIndex from './pages/order/forDeliver/index.vue'
+import forDeliver from './pages/order/forDeliver/forDeliver.vue'
+import deliver from './pages/order/forDeliver/deliver.vue'
+import forReceive from './pages/order/forReceive.vue'
 
 
 import huoquan from './pages/yufu/index.vue'
@@ -35,46 +35,35 @@ import cangdanshenqing from './pages/cangchu/cangdanshenqing.vue'
 
 export default [
   {
-    path:'/dingdan',component:dingdan,
-  },
-  {
-    path:'/suoyoudingdan',component:suoyoudingdan_index,
-    children:[
-      {path:'',component:suoyoudingdan},
-      {path:'xiangqing',component:dingdanxiangqing},
-    ]
-  },
-  {
-    path:'/faqidingdan',component:faqidingdan,
-  },
-  {
-    path:'/daiquerendingdan',component:daiquerendingdan_index,
-    children:[
-      {path:'',component:daiquerendingdan},
-      {path:'queren',component:querendingdan},
-    ]
-  },
-  {
     path:'/',component:HomePage,
   },
+  /*订单路由*/
   {
-    path:'/daifahuo',component:daifahuo_index,
+    path:'/order',component:order,
+  },
+  {
+    path:'/allOrder',component:allOrderIndex,
     children:[
-      {path:'',component:daifahuo},
-      {path:'fahuo',component:fahuo},
+      {path:'',component:allOrder},
+      {path:'orderDetail',component:orderDetail},
     ]
   },
   {
-    path:'/fahuo',component:fahuo,
+    path:'/launchOrder',component:launchOrder,
   },
   {
-    path:'/daishouhuo',component:daishouhuo,
+    path:'/orderForConfirm',component:orderForConfirmIndex,
+    children:[
+      {path:'',component:orderForConfirm},
+      {path:'orderConfirm',component:orderConfirm},
+    ]
   },
   {
-    path:'/yufu',component:huoquan,
-  },
-  {
-    path:'/cangchu',component:shouye,
+    path:'/forDeliver',component:forDeliverIndex,
+    children:[
+      {path:'',component:forDeliver},
+      {path:'deliver',component:deliver},
+    ]
   }, //应收账款
   {
     path:'/receivables',component:yingshou,

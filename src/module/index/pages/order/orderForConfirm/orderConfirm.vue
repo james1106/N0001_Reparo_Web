@@ -51,7 +51,7 @@
     methods:{
         onSubmit () {
             console.log("订单确认");
-          this.$router.push('/daifahuo');
+          this.$router.push('/forDeliver');
         }
     }
   }

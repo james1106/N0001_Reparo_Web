@@ -5,7 +5,7 @@
           <el-table-column prop="jiaoyiduishou" label="交易对手" style="width:25%"></el-table-column>
           <el-table-column prop="jine" label="金额" style="width:25%"></el-table-column>
           <el-table-column prop="caozuo" label="操作" style="width:25%">
-            <template scope="scope"><router-link to="/suoyoudingdan/xiangqing">查看详情</router-link></template>
+            <template scope="scope"><router-link to="/allOrder/orderDetail">查看详情</router-link></template>
           </el-table-column>
         </el-table>
 </template>

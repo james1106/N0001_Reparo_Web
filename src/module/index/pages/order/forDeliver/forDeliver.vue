@@ -6,7 +6,7 @@
       <el-table-column prop="jiaoyiduishou" label="交易对手" style="width:25%"></el-table-column>
       <el-table-column prop="jine" label="金额" style="width:25%"></el-table-column>
       <el-table-column prop="caozuo" label="操作" style="width:25%">
-        <template scope="scope"><router-link to="/daifahuo/fahuo">立即发货</router-link></template>
+        <template scope="scope"><router-link to="/forDeliver/deliver">立即发货</router-link></template>
       </el-table-column>
     </el-table>
   </div>
