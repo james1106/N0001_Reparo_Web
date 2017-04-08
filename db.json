@@ -1,20 +1,39 @@
 {
-  "getList":[
+  "getList":{
+    "orderSequence":"20170403123456",
+    "orderTime":"2017-04-03 10:29:11",
+    "purchaser":"B企业",
+    "orderAmount":"20,000",
+    "payMethod":"应收账款支付",
+    "goodName":"卡纸",
+    "goodAmount":"1,000",
+    "payBank":"中国农业银行",
+    "payAccount":"123456"
+  },
+  "allOrder":[
     {
-      "id":123,
-      "title":"wwd"
+      "orderId":"20170403123456",
+      "orderState":"待确认",
+      "opponentParty":"A企业",
+      "totalPrice":"20，000"
     },
     {
-      "id":123,
-      "title":"ddw"
+      "orderId":"20170403123456",
+      "orderState":"待确认",
+      "opponentParty":"A企业",
+      "totalPrice":"20，000"
     },
     {
-      "id":123,
-      "title":"sss"
+      "orderId":"20170403123456",
+      "orderState":"待发货",
+      "opponentParty":"A企业",
+      "totalPrice":"20，000"
     },
     {
-      "id":123,
-      "title":"ddd"
+      "orderId":"20170403123456",
+      "orderState":"待收货",
+      "opponentParty":"A企业",
+      "totalPrice":"20，000"
     }
   ]
 }

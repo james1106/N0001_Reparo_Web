@@ -51,11 +51,11 @@
       }
     },
     mounted() {
-      this.$http.get("http://localhost:80/server_test/getData1.php").then(
+      this.$http.get("/api/getList").then(
         function (res) {
           // 处理成功的结果
           console.log(res.body);
-          this.orderDetail=res.body.object;
+          this.orderDetail=res.body;
         },function (res) {
           // 处理失败的结果
           console.log(res);
