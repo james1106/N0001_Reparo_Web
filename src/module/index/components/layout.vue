@@ -7,11 +7,11 @@
       <el-col :span="10" class="logo">
         LOGO
 			</el-col>
-      <el-col :span="5">
-        <el-button type="primary" v-on:click="toBuyer()">我是买家</el-button>
+      <el-col :span="5" v-if="companyType === '1'">
+        <el-button type="primary" v-on:click="changeMenu()">我是买家</el-button>
       </el-col>
-      <el-col :span="5">
-        <el-button type="primary" v-on:click="toSeller()">我是卖家</el-button>
+      <el-col :span="5" v-if="companyType === '1'">
+        <el-button type="primary" v-on:click="changeMenu()">我是卖家</el-button>
       </el-col>
       <el-col :span="4" class="userinfo">
         <el-dropdown trigger="hover">
@@ -28,9 +28,15 @@
   </header>
   <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
   <main>
-    <aside class="main-left">
-      <menu-by v-bind:class="{isHide:isSeller}"></menu-by>
-      <menu-sl v-bind:class="{isHide:isBuyer}"></menu-sl>
+    <aside class="main-left" v-if="companyType === '1'">
+      <menu-by v-if="isBuyer"></menu-by>
+      <menu-sl v-else></menu-sl>
+    </aside>
+    <aside class="main-left" v-else-if="companyType === '2'">
+      <menu-wh></menu-wh>
+    </aside>
+    <aside class="main-left" v-else>
+      <menu-lg></menu-lg>
     </aside>
     <div class="main-right">
     <transition name="fade">
@@ -47,31 +53,35 @@
 import FooterA from './footer.vue'
 import MenuBy from './menuBuyer.vue'
 import MenuSl from './menuSeller.vue'
+import MenuLg from './menuLogistics.vue'
+import MenuWh from './menuWarehousing.vue'
+import Store from "../../../common/store.js"
 
 export default {
   name: 'wrapper',
+  created: function () {
+    this.companyType = Store.fetchCompanyType();
+    //后面判断 每个不同公司进去主页后的首页面
+    //使用this.$router.push(...);
+  },
   data () {
     return {
       msg: '',
       headerFixed : true,
       active:true,
       isBuyer:true,
-      isSeller:false
+      companyType:'1'  //1.融资企业 2.仓储公司 3.物流公司
     }
   },
   components: {
-      FooterA,MenuBy,MenuSl
+      FooterA,MenuBy,MenuSl,MenuLg,MenuWh
   },
   methods:{
-    toBuyer: function () {
-      if(this.isBuyer) return;
-      this.isSeller = !this.isSeller;
+    changeMenu: function () {
       this.isBuyer = !this.isBuyer;
       this.$router.push('/');
     },
-    toSeller: function () {
-      if(this.isSeller) return;
-      this.isSeller = !this.isSeller;
+    changeMenu: function () {
       this.isBuyer = !this.isBuyer;
       this.$router.push('/');
     }
@@ -80,9 +90,6 @@ export default {
 </script>
 
 <style scoped>
-  .isHide{
-    display:none;
-  }
   /* 头部导航 */
   header{z-index: 1000;min-width: 1200px;transition: all 0.5s ease;  border-top: solid 4px #3091F2;  background-color: #fff;  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);  }
   header.header-fixed{position: fixed;top: 0;left: 0;right: 0;}

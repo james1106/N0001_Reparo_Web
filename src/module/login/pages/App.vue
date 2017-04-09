@@ -8,6 +8,11 @@
       <el-form-item label="密码" prop="checkPass" >
         <el-input v-model="ruleForm2.checkPass"  type="password"  auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
+
+      <el-radio class="radio" v-model="companyType" label="1">融资企业</el-radio>
+      <el-radio class="radio" v-model="companyType" label="2">仓储公司</el-radio>
+      <el-radio class="radio" v-model="companyType" label="3">物流公司</el-radio>
+
       <el-form-item style="width:100%;margin-left: -70px;">
         <el-button type="primary" style="width: 350px;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       </el-form-item>
@@ -19,6 +24,7 @@
 
 //    export const requestLogin = params => { return res.post(`${base}/login`, params).then(res => res.data); };
   //  import Hello from '../../components/Hello'
+import Store from "../../../common/store.js"
 
   export default {
 //    name: 'app',
@@ -27,6 +33,7 @@
 //    }
     data(){
       return{
+        companyType: '1',
         logining:false,
         ruleForm2: {
           account: '',
@@ -46,6 +53,7 @@
       handleSubmit2(ev) {
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
+            Store.saveCompanyType(this.companyType);
             this.logining = true;
 //            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
 //            requestLogin(loginParams).then(data => {
