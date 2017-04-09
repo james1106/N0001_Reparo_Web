@@ -22,7 +22,7 @@
                   <el-row>
                     <el-col :span="8">货品名称：卡纸</el-col>
                     <el-col :span="8">订单金额：20,000</el-col>
-                    <router-link to="/allWarehousing/details"><el-button>查看详情</el-button></router-link>
+                    <router-link to="/myWarehousing/details"><el-button>查看详情</el-button></router-link>
                   </el-row>
                   <el-row>
                     <el-col :span="8">货品数量：1,000（箱）</el-col>
@@ -76,9 +76,16 @@
               </el-card>
             </el-col>
           </el-row>
+          <!--<div class="block" style="text-align: right">-->
+            <!--<el-pagination-->
+              <!--page-size:3-->
+              <!--layout="prev, pager, next"-->
+              <!--:total="50">-->
+            <!--</el-pagination>-->
+          <!--</div>-->
         </div>
       </el-tab-pane>
-      <el-tab-pane label="待确认" name="second">
+      <el-tab-pane label="待入库" name="second">
       </el-tab-pane>
     </el-tabs>
   </div>

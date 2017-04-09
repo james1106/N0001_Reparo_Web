@@ -4,7 +4,7 @@
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
-        <el-breadcrumb-item>出库申请</el-breadcrumb-item>
+        <el-breadcrumb-item>仓单申请</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div>
@@ -17,8 +17,8 @@
                 <el-form ref="warehousing" :model="warehousing" labelWidth="80px">
                   <el-row>
                     <el-col :span="8"><el-form-item label="仓储流水号"><el-input style="width: auto" v-model="warehousing.serialNumber"></el-input></el-form-item></el-col>
-                    <el-col :span="8"><el-form-item label="发起时间"><el-input style="width: auto" v-model="warehousing.state"></el-input></el-form-item></el-col>
-                    <el-col :span="8"><el-form-item label="订单编号"><el-input style="width: auto" v-model="warehousing.storageTime"></el-input></el-form-item></el-col>
+                    <el-col :span="8"><el-form-item label="仓储状态"><el-input style="width: auto" v-model="warehousing.state"></el-input></el-form-item></el-col>
+                    <el-col :span="8"><el-form-item label="入库时间"><el-input style="width: auto" v-model="warehousing.storageTime"></el-input></el-form-item></el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">持有人：B企业</el-col>

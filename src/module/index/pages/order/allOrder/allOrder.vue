@@ -121,7 +121,7 @@
           productName: '卡纸',
           totalPrice: '20,000',
           productNum: '1,000',
-          payingMthod: '应收账款支付'
+          payingMethod: '应收账款支付'
         }
         ]
       }
