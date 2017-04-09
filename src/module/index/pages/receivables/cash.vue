@@ -47,7 +47,7 @@
             yewuleixing:"待承兑",
             jiaoyiduishou:"C企业",
             jine:"20，000"
-          },
+          }
         ]
       }
     },
