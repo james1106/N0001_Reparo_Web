@@ -138,7 +138,7 @@
       }
     },
     mounted () {
-        this.$http.get("http://localhost:80/server_test/getData1.php").then(function(res){
+        this.$http.get("http://172.16.100.246/server_test/getData1.php").then(function(res){
             console.log("获取到的所有订单: "+res.body);
             this.allOrder=res.body.object;
         },

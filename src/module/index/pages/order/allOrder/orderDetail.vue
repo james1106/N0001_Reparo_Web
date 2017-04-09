@@ -156,7 +156,7 @@
     },
     mounted() {
       console.log("now the srtate is:"+store.state.checkId);
-      this.$http.get("http://localhost:80/server_test/getData2.php?checkId="+store.state.checkId).then(
+      this.$http.get("http://172.16.100.246/server_test/getData2.php?checkId="+store.state.checkId).then(
         function (res) {
           // 处理成功的结果
           console.log(res.body);

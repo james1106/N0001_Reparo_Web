@@ -63,7 +63,7 @@
     methods: {
       onSubmit () {
         console.log(this.launchOrder.payeeAccount);
-        this.$http.get("http://localhost/server_test/getData3.php").then(
+        this.$http.get("http://172.16.100.246/server_test/getData3.php").then(
           function (res) {
             console.log(res.body.object);
             store.commit('setCheckId', res.body.object.orderId);
