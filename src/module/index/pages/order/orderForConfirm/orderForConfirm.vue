@@ -1,5 +1,5 @@
 <template>
-    <el-table :data="suoyou" stripe="" style="width:100%">
+    <el-table :data="orderForConfirm" stripe="" style="width:100%" class="orderForConfirm">
       <el-table-column prop="yewubianhao" label="业务编号" style="width:25%"></el-table-column>
       <el-table-column prop="yewuleixing" label="业务类型" style="width:25%"></el-table-column>
       <el-table-column prop="jiaoyiduishou" label="交易对手" style="width:25%"></el-table-column>
@@ -14,7 +14,7 @@
     name:'index',
     data () {
       return {
-        suoyou:[
+        orderForConfirm:[
           {
             yewubianhao:"20170403123456",
             yewuleixing:"订单待确认",
@@ -49,3 +49,7 @@
     }
   }
 </script>
+<style>
+  .orderForConfirm th {background-color: #fff !important;}
+  .orderForConfirm .cell {background-color: transparent !important;}
+</style>

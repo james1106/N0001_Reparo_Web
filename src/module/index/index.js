@@ -5,6 +5,8 @@ import routerConfig from './router.config'
 import resource from 'vue-resource'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+// import 'font-awesome/css/font-awesome.min.css'
+
 Vue.use(VueRouter)
 Vue.use(resource)
 Vue.use(ElementUI)

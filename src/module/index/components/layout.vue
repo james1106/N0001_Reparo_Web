@@ -102,7 +102,7 @@ export default {
   /* 主内容区 */
   main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 40px #E9ECF1;  background-color: #FCFCFC;  }
   .main-left{text-align: center;-webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 200px;}
-  .main-right{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 50px 70px; }
+  .main-right{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 50px 70px; overflow: scroll;}
   .el-menu{background-color: transparent!important;}
   /* 路由切换动效 */
   .fade-enter-active, .fade-leave-active {
