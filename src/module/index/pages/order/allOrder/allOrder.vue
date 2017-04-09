@@ -1,15 +1,6 @@
 <template>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
     <el-tab-pane label="所有订单" name="first">
-      <!--<el-table :data="allOrder" stripe="" style="width:100%">
-        <el-table-column prop="orderId" label="业务编号" style="width:25%"></el-table-column>
-        <el-table-column prop="orderState" label="业务类型" style="width:25%"></el-table-column>
-        <el-table-column prop="opponentParty" label="交易对手" style="width:25%"></el-table-column>
-        <el-table-column prop="totalPrice" label="金额" style="width:25%"></el-table-column>
-        <el-table-column prop="operation" label="操作" style="width:25%">
-          <template scope="scope"><router-link to="/allOrder/orderDetail">查看详情</router-link></template>
-        </el-table-column>
-      </el-table>-->
       <el-row class="mycard row-black row-padding">
         <el-col :span="6">货品信息</el-col>
         <el-col :span="6">付款信息</el-col>
@@ -21,92 +12,166 @@
           <el-row class="row-black row-padding">
             <el-col :span="8">订单编号：{{item.orderId}}</el-col>
             <el-col :span="8">创建时间：{{item.timeStamp}}</el-col>
-            <el-col :span="8">状态：{{item.orderState}}</el-col>
+            <el-col :span="8">卖家：{{item.payeeAccount}}</el-col>
           </el-row>
-          <el-row class="row-padding">
-            <el-col :span="16">
-              <el-row>
-                <el-col :span="12">货品名称：{{item.productName}}</el-col>
-                <el-col :span="12">订单金额：{{item.totalPrice}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="12">货品数量：{{item.productNum}}</el-col>
-                <el-col :span="12">付款方式：{{item.payingMethod}}</el-col>
-              </el-row>
+          <el-row class="">
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">货品名称：{{item.productName}}</el-col>
+              <el-col :span="24">货品数量：{{item.productNum}}</el-col>
             </el-col>
-            <el-col :span="8" class="btn-vertical" @click.native.prevent="checkDetail(item.orderId)"><el-button type="primary">查看详情</el-button></el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">订单金额：{{item.totalPrice}}</el-col>
+              <el-col :span="24">付款方式：{{item.payingMethod}}</el-col>
+            </el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">交易状态：{{item.orderState.transactionState}}</el-col>
+              <el-col :span="24">账款状态：{{item.orderState.billState}}</el-col>
+              <el-col :span="24">仓储状态：{{item.orderState.storageState}}</el-col>
+              <el-col :span="24">物流状态：{{item.orderState.logisticState}}</el-col>
+            </el-col>
+            <el-col :span="6">
+                <el-button type="text" @click.native.prevent="checkDetail(item.orderId)">查看详情</el-button>
+                <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.transactionState==='待确认')" @click.native.prevent="confirmOrder">确认订单</el-button>
+                <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='待签发')" @click.native.prevent="signBill">签发</el-button>
+                <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='承兑已签收')" @click.native.prevent="sendGood">发货</el-button>
+                <el-button type="text" v-if="(state.changeRole==='pyer')&&(item.orderState.billState==='承兑待签收')" @click.native.prevent="acceptBill">承兑签收</el-button>
+            </el-col>
           </el-row>
         </div>
       </template>
     </el-tab-pane>
     <el-tab-pane label="待确认" name="second">
-      <template v-for="(item,index) in allOrder" v-if="item.orderState==='待确认'">
+      <template v-for="(item,index) in allOrder" v-if="item.orderState.transactionState==='待确认'">
         <div class="box-card mycard">
           <el-row class="row-black row-padding">
             <el-col :span="8">订单编号：{{item.orderId}}</el-col>
             <el-col :span="8">创建时间：{{item.timeStamp}}</el-col>
-            <el-col :span="8">状态：{{item.orderState}}</el-col>
+            <el-col :span="8">卖家：{{item.payeeAccount}}</el-col>
           </el-row>
-          <el-row class="row-padding">
-            <el-col :span="16">
-              <el-row>
-                <el-col :span="12">货品名称：{{item.productName}}</el-col>
-                <el-col :span="12">订单金额：{{item.totalPrice}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="12">货品数量：{{item.productNum}}</el-col>
-                <el-col :span="12">付款方式：{{item.payingMethod}}</el-col>
-              </el-row>
+          <el-row class="">
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">货品名称：{{item.productName}}</el-col>
+              <el-col :span="24">货品数量：{{item.productNum}}</el-col>
             </el-col>
-            <el-col :span="8" class="btn-vertical"><el-button type="primary">查看详情</el-button></el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">订单金额：{{item.totalPrice}}</el-col>
+              <el-col :span="24">付款方式：{{item.payingMethod}}</el-col>
+            </el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">交易状态：{{item.orderState.transactionState}}</el-col>
+              <el-col :span="24">账款状态：{{item.orderState.billState}}</el-col>
+              <el-col :span="24">仓储状态：{{item.orderState.storageState}}</el-col>
+              <el-col :span="24">物流状态：{{item.orderState.logisticState}}</el-col>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="text" @click.native.prevent="checkDetail(item.orderId)">查看详情</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.transactionState==='待确认')" @click.native.prevent="confirmOrder">确认订单</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='待签发')" @click.native.prevent="signBill">签发</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='承兑已签收')" @click.native.prevent="sendGood">发货</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyer')&&(item.orderState.billState==='承兑待签收')" @click.native.prevent="acceptBill">承兑签收</el-button>
+            </el-col>
           </el-row>
         </div>
       </template>
     </el-tab-pane>
-    <el-tab-pane label="待发货" name="third">
-      <template v-for="(item,index) in allOrder" v-if="item.orderState==='待发货'">
+    <el-tab-pane label="待付款" name="third">
+      <template v-for="(item,index) in allOrder" v-if="(item.orderState.billState==='承兑待签收')||(item.orderState.billState==='待签发')">
         <div class="box-card mycard">
           <el-row class="row-black row-padding">
             <el-col :span="8">订单编号：{{item.orderId}}</el-col>
             <el-col :span="8">创建时间：{{item.timeStamp}}</el-col>
-            <el-col :span="8">状态：{{item.orderState}}</el-col>
+            <el-col :span="8">卖家：{{item.payeeAccount}}</el-col>
           </el-row>
-          <el-row class="row-padding">
-            <el-col :span="16">
-              <el-row>
-                <el-col :span="12">货品名称：{{item.productName}}</el-col>
-                <el-col :span="12">订单金额：{{item.totalPrice}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="12">货品数量：{{item.productNum}}</el-col>
-                <el-col :span="12">付款方式：{{item.payingMethod}}</el-col>
-              </el-row>
+          <el-row class="">
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">货品名称：{{item.productName}}</el-col>
+              <el-col :span="24">货品数量：{{item.productNum}}</el-col>
             </el-col>
-            <el-col :span="8" class="btn-vertical"><el-button type="primary">查看详情</el-button></el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">订单金额：{{item.totalPrice}}</el-col>
+              <el-col :span="24">付款方式：{{item.payingMethod}}</el-col>
+            </el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">交易状态：{{item.orderState.transactionState}}</el-col>
+              <el-col :span="24">账款状态：{{item.orderState.billState}}</el-col>
+              <el-col :span="24">仓储状态：{{item.orderState.storageState}}</el-col>
+              <el-col :span="24">物流状态：{{item.orderState.logisticState}}</el-col>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="text" @click.native.prevent="checkDetail(item.orderId)">查看详情</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.transactionState==='待确认')" @click.native.prevent="confirmOrder">确认订单</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='待签发')" @click.native.prevent="signBill">签发</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='承兑已签收')" @click.native.prevent="sendGood">发货</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyer')&&(item.orderState.billState==='承兑待签收')" @click.native.prevent="acceptBill">承兑签收</el-button>
+            </el-col>
           </el-row>
         </div>
       </template>
     </el-tab-pane>
-    <el-tab-pane label="待收货" name="fourth">
-      <template v-for="(item,index) in allOrder" v-if="item.orderState==='待收货'">
+    <el-tab-pane label="待发货" name="fourth">
+      <template v-for="(item,index) in allOrder" v-if="item.orderState.billState==='承兑已签收'">
         <div class="box-card mycard">
           <el-row class="row-black row-padding">
             <el-col :span="8">订单编号：{{item.orderId}}</el-col>
             <el-col :span="8">创建时间：{{item.timeStamp}}</el-col>
-            <el-col :span="8">状态：{{item.orderState}}</el-col>
+            <el-col :span="8">卖家：{{item.payeeAccount}}</el-col>
           </el-row>
-          <el-row class="row-padding">
-            <el-col :span="16">
-              <el-row>
-                <el-col :span="12">货品名称：{{item.productName}}</el-col>
-                <el-col :span="12">订单金额：{{item.totalPrice}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="12">货品数量：{{item.productNum}}</el-col>
-                <el-col :span="12">付款方式：{{item.payingMethod}}</el-col>
-              </el-row>
+          <el-row class="">
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">货品名称：{{item.productName}}</el-col>
+              <el-col :span="24">货品数量：{{item.productNum}}</el-col>
             </el-col>
-            <el-col :span="8" class="btn-vertical"><el-button type="primary">查看详情</el-button></el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">订单金额：{{item.totalPrice}}</el-col>
+              <el-col :span="24">付款方式：{{item.payingMethod}}</el-col>
+            </el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">交易状态：{{item.orderState.transactionState}}</el-col>
+              <el-col :span="24">账款状态：{{item.orderState.billState}}</el-col>
+              <el-col :span="24">仓储状态：{{item.orderState.storageState}}</el-col>
+              <el-col :span="24">物流状态：{{item.orderState.logisticState}}</el-col>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="text" @click.native.prevent="checkDetail(item.orderId)">查看详情</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.transactionState==='待确认')" @click.native.prevent="confirmOrder">确认订单</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='待签发')" @click.native.prevent="signBill">签发</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='承兑已签收')" @click.native.prevent="sendGood">发货</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyer')&&(item.orderState.billState==='承兑待签收')" @click.native.prevent="acceptBill">承兑签收</el-button>
+            </el-col>
+          </el-row>
+        </div>
+      </template>
+    </el-tab-pane>
+    <el-tab-pane label="待收货" name="fifth">
+      <template v-for="(item,index) in allOrder" v-if="item.orderState.logisticState==='已发货'">
+        <div class="box-card mycard">
+          <el-row class="row-black row-padding">
+            <el-col :span="8">订单编号：{{item.orderId}}</el-col>
+            <el-col :span="8">创建时间：{{item.timeStamp}}</el-col>
+            <el-col :span="8">卖家：{{item.payeeAccount}}</el-col>
+          </el-row>
+          <el-row class="">
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">货品名称：{{item.productName}}</el-col>
+              <el-col :span="24">货品数量：{{item.productNum}}</el-col>
+            </el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">订单金额：{{item.totalPrice}}</el-col>
+              <el-col :span="24">付款方式：{{item.payingMethod}}</el-col>
+            </el-col>
+            <el-col :span="6" style="border-right: 1px solid #fff">
+              <el-col :span="24">交易状态：{{item.orderState.transactionState}}</el-col>
+              <el-col :span="24">账款状态：{{item.orderState.billState}}</el-col>
+              <el-col :span="24">仓储状态：{{item.orderState.storageState}}</el-col>
+              <el-col :span="24">物流状态：{{item.orderState.logisticState}}</el-col>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="text" @click.native.prevent="checkDetail(item.orderId)">查看详情</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.transactionState==='待确认')" @click.native.prevent="confirmOrder">确认订单</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='待签发')" @click.native.prevent="signBill">签发</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyee')&&(item.orderState.billState==='承兑已签收')" @click.native.prevent="sendGood">发货</el-button>
+              <el-button type="text" v-if="(state.changeRole==='pyer')&&(item.orderState.billState==='承兑待签收')" @click.native.prevent="acceptBill">承兑签收</el-button>
+            </el-col>
           </el-row>
         </div>
       </template>
@@ -114,7 +179,7 @@
   </el-tabs>
 </template>
 <script>
-  import store from '../../../store.js'
+  import store from '../../../vuex/store.js'
   export default {
     name:'index',
     data () {
@@ -123,13 +188,24 @@
         allOrder:[{
           orderId: "20170403123456",
           timeStamp: '2017-04-03 10:29:11',
-          orderState: '待确认',
+          payeeAccount:'',
           productName: '卡纸',
           totalPrice: '20,000',
           productNum: '1,000',
-          payingMthod: '应收账款支付'
+          payingMethod: '应收账款支付',
+          orderState:{
+              transactionState:'',
+              billState:'',
+              storageState:'',
+              logisticState:'',
+          }
         }
         ]
+      }
+    },
+    computed: {
+      state () {
+          return store.state;
       }
     },
     methods: {
@@ -141,6 +217,18 @@
         store.commit('setCheckId',orderId);
           console.log(store.state.checkId);
           this.$router.push("allOrder/orderDetail");
+      },
+      confirmOrder () {
+          console.log("确认订单！");
+      },
+      signBill () {
+        console.log("签发应收账款");
+      },
+      sendGood () {
+        console.log("发货");
+      },
+      acceptBill () {
+        console.log("承兑签收");
       }
     },
     mounted () {
@@ -157,7 +245,12 @@
 </script>
 <style>
   .mycard {width:90% !important;float:inherit !important;margin:10px auto !important;}
-  .mycard .el-col {text-align: center;}
+  .mycard .el-row {margin-bottom: 0 !important;display: -webkit-flex;
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;}
+  .mycard .el-col {text-align: center;box-sizing: border-box;padding:5px 0;}
   .row-black {background-color: rgba(215,215,215,1);}
   .row-padding {box-sizing: border-box;padding-top: 10px;padding-bottom: 10px;}
   .btn-vertical {margin-top: 10px;}
