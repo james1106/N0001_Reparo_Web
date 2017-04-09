@@ -10,6 +10,12 @@
           <template scope="scope"><router-link to="/allOrder/orderDetail">查看详情</router-link></template>
         </el-table-column>
       </el-table>-->
+      <el-row class="mycard row-black row-padding">
+        <el-col :span="6">货品信息</el-col>
+        <el-col :span="6">付款信息</el-col>
+        <el-col :span="6">订单状态</el-col>
+        <el-col :span="6">操作</el-col>
+      </el-row>
       <template v-for="(item,index) in allOrder">
         <div class="box-card mycard">
           <el-row class="row-black row-padding">
