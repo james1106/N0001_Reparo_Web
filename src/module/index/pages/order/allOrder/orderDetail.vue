@@ -53,6 +53,7 @@
     <el-row>
       <el-col :span="24">
       <el-card class="box-card mybox" style="width:100%">
+
         <div slot="header" class="clearfix">
           <span style="line-height: 36px;">物流信息</span>
         </div>

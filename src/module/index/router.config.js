@@ -1,3 +1,4 @@
+import HomePage from './pages/homePage/homePage.vue'
 /*订单相关*/
 import order from './pages/order/index.vue'
 import allOrderIndex from './pages/order/allOrder/index.vue'
@@ -12,10 +13,6 @@ import forDeliver from './pages/order/forDeliver/forDeliver.vue'
 import deliver from './pages/order/forDeliver/deliver.vue'
 import forReceive from './pages/order/forReceive.vue'
 
-
-import huoquan from './pages/yufu/index.vue'
-import shouye from './pages/cangchu/index.vue'
-
 /*应收账款*/
 import yingshou from './pages/receivables/index.vue'
 import AcceptIndexPage from './pages/receivables/accept/index.vue'
@@ -27,11 +24,16 @@ import SignoutListPage from './pages/receivables/signOut/signoutList.vue'
 import SignoutPage from './pages/receivables/signOut/signout.vue'
 import DiscountPage from './pages/receivables/discount.vue'
 
+/*仓储*/
 
-import HomePage from './pages/homePage/homePage.vue'
-import rukushenqing from './pages/cangchu/rukushenqing.vue'
-import chukushenqing from './pages/cangchu/chukushenqing.vue'
-import cangdanshenqing from './pages/cangchu/cangdanshenqing.vue'
+import warehousing from './pages/warehousing/index.vue'
+import warehousingIndex from './pages/warehousing/allWarehousing/index.vue'
+import allWarehousing from './pages/warehousing/allWarehousing/allWarehousing.vue'
+import details from './pages/warehousing/allWarehousing/details.vue'
+import receiptApplication from './pages/warehousing/receiptApplication.vue'
+import storage from './pages/warehousing/storage.vue'
+import out from './pages/warehousing/out.vue'
+
 
 export default [
   {
@@ -87,17 +89,27 @@ export default [
   },
   {
     path:'/discount',component:DiscountPage
-  },//
+  },
+
+  /*仓储路由*/
   {
-    path:'/cangchu',component:shouye,
+    path:'/warehousing',component:warehousing,
+  },
+  {path:'/allWarehousing',component:warehousingIndex,
+    children:[
+      {path:'',component:allWarehousing},
+      {path:'details',component:details}
+    ]},
+  {
+    path:'/storage',component:storage
   },
   {
-    path:'/rukushenqing',component:rukushenqing
+    path:'/out',component:out
   },
   {
-    path:'/chukushenqing',component:chukushenqing
+    path:'/receiptApplication',component:receiptApplication
   },
   {
-    path:'/cangdanshenqing',component:cangdanshenqing
-  },
+    path:'/allwarehousing',component:allWarehousing
+  }
 ]
