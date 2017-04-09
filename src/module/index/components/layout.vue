@@ -7,12 +7,13 @@
       <el-col :span="10" class="logo">
         LOGO
 			</el-col>
-      <el-col :span="10">
+      <el-col :span="5">
+        <el-button type="primary" v-on:click="toBuyer()">我是买家</el-button>
+      </el-col>
+      <el-col :span="5">
+        <el-button type="primary" v-on:click="toSeller()">我是卖家</el-button>
       </el-col>
       <el-col :span="4" class="userinfo">
-        <!--<el-badge is-dot class="item">我的消息</el-badge>-->
-        <!--<el-badge class="item">设置</el-badge>-->
-        <!--<el-badge class="item">退出登录</el-badge>-->
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link">user</span>
           <el-dropdown-menu slot="dropdown">
@@ -28,39 +29,8 @@
   <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
   <main>
     <aside class="main-left">
-      <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
-        <el-menu-item>
-          我的功能
-        </el-menu-item>
-        <el-submenu index="/dingdan">
-          <template slot="title">订单管理</template>
-          <el-menu-item index="/allOrder">所有订单</el-menu-item>
-          <el-menu-item index="/launchOrder">发起订单</el-menu-item>
-          <el-menu-item index="/orderForConfirm">待确认</el-menu-item>
-          <el-menu-item index="/forDeliver">待发货</el-menu-item>
-          <el-menu-item index="/forReceive">待收货</el-menu-item>
-        </el-submenu>
-        <el-submenu index="/yingshou">
-          <template slot="title">应收账款</template>
-          <el-menu-item index="/signout">签发</el-menu-item>
-          <el-menu-item index="/accept">待承兑的账款</el-menu-item>
-          <el-menu-item index="/discount">贴现</el-menu-item>
-          <el-menu-item index="/cash">兑付</el-menu-item>
-        </el-submenu>
-        <el-submenu index="/yufu">
-          <template slot="title">预付款</template>
-          <el-menu-item index="/yufu/qianfa">签发</el-menu-item>
-          <el-menu-item index="/yufu/daichengdui">待承兑的账款</el-menu-item>
-          <el-menu-item index="/yufu/yufutiexian">贴现</el-menu-item>
-        </el-submenu>
-        <el-submenu index="/warehousing">
-          <template slot="title">仓储管理</template>
-          <el-menu-item index="/allWarehousing">我的仓单</el-menu-item>
-          <el-menu-item index="/storage">入库申请</el-menu-item>
-          <el-menu-item index="/out">出库申请</el-menu-item>
-          <el-menu-item index="/receiptApplication">仓单申请</el-menu-item>
-        </el-submenu>
-      </el-menu>
+      <menu-by v-bind:class="{isHide:isSeller}"></menu-by>
+      <menu-sl v-bind:class="{isHide:isBuyer}"></menu-sl>
     </aside>
     <div class="main-right">
     <transition name="fade">
@@ -73,10 +43,10 @@
 </div>
 </template>
 
-
 <script>
-import FooterA from './footer'
-import MenuA from './menu'
+import FooterA from './footer.vue'
+import MenuBy from './menuBuyer.vue'
+import MenuSl from './menuSeller.vue'
 
 export default {
   name: 'wrapper',
@@ -84,16 +54,35 @@ export default {
     return {
       msg: '',
       headerFixed : true,
-      active:true
+      active:true,
+      isBuyer:true,
+      isSeller:false
     }
   },
   components: {
-      FooterA,MenuA
+      FooterA,MenuBy,MenuSl
+  },
+  methods:{
+    toBuyer: function () {
+      if(this.isBuyer) return;
+      this.isSeller = !this.isSeller;
+      this.isBuyer = !this.isBuyer;
+      this.$router.push('/');
+    },
+    toSeller: function () {
+      if(this.isSeller) return;
+      this.isSeller = !this.isSeller;
+      this.isBuyer = !this.isBuyer;
+      this.$router.push('/');
+    }
   }
 }
 </script>
 
 <style scoped>
+  .isHide{
+    display:none;
+  }
   /* 头部导航 */
   header{z-index: 1000;min-width: 1200px;transition: all 0.5s ease;  border-top: solid 4px #3091F2;  background-color: #fff;  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);  }
   header.header-fixed{position: fixed;top: 0;left: 0;right: 0;}
