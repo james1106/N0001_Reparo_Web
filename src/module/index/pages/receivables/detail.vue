@@ -1,16 +1,16 @@
 <template>
-  <div id="discount">
+  <div id="detail">
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>我的应付账款</el-breadcrumb-item>
-      <el-breadcrumb-item>贴现</el-breadcrumb-item>
+      <el-breadcrumb-item>详情</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row class="row-bg">
       <el-col :span="20" offset="0" class="row-bg1">
         <label>账单状态：承兑已签收</label>
       </el-col>
       <el-col :span="4" offset="0" class="row-bg1">
-        <el-button type="primary" size="small">确认贴现</el-button>
+        <el-button type="primary" size="small">承兑确认</el-button>
       </el-col>
     </el-row>
     <el-row class="row-bg">
@@ -56,23 +56,21 @@
           </el-tab-pane>
         </el-tabs>
       </el-col>
-      <el-col :span="24" >
-        <label>请选择贴现银行</label>
+      <el-col :span="24" offset="0" class="row-bg1">
+        <label>账款状态</label>
       </el-col>
-      <el-col :span="24">
-        <label>选择贴现银行</label>
-        <el-select placeholder="请选择开户行">
-          <el-option label="农业银行（默认）" value="4"></el-option>
-          <el-option label="工商银行" value="5"></el-option>
-          <el-option label="兴业银行" value="6"></el-option>
-        </el-select>
+      <el-col :span="24" offset="0" class="row-bg1">
+        <label>承兑已签发:2017-04-03 10:00:00</label>
+      </el-col>
+      <el-col :span="24" offset="0" class="row-bg1">
+        <label>承兑已签收:2017-04-03 11:00:00</label>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
   export default {
-    name:'discount',
+    name:'detail',
     data () {
       return {
         data:[

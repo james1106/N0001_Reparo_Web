@@ -14,15 +14,13 @@ import deliver from './pages/order/forDeliver/deliver.vue'
 import forReceive from './pages/order/forReceive.vue'
 
 /*应收账款*/
-import yingshou from './pages/receivables/index.vue'
-import AcceptIndexPage from './pages/receivables/accept/index.vue'
-import AcceptPage from './pages/receivables/accept/accept.vue'
-import AcceptListPage from './pages/receivables/accept/acceptList.vue'
+import AllAccountsPage from './pages/receivables/index.vue'
+import AccountListPage from './pages/receivables/accountsList.vue'
+import AcceptPage from './pages/receivables/accept.vue'
 import CashPage from './pages/receivables/cash.vue'
-import SignoutIndexPage from './pages/receivables/signOut/index.vue'
-import SignoutListPage from './pages/receivables/signOut/signoutList.vue'
-import SignoutPage from './pages/receivables/signOut/signout.vue'
+import SignoutPage from './pages/receivables/signout.vue'
 import DiscountPage from './pages/receivables/discount.vue'
+import AccountsDetailPage from './pages/receivables/detail.vue'
 
 /*仓储*/
 
@@ -68,27 +66,15 @@ export default [
     ]
   }, //应收账款
   {
-    path:'/receivables',component:yingshou,
-  },
-  {
-    path:'/accept',component:AcceptIndexPage,
+    path:'/allAccounts/:status',component:AllAccountsPage,
     children:[
-      {path:'',component:AcceptListPage},
-      {path:'accept',component:AcceptPage}
+      {path:'',component:AccountListPage},
+      {path:'signout',component:SignoutPage},
+      {path:'accept',component:AcceptPage},
+      {path:'cash',component:CashPage},
+      {path:'discount',component:DiscountPage},
+      {path:'detail',component:AccountsDetailPage}
     ]
-  },
-  {
-    path:'/cash',component:CashPage
-  },
-  {
-    path:'/signout',component:SignoutIndexPage,
-    children:[
-      {path:'',component:SignoutListPage},
-      {path:'signout',component:SignoutPage}
-    ]
-  },
-  {
-    path:'/discount',component:DiscountPage
   },
 
   /*仓储路由*/
