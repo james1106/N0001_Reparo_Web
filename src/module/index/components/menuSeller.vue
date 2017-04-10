@@ -1,6 +1,5 @@
 <template>
-  <div id="menu">
-
+  <div id="menu" style="position: fixed">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item>
           <img src="../assets/home.png" style="padding-right: 10px"><span>首页</span>
@@ -53,6 +52,6 @@
   }
 </script>
 
-<style scoped>
-
+<style>
+  .el-menu-item, .el-submenu__title{width: 160px!important;}
 </style>

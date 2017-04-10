@@ -35,7 +35,7 @@
       </el-col>
       <el-col :span="10" >
         <el-row >
-          <el-card style="height: 212px;width: 580px" id="chart_card">
+          <el-card style="height: 212px;width: 580px;background-color: white" id="chart_card">
 
           </el-card>
         </el-row>
