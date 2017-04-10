@@ -234,7 +234,7 @@
   </div>
 </template>
 <script>
-  import Store from '../../store.js'
+  import Store from '../../vuex/store.js'
 
   export default {
     name:'list',

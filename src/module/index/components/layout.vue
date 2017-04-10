@@ -7,10 +7,10 @@
       <el-col :span="10" class="logo">
         LOGO
 			</el-col>
-      <el-col :span="5" v-if="companyType === '1'">
+      <el-col :span="5" v-if="companyType === '0'">
         <el-button type="primary" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
-      <el-col :span="5" v-if="companyType === '1'">
+      <el-col :span="5" v-if="companyType === '0'">
         <el-button type="primary" v-on:click="toSeller()">我是卖家</el-button>
       </el-col>
       <el-col :span="4" class="userinfo">
@@ -28,7 +28,7 @@
   </header>
   <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
   <main>
-    <aside class="main-left" v-if="companyType === '1'">
+    <aside class="main-left" v-if="companyType === '0'">
       <menu-by v-if="isBuyer"></menu-by>
       <menu-sl v-else></menu-sl>
     </aside>
@@ -56,13 +56,14 @@ import MenuSl from './menuSeller.vue'
 import MenuLg from './menuLogistics.vue'
 import MenuWh from './menuWarehousing.vue'
 import LocalStore from "../../../common/store.js"
-import Store from '../store.js'
+import Store from '../vuex/store.js'
 
 export default {
   name: 'wrapper',
   created: function () {
-    Store.state.isBuyer = isBuyer;
-    this.companyType = LocalStore.fetchCompanyType();
+    Store.state.isBuyer = this.isBuyer;
+    var userInfo = LocalStore.fetchUserInfo();
+    this.companyType = userInfo.roleCode;
     //后面判断 每个不同公司进去主页后的首页面
     //使用this.$router.push(...);
   },
