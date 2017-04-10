@@ -1,5 +1,5 @@
 <template>
-  <div id="menu">
+  <div id="menu" style="position: fixed">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/">
           <i class="el-icon-date"></i>首页
@@ -47,4 +47,5 @@
 
 <style scoped>
   .el-menu{background-color: transparent!important;}
+  .el-menu-item, .el-submenu__title{width: 160px!important;}
 </style>
