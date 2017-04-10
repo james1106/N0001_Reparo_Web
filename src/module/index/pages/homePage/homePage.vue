@@ -35,7 +35,7 @@
       </el-col>
       <el-col :span="10" >
         <el-row >
-          <el-card style="height: 210px">
+          <el-card style="height: 212px;width: 580px" id="chart_card">
 
           </el-card>
         </el-row>
@@ -98,14 +98,74 @@
       </el-table>
     </el-card>
   </div>
-
 </template>
+
 <script>
+  import echarts from 'echarts'
 export default {
   name: 'app',
+  mounted: function (){
+    this.$nextTick(function () {
+      var chart = echarts.init(document.getElementById("chart_card"));
+      chart.setOption({
+        title: {
+          text: '订单趋势图'
+        },
+        tooltip: {
+//          trigger: 'axis'
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['2017-10-04','2017-10-05','2017-10-06','2017-10-07','2017-10-08','2017-10-09','2017-10-10']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name:'订单数量',
+            type:'line',
+            stack: '总量',
+
+            itemStyle : {
+              normal : {
+                lineStyle:{
+                  color:'rgb(68,209,153)',
+                  lineStyle:{
+                    color:'rgb(68,209,153)'
+                  }
+                }
+              }
+            },
+            areaStyle: {normal: {
+                color:new echarts.graphic.LinearGradient(0,0,0,1,[
+                  {
+                    offset:0,
+                    color:'rgb(95,223,227)'
+                  },{
+                    offset:1,
+                    color:'rgb(68,209,153)'
+                  }
+                ])
+            }},
+            data:[150, 232, 201, 154, 190, 330, 410]
+          }
+        ]
+      });
+    });
+  },
+  created:function () {
+
+  },
   data () {
     return {
-//      msg: 'Welcome to Your Vue.js App'
       showOrder:[
         {
           "orderNo":"1111111122",

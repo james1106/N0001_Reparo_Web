@@ -30,7 +30,6 @@
         <el-button type="primary" style="width: 600px;" @click="submitForm('ruleForm')">注册</el-button>
       </el-form-item>
     </el-form>
-
   </div>
 </template>
 
