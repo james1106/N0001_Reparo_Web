@@ -30,7 +30,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button type="primary">同意</el-button><el-button type="primary">拒绝</el-button>
+      <el-button type="primary">出库确认</el-button><el-button type="primary">取消</el-button>
     </el-row>
   </div>
 </template>

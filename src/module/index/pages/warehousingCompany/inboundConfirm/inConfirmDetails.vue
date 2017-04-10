@@ -1,33 +1,43 @@
 <template>
-  <!--入库确认-->
-  <el-form ref="inboundConfirm" :model="inboundConfirm" label-width="200px">
-    <el-form-item label="申请人">
-      <el-select v-model="inboundConfirm.applicant" style="width: 250px">
-        <el-option label="A企业" value="companyA"></el-option>
-        <el-option label="B企业" value="companyB"></el-option>
-        <el-option label="C企业" value="companyC"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="运单号">
-      <el-input v-model="inboundConfirm.trackingNumber" style="width: 250px"></el-input>
-    </el-form-item>
-    <el-form-item label="物流公司">
-      <el-input v-model="inboundConfirm.logisticsCompany" style="width: 250px"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">提交</el-button>
-    </el-form-item>
-  </el-form>
+  <div class="box-card">
+    <span>发货申请单详情</span>
+    <el-row class="row-black row-padding">
+      <el-col :span="8">业务编号：{{item.orderId}}</el-col>
+      <el-col :span="8">发起时间：{{item.timeStamp}}</el-col>
+    </el-row>
+    <el-row class="row-padding">
+      <el-col :span="16">
+        <el-row>
+          <el-col :span="12">申请人：{{item.sender}}</el-col>
+          <el-col :span="12">运单号：{{item.logisticNum}}</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">物流公司：{{item.logistics}}</el-col>
+          <el-col :span="12">货物价值：{{item.value}}</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">仓库编号:<el-input></el-input></el-col>
+        </el-row>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-button type="primary">入库确认</el-button><el-button type="primary">取消</el-button>
+    </el-row>
+  </div>
 </template>
 <script>
   export default {
     name:'index',
     data () {
       return {
-        inboundConfirm:{
-          applicant:'',
-          trackingNumber:'',
-          logisticsCompany:''
+        item:{
+          orderId:'20170403123456',
+          timeStamp:'2017-04-43 10:29:11',
+          sender:'A企业',
+          logisticNum:'11124234324',
+          storageNum:'ddd',
+          logistics:'xx物流',
+          value:'20,000'
         }
       }
     }

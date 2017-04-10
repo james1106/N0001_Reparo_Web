@@ -6,7 +6,7 @@
           :data="tableData"
           border:false
           class="el-table"
-          style="width: 724px;">
+          style="width: auto;">
           <el-table-column
             prop="receiptNum"
             label="仓单编号"
@@ -25,7 +25,7 @@
           <el-table-column
             prop="operateTime"
             label="操作时间"
-            width="150">
+            width="180">
           </el-table-column>
           <el-table-column
             prop="option"

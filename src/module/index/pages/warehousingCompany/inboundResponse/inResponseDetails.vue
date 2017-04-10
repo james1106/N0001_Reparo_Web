@@ -17,7 +17,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button type="primary">同意</el-button><el-button type="primary">拒绝</el-button>
+      <el-button type="primary">同意入库</el-button><el-button type="primary">拒绝</el-button>
     </el-row>
   </div>
 </template>

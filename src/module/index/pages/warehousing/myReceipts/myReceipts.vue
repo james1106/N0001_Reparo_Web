@@ -1,31 +1,46 @@
 <template>
-  <div id="index">
-    <!--<div style="width: auto;height: auto;border: 1px solid #d1dbe5">-->
-    <el-row>
-      <span style="margin-left: 35px">我的仓单</span>
-      <el-col :span="24">
-        <el-card class="box-card card">
-          <el-form ref="list" :model="list" labelWidth="80px">
-            <el-row>
-              <el-col :span="8"><el-form-item label="订单编号:"><span v-model="list.number">{{list.orderNumber}}</span></el-form-item></el-col>
-              <el-col :span="8"><el-form-item label="创建时间:"><span v-model="list.time">{{list.time}}</span></el-form-item></el-col>
-              <el-col :span="8"><el-form-item label="仓单编号:"><span v-model="list.state">{{list.receiptNumber}}</span></el-form-item></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="8">货品名称：卡纸</el-col>
-              <el-col :span="8">订单金额：20,000</el-col>
-              <router-link to="/allWarehousing/details"><el-button>查看详情</el-button></router-link>
-            </el-row>
-            <el-row>
-              <el-col :span="8">货品数量：1,000（箱）</el-col>
-              <el-col :span="8">付款方式：应收账款支付</el-col>
-            </el-row>
-          </el-form>
-        </el-card>
-      </el-col>
-    </el-row>
-    <!--</div>-->
-  </div>
+  <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="所有仓单" name="first">
+      <el-card>
+        <el-table
+          :data="tableData"
+          border:false
+          class="el-table"
+          style="width: auto;">
+          <el-table-column
+            prop="receiptNum"
+            label="仓单编号"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="owner"
+            label="持有人"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="state"
+            label="状态"
+            width="100">
+          </el-table-column>
+          <el-table-column
+            prop="operateTime"
+            label="操作时间"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="option"
+            label="查看"
+            width="114">
+            <template scope="scope">
+              <el-button><router-link to="/myReceipts/myReceiptsDetails">立即查看</router-link></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-card>
+    </el-tab-pane>
+    <el-tab-pane label="可质押" name="second">可质押</el-tab-pane>
+    <el-tab-pane label="已失效" name="third">已失效</el-tab-pane>
+  </el-tabs>
 </template>
 <script>
   export default {
@@ -33,11 +48,27 @@
     data () {
       return {
         activeName: 'first',
-        list:{
-          orderNumber:'20170403123456',
-          time:'2017-04-03 10:29:11',
-          receiptNumber:'20170403123456'
-        }
+        tableData:[{
+          receiptNum: '2017-03-31 10:00:00',
+          owner: 'A公司',
+          state:'可质押',
+          operateTime: ''
+        }, {
+          receiptNum: '20170403234567',
+          owner: 'B公司',
+          state:'可质押',
+          operateTime: '2017-03-31 10:00:00'
+        }, {
+          receiptNum: '20170403123567',
+          owner: 'C公司',
+          state:'已失效',
+          operateTime: '2017-03-31 10:00:00'
+        }]
+      };
+    },
+    methods: {
+      handleClick(tab, event){
+        console.log(tab, event);
       }
     }
   }

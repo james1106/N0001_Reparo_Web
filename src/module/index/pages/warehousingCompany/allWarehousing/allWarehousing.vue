@@ -6,7 +6,7 @@
           :data="tableData"
           border:false
           class="el-table"
-          style="width: 724px;">
+          style="width: auto;">
           <el-table-column
             prop="number"
             label="业务编号"
