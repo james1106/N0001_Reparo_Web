@@ -27,9 +27,8 @@
         </el-submenu>
         <el-submenu index="/warehousing">
           <template slot="title">仓储管理</template>
-          <el-menu-item index="/allWarehousing">我的仓单</el-menu-item>
-          <el-menu-item index="/storage">入库申请</el-menu-item>
-          <el-menu-item index="/out">出库申请</el-menu-item>
+          <el-menu-item index="/myWarehousing">我的仓储</el-menu-item>
+          <el-menu-item index="/myReceipts">我的仓单</el-menu-item>
           <el-menu-item index="/receiptApplication">仓单申请</el-menu-item>
         </el-submenu>
       </el-menu>

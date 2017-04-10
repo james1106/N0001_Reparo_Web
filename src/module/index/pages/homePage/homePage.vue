@@ -1,35 +1,41 @@
 <template>
   <div>
-    <div class="box1">
-      <el-card class="box-card">
-        <div slot="header" class="clearfix headername">
-          <span>订单管理</span>
-        </div>
-        <div v-for="item in items1" class="text item">
-          {{ item.message }}
-        </div>
-      </el-card>
+    <!--<el-card>-->
+      <!--<el-card class="box-card">-->
+        <!--<div slot="header" class="clearfix headername">-->
+          <!--<span>订单管理</span>-->
+        <!--</div>-->
+        <!--<div v-for="item in items1" class="text item">-->
+          <!--{{ item.message }}-->
+        <!--</div>-->
+      <!--</el-card>-->
+      <!--<el-card class="box-card">-->
+        <!--<div slot="header"  class="clearfix headername">-->
+          <!--<span >应收账款</span>-->
+        <!--</div>-->
+        <!--<div v-for="item in items2" class="text item">-->
+          <!--{{ item.message }}-->
+        <!--</div>-->
+      <!--</el-card>-->
+      <!--<el-card class="box-card" style="height: 187px">-->
+        <!--<div slot="header" class="clearfix headername">-->
+          <!--<span>物流管理</span>-->
+        <!--</div>-->
+        <!--<div v-for="item in items3" class="text item">-->
+          <!--{{ item.message }}-->
+        <!--</div>-->
+      <!--</el-card>-->
+      <!--<el-card class="box-card">-->
+        <!--<div slot="header" class="clearfix headername">-->
+          <!--<span>仓储管理</span>-->
+        <!--</div>-->
+        <!--<div v-for="item in items4" class="text item">-->
+          <!--{{ item.message }}-->
+        <!--</div>-->
+      <!--</el-card>-->
+    <!--</el-card>-->
 
-      <el-card class="box-card">
-        <div slot="header"  class="clearfix headername">
-          <span>应收账款</span>
-        </div>
-        <div v-for="item in items2" class="text item">
-          {{ item.message }}
-        </div>
-      </el-card>
-
-      <el-card class="box-card">
-        <div slot="header" class="clearfix headername">
-          <span>预付账款</span>
-        </div>
-        <div v-for="item in items3" class="text item">
-          {{ item.message }}
-        </div>
-      </el-card>
-    </div>
-
-    <div class="box2">
+    <el-card>
       <el-table
         :data="tableData"
         border:false
@@ -64,7 +70,7 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>
+    </el-card>
   </div>
 
 </template>
@@ -78,18 +84,22 @@ export default {
 //      msg: 'Welcome to Your Vue.js App'
       items1: [
         { message: '发起订单' },
-        { message: '确认订单' },
-        { message: '所有订单' }
+        { message: '我买入的订单' },
+        { message: '待付款' }
       ],
       items2: [
-        { message: '应收还款' },
-        { message: '确认应收' },
-        { message: '应收融资' }
+        { message: '签发' },
+        { message: '我的应收账款' },
+        { message: '贴现' }
       ],
       items3: [
-        { message: '追缴保金' },
-        { message: '确认预付' },
-        { message: '预付融资' }
+        { message: '我的物流' },
+        { message: '待收货' }
+      ],
+      items4: [
+        { message: '我的仓储' },
+        { message: '已入库' },
+        { message: '待入库' }
       ],
       tableData: [{
         number: '20170403123456',
@@ -113,54 +123,36 @@ export default {
 </script>
 
 <style>
+  /*.headername{*/
+    /*font-size: 18px;*/
+    /*line-height: 20px;*/
+    /*text-align: center;*/
+    /*border-bottom: 0px!important;*/
+  /*}*/
+  /*.text {*/
+    /*font-size: 14px;*/
+    /*text-align: center;*/
+  /*}*/
 
-  /*卡片样式*/
-  .box1{
-    border: 1px solid #d1dbe5;
-    width: auto;
-    /*height: auto;*/
-    height: 220px;
-    padding:20px 1px 0px 10px;
-    /*margin-right: 80px;*/
-  }
-  .box2{
-    border: 1px solid #d1dbe5;
-    /*width: 752px;*/
-    height: 250px;
-    width: auto;
-    padding:20px 1px 0px 25px;
-    margin-top: 20px;
-  }
-  .headername{
-    font-size: 18px;
-    line-height: 20px;
-    text-align: center;
-    border-bottom: 0px!important;
-  }
-  .text {
-    font-size: 14px;
-    text-align: center;
-  }
+  /*.item {*/
+    /*padding: 5px 0;*/
+  /*}*/
 
-  .item {
-    padding: 5px 0;
-  }
+  /*.clearfix:before,*/
+  /*.clearfix:after {*/
+    /*display: table;*/
+    /*content: "";*/
+  /*}*/
+  /*.clearfix:after {*/
+    /*clear: both*/
+  /*}*/
 
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
-
-  .box-card {
-    width: 220px;
-    float: left;
-    margin: 0 15px;
-    background-color: rgb(242,242,242);
-  }
+  /*.box-card {*/
+    /*width: 190px;*/
+    /*float: left;*/
+    /*margin: 0 5px;*/
+    /*background-color: rgb(242,242,242);*/
+  /*}*/
   .el-table th.is-leaf{
     border-bottom: 0px!important;
     background-color: transparent;
@@ -174,4 +166,7 @@ export default {
     background-color: rgb(201,201,201)!important;
     width: 100%;
   }
+  /*.el-card__body{*/
+    /*height: 90px;*/
+  /*}*/
 </style>

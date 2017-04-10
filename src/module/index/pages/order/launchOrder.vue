@@ -42,12 +42,12 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">提交</el-button>
-      </el-form-item>
+      </el-form-item></el-form-item>
     </el-form>
   </div>
 </template>
 <script>
-  import store from '../../store'
+  import store from '../../vuex/store'
   export default {
     name: 'index',
     data () {

@@ -7,9 +7,9 @@
         </el-menu-item>
         <el-submenu index="/dingdan">
           <template slot="title">运单管理</template>
-          <el-menu-item index="/allOrder">我的运单</el-menu-item>
-          <el-menu-item index="/launchOrder">发货确认</el-menu-item>
-          <el-menu-item index="/orderForConfirm">收货确认</el-menu-item>
+          <el-menu-item index="/waybill">我的运单</el-menu-item>
+          <el-menu-item index="/deliveryConfirm">发货确认</el-menu-item>
+          <el-menu-item index="/receiveConfirm">收货确认</el-menu-item>
         </el-submenu>
       </el-menu>
   </div>
