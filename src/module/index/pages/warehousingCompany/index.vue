@@ -10,6 +10,6 @@
     name:'index',
     data () {
       return {}
-    },
+    }
   }
 </script>

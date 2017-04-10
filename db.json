@@ -1,4 +1,21 @@
 {
+  "login":{
+    "code": 0,
+    "message":"",
+    "data":{
+      "accuntName":"ethan",
+      "companyName":"杭州趣链科技有限公司",
+      "phone":"18700000000",
+      "roleCode":"0",
+      "certType":"1",
+      "certNo":"11111111",
+      "acctId":"111111111",
+      "svcrClass":"316",
+      "acctSvcr":"dontkonw",
+      "acctSvcrName":"浙商银行"
+    }
+  },
+
   "getList":{
     "orderSequence":"20170403123456",
     "orderTime":"2017-04-03 10:29:11",

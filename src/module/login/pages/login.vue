@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="login">
     <img src="../assets/logo.png">
     <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="70px" class="login-container">
       <el-form-item label="用户名" prop="account">
@@ -9,12 +9,12 @@
         <el-input v-model="ruleForm2.checkPass"  type="password"  auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
 
-      <el-radio class="radio" v-model="companyType" label="1">融资企业</el-radio>
-      <el-radio class="radio" v-model="companyType" label="2">仓储公司</el-radio>
-      <el-radio class="radio" v-model="companyType" label="3">物流公司</el-radio>
-
+      <el-row>
+        <el-col :span="12"><router-link to="/pwdRetrieval">找回密码</router-link></el-col>
+        <el-col :span="12"><router-link to="/register">注册业务</router-link></el-col>
+      </el-row>
       <el-form-item style="width:100%;margin-left: -70px;">
-        <el-button type="primary" style="width: 350px;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
+        <el-button type="primary" style="width: 350px;" @click="login()">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -22,19 +22,15 @@
 
 <script>
 
-//    export const requestLogin = params => { return res.post(`${base}/login`, params).then(res => res.data); };
-  //  import Hello from '../../components/Hello'
 import Store from "../../../common/store.js"
 
   export default {
-//    name: 'app',
+    name: 'login',
 //    components: {
 //      Hello
 //    }
     data(){
       return{
-        companyType: '1',
-        logining:false,
         ruleForm2: {
           account: '',
           checkPass: ''
@@ -50,32 +46,19 @@ import Store from "../../../common/store.js"
       }
     },
     methods:{
-      handleSubmit2(ev) {
-        this.$refs.ruleForm2.validate((valid) => {
-          if (valid) {
-            Store.saveCompanyType(this.companyType);
-            this.logining = true;
-//            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-//            requestLogin(loginParams).then(data => {
-//              this.logining = false;
-//              let { msg, code, user } = data;
-//              if (code !== 200) {
-//                this.$message({
-//                  message: msg,
-//                  type: 'error'
-//                });
-//              }
-//              else {
-//                sessionStorage.setItem('user', JSON.stringify(user));
-                  window.location.href='index.html';
-//              }
-//            });
+      login() {
+        this.$http.get('/api/login').then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          var data =  res.body.data;
+          if(code != 0){
+            return;
           }
-//          else {
-//            console.log('error submit!!');
-//            return false;
-//          }
-        });
+          Store.saveUserInfo(data);
+          window.location.href='index.html';
+        },(err) => {
+          console.log(err);
+        })
       }
     }
 

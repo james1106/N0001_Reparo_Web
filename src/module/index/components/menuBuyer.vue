@@ -15,10 +15,9 @@
         </el-submenu>
         <el-submenu index="/yingshou">
           <template slot="title">应收账款</template>
-          <el-menu-item index="/signout">签发</el-menu-item>
-          <el-menu-item index="/accept">待承兑的账款</el-menu-item>
-          <el-menu-item index="/discount">贴现</el-menu-item>
-          <el-menu-item index="/cash">兑付</el-menu-item>
+          <el-menu-item index="/allAccounts/all" v-on:click="setStatus('all')">我的应付账款</el-menu-item>
+          <el-menu-item index="/allAccounts/accept" v-on:click="setStatus('accept')">承兑</el-menu-item>
+          <el-menu-item index="/allAccounts/cash" v-on:click="setStatus('cash')">兑付</el-menu-item>
         </el-submenu>
         <el-submenu index="/yufu">
           <template slot="title">预付款</template>
@@ -31,14 +30,20 @@
 </template>
 
 <script>
-export default {
-  name: 'menu',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import Store from '../vuex/store.js'
+
+  export default {
+    name: 'menu',
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
+    },
+    methods:{
+      setStatus: function (status) {
+        Store.state.accountsStatus = status    }
     }
   }
-}
 </script>
 
 <style scoped>

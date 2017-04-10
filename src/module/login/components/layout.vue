@@ -1,15 +1,18 @@
 <template>
-  <div id="index">
+  <div id="app">
     <transition name="fade">
       <router-view class="view"></router-view>
     </transition>
   </div>
 </template>
+
 <script>
+
   export default {
-    name:'index',
-    data () {
-      return {}
-    },
+    data(){
+      return{
+      }
+    }
   }
 </script>
+v a

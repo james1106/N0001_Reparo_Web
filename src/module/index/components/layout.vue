@@ -7,11 +7,11 @@
       <el-col :span="10" class="logo">
         LOGO
 			</el-col>
-      <el-col :span="5" v-if="companyType === '1'">
-        <el-button type="primary" v-on:click="changeMenu()">我是买家</el-button>
+      <el-col :span="5" v-if="companyType === '0'">
+        <el-button type="primary" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
-      <el-col :span="5" v-if="companyType === '1'">
-        <el-button type="primary" v-on:click="changeMenu()">我是卖家</el-button>
+      <el-col :span="5" v-if="companyType === '0'">
+        <el-button type="primary" v-on:click="toSeller()">我是卖家</el-button>
       </el-col>
       <el-col :span="4" class="userinfo">
         <el-dropdown trigger="hover">
@@ -28,7 +28,7 @@
   </header>
   <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
   <main>
-    <aside class="main-left" v-if="companyType === '1'">
+    <aside class="main-left" v-if="companyType === '0'">
       <menu-by v-if="isBuyer"></menu-by>
       <menu-sl v-else></menu-sl>
     </aside>
@@ -55,12 +55,15 @@ import MenuBy from './menuBuyer.vue'
 import MenuSl from './menuSeller.vue'
 import MenuLg from './menuLogistics.vue'
 import MenuWh from './menuWarehousing.vue'
-import Store from "../../../common/store.js"
+import LocalStore from "../../../common/store.js"
+import Store from '../vuex/store.js'
 
 export default {
   name: 'wrapper',
   created: function () {
-    this.companyType = Store.fetchCompanyType();
+    Store.state.isBuyer = this.isBuyer;
+    var userInfo = LocalStore.fetchUserInfo();
+    this.companyType = userInfo.roleCode;
     //后面判断 每个不同公司进去主页后的首页面
     //使用this.$router.push(...);
   },
@@ -77,13 +80,23 @@ export default {
       FooterA,MenuBy,MenuSl,MenuLg,MenuWh
   },
   methods:{
-    changeMenu: function () {
-      this.isBuyer = !this.isBuyer;
+    toBuyer: function () {
+      if(this.isBuyer == true){
+        return
+      }
+      this.isBuyer = !this.isBuyer
       this.$router.push('/');
+      Store.state.isBuyer = this.isBuyer
+
     },
-    changeMenu: function () {
-      this.isBuyer = !this.isBuyer;
+    toSeller: function () {
+      if(!this.isBuyer){
+        return
+      }
+      this.isBuyer = !this.isBuyer
       this.$router.push('/');
+      Store.state.isBuyer = this.isBuyer
+
     }
   }
 }
