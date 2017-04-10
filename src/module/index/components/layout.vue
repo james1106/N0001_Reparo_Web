@@ -1,7 +1,7 @@
 <template>
 <div id="wrapper">
   <!--头部导航-->
-  <header class="header" :class="{ 'header-fixed' : headerFixed }">
+  <header class="header" :class="[{'seller': isSeller, 'buyer': isBuyer ,'header-fixed':headerFixed}] "">
   <el-row>
     <el-col :span="24">
 
@@ -9,13 +9,15 @@
         <img src="../assets/logoWhiteCopy.png" style="margin-top: 8px">
 			</el-col>
       <el-col :span="4" style="margin-left: 10px;margin-top: 20px;color: white">
-        <span >趣链科技</span><span> | </span><span style="font-size: 14px">卖家中心</span>
+        <span >趣链科技</span><span> | </span>
+        <span style="font-size: 14px" v-if="isBuyer === true">买家中心</span>
+        <span style="font-size: 14px" v-else >卖家中心</span>
       </el-col>
       <el-col :span="2" v-if="companyType === '0'">
-        <el-button  class="changeButton" size="large" type="primary" v-on:click="toBuyer()">我是买家</el-button>
+        <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:isSeller}" v-on:click="toSeller()">我是卖家</el-button>
       </el-col>
       <el-col :span="2" v-if="companyType === '0'">
-        <el-button  class="changeButton" size="large" type="primary" v-on:click="toSeller()">我是卖家</el-button>
+        <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:isBuyer}" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
       <el-col :span="14" class="userinfo" v-if="companyType === '0'">
         <el-dropdown trigger="hover">
@@ -87,6 +89,7 @@ export default {
       headerFixed : true,
       active:true,
       isBuyer:true,
+      isSeller:false,
       companyType:'1'  //1.融资企业 2.仓储公司 3.物流公司
     }
   },
@@ -98,6 +101,7 @@ export default {
       if(this.isBuyer == true){
         return
       }
+      this.isSeller = !this.isSeller
       this.isBuyer = !this.isBuyer
       this.$router.push('/');
       Store.state.isBuyer = this.isBuyer
@@ -108,6 +112,7 @@ export default {
         return
       }
       this.isBuyer = !this.isBuyer
+      this.isSeller = !this.isSeller
       this.$router.push('/');
       Store.state.isBuyer = this.isBuyer
     },
@@ -120,9 +125,14 @@ export default {
 
 <style>
   /* 头部导航 */
-  header{
+  .seller{
     z-index: 1000;height:60px;min-width: 1200px;
     background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(57,202,166)), to(rgb(133,211,44))); /*兼容Safari／Chrome*/
+    background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
+    transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
+  .buyer{
+    z-index: 1000;height:60px;min-width: 1200px;
+    background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(0,148,218)), to(rgb(0,176,182))); /*兼容Safari／Chrome*/
     background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
     transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
   header_Sale{background-color: rgb(0,205,211);}  /*卖家背景*/
@@ -142,12 +152,12 @@ export default {
     font-size: 14px!important;
     height: 60px;
     background-color: transparent!important;
-    border:0px !important;
+    border: 0px!important;
     border-radius: 0%!important;
   }
-  .changeButton:hover{
-    background-color:white!important;
-    color: rgb(0,209,156)!important;
+  .borderBottom{
+    border-top: 6px solid transparent!important;
+    border-bottom: 6px solid white!important;
   }
   /* 主内容区 */
   main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 0px #E9ECF1;  background-color: #FCFCFC;  }
