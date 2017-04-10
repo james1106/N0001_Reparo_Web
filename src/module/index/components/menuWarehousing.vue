@@ -2,10 +2,10 @@
   <div id="menu">
       <el-menu  default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item>
-          我的功能
+          <i class="el-icon-date"></i>首页
         </el-menu-item>
         <el-submenu index="/dingdan">
-          <template slot="title">仓储管理</template>
+          <template slot="title"><i class="el-icon-menu"></i>仓储管理</template>
           <el-menu-item index="/allWarehousing">我的仓储</el-menu-item>
           <el-menu-item index="/receipts">我的仓单</el-menu-item>
           <el-menu-item index="/inboundResponse">入库响应</el-menu-item>

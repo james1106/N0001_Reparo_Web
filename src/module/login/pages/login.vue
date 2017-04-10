@@ -22,7 +22,7 @@
 
 <script>
 
-import Store from "../../../common/store.js"
+  import Store from "../../../common/store.js"
 
   export default {
     name: 'login',

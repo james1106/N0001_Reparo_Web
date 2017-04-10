@@ -1,74 +1,130 @@
 <template>
   <div>
-    <!--<el-card>-->
-      <!--<el-card class="box-card">-->
-        <!--<div slot="header" class="clearfix headername">-->
-          <!--<span>订单管理</span>-->
-        <!--</div>-->
-        <!--<div v-for="item in items1" class="text item">-->
-          <!--{{ item.message }}-->
-        <!--</div>-->
-      <!--</el-card>-->
-      <!--<el-card class="box-card">-->
-        <!--<div slot="header"  class="clearfix headername">-->
-          <!--<span >应收账款</span>-->
-        <!--</div>-->
-        <!--<div v-for="item in items2" class="text item">-->
-          <!--{{ item.message }}-->
-        <!--</div>-->
-      <!--</el-card>-->
-      <!--<el-card class="box-card" style="height: 187px">-->
-        <!--<div slot="header" class="clearfix headername">-->
-          <!--<span>物流管理</span>-->
-        <!--</div>-->
-        <!--<div v-for="item in items3" class="text item">-->
-          <!--{{ item.message }}-->
-        <!--</div>-->
-      <!--</el-card>-->
-      <!--<el-card class="box-card">-->
-        <!--<div slot="header" class="clearfix headername">-->
-          <!--<span>仓储管理</span>-->
-        <!--</div>-->
-        <!--<div v-for="item in items4" class="text item">-->
-          <!--{{ item.message }}-->
-        <!--</div>-->
-      <!--</el-card>-->
-    <!--</el-card>-->
+    <el-row>
+      <el-col :span="5" style="margin-right: 15px">
+        <el-card style="height: 100px;">
+          <img src="../../assets/group_1.png">
+          <div style="margin-right: 30px;float: right;margin-top: 13px">
+            <span style="font-size: 10px;">全部订单</span> <br>
+            <span>1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 15px">
+        <el-card style="height: 100px;">
+          <img src="../../assets/group_2.png">
+          <div style="margin-right: 30px;float: right;margin-top: 13px">
+            <span style="font-size: 10px;">全部订单</span> <br>
+            <span>1000</span>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="5" style="margin-right: 15px">
+        <el-card style="height: 100px;">
+          <img src="../../assets/group_3.png">
+          <div style="margin-right: 30px;float: right;margin-top: 13px">
+            <span style="font-size: 10px;">全部订单</span> <br>
+            <span>1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 15px">
+        <el-card style="height: 100px;">
+          <img src="../../assets/group_4.png">
+          <div style="margin-right: 30px;float: right;margin-top: 13px">
+            <span style="font-size: 10px;">全部订单</span> <br>
+            <span>1000</span>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
 
     <el-card>
-      <el-table
-        :data="tableData"
-        border:false
-        class="el-table"
-        style="width: 724px;">
-        <el-table-column
-          prop="number"
-          label="业务编号"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="type"
-          label="业务类型"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="opponent"
-          label="交易对手"
-          width="100">
-        </el-table-column>
-        <el-table-column
-          prop="value"
-          label="金额"
-          width="150">
-        </el-table-column>
-        <el-table-column
-          prop="option"
-          label="操作"
-          width="114">
-          <template scope="scope">
-            <el-button>立即查看</el-button>
-          </template>
-        </el-table-column>
+      <div slot="header" class="clearfix" style="height: 8px">
+        <span>待办订单</span>
+      </div>
+      <!--<el-table-->
+        <!--:data="tableData"-->
+        <!--border:false-->
+        <!--class="el-table"-->
+        <!--style="width: 724px;">-->
+        <!--<el-table-column-->
+          <!--prop="number"-->
+          <!--label="业务编号"-->
+          <!--width="180">-->
+        <!--</el-table-column>-->
+        <!--<el-table-column-->
+          <!--prop="type"-->
+          <!--label="业务类型"-->
+          <!--width="180">-->
+        <!--</el-table-column>-->
+        <!--<el-table-column-->
+          <!--prop="opponent"-->
+          <!--label="交易对手"-->
+          <!--width="100">-->
+        <!--</el-table-column>-->
+        <!--<el-table-column-->
+          <!--prop="value"-->
+          <!--label="金额"-->
+          <!--width="150">-->
+        <!--</el-table-column>-->
+        <!--<el-table-column-->
+          <!--prop="option"-->
+          <!--label="操作"-->
+          <!--width="114">-->
+          <!--<template scope="scope">-->
+            <!--<el-button>立即查看</el-button>-->
+          <!--</template>-->
+        <!--</el-table-column>-->
+      <!--</el-table>-->
+      <el-row style="background-color: rgb(223,238,236);height: 40px;line-height: 40px;border-radius: 1%">
+        <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
+        <el-col :span="6">付款信息</el-col>
+        <el-col :span="6">订单状态</el-col>
+        <el-col :span="4" style="text-align: center">操作</el-col>
+      </el-row>
+      <template v-for="(item,index) in showOrder">
+        <div>
+          <el-row>
+            <el-row>
+              <el-col :span="6">订单编号:{{item.orderNo}}</el-col>
+              <el-col :span="6">创建时间:{{item.orderGenerateTime}}</el-col>
+              <el-col :span="6">卖家:{{item.payeeAccount}}</el-col>
+              <el-col :span="6"></el-col>
+            </el-row>
+            <el-row>
+              <el-row>
+                <el-col :span="4">
+                  <el-row>货品名称:{{item.productName}}</el-row>
+                  <el-row>货品数量:{{item.productNum}}</el-row>
+                </el-col>
+                <el-col :span="4">
+                  <el-row>订单金额(元):{{item.totalPrice}}</el-row>
+                  <el-row>付款方式:{{item.payingMethod}}</el-row>
+                </el-col>
+                <el-col :span="3">
+                  <el-row>交易状态</el-row>
+                  <el-row>{{item.txState}}</el-row>
+                </el-col>
+                <el-col :span="3">
+                  <el-row>账款状态</el-row>
+                  <el-row>{{item.receState}}</el-row>
+                </el-col>
+                <el-col :span="3">
+                  <el-row>仓储状态</el-row>
+                  <el-row>{{item.repoCertState}}</el-row>
+                </el-col>
+                <el-col :span="3">
+                  <el-row>物流状态</el-row>
+                  <el-row>{{item.wayBillState}}</el-row>
+                </el-col>
+              </el-row>
+            </el-row>
+          </el-row>
+        </div>
+      </template>
       </el-table>
     </el-card>
   </div>
@@ -82,77 +138,71 @@ export default {
   data () {
     return {
 //      msg: 'Welcome to Your Vue.js App'
-      items1: [
-        { message: '发起订单' },
-        { message: '我买入的订单' },
-        { message: '待付款' }
-      ],
-      items2: [
-        { message: '签发' },
-        { message: '我的应收账款' },
-        { message: '贴现' }
-      ],
-      items3: [
-        { message: '我的物流' },
-        { message: '待收货' }
-      ],
-      items4: [
-        { message: '我的仓储' },
-        { message: '已入库' },
-        { message: '待入库' }
-      ],
-      tableData: [{
-        number: '20170403123456',
-        type: '签发待确认',
-        opponent:'A企业',
-        value: '20,000',
-      }, {
-        number: '20170403234567',
-        type: '订单待确认',
-        opponent:'B企业',
-        value: '20,000'
-      }, {
-        number: '20170403123567',
-        type: '到期待还款',
-        opponent:'C企业',
-        value: '20,000'
-      }]
+      showOrder:[
+        {
+          "orderNo":"1111111122",
+          "payeeAccount":"杭州趣链科技有限公司",
+          "productName":"ka pian ",
+          "productNum":"1000",
+          "productPrice":"10000",
+          "totalPrice":"100000",
+          "payingMethod":"应收账款",
+          "orderGenerateTime":"2017-04-01 17:00",
+          "txState":"xxx",
+          "repoCertState":"xxx",
+          "wayBillState":"xx",
+          "receState":"xxx"
+        },
+        {
+          "orderNo":"1111111122",
+          "payeeAccount":"杭州趣链科技有限公司",
+          "/kge":"ka pian ",
+          "productNum":"1000",
+          "productPrice":"10000",
+          "totalPrice":"100000",
+          "payingMethod":"应收账款",
+          "orderGenerateTime":"2017-04-01 17:00",
+          "txState":"xxx",
+          "repoCertState":"xxx",
+          "wayBillState":"xx",
+          "receState":"xxx"
+        },
+        {
+          "orderNo":"1111111122",
+          "payeeAccount":"杭州趣链科技有限公司",
+          "productName":"ka pian ",
+          "productNum":"1000",
+          "productPrice":"10000",
+          "totalPrice":"100000",
+          "payingMethod":"应收账款",
+          "orderGenerateTime":"2017-04-01 17:00",
+          "txState":"xxx",
+          "repoCertState":"xxx",
+          "wayBillState":"xx",
+          "receState":"xxx"
+        },
+        {
+          "orderNo":"1111111122",
+          "payeeAccount":"杭州趣链科技有限公司",
+          "productName":"ka pian ",
+          "productNum":"1000",
+          "productPrice":"10000",
+          "totalPrice":"100000",
+          "payingMethod":"应收账款",
+          "orderGenerateTime":"2017-04-01 17:00",
+          "txState":"xxx",
+          "repoCertState":"xxx",
+          "wayBillState":"xx",
+          "receState":"xxx"
+        }
+      ]
     }
   }
 }
 </script>
 
 <style>
-  /*.headername{*/
-    /*font-size: 18px;*/
-    /*line-height: 20px;*/
-    /*text-align: center;*/
-    /*border-bottom: 0px!important;*/
-  /*}*/
-  /*.text {*/
-    /*font-size: 14px;*/
-    /*text-align: center;*/
-  /*}*/
-
-  /*.item {*/
-    /*padding: 5px 0;*/
-  /*}*/
-
-  /*.clearfix:before,*/
-  /*.clearfix:after {*/
-    /*display: table;*/
-    /*content: "";*/
-  /*}*/
-  /*.clearfix:after {*/
-    /*clear: both*/
-  /*}*/
-
-  /*.box-card {*/
-    /*width: 190px;*/
-    /*float: left;*/
-    /*margin: 0 5px;*/
-    /*background-color: rgb(242,242,242);*/
-  /*}*/
+  .el-card__body{padding-top: 12px!important;}
   .el-table th.is-leaf{
     border-bottom: 0px!important;
     background-color: transparent;
