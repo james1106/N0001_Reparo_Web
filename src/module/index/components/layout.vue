@@ -4,18 +4,20 @@
   <header class="header" :class="{ 'header-fixed' : headerFixed }">
   <el-row>
     <el-col :span="24">
-      <el-col :span="6" class="logo">
-        <img src="../assets/logoWhiteCopy.png">
-        <span style="margin-left: 10px;margin-bottom: 10px">趣链科技</span>
-			</el-col>
 
+      <el-col :span="1" class="logo">
+        <img src="../assets/logoWhiteCopy.png" style="margin-top: 8px">
+			</el-col>
+      <el-col :span="4" style="margin-left: 10px;margin-top: 20px;color: white">
+        <span >趣链科技</span><span> | </span><span style="font-size: 14px">卖家中心</span>
+      </el-col>
       <el-col :span="2" v-if="companyType === '0'">
         <el-button  class="changeButton" size="large" type="primary" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
       <el-col :span="2" v-if="companyType === '0'">
         <el-button  class="changeButton" size="large" type="primary" v-on:click="toSeller()">我是卖家</el-button>
       </el-col>
-      <el-col :span="13" class="userinfo" v-if="companyType === '0'">
+      <el-col :span="14" class="userinfo" v-if="companyType === '0'">
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
@@ -118,7 +120,11 @@ export default {
 
 <style>
   /* 头部导航 */
-  header{z-index: 1000;min-width: 1200px;background-color: rgb(0,209,156);transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
+  header{
+    z-index: 1000;height:60px;min-width: 1200px;
+    background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(57,202,166)), to(rgb(133,211,44))); /*兼容Safari／Chrome*/
+    background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
+    transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
   header_Sale{background-color: rgb(0,205,211);}  /*卖家背景*/
   header_Buy{background-color: rgb(0,209,156);}   /*买家背景*/
   header.header-fixed{position: fixed;top: 0;left: 0;right: 0;}
@@ -133,6 +139,7 @@ export default {
     font-size: 14px!important;
   }
   .changeButton{
+    font-size: 14px!important;
     height: 60px;
     background-color: transparent!important;
     border:0px !important;

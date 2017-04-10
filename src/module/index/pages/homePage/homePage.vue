@@ -49,7 +49,7 @@
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
         <el-col :span="6">付款信息</el-col>
         <el-col :span="8">订单状态</el-col>
-        <el-col :span="2" style="text-align: center">操作</el-col>
+        <el-col :span="2">操作</el-col>
       </el-row>
       <template v-for="(item,index) in showOrder">
         <div>
@@ -61,7 +61,7 @@
               <el-col :span="2"></el-col>
             </el-row>
             <el-row>
-              <el-row style="font-size: 14px">
+              <el-row style="font-size: 12px">
                 <el-col :span="6">
                   <el-row>货品名称:{{item.productName}}</el-row>
                   <el-row>货品数量:{{item.productNum}}</el-row>
@@ -87,8 +87,8 @@
                   <el-row>{{item.wayBillState}}</el-row>
                 </el-col>
                 <el-col :span="2">
-                  <el-row>确认订单</el-row>
-                  <el-row>{{item.wayBillState}}</el-row>
+                  <el-row style="text-align: center;color: rgb(57,202,166);font-size: 12px">确认订单</el-row>
+                  <el-row style="text-align: center"><el-button size="small">查看详情</el-button></el-row>
                 </el-col>
               </el-row>
             </el-row>
