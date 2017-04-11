@@ -1,41 +1,41 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="5" style="margin-right: 15px">
-        <el-row><el-card style="height: 100px;">
-          <img src="../../assets/group_1.png">
-          <div style="margin-right: 30px;float: right;margin-top: 13px">
-            <span style="font-size: 10px;">全部订单</span> <br>
-            <span>1000</span>
+      <el-col :span="6" style="margin-right: 15px">
+        <el-row><el-card  class="showCard">
+          <img src="../../assets/dd.png">
+          <div class="showMesg">
+            <span class="showName">全部订单</span> <br>
+            <span class="showNum">1000</span>
           </div>
         </el-card></el-row>
-        <el-row><el-card style="height: 100px;">
-          <img src="../../assets/group_3.png">
-          <div style="margin-right: 30px;float: right;margin-top: 13px">
-            <span style="font-size: 10px;">全部订单</span> <br>
-            <span>1000</span>
+        <el-row><el-card class="showCard">
+          <img src="../../assets/wl.png">
+          <div class="showMesg">
+            <span class="showName">全部订单</span> <br>
+            <span class="showNum">1000</span>
           </div>
         </el-card></el-row>
       </el-col>
-      <el-col :span="5" style="margin-right: 15px">
-        <el-row><el-card style="height: 100px;">
-          <img src="../../assets/group_2.png">
-          <div style="margin-right: 30px;float: right;margin-top: 13px">
-            <span style="font-size: 10px;">全部订单</span> <br>
-            <span>1000</span>
+      <el-col :span="6" style="margin-right: 15px">
+        <el-row><el-card class="showCard">
+          <img src="../../assets/yszk.png">
+          <div class="showMesg">
+            <span class="showName">全部订单</span> <br>
+            <span class="showNum">1000</span>
           </div>
         </el-card></el-row>
-        <el-row><el-card style="height: 100px;">
-          <img src="../../assets/group_4.png">
-          <div style="margin-right: 30px;float: right;margin-top: 13px">
-            <span style="font-size: 10px;">全部订单</span> <br>
-            <span>1000</span>
+        <el-row><el-card class="showCard">
+          <img src="../../assets/cc.png">
+          <div class="showMesg">
+            <span class="showName">全部订单</span> <br>
+            <span class="showNum">1000</span>
           </div>
         </el-card></el-row>
       </el-col>
       <el-col :span="10" >
         <el-row >
-          <el-card style="height: 212px;width: 580px;background-color: white" id="chart_card">
+          <el-card style="height: 170px;width: 500px;" id="chart_card">
 
           </el-card>
         </el-row>
@@ -43,7 +43,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span>待办订单</span>
+        <span style="line-height: 8px">待办订单</span>
       </div>
       <el-row style="background-color: rgb(242,246,247);font-size: 14px;height: 40px;line-height: 40px;border-radius: 1%">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -86,9 +86,9 @@
                   <el-row>物流状态</el-row>
                   <el-row>{{item.wayBillState}}</el-row>
                 </el-col>
-                <el-col :span="2">
-                  <el-row style="text-align: center;color: rgb(57,202,166);font-size: 12px">确认订单</el-row>
-                  <el-row style="text-align: center"><el-button size="small">查看详情</el-button></el-row>
+                <el-col :span="2" style="line-height: 10px">
+                  <el-row style="text-align: center;"><el-button size="mini" type="text" style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
+                  <el-row style="text-align: center;"><el-button size="mini" style="height: 25px">查看详情</el-button></el-row>
                 </el-col>
               </el-row>
             </el-row>
@@ -133,7 +133,6 @@ export default {
             name:'订单数量',
             type:'line',
             stack: '总量',
-
             itemStyle : {
               normal : {
                 lineStyle:{
@@ -155,7 +154,7 @@ export default {
                   }
                 ])
             }},
-            data:[150, 232, 201, 154, 190, 330, 410]
+            data:[0, 232, 130, 250, 180, 330, 130]
           }
         ]
       });
@@ -230,13 +229,19 @@ export default {
 </script>
 
 <style>
-  .el-row{margin-bottom: 10px!important;
+  .el-row{
+    margin-bottom: 10px!important;
     padding: 0px!important;
     border-radius: 4px!important;
   }
   .el-card{
     border: 0px!important;
     box-shadow: none!important;
+  }
+  .el-card__header{
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+    height: 40px!important;
   }
   .el-card__body{padding-top: 12px!important;}
   .el-table th.is-leaf{
@@ -255,4 +260,21 @@ export default {
   /*.el-card__body{*/
     /*height: 90px;*/
   /*}*/
+  .showName{
+    font-size: 10px;
+    color: #666666;
+  }
+  .showNum{
+    font-size: 24px;
+  }
+  .showCard{
+    width: 260px;
+    height: 80px;
+    background-image: url("../../assets/bg.png");
+  }
+  .showMesg{
+    margin-right: 95px;
+    float: right;
+    /*margin-top: 13px;*/
+  }
 </style>
