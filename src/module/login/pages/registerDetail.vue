@@ -5,25 +5,25 @@
       <h3 style="color: #666666">完善信息</h3>
     </el-row>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="login-container">
-      <el-form-item prop="companyName">
-        <el-input v-model="ruleForm.companyName"  type="text"  auto-complete="off" placeholder="企业名"></el-input>    <!--v-model传值-->
+      <el-form-item prop="enterpriseName">
+        <el-input v-model="ruleForm.enterpriseName"  type="text"  auto-complete="off" placeholder="企业名"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item prop="bank" >
-        <el-input v-model="ruleForm.bank"  type="text"  auto-complete="off" placeholder="开户行"></el-input>
+      <el-form-item prop="acctSvcrName" >
+        <el-input v-model="ruleForm.acctSvcrName"  type="text"  auto-complete="off" placeholder="开户行"></el-input>
       </el-form-item>
-      <el-form-item prop="account">
-        <el-input v-model="ruleForm.account"  placeholder="账号"></el-input>    <!--v-model传值-->
+      <el-form-item prop="acctIds">
+        <el-input v-model="ruleForm.acctIds"  placeholder="账号"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item prop="companyType">
-        <el-radio-group v-model="ruleForm.companyType">
-          <el-radio class="companyType" v-model="radio" label="0">融资企业</el-radio>
-          <el-radio class="companyType" v-model="radio" label="1">仓储公司</el-radio>
-          <el-radio class="companyType" v-model="radio" label="2">物流公司</el-radio>
+      <el-form-item prop="roleCode">
+        <el-radio-group v-model="ruleForm.roleCode">
+          <el-radio name="roleCode" label="0">融资企业</el-radio>
+          <el-radio name="roleCode" label="1">仓储公司</el-radio>
+          <el-radio name="roleCode" label="2">物流公司</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-row class="agreeMsg"><span class="tip">点击注册表示你已阅读并同意<span style="color:rgb(57,202,166);">《xxx条款》</span></span></el-row>
       <el-form-item style="width:100%;">
-        <el-button type="primary" class="nextButton" @click="submitForm('ruleForm')">注册</el-button>
+        <el-button type="primary" class="nextButton" @click="register('ruleForm')">注册</el-button>
       </el-form-item>
     </el-form>
     <el-row style="text-align: center">
@@ -37,22 +37,21 @@
   export default {
     name: 'register',
     data(){
-      //校验密码长度
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else if(value.length < 6 || value.length > 20){
-          callback(new Error('密码长度请在6-20位之间'));
-        }else {
-          callback();
-        }
-      };
       return{
         ruleForm: {
-          account: '',
-          companyName:'',
-          companyType: '0',
-          bank:'',
+          accountName: '',     //用户名
+          password:'',         //密码
+          enterpriseName:'',   //企业名称
+          phone:'',            //手机号
+          roleCode: 0,       //角色code
+          securityCode:'1234', //验证码
+          securityCodeId:1,    //验证码id
+          certType:"id",       //证件类型
+          certNo:'33028',      //证件号码
+          acctIds:"1111",      //开户行账号
+          svcrClass:'316',     //开户行别
+          acctSvcrName:'',     //开户行
+          acctIds:'',          //开户行账号
         },
         rules: {
           account: [
@@ -68,11 +67,24 @@
       }
     },
     methods:{
-      submitForm(formName) {
+      register(formName) {
+        this.ruleForm.accountName = this.$route.params.userName;
+        this.ruleForm.password = this.$route.params.pwd;
+        this.ruleForm.password = this.$route.params.phone;
+
         this.$refs[formName].validate((valid) => {
           if (valid) {
-              //做注册操作
-            this.$router.push('/registerSuccess')
+            this.$http.post('/v1/account/user',this.ruleForm,{emulateJSON:true}).then((res) => {
+              console.log(res.body);
+              var code =  res.body.code;
+              if(code != 0){
+                this.msg = res.body.message;
+                return;
+              }
+              this.$router.push('/registerSuccess')
+            },(err) => {
+              console.log(err);
+            })
           } else {
             return false;
           }

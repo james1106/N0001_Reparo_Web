@@ -5,11 +5,11 @@
       <h3 style="color: #666666">注册</h3>
     </el-row>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="login-container">
-      <el-form-item prop="account">
-        <el-input v-model="ruleForm.account"  type="text"  auto-complete="off" placeholder="用户名，英文+数字不超过20位"></el-input>    <!--v-model传值-->
+      <el-form-item prop="userName">
+        <el-input v-model="ruleForm.userName"  type="text"  auto-complete="off" placeholder="用户名，英文+数字不超过20位"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item  prop="checkPass" >
-        <el-input v-model="ruleForm.checkPass"  type="password"  auto-complete="off" placeholder="密码，6位以上20位以下"></el-input>
+      <el-form-item  prop="password" >
+        <el-input v-model="ruleForm.password"  type="password"  auto-complete="off" placeholder="密码，6位以上20位以下"></el-input>
       </el-form-item>
       <el-form-item prop="phone">
         <el-input v-model.number="ruleForm.phone"  placeholder="手机号"></el-input>    <!--v-model传值-->
@@ -20,15 +20,8 @@
           <el-col :span="8"><el-button type="primary" class="nextButton codeButton">获取验证码</el-button></el-col>
         </el-row>
       </el-form-item>
-      <!--<el-form-item label="" prop="companyType">-->
-        <!--<el-radio-group v-model="ruleForm.companyType">-->
-          <!--<el-radio class="companyType" v-model="radio" label="0">融资企业</el-radio>-->
-          <!--<el-radio class="companyType" v-model="radio" label="1">仓储公司</el-radio>-->
-          <!--<el-radio class="companyType" v-model="radio" label="2">物流公司</el-radio>-->
-        <!--</el-radio-group>-->
-      <!--</el-form-item>-->
       <el-form-item>
-        <el-button type="primary" class="nextButton" @click="nextStep">下一步</el-button>
+        <el-button type="primary" class="nextButton" @click="nextStep('ruleForm')">下一步</el-button>
       </el-form-item>
     </el-form>
     <el-row style="text-align: center">
@@ -54,16 +47,16 @@
       };
       return{
         ruleForm: {
-          account: '',
-          checkPass: '',
+          userName: '',
+          password: '',
           phone:'',
           code:''
         },
         rules: {
-          account: [
+          userName: [
             { required: true, message: '请输入用户名', trigger: 'blur' },   //表单验证
           ],
-          checkPass: [
+          password: [
             { validator: validatePass, trigger: 'blur' }
           ],
           phone: [
@@ -74,9 +67,17 @@
       }
     },
     methods:{
-      nextStep(){
-          this.$router.push('/registerDetail')
+      nextStep(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+          this.$router.push('/registerDetail/'+ this.ruleForm.userName +'/pwd/'+ this.ruleForm.password+'/phone/' +  this.ruleForm.phone);
+          } else {
+            return false;
+          }
+        });
       }
+//      (){
+//      }
     }
   }
 </script>

@@ -16,7 +16,7 @@ export default [
     path:'/pwdRetrieval',component:PwdRetrievalPage,
   },
   {
-    path:'/registerDetail',component:RegisterDetailPage,
+    path:'/registerDetail/:userName/pwd/:pwd/phone/:phone',component:RegisterDetailPage,
   },
   {
     path:'/registerSuccess',component:RegisterSuccessPage,
