@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <img src="../assets/group_1.png">
+    <img src="../assets/logo_login.png">
     <h3 style="color: #666666">登录</h3>
     <el-form :model="loginInfo" :rules="rules" ref="loginInfo" label-position="left" label-width="0px" class="login-container">
       <el-form-item prop="account_name">
