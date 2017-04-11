@@ -35,7 +35,7 @@
       </el-col>
       <el-col :span="10" >
         <el-row >
-          <el-card style="height: 212px;width: 580px" id="chart_card">
+          <el-card style="height: 212px;width: 580px;background-color: white" id="chart_card">
 
           </el-card>
         </el-row>
@@ -61,7 +61,7 @@
               <el-col :span="2"></el-col>
             </el-row>
             <el-row>
-              <el-row style="font-size: 12px">
+              <el-row style="font-size: 12px;color: rgb(51,51,51)">
                 <el-col :span="6">
                   <el-row style="line-height: 40px">货品名称:{{item.productName}}</el-row>
                   <el-row style="line-height: 40px">货品数量:{{item.productNum}}</el-row>
@@ -170,7 +170,7 @@ export default {
         {
           "orderNo":"1111111122",
           "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"ka pian ",
+          "productName":"卡片",
           "productNum":"1000",
           "productPrice":"10000",
           "totalPrice":"100000",
@@ -184,7 +184,7 @@ export default {
         {
           "orderNo":"1111111122",
           "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"ka pian ",
+          "productName":"卡片",
           "productNum":"1000",
           "productPrice":"10000",
           "totalPrice":"100000",
@@ -198,7 +198,7 @@ export default {
         {
           "orderNo":"1111111122",
           "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"ka pian ",
+          "productName":"卡片",
           "productNum":"1000",
           "productPrice":"10000",
           "totalPrice":"100000",
@@ -212,7 +212,7 @@ export default {
         {
           "orderNo":"1111111122",
           "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"ka pian ",
+          "productName":"卡片",
           "productNum":"1000",
           "productPrice":"10000",
           "totalPrice":"100000",
@@ -233,6 +233,10 @@ export default {
   .el-row{margin-bottom: 10px!important;
     padding: 0px!important;
     border-radius: 4px!important;
+  }
+  .el-card{
+    border: 0px!important;
+    box-shadow: none!important;
   }
   .el-card__body{padding-top: 12px!important;}
   .el-table th.is-leaf{
