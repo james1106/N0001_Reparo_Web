@@ -43,7 +43,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span v-bind:class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
+        <span :class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
       </div>
       <el-row style="background-color: rgb(242,246,247);font-size: 14px;height: 40px;line-height: 40px;border-radius: 1%">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -67,7 +67,7 @@
                   <el-row>货品数量:{{item.productNum}}</el-row>
                 </el-col>
                 <el-col :span="6">
-                  <el-row :class="content-row">订单金额(元):{{item.totalPrice}}</el-row>
+                  <el-row :class="content-row">订单金额(元):{v{item.totalPrice}}</el-row>
                   <el-row :class="content-row">付款方式:{{item.payingMethod}}</el-row>
                 </el-col>
                 <el-col :span="2">
