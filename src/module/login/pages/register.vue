@@ -45,6 +45,24 @@
           callback();
         }
       };
+      var validateUserName = (rule, value, callback) => {
+        var regp =/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/;
+        if(value === ''){
+          callback(new Error('用户名，英文+数字不超过20位'));
+        }else if (!regp.test(value) || value.length>20){
+          callback(new Error('请输入用户名'));
+        }else {
+          callback();
+        }
+      };
+      var validatePhone = (rule, value, callback) => {
+
+        if (value.length  > 11){
+          callback(new Error('请输入正确的手机号'));
+        }else {
+          callback();
+        }
+      };
       return{
         ruleForm: {
           userName: '',
@@ -54,14 +72,15 @@
         },
         rules: {
           userName: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },   //表单验证
+            { validator: validateUserName, trigger: 'blur' },   //表单验证
           ],
           password: [
             { validator: validatePass, trigger: 'blur' }
           ],
           phone: [
             { required: true, message: '手机号不能为空'},
-            { type: 'number', message: '手机号必须为数字值'}
+            { type: 'number', message: '手机号必须为数字值'},
+            { validator: validatePhone, trigger: 'blur' }
           ]
         },
       }

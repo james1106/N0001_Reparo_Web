@@ -4,12 +4,12 @@
       <img src="../assets/logo_login.png">
       <h3 style="color: #666666">注册成功</h3>
     </el-row>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="100px" class="login-container">
+    <el-form label-position="left" label-width="100px" class="login-container">
       <el-row style="margin: 50px auto">
         <img src="../assets/group.png">
       </el-row>
       <el-row style="margin: 20px auto">
-        <el-button type="primary" class="successButton" @click="login('loginInfo')">进入后台</el-button>
+        <el-button type="primary" class="successButton" @click="toHomePage()">进入后台</el-button>
       </el-row>
       <el-row style="margin: 20px auto">
         <span><router-link to="/" class="back">返回登录</router-link></span>
@@ -22,7 +22,14 @@
   export default {
     name: 'register',
     data(){
-      return{}
+      return{
+
+      }
+    },
+    methods:{
+      toHomePage(){
+        window.location.href='index.html';
+      }
     }
   }
 </script>

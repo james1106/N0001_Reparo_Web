@@ -29,29 +29,37 @@
     <el-row style="text-align: center">
       <span><router-link to="/register" class="back">返回上级</router-link></span>
     </el-row>
+    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+      <span>{{msg}}</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-
+  import Store from "../../../common/store.js"
   export default {
     name: 'register',
     data(){
       return{
+        dialogVisible:false,
+        msg:'',
         ruleForm: {
           accountName: '',     //用户名
           password:'',         //密码
           enterpriseName:'',   //企业名称
-          phone:'',            //手机号
-          roleCode: 0,       //角色code
+          phone:'111',         //手机号
+          roleCode: "0",         //角色code
           securityCode:'1234', //验证码
           securityCodeId:1,    //验证码id
           certType:"id",       //证件类型
           certNo:'33028',      //证件号码
-          acctIds:"1111",      //开户行账号
+          acctIds:"",      //开户行账号
           svcrClass:'316',     //开户行别
           acctSvcrName:'',     //开户行
-          acctIds:'',          //开户行账号
+          acctSvcr:'1',         //开户行号
         },
         rules: {
           account: [
@@ -70,17 +78,20 @@
       register(formName) {
         this.ruleForm.accountName = this.$route.params.userName;
         this.ruleForm.password = this.$route.params.pwd;
-        this.ruleForm.password = this.$route.params.phone;
+        this.ruleForm.phone = this.$route.params.phone;
 
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$http.post('/v1/account/user',this.ruleForm,{emulateJSON:true}).then((res) => {
               console.log(res.body);
               var code =  res.body.code;
+              var data =  res.body.data;
               if(code != 0){
+                this.dialogVisible = true;
                 this.msg = res.body.message;
                 return;
               }
+              Store.saveUserInfo(data);
               this.$router.push('/registerSuccess')
             },(err) => {
               console.log(err);

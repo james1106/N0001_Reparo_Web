@@ -3,8 +3,8 @@
     <img src="../assets/logo_login.png">
     <h3 style="color: #666666">登录</h3>
     <el-form :model="loginInfo" :rules="rules" ref="loginInfo" label-position="left" label-width="0px" class="login-container">
-      <el-form-item prop="account_name">
-        <el-input v-model="loginInfo.account_name"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
+      <el-form-item prop="accountName">
+        <el-input v-model="loginInfo.accountName"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
       </el-form-item>
       <el-form-item prop="password" >
         <el-input v-model="loginInfo.password"  type="password"  auto-complete="off" placeholder="密码"></el-input>
@@ -27,7 +27,6 @@
     <el-row>
       <span><router-link to="/register" class="register">注册账号</router-link></span>
     </el-row>
-    <!--<dialog-view v-model="showDialogView" isShow={showDialogView}></dialog-view>-->
     <el-dialog title="提示" v-model="dialogVisible" size="tiny">
       <span>{{msg}}</span>
       <span slot="footer" class="dialog-footer">
@@ -40,14 +39,9 @@
 <script>
 
   import Store from "../../../common/store.js"
-  import dialogView from "../../../components/dialog.vue"
-
 
   export default {
     name: 'login',
-    components: {
-      dialogView
-    },
     data(){
       return{
         dialogVisible:false,
@@ -58,7 +52,7 @@
           password: ''
         },
         rules: {
-          account_name: [
+          accountName: [
             { required: true, message: '请输入用户名', trigger: 'blur' },   //表单验证
           ],
           password: [
