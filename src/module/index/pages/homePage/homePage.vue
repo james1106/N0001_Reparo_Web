@@ -61,14 +61,14 @@
               <el-col :span="2"></el-col>
             </el-row>
             <el-row>
-              <el-row style="font-size: 12px;color: rgb(51,51,51)">
-                <el-col :span="6">
-                  <el-row style="line-height: 40px">货品名称:{{item.productName}}</el-row>
-                  <el-row style="line-height: 40px">货品数量:{{item.productNum}}</el-row>
+              <el-row style="font-size: 12px;height: 80px;line-height: 22px" >
+                <el-col :span="6" style="margin-left: 19px;">
+                  <el-row>货品名称:{{item.productName}}</el-row>
+                  <el-row>货品数量:{{item.productNum}}</el-row>
                 </el-col>
                 <el-col :span="6">
-                  <el-row>订单金额(元):{{item.totalPrice}}</el-row>
-                  <el-row>付款方式:{{item.payingMethod}}</el-row>
+                  <el-row :class="content-row">订单金额(元):{{item.totalPrice}}</el-row>
+                  <el-row :class="content-row">付款方式:{{item.payingMethod}}</el-row>
                 </el-col>
                 <el-col :span="2">
                   <el-row>交易状态</el-row>
