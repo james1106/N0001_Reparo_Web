@@ -1,8 +1,8 @@
 <template>
   <div id="menu" style="position: fixed">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
-        <el-menu-item index="/">
-          <i class="el-icon-date"></i>首页
+        <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
+          <img src="../assets/home.png" style="padding-right: 10px">首页
         </el-menu-item>
         <el-submenu index="/dingdan">
           <template slot="title"><i class="el-icon-menu"></i>订单管理</template>
@@ -47,5 +47,5 @@
 
 <style scoped>
   .el-menu{background-color: transparent!important;}
-  .el-menu-item, .el-submenu__title{width: 160px!important;}
+  .el-menu-item, .el-submenu__title{width: 170px!important;}
 </style>

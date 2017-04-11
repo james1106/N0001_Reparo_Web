@@ -1,7 +1,7 @@
 <template>
 <div id="wrapper">
   <!--头部导航-->
-  <header class="header" :class="[{'seller': isSeller, 'buyer': isBuyer ,'header-fixed':headerFixed}] "">
+  <header class="header" :class="[{'seller': isSeller, 'buyer': isBuyer ,'header-fixed':headerFixed}] ">
   <el-row>
     <el-col :span="24">
 
@@ -135,8 +135,6 @@ export default {
     background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(0,148,218)), to(rgb(0,176,182))); /*兼容Safari／Chrome*/
     background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
     transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
-  header_Sale{background-color: rgb(0,205,211);}  /*卖家背景*/
-  header_Buy{background-color: rgb(0,209,156);}   /*买家背景*/
   header.header-fixed{position: fixed;top: 0;left: 0;right: 0;}
   header .el-menu-demo{padding-left: 300px!important;}
   .logo { width:230px;height:60px;color:white;font-size: 22px;padding-left:20px;padding-right:20px;padding-top:5px;border:0px}

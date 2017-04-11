@@ -1,7 +1,7 @@
 <template>
   <div id="menu" style="position: fixed">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
-        <el-menu-item>
+        <el-menu-item index="/" style="background-color: rgb(244,250,249)">
           <img src="../assets/home.png" style="padding-right: 10px"><span>首页</span>
         </el-menu-item>
         <el-submenu index="/dingdan">
@@ -53,5 +53,5 @@
 </script>
 
 <style>
-  .el-menu-item, .el-submenu__title{width: 160px!important;}
+  .el-menu-item, .el-submenu__title{width: 170px!important;}
 </style>
