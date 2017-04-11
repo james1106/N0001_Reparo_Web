@@ -43,7 +43,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span>待办订单</span>
+        <span v-bind:class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
       </div>
       <el-row style="background-color: rgb(242,246,247);font-size: 14px;height: 40px;line-height: 40px;border-radius: 1%">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -230,6 +230,12 @@ export default {
 </script>
 
 <style>
+  .buyerTitle{
+    color: rgb(0,150,215);
+  }
+  .sellerTitle{
+    color: rgb(57,202,166);
+  }
   .el-row{margin-bottom: 10px!important;
     padding: 0px!important;
     border-radius: 4px!important;
