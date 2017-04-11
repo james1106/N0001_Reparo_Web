@@ -14,7 +14,7 @@
       <el-form-item prop="account">
         <el-input v-model="ruleForm.account"  placeholder="账号"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item prop="companyType">
+      <el-form-item prop="companyType" style="height: 20px;text-align: left">
         <el-radio-group v-model="ruleForm.companyType">
           <el-radio class="companyType" v-model="radio" label="0">融资企业</el-radio>
           <el-radio class="companyType" v-model="radio" label="1">仓储公司</el-radio>
@@ -90,6 +90,7 @@
   .back{
     color: #666666;
     font-size: 13px;
+    text-decoration: none;
   }
   .tip{
     font-size: 12px;
@@ -97,6 +98,24 @@
   }
   .agreeMsg{
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
+  .companyType{
+    color: #999999!important;
+  }
+  .el-radio__inner{
+    width: 15px!important;
+    height: 15px!important;
+  }
+  .el-radio__inner:hover{
+    border-color:rgb(56,202,166)!important;
+  }
+  .el-radio__input.is-checked .el-radio__inner{
+    border-color:rgb(56,202,166)!important;
+    background:rgb(56,202,166)!important;
+  }
+  /*.el-radio__label{*/
+    /*font-size: 12px!important;*/
+    /*padding-left: 8px!important;*/
+  /*}*/
   </style>

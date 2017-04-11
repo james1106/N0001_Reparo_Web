@@ -20,13 +20,6 @@
           <el-col :span="8"><el-button type="primary" class="nextButton codeButton">获取验证码</el-button></el-col>
         </el-row>
       </el-form-item>
-      <!--<el-form-item label="" prop="companyType">-->
-        <!--<el-radio-group v-model="ruleForm.companyType">-->
-          <!--<el-radio class="companyType" v-model="radio" label="0">融资企业</el-radio>-->
-          <!--<el-radio class="companyType" v-model="radio" label="1">仓储公司</el-radio>-->
-          <!--<el-radio class="companyType" v-model="radio" label="2">物流公司</el-radio>-->
-        <!--</el-radio-group>-->
-      <!--</el-form-item>-->
       <el-form-item>
         <el-button type="primary" class="nextButton" @click="nextStep">下一步</el-button>
       </el-form-item>
