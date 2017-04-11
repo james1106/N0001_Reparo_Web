@@ -1,35 +1,39 @@
 <template>
   <div id="register">
     <el-row>
-      <el-col :span="8"><img src="../assets/logo.png"></el-col>
-      <el-col :span="8"><h1>注册业务</h1></el-col>
-      <el-col :span="8"></el-col>
+      <img src="../assets/logo_login.png">
+      <h3 style="color: #666666">注册</h3>
     </el-row>
-
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="100px" class="register-container">
-      <el-form-item label="用户名" prop="account">
-        <el-input v-model="ruleForm.account"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="login-container">
+      <el-form-item prop="account">
+        <el-input v-model="ruleForm.account"  type="text"  auto-complete="off" placeholder="用户名，英文+数字不超过20位"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item label="企业名称" prop="companyName">
-        <el-input v-model="ruleForm.companyName"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
+      <el-form-item  prop="checkPass" >
+        <el-input v-model="ruleForm.checkPass"  type="password"  auto-complete="off" placeholder="密码，6位以上20位以下"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="checkPass" >
-        <el-input v-model="ruleForm.checkPass"  type="password"  auto-complete="off" placeholder="密码"></el-input>
+      <el-form-item prop="phone">
+        <el-input v-model.number="ruleForm.phone"  placeholder="手机号"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item label="经办人手机号" prop="phone">
-        <el-input v-model.number="ruleForm.phone"  placeholder="经办人手机号"></el-input>    <!--v-model传值-->
+      <el-form-item prop="code">
+        <el-row>
+          <el-col :span="14"><el-input v-model.number="ruleForm.code"  placeholder="验证码"></el-input></el-col>
+          <el-col :span="8"><el-button type="primary" class="nextButton codeButton">获取验证码</el-button></el-col>
+        </el-row>
       </el-form-item>
-      <el-form-item label="" prop="companyType">
-        <el-radio-group v-model="ruleForm.companyType">
-          <el-radio class="companyType" v-model="radio" label="0">融资企业</el-radio>
-          <el-radio class="companyType" v-model="radio" label="1">仓储公司</el-radio>
-          <el-radio class="companyType" v-model="radio" label="2">物流公司</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item style="width:100%;margin-left: -70px;">
-        <el-button type="primary" style="width: 600px;" @click="nextStep">下一步</el-button>
+      <!--<el-form-item label="" prop="companyType">-->
+        <!--<el-radio-group v-model="ruleForm.companyType">-->
+          <!--<el-radio class="companyType" v-model="radio" label="0">融资企业</el-radio>-->
+          <!--<el-radio class="companyType" v-model="radio" label="1">仓储公司</el-radio>-->
+          <!--<el-radio class="companyType" v-model="radio" label="2">物流公司</el-radio>-->
+        <!--</el-radio-group>-->
+      <!--</el-form-item>-->
+      <el-form-item>
+        <el-button type="primary" class="nextButton" @click="nextStep">下一步</el-button>
       </el-form-item>
     </el-form>
+    <el-row style="text-align: center">
+      <span class="registerStep">1 设置用户名 </span><span class="registerStep">2 完善个人信息 </span><span class="registerStep">3 注册成功</span>
+    </el-row>
   </div>
 </template>
 
@@ -51,10 +55,9 @@
       return{
         ruleForm: {
           account: '',
-          companyName:'',
           checkPass: '',
-          companyType: '0',
           phone:'',
+          code:''
         },
         rules: {
           account: [
@@ -79,14 +82,26 @@
 </script>
 
 <style>
-  .register-container {
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    background-clip: padding-box;
-    margin: 0 auto;
-    width: 600px;
-    padding: 35px 35px 15px 35px;
-    background: #fff;
+  /*.register-container {*/
+    /*-webkit-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+    /*-moz-border-radius: 5px;*/
+    /*background-clip: padding-box;*/
+    /*margin: 0 auto;*/
+    /*width: 600px;*/
+    /*padding: 35px 35px 15px 35px;*/
+    /*background: #fff;*/
+  /*}*/
+  .codeButton{
+    margin-left: 20px!important;
+    margin-top: 0px!important;
+    font-size: 13px!important;
+    padding-left: 10px!important;
+  }
+  .el-form-item{margin-bottom: 18px!important;}
+  .registerStep{
+    margin: 0 20px;
+    color: #CCCCCC;
+    font-size: 13px;
   }
   </style>

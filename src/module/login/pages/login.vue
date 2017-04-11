@@ -18,7 +18,7 @@
         </el-col>
       </el-row>
       <el-form-item style="width:100%;">
-        <el-button type="primary" class="loginButton" @click="login()">登录</el-button>
+        <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login()">登录</el-button>
       </el-form-item>
     </el-form>
     <el-row>
@@ -96,7 +96,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 100px;
+    margin-top: 50px;
   }
   .login-container {
     position: relative;
@@ -169,9 +169,9 @@
     color: #999999;
     font-size: 12px;
   }
-  .loginButton{
+  .nextButton{
     width: 100%;
-    margin-top: 15px!important;
+    /*margin-top: 15px!important;*/
     border-color:#38CAA6!important;
     background-color: #38CAA6!important;
   }
