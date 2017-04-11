@@ -27,7 +27,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item style="width:100%;margin-left: -70px;">
-        <el-button type="primary" style="width: 600px;" @click="submitForm('ruleForm')">注册</el-button>
+        <el-button type="primary" style="width: 600px;" @click="submitForm('ruleForm')">Success</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -75,7 +75,6 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
               //做注册操作
-            this.$router.push('/registerSuccess')
           } else {
             return false;
           }
