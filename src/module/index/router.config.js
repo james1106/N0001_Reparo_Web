@@ -66,6 +66,9 @@ export default [
   {
     path:'/',component:HomePage,
   },
+  {
+    path:'/:isBuyer',component:HomePage,
+  },
   /*订单路由*/
   {
     path:'/order',component:order,

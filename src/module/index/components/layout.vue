@@ -13,10 +13,10 @@
         <span style="font-size: 14px" v-if="isBuyer === true">买家中心</span>
         <span style="font-size: 14px" v-else >卖家中心</span>
       </el-col>
-      <el-col :span="2" v-if="companyType === '0'">
+      <el-col :span="2" v-if="companyType === 0">
         <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:isSeller}" v-on:click="toSeller()">我是卖家</el-button>
       </el-col>
-      <el-col :span="2" v-if="companyType === '0'">
+      <el-col :span="2" v-if="companyType === 0">
         <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:isBuyer}" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
       <el-col :span="14" class="userinfo" v-if="companyType === '0'">
@@ -42,11 +42,11 @@
   </header>
   <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
   <main>
-    <aside class="main-left" v-if="companyType === '0'">
+    <aside class="main-left" v-if="companyType === 0">
       <menu-by v-if="isBuyer"></menu-by>
       <menu-sl v-else></menu-sl>
     </aside>
-    <aside class="main-left" v-else-if="companyType === '2'">
+    <aside class="main-left" v-else-if="companyType === 2">
       <menu-wh></menu-wh>
     </aside>
     <aside class="main-left" v-else>
@@ -103,7 +103,7 @@ export default {
       }
       this.isSeller = !this.isSeller
       this.isBuyer = !this.isBuyer
-      this.$router.push('/');
+      this.$router.push('/true');
       Store.state.isBuyer = this.isBuyer
 
     },
@@ -113,7 +113,7 @@ export default {
       }
       this.isBuyer = !this.isBuyer
       this.isSeller = !this.isSeller
-      this.$router.push('/');
+      this.$router.push('/false');
       Store.state.isBuyer = this.isBuyer
     },
     logout(){

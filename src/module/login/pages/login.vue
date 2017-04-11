@@ -2,12 +2,12 @@
   <div id="login">
     <img src="../assets/logo_login.png">
     <h3 style="color: #666666">登录</h3>
-    <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="login-container">
-      <el-form-item prop="account">
-        <el-input v-model="ruleForm2.account"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
+    <el-form :model="loginInfo" :rules="rules" ref="loginInfo" label-position="left" label-width="0px" class="login-container">
+      <el-form-item prop="account_name">
+        <el-input v-model="loginInfo.account_name"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item prop="checkPass" >
-        <el-input v-model="ruleForm2.checkPass"  type="password"  auto-complete="off" placeholder="密码"></el-input>
+      <el-form-item prop="password" >
+        <el-input v-model="loginInfo.password"  type="password"  auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
       <el-row>
         <el-col :span="8">
@@ -18,7 +18,7 @@
         </el-col>
       </el-row>
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login()">登录</el-button>
+        <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
       </el-form-item>
     </el-form>
     <el-row>
@@ -27,53 +27,68 @@
     <el-row>
       <span><router-link to="/register" class="register">注册账号</router-link></span>
     </el-row>
+    <!--<dialog-view v-model="showDialogView" isShow={showDialogView}></dialog-view>-->
+    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+      <span>{{msg}}</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 
   import Store from "../../../common/store.js"
+  import dialogView from "../../../components/dialog.vue"
+
 
   export default {
     name: 'login',
-//    components: {
-//      Hello
-//    }
+    components: {
+      dialogView
+    },
     data(){
       return{
-        params:{
-          account_name:"admin",
-          password:"admin"
-        },
+        dialogVisible:false,
+        msg:'',
         checked:true,
-        ruleForm2: {
-          account: '',
-          checkPass: ''
+        loginInfo: {
+          account_name: '',
+          password: ''
         },
-        rules2: {
-          account: [
+        rules: {
+          account_name: [
             { required: true, message: '请输入用户名', trigger: 'blur' },   //表单验证
           ],
-          checkPass: [
+          password: [
             { required: true, message: '请输入密码', trigger: 'blur' },
           ]
         },
       }
     },
     methods:{
-      login() {
-        this.$http.post('/v1/account/login',{account_name:"admin",password:"admin"},{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          var data =  res.body.data;
-          if(code != 0){
-            return;
+      login(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$http.post('/v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
+              console.log(res.body);
+              var code =  res.body.code;
+              var data =  res.body.data;
+              if(code != 0){
+                this.dialogVisible = true;
+                this.msg = res.body.message;
+                return;
+              }
+              Store.saveUserInfo(data);
+              window.location.href='index.html';
+            },(err) => {
+              console.log(err);
+            })
+          } else {
+            return false;
           }
-          Store.saveUserInfo(data);
-          window.location.href='index.html';
-        },(err) => {
-          console.log(err);
-        })
+        });
       }
     }
 
