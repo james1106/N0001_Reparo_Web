@@ -41,6 +41,10 @@
 //    }
     data(){
       return{
+        params:{
+          account_name:"admin",
+          password:"admin"
+        },
         checked:true,
         ruleForm2: {
           account: '',
@@ -58,7 +62,7 @@
     },
     methods:{
       login() {
-        this.$http.get('/api/login').then((res) => {
+        this.$http.post('/v1/account/login',{account_name:"admin",password:"admin"},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;

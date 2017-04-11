@@ -27,7 +27,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item style="width:100%;margin-left: -70px;">
-        <el-button type="primary" style="width: 600px;" @click="nextStep">下一步</el-button>
+        <el-button type="primary" style="width: 600px;" @click="submitForm('ruleForm')">Success</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -71,8 +71,14 @@
       }
     },
     methods:{
-      nextStep(){
-          this.$router.push('/registerDetail')
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+              //做注册操作
+          } else {
+            return false;
+          }
+        });
       }
     }
   }

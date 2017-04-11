@@ -28,7 +28,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "/api/":"http://127.0.0.1:8089/"
+      '/v1': {
+        target: 'http://localhost:8080/reparo',
+        // http://localhost:8082/v1_0/interface/all
+        changeOrigin: true,
+        pathRewrite: {
+          '^/v1': '/v1'
+        }
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

@@ -59,16 +59,16 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 // JSON - SERVER
-const jsonServer = require('json-server')
-const apiServer = jsonServer.create()
-const apiRouter = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
-
-apiServer.use(middlewares)
-apiServer.use('/api', apiRouter)
-apiServer.listen(port + 1, () => {
-  console.log('JSON Server is running')
-})
+// const jsonServer = require('json-server')
+// const apiServer = jsonServer.create()
+// const apiRouter = jsonServer.router('db.json')
+// const middlewares = jsonServer.defaults()
+//
+// apiServer.use(middlewares)
+// apiServer.use('/api', apiRouter)
+// apiServer.listen(port + 1, () => {
+//   console.log('JSON Server is running')
+// })
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
