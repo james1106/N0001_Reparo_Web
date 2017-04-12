@@ -52,7 +52,7 @@
           <el-col :span="12">
             <el-form-item label="选择付款账户" prop="payerAccount">
               <el-select v-model="launchOrder.payerAccount" placeholder="请选择付款账户">
-                <el-option label="111111111（默认账户）" value="111111111"></el-option>
+                <el-option label="111111111（默认账户）" :value="UserInfo.acctIds"></el-option>
                 <el-option label="234567" value="234567"></el-option>
                 <el-option label="345678" value="345678"></el-option>
               </el-select>
@@ -129,7 +129,7 @@
         },
         creationRules: {
           payeeCompanyName:[
-            {required:true, message:'请选择供应商', trigger:'blur'},
+            {required:true, message:'请选择供应商'},
           ],
           productName:[
             {required:true, message:'请输入货品名称', trigger:'blur'}
@@ -143,9 +143,14 @@
             {validator:validatePass1,trigger:'blur'}
           ],
           payerRepo:[
-            {required:true, message:'请选择入库仓储', trigger:'blur'},
+            {required:true, message:'请选择入库仓储', },
           ]
         }
+      }
+    },
+    computed:{
+      UserInfo () {
+          return Store.fetchUserInfo();
       }
     },
     methods: {
@@ -191,7 +196,8 @@
     mounted () {
       var userInfo = Store.fetchUserInfo();
       this.launchOrder.payerBank = userInfo.acctSvcrName;
-      this.launchOrder.payerAccount = userInfo.acctId;
+      this.launchOrder.payerAccount = userInfo.acctIds;
+      console.log(userInfo);
       switch (0) {
         case 0:
           this.launchOrder.payingMethod = true;
