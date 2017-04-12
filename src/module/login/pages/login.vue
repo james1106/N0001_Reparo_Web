@@ -55,6 +55,10 @@ import Store from "../../../common/store.js"
             return;
           }
           Store.saveUserInfo(data);
+          Store.fetchUserInfo();
+          console.log(Store.fetchUserInfo());
+//          window.localStorage.setItem("userInfo_type",JSON.stringify(data));
+
           window.location.href='index.html';
         },(err) => {
           console.log(err);

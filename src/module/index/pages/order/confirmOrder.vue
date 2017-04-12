@@ -6,17 +6,17 @@
       </div>
       <div class="box-card mycard1">
         <el-row class="">
-          <el-col :span="8">购买人：{{orderDetail.txDetail.oppositeAccount}}</el-col>
-          <el-col :span="8">订单金额：{{orderDetail.txDetail.totalPrice}}</el-col>
-          <el-col :span="8">付款方式：{{orderDetail.txDetail.payingMethod}}</el-col>
+          <el-col :span="8">购买人：{{orderDetail.txDetail.payerAddress}}</el-col>
+          <el-col :span="8">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+          <el-col :span="8">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
         </el-row>
         <el-row class="">
           <el-col :span="8">货品名称：{{orderDetail.txDetail.productName}}</el-col>
-          <el-col :span="8">货品数量：{{orderDetail.txDetail.productNum}}</el-col>
+          <el-col :span="8">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
         </el-row>
         <el-row class="" style="border-bottom: 1px solid #fff">
           <el-col :span="8">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
-          <el-col :span="8">付款账户：{{orderDetail.txDetail.payerBankAccount}}</el-col>
+          <el-col :span="8">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
         </el-row>
       </div>
     </el-card>
@@ -29,9 +29,9 @@
           <el-col :span="12">
             <el-form-item label="出库货品所在仓储：">
               <el-select v-model="confirmOrder.payeeRepo" placeholder="请选择仓储">
-                <el-option label="A仓储企业" value="Aqiye"></el-option>
-                <el-option label="B仓储企业" value="Bqiye"></el-option>
-                <el-option label="C仓储企业" value="Cqiye"></el-option>
+                <el-option label="A仓储企业" value="Acangchu"></el-option>
+                <el-option label="B仓储企业" value="Bcangchu"></el-option>
+                <el-option label="C仓储企业" value="Ccangchu"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -50,7 +50,7 @@
     </el-card>
       <el-col :span="24" style="text-align: right;margin-top: 10px">
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">发起订单</el-button>
+      <el-button type="primary" @click="onSubmit">确认订单</el-button>
     </el-form-item>
       </el-col>
   </el-form>
@@ -64,15 +64,15 @@
       <div class="confirm-content">
         <el-row>
           <el-col :span="24">
-            订单编号：{{orderDetail.txDetail.orderNo}}
+            订单编号：{{orderDetail.txDetail.orderId}}
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            购买人：{{orderDetail.txDetail.oppositeAccount}}
+            购买人：{{orderDetail.txDetail.payerAddress}}
           </el-col>
           <el-col :span="12">
-            订单金额：{{orderDetail.txDetail.totalPrice}}
+            订单金额：{{orderDetail.txDetail.productTotalPrice}}
           </el-col>
         </el-row>
         <el-row>
@@ -80,12 +80,12 @@
             货品名称：{{orderDetail.txDetail.productName}}
           </el-col>
           <el-col :span="12">
-            货品数量：{{orderDetail.txDetail.productNum}}
+            货品数量：{{orderDetail.txDetail.productQuantity}}
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            付款方式：{{orderDetail.txDetail.payingMethod}}
+            付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}
           </el-col>
         </el-row>
         <el-row>
@@ -95,7 +95,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            付款账户：{{orderDetail.txDetail.payerBankAccount}}
+            付款账户：{{orderDetail.txDetail.payerAccount}}
           </el-col>
         </el-row>
         <el-row>
@@ -118,7 +118,7 @@
 </div>
 </template>
 <script>
-  import store from "../../../vuex/store"
+  import store from "../../vuex/store"
   export default {
     name: 'index',
     data () {
@@ -130,9 +130,7 @@
           wayBillDetail: {}
         },
         confirmOrder: {
-          payeeAccount:'',
-          orderId:'',
-          reply:'',
+          orderNo:'',
           payeeRepo:'',
           payeeRepoCertNo:'',
         },
@@ -150,19 +148,17 @@
       confirm () {
           this.showModal=false;
         console.log("订单确认");
-         this.confirmOrder.payeeAccount=store.state.commonData.payeeAccount;
-         this.confirmOrder.orderId=store.state.checkId;
-         this.confirmOrder.reply=0;//0表示同意，1表示拒绝
+         this.confirmOrder.orderNo=store.state.checkId;
          console.log(this.confirmOrder);
-         this.$http.post("http://172.16.100.246/server_test/getData3.php",this.confirmOrder,{emulateJSON:true}).then(
+         this.$http.post("/v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
          function(res){console.log(res.body);},
          function(err){console.log(err)}
          );
-//        this.$router.push('/forDeliver');
+//        this.$router.push('/forDeliver(发货 后面用到)');
       }
     },
     mounted () {
-        this.$http.get("http://172.16.100.246/server_test/getData2.php?checkId="+store.state.checkId).then(
+        this.$http.get("/v1/order/detail?orderNo="+store.state.checkId).then(
             function(res){
                 console.log(res.body);
                 this.orderDetail=res.body.data;

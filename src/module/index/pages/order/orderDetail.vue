@@ -1,0 +1,303 @@
+<template>
+  <div>
+    <el-row style="margin:10px 0;float: right;z-index:999">
+      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.orderState===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
+      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.FORISSUE)" @click.native.prevent="signBill">签发</el-button>
+      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
+      <el-button type="primary" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card mybox" style="width:100%">
+          <div slot="header" class="clearfix">
+            <span style="line-height: 36px;">交易详情</span>
+          </div>
+          <div class="box-card mycard1">
+            <el-row class="row-black row-padding">
+              <el-col :span="8">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
+              <el-col :span="8" style="float:right">发起时间：{{orderDetail.txDetail.orderGenerateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8" v-if="state.isBuyer==='true'">商家：{{orderDetail.txDetail.payerAddress}}</el-col>
+              <el-col :span="8" v-else>购买者：{{orderDetail.txDetail.payeeAddress}}</el-col>
+              <el-col :span="8">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+              <el-col :span="8">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">货品名称：{{orderDetail.txDetail.productName}}</el-col>
+              <el-col :span="8">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
+            </el-row>
+            <el-row class="" style="border-bottom: 1px solid #fff">
+              <el-col :span="8">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
+              <el-col :span="8">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">交易状态</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">交易发起：{{orderDetail.txDetail.orderGenerateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8" v-if="(orderDetail.txDetail.orderState!==constantData.UNCONFIRMED)">交易确认：{{orderDetail.txDetail.orderConfirmTime | timeTransfer}}</el-col>
+            </el-row>
+          </div>
+
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card mybox" style="width:100%">
+          <div slot="header" class="clearfix">
+            <span style="line-height: 36px;">应收账款详情</span>
+          </div>
+          <div class="box-card mycard1" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
+            暂无应收账款信息!
+          </div>
+          <div class="box-card mycrad1" v-else-if="orderDetail.receOver.receLatestStatus===constantData.FORISSUE">
+            应收账款待签发!
+          </div>
+          <div class="box-card mycard1" v-else>
+            <el-row class="row-black row-padding">
+              <el-col :span="8">业务编号：{{orderDetail.receOver.receNo}}</el-col>
+              <el-col :span="8" style="float:right">签发时间：{{orderDetail.receOver.receGenerateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">收款方：{{orderDetail.receOver.receivingSide}}</el-col>
+              <el-col :span="8">付款方：{{orderDetail.receOver.payingSide}}</el-col>
+              <el-col :span="8">账款金额：{{orderDetail.receOver.receAmount}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">票面利息：{{orderDetail.receOver.coupon}}</el-col>
+              <el-col :span="8">到期日：{{orderDetail.receOver.dueDate}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">
+                应收账款最新状态：{{orderDetail.receOver.receLatestStatus | receStatus}},({{orderDetail.receOver.receUpdateTime | timeTransfer}})
+              </el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8" style="float:right">
+                <el-button type="primary">查看账款详情</el-button>
+              </el-col>
+            </el-row>
+          </div>
+
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card mybox" style="width:100%">
+
+          <div slot="header" class="clearfix">
+            <span style="line-height: 36px;">物流信息</span>
+          </div>
+          <div class="box-card mycard1" v-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.NOMESSAGE">
+            暂无物流信息！
+          </div>
+          <div class="box-card mycard1" v-else-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.FORSEND">
+            待发货！
+          </div>
+          <div class="box-card mycard1" v-else>
+            <el-row class="row-black row-padding">
+              <el-col :span="8">运单号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
+              <el-col :span="8" style="float:right">下单时间：{{orderDetail.wayBillOver.wayBillGenerateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">物流公司：{{orderDetail.wayBillOver.logisticCompany}}</el-col>
+              <el-col :span="8">
+                物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus | wayBillStatus}},（{{orderDetail.wayBillOver.wayBillUpdateTime | timeTransfer}}）
+              </el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8" style="float:right">
+                <el-button type="primary">查看物流详情</el-button>
+              </el-col>
+            </el-row>
+          </div>
+
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card mybox" style="width:100%">
+          <div slot="header" class="clearfix">
+            <span style="line-height: 36px;">仓储信息</span>
+          </div>
+          <div class="box-card mycard1" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
+            <div v-if="orderDetail.repoOver.repoLatestStatus===constantData.NOMESSAGE"><!--买家和卖家状态字段不同-->
+              暂无仓储信息！
+            </div>
+            <div v-else>
+            <el-row class="row-black row-padding">
+              <el-col :span="8">仓储流水号：{{orderDetail.repoOver.repoSerialNo}}</el-col>
+              <el-col :span="8" style="float:right">入库申请时间：{{orderDetail.repoOver.repoGenerateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">仓储公司：{{orderDetail.repoOver.payeeRepoCompany}}</el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">仓储状态：{{orderDetail.repoOver.repoLatestStatus | repoStatus}},{{orderDetail.repoOver.receUpdateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8" style="float:right">
+                <el-button type="primary">查看仓储详情</el-button>
+              </el-col>
+            </el-row>
+            </div>
+          </div>
+
+          <div class="box-card mycard1" v-if="state.isBuyer==='false'">
+            <div v-if="orderDetail.repoOver.repoLatestStatus===constantData.NOMESSAGE">
+              暂无仓储信息！
+            </div>
+            <div v-else>
+            <el-row class="row-black row-padding">
+              <el-col :span="8">仓储流水号：{{orderDetail.repoOver.repoSerialNo}}</el-col>
+              <el-col :span="8" style="float:right">出库申请时间：{{orderDetail.repoOver.repoGenerateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8">仓储公司：{{orderDetail.repoOver.payerRepoCompany}}</el-col>
+              <el-col :span="8">仓单编号：{{orderDetail.repoOver.repoCertNo}}</el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">仓储状态：{{orderDetail.repoOver.repoLatestStatus | repoStatus}},{{orderDetail.repoOver.receUpdateTime | timeTransfer}}</el-col>
+            </el-row>
+            <el-row class="">
+              <el-col :span="8" style="float:right">
+                <el-button type="primary">查看仓储详情</el-button>
+              </el-col>
+            </el-row>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
+</template>
+<script>
+  import store from '../../vuex/store.js'
+  import constantData from '../../../../common/const'
+  export default {
+    name: 'index',
+    data () {
+      return {
+        orderDetail: {
+          txDetail: {},
+          receOver: {},
+          repoOver: {},
+          wayBillOver: {}
+        }
+      }
+    },
+    computed: {
+      state () {
+        return store.state;
+      },
+      constantData () {
+          return constantData;
+      }
+    },
+    methods: {
+      confirmOrder (checkId) {
+        console.log("确认订单！");
+        store.commit('setCheckId',checkId);
+        this.$router.push("/order/confirmOrder");
+      },
+      signBill () {
+        console.log("签发应收账款");
+      },
+      sendGood () {
+        console.log("发货");
+      },
+      acceptBill () {
+        console.log("承兑签收");
+      }
+    },
+    mounted() {
+      console.log("the state checkId is:" + store.state.checkId);
+      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkId).then(
+        function (res) {
+          // 处理成功的结果
+          console.log(res.body);
+          this.orderDetail = res.body.data;
+        }, function (res) {
+          // 处理失败的结果
+          console.log(res);
+        }
+      );
+    }
+  }
+</script>
+<style>
+  .el-row {
+    margin-bottom: 20px;
+  }
+
+  .el-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .el-col {
+    border-radius: 4px;
+  }
+
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+
+  .bg-purple {
+    background: #d3dce6;
+  }
+
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+
+  .mycard1 {
+    width: 90% !important;
+    float: inherit !important;
+    margin: 10px auto !important;
+    background-color: rgba(242,242,242,1)
+  }
+
+  .mycard1 .el-row {
+    margin-bottom: 0 !important;
+  }
+
+  .mycard1 .el-col {
+    text-align: center;
+    box-sizing: border-box;
+    padding: 5px 0;
+  }
+
+  .mybox {
+    margin: 0 !important;
+  }
+
+  .mybox .el-card__header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .mycard11 .row-padding-bottom {
+    box-sizing: border-box;
+    padding-bottom: 10px;
+  }
+
+  .mycard11 .row-black {
+    border-bottom: 1px solid #fff;
+  }
+</style>

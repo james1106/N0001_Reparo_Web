@@ -1,17 +1,10 @@
 import HomePage from './pages/homePage/homePage.vue'
 /*订单相关*/
 import order from './pages/order/index.vue'
-import allOrderIndex from './pages/order/allOrder/index.vue'
-import allOrder from './pages/order/allOrder/allOrder.vue'
-import orderDetail from './pages/order/allOrder/orderDetail.vue'
-import launchOrder from './pages/order/launchOrder.vue'
-import orderForConfirmIndex from './pages/order/orderForConfirm/index.vue'
-import orderForConfirm from './pages/order/orderForConfirm/orderForConfirm.vue'
-import orderConfirm from './pages/order/orderForConfirm/orderConfirm.vue'
-import forDeliverIndex from './pages/order/forDeliver/index.vue'
-import forDeliver from './pages/order/forDeliver/forDeliver.vue'
-import deliver from './pages/order/forDeliver/deliver.vue'
-import forReceive from './pages/order/forReceive.vue'
+import allOrder from './pages/order/allOrder.vue'
+import orderDetail from './pages/order/orderDetail.vue'
+import createOrder from './pages/order/createOrder.vue'
+import confirmOrder from './pages/order/confirmOrder.vue'
 
 /*应收账款*/
 import AllAccountsPage from './pages/receivables/index.vue'
@@ -69,31 +62,14 @@ export default [
   /*订单路由*/
   {
     path:'/order',component:order,
-  },
-  {
-    path:'/allOrder',component:allOrderIndex,
     children:[
-      {path:'',component:allOrder},
+      {path:'allOrder/:value',component:allOrder},
       {path:'orderDetail',component:orderDetail},
+      {path:'createOrder',component:createOrder},
+      {path:'confirmOrder',component:confirmOrder},
     ]
   },
-  {
-    path:'/launchOrder',component:launchOrder,
-  },
-  {
-    path:'/orderForConfirm',component:orderForConfirmIndex,
-    children:[
-      {path:'',component:orderForConfirm},
-      {path:'orderConfirm',component:orderConfirm},
-    ]
-  },
-  {
-    path:'/forDeliver',component:forDeliverIndex,
-    children:[
-      {path:'',component:forDeliver},
-      {path:'deliver',component:deliver},
-    ]
-  },
+
   //应收账款
   {
     path:'/allAccounts/:status',component:AllAccountsPage,

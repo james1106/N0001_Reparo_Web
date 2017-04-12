@@ -7,26 +7,48 @@ Vue.use(Vuex)
 const state={
   checkId:'',//全部订单列表点击详情时记住Id
   commonData:{
-    "payeeAccount":'B企业',
-    "payerAccount":"A企业",
-    "payerBank":"农业银行",
-    "payerBankAccount":"123456",
-    "payingMethod":0,
+    "account_name":'A员工',
+    "company_name":"A企业",
+    "phone":"13255556666",
+    "role_code":0,
+    "cert_type":"identifacation",
+    "cert_no":"346734199577774356",
+    "acct_id":"bankA",
+    "svcr_class":"001",
+    "acct_svcr":"44444",
+    "acct_svcr_name":"农业银行",
   },
   accountsStatus:'all',  //应收账款中当前选中的状态
-  isBuyer:true,   //我是买家
-  changeRole:'pyee'//pyee卖方，pyer买方
+  isBuyer:"true",   //我是买家
+  orderTab:"first"
+}
+
+/* 从本地存储读取数据 */
+for(var item in state){
+  localStorage.getItem(item)?
+    state[item] = localStorage.getItem(item): false;
 }
 
 const mutations={
   setCheckId (state, id) {
     state.checkId=id;
+    localStorage.setItem('checkId',id);
   },
   setAccountsStatus (state, status) {
     state.accountsStatus=status;
+    localStorage.setItem('accountsStatus',status);
   },
   setIsBuyer (state, buyer) {
     state.isBuyer=buyer;
+    localStorage.setItem('isBuyer',buyer);
+  },
+  setCommonData (state,commonData) {
+    Object.assign(state.commonData,commonData);
+    localStorage.setItem('commonData',JSON.stringify(commonData));
+  },
+  setOrderTab (state,orderTab) {
+    state.orderTab=orderTab;
+    localStorage.setItem('orderTab',orderTab);
   }
 }
 

@@ -5,25 +5,21 @@
         <el-menu-item>
           我的功能
         </el-menu-item>
-        <el-submenu index="/dingdan">
+        <el-submenu index="/order">
           <template slot="title">订单管理</template>
-          <el-menu-item index="/allOrder">所有订单</el-menu-item>
-          <el-menu-item index="/launchOrder">发起订单</el-menu-item>
-          <el-menu-item index="/orderForConfirm">待确认</el-menu-item>
-          <el-menu-item index="/forDeliver">待发货</el-menu-item>
-          <el-menu-item index="/forReceive">待收货</el-menu-item>
+          <el-menu-item index="/order/createOrder">发起订单</el-menu-item>
+          <el-menu-item index="/order/allOrder/b">我买入的订单</el-menu-item>
         </el-submenu>
         <el-submenu index="/yingshou">
-          <template slot="title">应收账款</template>
+          <template slot="title">应付账款</template>
           <el-menu-item index="/allAccounts/all" v-on:click="setStatus('all')">我的应付账款</el-menu-item>
           <el-menu-item index="/allAccounts/accept" v-on:click="setStatus('accept')">承兑</el-menu-item>
           <el-menu-item index="/allAccounts/cash" v-on:click="setStatus('cash')">兑付</el-menu-item>
         </el-submenu>
-        <el-submenu index="/yufu">
-          <template slot="title">预付款</template>
-          <el-menu-item index="/yufu/qianfa">签发</el-menu-item>
-          <el-menu-item index="/yufu/daichengdui">待承兑的账款</el-menu-item>
-          <el-menu-item index="/yufu/yufutiexian">贴现</el-menu-item>
+        <el-submenu index="/warehousing">
+          <template slot="title">仓储管理</template>
+          <el-menu-item index="/myWarehousing">我的仓储</el-menu-item>
+          <el-menu-item index="/myReceipts">我的仓单</el-menu-item>
         </el-submenu>
       </el-menu>
   </div>
