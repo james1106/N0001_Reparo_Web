@@ -1,7 +1,7 @@
 <template>
   <div class="launchOrder">
     <el-form ref="launchOrder" :model="launchOrder" :label-position="labelPosition" :rules="creationRules">
-      <el-card class="boxcard mybox">
+      <el-card class="boxcard">
         <div>    <!--slot="header" class="clearfix"-->
           <span class="buyerStepTitle">1. 请填写订单详情</span>
         </div>
@@ -230,7 +230,7 @@
     border-radius: 4px;
     margin: 20px 0;
   }
-  .el-form-item__error {left:30% !important;}
+  .el-form-item__error {left:33% !important;top: 20%!important;}
   .buyerStepTitle{
     color:rgb(0,150,215);
     line-height: 50px;
