@@ -6,7 +6,7 @@
       </div>
       <div class="box-card mycard1">
         <el-row class="">
-          <el-col :span="8">购买人：{{orderDetail.txDetail.payerAddress}}</el-col>
+          <el-col :span="8">购买人：{{orderDetail.txDetail.payerCompanyName}}</el-col>
           <el-col :span="8">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
           <el-col :span="8">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
         </el-row>
@@ -69,7 +69,7 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            购买人：{{orderDetail.txDetail.payerAddress}}
+            购买人：{{orderDetail.txDetail.payerCompanyName}}
           </el-col>
           <el-col :span="12">
             订单金额：{{orderDetail.txDetail.productTotalPrice}}
