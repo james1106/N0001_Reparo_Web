@@ -9,6 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "echarts": "^3.5.2",
     "element-ui": "^1.2.7",
     "json-server": "^0.9.6",
     "node-glob": "^1.2.0",

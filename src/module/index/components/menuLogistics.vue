@@ -3,10 +3,10 @@
 
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item>
-          我的功能
+          <i class="el-icon-date"></i>首页
         </el-menu-item>
         <el-submenu index="/dingdan">
-          <template slot="title">运单管理</template>
+          <template slot="title"><i class="el-icon-menu"></i>运单管理</template>
           <el-menu-item index="/waybill">我的运单</el-menu-item>
           <el-menu-item index="/deliveryConfirm">发货确认</el-menu-item>
           <el-menu-item index="/receiveConfirm">收货确认</el-menu-item>
