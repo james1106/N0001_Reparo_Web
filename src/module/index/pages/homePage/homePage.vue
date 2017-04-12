@@ -33,7 +33,7 @@
           </div>
         </el-card></el-row>
       </el-col>
-      <el-col :span="10" >
+      <el-col :span="10">
         <el-row >
           <el-card style="height: 170px;width: 500px;" id="chart_card">
 
@@ -67,8 +67,9 @@
                   <el-row>货品数量:{{item.productNum}}</el-row>
                 </el-col>
                 <el-col :span="6">
-                  <el-row :class="content-row">订单金额(元):{v{item.totalPrice}}</el-row>
-                  <el-row :class="content-row">付款方式:{{item.payingMethod}}</el-row>
+                  <!--:class="content-row"-->
+                  <el-row >订单金额(元):{{item.totalPrice}}</el-row>
+                  <el-row >付款方式:{{item.payingMethod}}</el-row>
                 </el-col>
                 <el-col :span="2">
                   <el-row>交易状态</el-row>
@@ -87,7 +88,7 @@
                   <el-row>{{item.wayBillState}}</el-row>
                 </el-col>
                 <el-col :span="2" style="line-height: 10px">
-                  <el-row style="text-align: center;"><el-button size="mini" type="text" style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
+                  <el-row style="text-align: center;"><el-button size="mini" type="text"  style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
                   <el-row style="text-align: center;"><el-button size="mini" style="height: 25px">查看详情</el-button></el-row>
                 </el-col>
               </el-row>

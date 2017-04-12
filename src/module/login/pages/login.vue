@@ -9,36 +9,39 @@
       <el-form-item prop="password" >
         <el-input v-model="loginInfo.password"  type="password"  auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
+        <el-row>
+          <el-col :span="8">
+            <el-checkbox size="small" v-model="checked" class="remember">5天内记住我</el-checkbox>
+          </el-col>
+          <el-col :span="16" style="padding-left: 100px">
+            <router-link to="/pwdRetrieval" class="forgetPwd">忘记密码？</router-link>
+          </el-col>
+        </el-row>
+        <el-form-item style="width:100%;">
+          <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
+        </el-form-item>
+      </el-form>
       <el-row>
-        <el-col :span="8">
-          <el-checkbox size="small" v-model="checked" class="remember">5天内记住我</el-checkbox>
-        </el-col>
-        <el-col :span="16" style="padding-left: 100px">
-          <router-link to="/pwdRetrieval" class="forgetPwd">忘记密码？</router-link>
-        </el-col>
+        <span class="noAccount">没有账号？</span>
       </el-row>
-      <el-form-item style="width:100%;">
-        <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
-      </el-form-item>
-    </el-form>
-    <el-row>
-      <span class="noAccount">没有账号？</span>
-    </el-row>
     <el-row>
       <span><router-link to="/register" class="register">注册账号</router-link></span>
     </el-row>
     <el-dialog title="提示" v-model="dialogVisible" size="tiny">
       <span>{{msg}}</span>
       <span slot="footer" class="dialog-footer">
+      <!--<dialog-view v-model="showDialogView" isShow={showDialogView}></dialog-view>-->
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
-    </el-dialog>
+        </span>
+      </el-dialog>
   </div>
 </template>
 
 <script>
 
   import Store from "../../../common/store.js"
+  import dialogView from "../../../components/dialog.vue"
+//  import particles from "../../../framework/particles.js"
 
   export default {
     name: 'login',
@@ -87,6 +90,55 @@
     }
 
   }
+
+//  particlesJS('particles-js', {
+//    particles: {
+//      color: '#fff',
+//      shape: 'circle', // "circle", "edge" or "triangle"
+//      opacity: 1,
+//      size: 4,
+//      size_random: true,
+//      nb: 150,
+//      line_linked: {
+//        enable_auto: true,
+//        distance: 100,
+//        color: '#fff',
+//        opacity: 1,
+//        width: 1,
+//        condensed_mode: {
+//          enable: false,
+//          rotateX: 600,
+//          rotateY: 600
+//        }
+//      },
+//      anim: {
+//        enable: true,
+//        speed: 1
+//      }
+//    },
+//    interactivity: {
+//      enable: true,
+//      mouse: {
+//        distance: 250
+//      },
+//      detect_on: 'canvas', // "canvas" or "window"
+//      mode: 'grab',
+//      line_linked: {
+//        opacity: .5
+//      },
+//      events: {
+//        onclick: {
+//          enable: true,
+//          mode: 'push', // "push" or "remove" (particles)
+//          nb: 4
+//        }
+//      }
+//    },
+//    /* Retina Display Support */
+//    retina_detect: true
+//  });
+
+
 </script>
 
 <style>
