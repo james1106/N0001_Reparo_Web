@@ -28,7 +28,7 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
-      <el-col :span="17" class="userinfo" v-else="">
+      <el-col :span="14" class="userinfo" v-else="">
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
@@ -142,7 +142,7 @@ export default {
   /* 头部导航 */
   .seller{
     z-index: 1000;height:60px;min-width: 1200px;
-    background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(57,202,166)), to(rgb(133,211,44))); /*兼容Safari／Chrome*/
+    background:-webkit-gradient(linear, 50 bottom, right bottom, from(rgb(57,202,166)), to(rgb(133,211,44))); /*兼容Safari／Chrome*/
     background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
     transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
   .buyer{
