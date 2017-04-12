@@ -167,6 +167,7 @@
 <script>
   import store from '../../vuex/store.js'
   import constantData from '../../../../common/const'
+  import '../../../../assets/css/style.css'
   export default {
     name: 'index',
     data () {
@@ -251,62 +252,5 @@
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
-  }
-
-  .mycard1 {
-    /*width: 90% !important;*/
-    float: inherit !important;
-    /*margin: 10px auto !important;*/
-    /*background-color: rgba(242,242,242,1)*/
-  }
-
-  .mycard1 .el-row {
-    margin-bottom: 0 !important;
-  }
-
-  .mycard1 .el-col {
-    text-align: center;
-    box-sizing: border-box;
-    padding: 5px 0;
-  }
-
-  .mybox {
-    margin: 0 auto !important;
-    border: 1px solid rgb(138,176,200)!important;
-    border-radius: 0px!important;
-  }
-
-  .mybox .el-card__header {
-    padding: 0px!important;
-  }
-
-  /*.mycard11 .row-padding-bottom {*/
-    /*box-sizing: border-box;*/
-    /*padding-bottom: 10px;*/
-  /*}*/
-  .detailButton{
-    float: right;
-    line-height: 30px!important;
-    padding-right: 5px!important;
-    color: #666666!important;
-  }
-  .msgName{
-    text-align: left!important;
-    font-size: 14px;
-    color: #666666;
-  }
-  .keynote{
-    font-weight: bold;
-  }
-  .buyerColor{
-    color: #0096D7;
-  }
-  .stateShow{
-    margin-left: 10px;
-    font-size: 14px;
-  }
-  .statePosition{
-    border-bottom:none;
-    margin-bottom: 20px;
   }
 </style>
