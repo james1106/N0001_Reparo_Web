@@ -5,7 +5,7 @@
           <img src="../assets/home_b.png" style="padding-right: 10px">首页
         </el-menu-item>
         <el-submenu index="/order">
-          <template slot="title">订单管理</template>
+          <template slot="title"><img src="../assets/order_b.png" class="menuImag">订单管理</template>
           <el-menu-item index="/order/createOrder">发起订单</el-menu-item>
           <el-menu-item index="/order/allOrder/b">我买入的订单</el-menu-item>
         </el-submenu>

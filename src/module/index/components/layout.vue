@@ -197,9 +197,4 @@ export default {
     font-size: 10px;
     margin-right: 10px
   }
-  /*@import '../../../framework/avenxo/assets/fonts/font-awesome/css/font-awesome.min.css';
-  @import '../../../framework/avenxo/assets/fonts/themify-icons/themify-icons.css';
-  @import '../../../framework/avenxo/assets/css/styles.css';
-  @import 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600';*/
-
 </style>

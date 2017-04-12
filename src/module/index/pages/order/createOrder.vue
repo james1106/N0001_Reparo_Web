@@ -1,9 +1,9 @@
 <template>
   <div class="launchOrder">
     <el-form ref="launchOrder" :model="launchOrder" :label-position="labelPosition" :rules="creationRules">
-      <el-card class="boxcard mybox">
-        <div slot="header" class="clearfix">
-          <span style="line-height: 36px;">1. 请填写订单详情</span>
+      <el-card class="boxcard">
+        <div>    <!--slot="header" class="clearfix"-->
+          <span class="buyerStepTitle">1. 请填写订单详情</span>
         </div>
         <el-row>
           <el-col :span="12">
@@ -17,7 +17,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="货品名称" prop="productName">
-              <el-input v-model="launchOrder.productName"></el-input>
+              <el-input class="clearfix" v-model="launchOrder.productName"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -36,10 +36,8 @@
             </el-form-item>
           </el-col>-->
         </el-row>
-      </el-card>
-      <el-card class="boxcard mybox">
-        <div slot="header" class="clearfix">
-          <span style="line-height: 36px;">2. 请填写付款信息</span>
+        <div>
+          <span class="buyerStepTitle">2. 请填写付款信息</span>
         </div>
         <el-row>
           <el-col :span="12">
@@ -66,13 +64,11 @@
             </el-form-item>
           </el-col>
         </el-row>
-      </el-card>
-      <el-card class="boxcard mybox">
-        <div slot="header" class="clearfix">
-          <span style="line-height: 36px;">3. 请选择货品入库仓储</span>
+        <div>
+          <span class="buyerStepTitle">3. 请选择货品入库仓储</span>
         </div>
         <el-row>
-          <el-col :span="15">
+          <el-col :span="12">
             <el-form-item label="选择申请入库的仓储" prop="payerRepo">
               <el-select v-model="launchOrder.payerRepo" placeholder="请选择入库仓储">
                 <el-option label="A企业" value="Aqiye"></el-option>
@@ -82,10 +78,12 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-button type="primary" @click.native.prevent="onSubmit('launchOrder')">发起订单</el-button>
+          </el-col>
+        </el-row>
       </el-card>
-      <el-form-item>
-        <el-button type="primary" @click.native.prevent="onSubmit('launchOrder')">发起订单</el-button>
-      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -224,14 +222,51 @@
 
   .launchOrder .el-select .el-input {
     width: 100% !important;
+    margin: 0px 0.2%!important;
   }
 
   .launchOrder .el-select, .el-input {
-    width: 70% !important;
+    width: 65% !important;
+    margin: 0px 2%!important;
   }
 
   .launchOrder .el-button {
-    float: right;
+    float: left;
+    width: 30%;
+    border-radius: 4px;
+    margin: 20px 0;
   }
-  .el-form-item__error {left:30% !important;}
+  .el-form-item__error {left:33% !important;top: 20%!important;}
+  .buyerStepTitle{
+    color:rgb(0,150,215);
+    line-height: 50px;
+    font-size: 14px;
+  }
+  .el-form-item__content{
+    border:1px solid #EEEEEE;
+    /*line-height: 41px!important;*/
+    /*padding: 5px 10px;*/
+  }
+  .el-input__inner{
+    width: 100% !important;
+    height: 30px!important;
+    border-color: #CCCCCC!important;
+    border-radius: 2px!important;
+  }
+  .el-form-item__label{
+    line-height: normal!important;
+    background-color: #F7F7F7;
+    border-right: 1px solid #EEEEEE;
+    font-size: 12px!important;
+  }
+  .el-input{
+    /*margin: 0 20px!important;*/
+    /*margin: 0px 2%!important;*/
+  }
+  .el-col-12{
+    height:40px;
+  }
+  .el-checkbox__input{
+    margin-left: 10px;
+  }
 </style>

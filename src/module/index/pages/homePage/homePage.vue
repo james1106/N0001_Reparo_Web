@@ -45,7 +45,7 @@
       <div slot="header" class="clearfix" style="height: 8px">
         <span :class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
       </div>
-      <el-row style="background-color: rgb(242,246,247);font-size: 14px;height: 40px;line-height: 40px;border-radius: 1%">
+      <el-row class="el-row-header" style="background-color: rgb(242,246,247)">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
         <el-col :span="6">付款信息</el-col>
         <el-col :span="8">订单状态</el-col>
@@ -54,7 +54,7 @@
       <template v-for="(item,index) in showOrder">
         <div>
           <el-row style="border: 1px solid rgb(238,238,238);height: 120px;border-radius: 4px;padding: 10px">
-            <el-row style="background-color: rgb(248,248,248);color: rgb(102,102,102);font-size: 14px;height: 40px;line-height: 40px">
+            <el-row class="el-row-header">
               <el-col :span="6" style="margin-left: 19px;" >订单编号:{{item.orderNo}}</el-col>
               <el-col :span="6">创建时间:{{item.orderGenerateTime}}</el-col>
               <el-col :span="8">卖家:{{item.payeeAccount}}</el-col>
@@ -231,5 +231,16 @@ export default {
     margin-right: 95px;
     float: right;
     /*margin-top: 13px;*/
+  }
+  .el-row-header{
+    /*background-color: rgb(242,246,247);*/
+    background-color: rgb(248,248,248);
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 1%;
+    padding-left: 15px;
+    color: #666666;
+    border-bottom: 1px solid #EEEEEE;
   }
 </style>
