@@ -100,8 +100,13 @@
       }
     },
     methods:{
-       handleClick () {
-        console.log("查看");
+      cash(){
+        this.$http.post('/v1/receivable/accept',this.acceptParam,{emulateJSON:true}).then((data) => {
+          console.log(data);
+
+      },(err) => {
+          console.log(err);
+        })
       }
     }
   }

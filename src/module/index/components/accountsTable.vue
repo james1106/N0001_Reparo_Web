@@ -25,14 +25,16 @@
           <el-col :span="24">{{item.enterpriseName}}</el-col>
         </el-col>
         <el-col :span="5">
-          <el-col :span="24">{{item.status}}</el-col>
+          <el-col :span="24">{{item.status | receStatus}}</el-col>
         </el-col>
         <el-col :span="4">
           <el-col :span="24">
-            <router-link to="/allAccounts/signout/signout">签发账款</router-link>
+            <el-button type="text" v-if="(isBuyer==='true')&&(item.status===constantData.FORACCEPT)" @click.native.prevent="confirmAccept(item.receivableNo)">承兑确认</el-button>
+            <el-button type="text" v-if="(isBuyer==='true')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmCash(item.receivableNo)">兑付确认</el-button>
+            <el-button type="text" v-if="(isBuyer==='false')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmDiscount(item.receivableNo)">贴现账款</el-button>
           </el-col>
           <el-col :span="24">
-            <router-link to="/allAccounts/accounts/detail">查看详情</router-link>
+            <el-button type="text" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
           </el-col>
         </el-col>
       </el-row>
@@ -47,61 +49,41 @@
 </template>
 
 <script>
+  import constantData from '../../../common/const'
+
   export default {
     name: 'accountTable',
+    computed: {
+      constantData () {
+        return constantData;
+      },
+    },
     mounted: function (){
       this.$nextTick(function () {
         this.getDataByStatus()
         this.getDataByPageNum(0)
       });
     },
-    props: ['accountInfo','status','pageSize'],
+    props: ['accountInfo','status','pageSize','isBuyer'],
     data(){
         return{
           tableData:this.accountInfo,
           showData:[],
           accountsStatus:this.status,
-          detailPath:''
         }
     },
     methods:{
       currentChange(val){
         this.getDataByPageNum(val - 1)
       },
-      turnStatus(){
-          switch (this.accountsStatus){
-            case 'all':
-
-                return '1'
-              break;
-            case 'accept':
-                return '2'
-              break;
-            case 'discount':
-                return '3'
-              break;
-            case 'cash':
-                return '4'
-              break;
-            case 'signout':
-                return '5'
-              break;
-            case 'other':
-                return '6'
-              break;
-            default:
-                return "1"
-          }
-      },
       getDataByStatus(){
-          var resStatus = this.turnStatus()
-          if(resStatus == '1'){
+          if(this.accountsStatus == 0){
               return
           }
           var res = []
           for(var i=0;i<this.tableData.length;i++ ){
             var item = this.tableData[i];
-            if(item.status == resStatus){
+            if(item.status == this.accountsStatus){
               res.push(item)
             }
           }
@@ -113,6 +95,18 @@
           }else {
             this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
           }
+      },
+      showDetail(no){
+
+      },
+      confirmAccept(no){
+
+      },
+      confirmCash(no){
+
+      },
+      confirmDiscount(no){
+
       }
     }
   }
