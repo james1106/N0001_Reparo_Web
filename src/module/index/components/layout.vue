@@ -10,7 +10,7 @@
 			</el-col>
       <el-col :span="4" style="margin-left: 10px;margin-top: 20px;color: white">
         <span >趣链科技</span><span> | </span>
-        <span style="font-size: 14px" v-if="isBuyer === true">买家中心</span>
+        <span style="font-size: 14px" v-if="state.isBuyer === 'true'">买家中心</span>
         <span style="font-size: 14px" v-else >卖家中心</span>
       </el-col>
       <el-col :span="2" v-if="companyType === 0">
@@ -75,7 +75,7 @@
 export default {
   name: 'wrapper',
   created: function () {
-      Store.commit('setIsBuyer','true');
+    Store.commit('setIsBuyer','true');
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     //后面判断 每个不同公司进去主页后的首页面
@@ -88,8 +88,6 @@ export default {
       msg: '',
       headerFixed : true,
       active:true,
-      isBuyer:true,
-      isSeller:false,
       companyType:'1'  //1.融资企业 2.仓储公司 3.物流公司
     }
   },

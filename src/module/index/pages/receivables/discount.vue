@@ -84,7 +84,25 @@
             lixi:"4%",
             data:"2018-01-30"
           }
-        ]
+        ],
+        discountParam:{
+          receivableNo:'',       //应收款编号
+          applicantAcctId:'',    //申请人账号
+          replyerAcctId:'',      //回复人账号
+          discountApplyAmount:'' //申请贴现金额
+        }
+      }
+    },
+    methods:{
+      accept(){
+        this.$http.post('/v1/receivable/discountApply',this.acceptParam,{emulateJSON:true}).then((data) => {
+          console.log(data);
+
+
+
+        },(err) => {
+          console.log(err);
+        })
       }
     }
   }

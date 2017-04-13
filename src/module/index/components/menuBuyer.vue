@@ -36,7 +36,8 @@
     },
     methods:{
       setStatus: function (status) {
-        Store.state.accountsStatus = status    }
+        Store.commit('setAccountsStatus',status);
+      }
     }
   }
 </script>

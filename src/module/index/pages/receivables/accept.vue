@@ -79,8 +79,56 @@
             lixi:"4%",
             data:"2018-01-30"
           }
-        ]
+        ],
+        acceptParam:{
+          receivableNo:'', //应收款编号
+          replyerAcctId:'',//回复人账号
+          response:''      //回复意见 0.同意 1.拒绝
+        },
+        detailInfo:{
+          receivableNo:'', //应收款编号
+          orderNo:'',       //订单编号
+          signer:'',//签发人账号
+          accptr:'',//承兑人账号
+          pyer:'',//付款人账号
+          pyee:'',//收款人账号
+          pyerEnterpriseName:'',//付款人企业名称
+          pyeeEnterpriseName:'',//收款人企业名称
+          pyerAcctSvcrName:'', //付款人开户行名称
+          pyeeAcctSvcrName:'',//付款人开户行名称
+          firstOwner:'',//本手持有人
+          secondOwner:'',//下手持有人
+          isseAmt:'',//票面金额
+          cashedAmount:'',//已兑付金额
+          status:'',//应收款上一状态
+          lastStatus:'',//应收款下一状态
+          isseDt:'',//签发日
+          signInDt:'',//签收日
+          dueDt:'', //到期日
+          rate:'',//利率
+          contractNo:'',//合同号
+          invoiceNo:'',//发票号
+          note:'', //备注
+          discounted:'',//贴现标志
+          discountInHandAmount:'',//贴现实际到手金额
+          pyeeLinkMan:'',//收款人联系人
+          pyerLinkMan:'',//付款人联系人
+          pyeePhone:'',//收款人联系方式
+          pyerPhone:''//付款人联系方式
+        }
       }
+    },
+    methods:{
+        accept(){
+          this.$http.post('/v1/receivable/accept',this.acceptParam,{emulateJSON:true}).then((data) => {
+            console.log(data);
+
+            
+
+          },(err) => {
+            console.log(err);
+          })
+        }
     }
   }
 </script>
