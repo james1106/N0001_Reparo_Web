@@ -10,61 +10,10 @@
     <el-card>
       <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="所有订单" name="first">
-      <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-        <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
-        <el-col :span="6">付款信息</el-col>
-        <el-col :span="8">订单状态</el-col>
-        <el-col :span="2">操作</el-col>
-      </el-row>
-      <template v-for="(item,index) in allOrder">
-        <div>
-          <el-row class="dataTable">
-            <el-row class="el-row-header">
-              <el-col :span="6" style="margin-left: 19px;">订单编号：{{item.orderNo}}</el-col>
-              <el-col :span="6">创建时间：{{item.orderGenerateTime | timeTransfer}}</el-col>
-              <el-col :span="8" v-if="state.isBuyer==='true'">卖家：{{item.payeeAddress}}</el-col>
-              <el-col :span="8" v-else>买家：{{item.payerAddress}}</el-col>
-              <el-col :span="2">操作</el-col>
-            </el-row>
-            <el-row class="el-row-content">
-              <el-col :span="6" style="margin-left: 19px;">
-                <el-row>货品名称：{{item.productName}}</el-row>
-                <el-row>货品数量：{{item.productQuantity}}</el-row>
-              </el-col>
-              <el-col :span="6">
-                <el-row>订单金额：{{item.productTotalPrice}}</el-row>
-                <el-row>付款方式：{{item.payingMethod | payingMethod}}</el-row>
-              </el-col>
-              <el-col :span="2">
-                <el-row>交易状态</el-row>
-                <el-row>{{item.txState | transactionStatus}}</el-row>
-              </el-col>
-              <el-col :span="2">
-                <el-row>账款状态</el-row>
-                <el-row>{{item.receState | receStatus}}</el-row>
-              </el-col>
-              <el-col :span="2">
-                <el-row>仓储状态</el-row>
-                <el-row>{{item.repoCertState | repoStatus}}</el-row>
-              </el-col>
-              <el-col :span="2">
-                <el-row>物流状态</el-row>
-                <el-row>{{item.wayBillState | wayBillStatus}}</el-row>
-              </el-col>
-              <el-col :span="2">
-                <el-button type="text" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-                <el-button type="text" v-if="(state.isBuyer==='false')&&(item.txState===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(item.orderNo)">确认订单</el-button>
-                <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receState===constantData.FORISSUE)" @click.native.prevent="signBill">签发</el-button>
-                <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receState===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
-                <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receState===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
-              </el-col>
-            </el-row>
-          </el-row>
-        </div>
-      </template>
+      <order-table :orderList="allOrder" status="all" pageSize="10"> </order-table>
     </el-tab-pane>
     <el-tab-pane label="待确认" name="second">
-      <template v-for="(item,index) in allOrder" v-if="item.transactionStatus===constantData.UNCONFIRMED"><!--待确认 0-->
+      <!--<template v-for="(item,index) in allOrder" v-if="item.transactionStatus===constantData.UNCONFIRMED">&lt;!&ndash;待确认 0&ndash;&gt;
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
@@ -109,10 +58,11 @@
             </el-row>
           </el-row>
         </div>
-      </template>
+      </template>-->
+      <order-table :orderList="allOrder" status="forConfirm" pageSize="10"> </order-table>
     </el-tab-pane>
     <el-tab-pane label="待付款" name="third">
-      <template v-for="(item,index) in allOrder" v-if="(item.receStatus===constantData.FORACCEPT)||(item.transactionStatus===constantData.CONFIRMED)"><!--承兑待签收3 待签发0/订单已确认-->
+      <!--<template v-for="(item,index) in allOrder" v-if="(item.receStatus===constantData.FORACCEPT)||(item.transactionStatus===constantData.CONFIRMED)">&lt;!&ndash;承兑待签收3 待签发0/订单已确认&ndash;&gt;
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
@@ -157,10 +107,11 @@
             </el-row>
           </el-row>
         </div>
-      </template>
+      </template>-->
+      <order-table :orderList="allOrder" status="forPay" pageSize="10"> </order-table>
     </el-tab-pane>
     <el-tab-pane label="待发货" name="fourth">
-      <template v-for="(item,index) in allOrder" v-if="item.receStatus===constantData.ACCEPTED"><!--承兑已签收4-->
+      <!--<template v-for="(item,index) in allOrder" v-if="item.receStatus===constantData.ACCEPTED">&lt;!&ndash;承兑已签收4&ndash;&gt;
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
@@ -205,10 +156,11 @@
             </el-row>
           </el-row>
         </div>
-      </template>
+      </template>-->
+      <order-table :orderList="allOrder" status="forSend" pageSize="10"> </order-table>
     </el-tab-pane>
     <el-tab-pane label="待收货" name="fifth">
-      <template v-for="(item,index) in allOrder" v-if="item.wayBillStatus===constantData.SENDED"><!--已发货1-->
+      <!--<template v-for="(item,index) in allOrder" v-if="item.wayBillStatus===constantData.SENDED">&lt;!&ndash;已发货1&ndash;&gt;
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
@@ -253,7 +205,8 @@
             </el-row>
           </el-row>
         </div>
-      </template>
+      </template>-->
+      <order-table :orderList="allOrder" status="forReceive" pageSize="10"> </order-table>
     </el-tab-pane>
   </el-tabs>
     </el-card>
@@ -263,6 +216,7 @@
   import store from '../../vuex/store.js'
   import constantData from '../../../../common/const'
   import '../../../../assets/css/style.css'
+  import OrderTable from '../../components/orderDataTable.vue'
   export default {
     name:'index',
     data () {
@@ -279,6 +233,9 @@
         }
         ]
       }
+    },
+    components: {
+        OrderTable
     },
     computed: {
       state () {
@@ -329,6 +286,7 @@
         default:break;
       }
         this.$http.get("/v1/order/order_list/"+tempRole).then(function(res){
+//        this.$http.get("http://localhost/server_test/getData1.php").then(function(res){
             console.log("获取到的所有订单: "+res.body);
             this.allOrder=res.body.data;
         },

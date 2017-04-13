@@ -17,8 +17,8 @@
         </el-submenu>
         <el-submenu index="/warehousing" >
           <template slot="title"><img src="../assets/cc_b.png" class="menuImag">仓储管理</template>
-          <el-menu-item index="/myWarehousing">我的仓储</el-menu-item>
-          <el-menu-item index="/myReceipts">我的仓单</el-menu-item>
+          <el-menu-item index="/warehousing/repoIn">入库管理</el-menu-item>
+          <el-menu-item index="/warehousing/myReceipts">我的仓单</el-menu-item>
         </el-submenu>
       </el-menu>
   </div>

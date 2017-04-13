@@ -26,14 +26,16 @@
             <el-col :span="24">{{item.enterpriseName}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">{{item.status}}</el-col>
+            <el-col :span="24">{{item.status | receStatus}}</el-col>
           </el-col>
           <el-col :span="2">
             <el-col :span="24">
-              <el-button size="mini" type="text"><router-link to="/allAccounts/signout/signout" class="buyerColor" style="text-decoration: none;">签发账款</router-link></el-button>
+              <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='true')&&(item.status===constantData.FORACCEPT)" @click.native.prevent="confirmAccept(item.receivableNo)">承兑确认</el-button>
+              <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='true')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmCash(item.receivableNo)">兑付确认</el-button>
+              <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='false')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmDiscount(item.receivableNo)">贴现账款</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
-              <el-button size="small"><router-link to="/allAccounts/accounts/detail" style="color:black;text-decoration: none">查看详情</router-link></el-button>
+              <el-button size="small" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
             </el-col>
           </el-col>
         </el-row>
@@ -49,61 +51,43 @@
 </template>
 
 <script>
+  import constantData from '../../../common/const'
+  import Store from '../vuex/store.js'
+
   export default {
     name: 'accountTable',
-    mounted: function (){
-      this.$nextTick(function () {
-        this.getDataByStatus()
-        this.getDataByPageNum(0)
-      });
+    computed: {
+      constantData () {
+        return constantData;
+      },
     },
-    props: ['accountInfo','status','pageSize'],
+    props: ['accountInfo','status','pageSize','isBuyer'],
     data(){
         return{
           tableData:this.accountInfo,
           showData:[],
           accountsStatus:this.status,
-          detailPath:''
         }
+    },
+    watch:{
+      accountInfo(curVal){
+        this.tableData = curVal
+        this.getDataByStatus()
+        this.getDataByPageNum(0)
+      }
     },
     methods:{
       currentChange(val){
         this.getDataByPageNum(val - 1)
       },
-      turnStatus(){
-          switch (this.accountsStatus){
-            case 'all':
-
-                return '1'
-              break;
-            case 'accept':
-                return '2'
-              break;
-            case 'discount':
-                return '3'
-              break;
-            case 'cash':
-                return '4'
-              break;
-            case 'signout':
-                return '5'
-              break;
-            case 'other':
-                return '6'
-              break;
-            default:
-                return "1"
-          }
-      },
       getDataByStatus(){
-          var resStatus = this.turnStatus()
-          if(resStatus == '1'){
+          if(this.accountsStatus == 0){
               return
           }
           var res = []
           for(var i=0;i<this.tableData.length;i++ ){
             var item = this.tableData[i];
-            if(item.status == resStatus){
+            if(item.status == this.accountsStatus){
               res.push(item)
             }
           }
@@ -115,6 +99,22 @@
           }else {
             this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
           }
+      },
+      showDetail(receivableNo){
+        Store.commit('setCheckId',receivableNo);
+        this.$router.push("/allAccounts/detail/detail");
+      },
+      confirmAccept(receivableNo){
+        Store.commit('setCheckId',receivableNo);
+        this.$router.push("/allAccounts/accept/accept");
+      },
+      confirmCash(receivableNo){
+        Store.commit('setCheckId',receivableNo);
+        this.$router.push("/allAccounts/cash/cash");
+      },
+      confirmDiscount(receivableNo){
+        Store.commit('setCheckId',receivableNo);
+        this.$router.push("/allAccounts/discount/discount");
       }
     }
   }

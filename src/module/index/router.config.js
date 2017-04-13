@@ -17,14 +17,11 @@ import AccountsDetailPage from './pages/receivables/detail.vue'
 
 /*企业仓储*/
 import warehousingIndex from './pages/warehousing/index.vue'
-import mywarehousingIndex from './pages/warehousing/myWarehousing/index.vue'
-import myWarehousing from './pages/warehousing/myWarehousing/myWarehousing.vue'
-import details from './pages/warehousing/myWarehousing/details.vue'
-import receiptApplication from './pages/warehousing/receiptApplication.vue'
-import myReceiptsIndex from './pages/warehousing/myReceipts/index.vue'
-import myReceipts from './pages/warehousing/myReceipts/myReceipts.vue'
-import myReceiptsDetails from './pages/warehousing/myReceipts/myReceiptsDetails.vue'
-
+import repoIn from './pages/warehousing/repoIn.vue'
+import repoOut from './pages/warehousing/repoOut.vue'
+import myReceipts from './pages/warehousing/myReceipts.vue'
+import repoDetails from './pages/warehousing/repoDetails.vue'
+import receiptsDetails from './pages/warehousing/receiptsDetails.vue'
 /*仓储公司*/
 import warehousingCompanyIndex from './pages/warehousingCompany/index.vue'
 import ReceiptsIndex from './pages/warehousingCompany/receipts/index.vue'
@@ -87,24 +84,15 @@ export default [
   },
 
   /*仓储路由*/
-  {
-    path:'/warehousing',component:warehousingIndex,
-  },
-  {path:'/myWarehousing',component:mywarehousingIndex,
+  {path:'/warehousing',component:warehousingIndex,
     children:[
-      {path:'',component:myWarehousing},
-      {path:'details',component:details}
+      {path:'repoIn',component:repoIn},
+      {path:'repoOut',component:repoOut},
+      {path:'myReceipts',component:myReceipts},
+      {path:'repoDetails',component:repoDetails},
+      {path:'receiptsDetails',component:receiptsDetails},
+
     ]},
-  {
-    path:'/receiptApplication',component:receiptApplication
-  },
-  {
-    path:'/myReceipts',component:myReceiptsIndex,
-    children:[
-      {path:'',component:myReceipts},
-      {path:'myReceiptsDetails',component:myReceiptsDetails}
-    ]
-  },
   // 仓储公司
   {
     path:'/warehousingCompany',component:warehousingCompanyIndex,

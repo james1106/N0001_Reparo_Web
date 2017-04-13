@@ -16,7 +16,7 @@
           <el-col :span="12">
             <el-form-item label="供应商" prop="payeeCompanyName">
               <el-select v-model="launchOrder.payeeCompanyName" placeholder="请选择供应商">
-                <el-option label="李四集团" value="李四集团"></el-option>
+                <el-option label="企业1ocqic" value="企业1i194k0"></el-option>
                 <el-option label="B企业" value="Bqiye"></el-option>
                 <el-option label="C企业" value="Cqiye"></el-option>
               </el-select>
@@ -78,7 +78,7 @@
           <el-col :span="12">
             <el-form-item label="选择申请入库的仓储" prop="payerRepo">
               <el-select v-model="launchOrder.payerRepo" placeholder="请选择入库仓储">
-                <el-option label="A企业" value="Aqiye"></el-option>
+                <el-option label="仓储36hru64" value="仓储1m7o4k0"></el-option>
                 <el-option label="B企业" value="Bqiye"></el-option>
                 <el-option label="C企业" value="Cqiye"></el-option>
               </el-select>
