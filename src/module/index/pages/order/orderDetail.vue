@@ -121,8 +121,8 @@
           </div>
           <div class="box-card mycard1" v-else>
             <el-row>
-              <el-col :span="8" class="msgName keynote">运单号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
-              <el-col :span="8" class="msgName">下单时间：{{orderDetail.wayBillOver.wayBillGenerateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="msgName keynote">运单号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
+              <el-col :span="6" class="msgName">下单时间：{{orderDetail.wayBillOver.wayBillGenerateTime | timeTransfer}}</el-col>
             </el-row>
             <el-row class="">
               <el-col :span="6" class="msgName">物流公司：{{orderDetail.wayBillOver.logisticCompany}}</el-col>

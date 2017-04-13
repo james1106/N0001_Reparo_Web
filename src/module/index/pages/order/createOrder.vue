@@ -66,7 +66,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="收款方式" prop="payingMethod">
-              <el-checkbox v-model="launchOrder.payingMethod">应收账款支付</el-checkbox>
+              <el-checkbox v-model="launchOrder.payingMethod" class="defaultMsg">应收账款支付</el-checkbox>
             </el-form-item>
           </el-col>
         </el-row>

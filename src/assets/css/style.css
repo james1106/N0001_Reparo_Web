@@ -104,7 +104,7 @@ showName{     /*.主页中的四个卡片上的名称*/
 }
 .msgName{
   text-align: left!important;
-  font-size: 14px;
+  font-size: 12px;
   color: #666666;
 }
 .keynote{
@@ -124,15 +124,17 @@ showName{     /*.主页中的四个卡片上的名称*/
 }
 .dataTable{
   border: 1px solid rgb(238,238,238);
-  height: 120px;
+  /*height: 120px;*/
+  height: auto;
   border-radius: 4px;
   padding: 10px;
   background-color: white;
 
 }
 .el-row-content{
-  font-size: 12px;
-  height: 80px;
+  font-size: 12px!important;
+  color: rgb(51,51,51);
+  /*height: 80px;*/
   line-height: 22px;
 }
 .el-tabs__item{
@@ -156,4 +158,36 @@ showName{     /*.主页中的四个卡片上的名称*/
   padding-bottom: 10px!important;
   margin-bottom: 10px!important;
   border-bottom: 1px dashed rgb(221, 221, 221);
+}
+
+
+
+.signout .mybox {
+  margin-bottom: 20px !important;
+}
+
+.signout .el-form-item__label {
+  width: 30% !important;
+  color: rgb(51,51,51);
+}
+
+.signout .el-select .el-input {
+  width: 100% !important;
+  margin: 0px 0.2%!important;
+}
+
+.signout .el-select, .el-input {
+  width: 65% !important;
+  margin: 0px 2%!important;
+}
+
+.signout .el-button {
+  float: left;
+  width: 30%;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+.defaultMsg{    /*信息中默认填写的*/
+  padding-left: 10px;
+  font-size: 12px;
 }
