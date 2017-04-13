@@ -212,6 +212,7 @@
 <script>
   import store from '../../vuex/store.js'
   import constantData from '../../../../common/const'
+  import '../../../../assets/css/style.css'
   export default {
     name: 'index',
     data () {
