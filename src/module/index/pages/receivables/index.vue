@@ -1,7 +1,10 @@
 <template>
   <div>
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">所有应收账款</el-breadcrumb-item>
+    <el-breadcrumb separator=">" style="margin-bottom: 23px">
+      <img src="../../assets/combinedShape.png" style="float: left;margin-right: 0.5%">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>应收账款</el-breadcrumb-item>
+      <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
     </el-breadcrumb>
     <transition name="fade">
       <router-view class="view"></router-view>

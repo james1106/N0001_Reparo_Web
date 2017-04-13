@@ -411,9 +411,9 @@
     /*background-color: rgba(242,242,242,1)*/
   }
 
-  .mycard1 .el-row {
-    margin-bottom: 0 !important;
-  }
+  /*.mycard1 .el-row {*/
+    /*margin-bottom: 0 !important;*/
+  /*}*/
 
   .mycard1 .el-col {
     text-align: center;

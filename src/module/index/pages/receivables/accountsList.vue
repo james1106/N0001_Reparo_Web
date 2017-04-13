@@ -1,6 +1,7 @@
 <template>
   <div id="list">
-    <el-tabs type="border-card" v-bind:value="state.accountsStatus">
+    <el-card>
+    <el-tabs  v-bind:value="state.accountsStatus">
       <el-tab-pane label="所有应收账款" name="all">
         <accounts-table :accountInfo="orderList" status="all" pageSize="10"> </accounts-table>
       </el-tab-pane>
@@ -125,6 +126,7 @@
         </template>
       </el-tab-pane>
     </el-tabs>
+    </el-card>
   </div>
 </template>
 <script>

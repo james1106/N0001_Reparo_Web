@@ -1,40 +1,42 @@
 <template>
   <div id="accountTable">
-    <el-row class="row-black row-padding">
-      <el-col :span="5">货品信息</el-col>
+    <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+      <el-col :span="5" style="margin-left: 20px">货品信息</el-col>
       <el-col :span="5">账款信息</el-col>
       <el-col :span="5">收款人</el-col>
       <el-col :span="5">账款状态</el-col>
-      <el-col :span="4">操作</el-col>
+      <el-col :span="2">操作</el-col>
     </el-row>
     <template v-for="item in showData">
-      <el-row class="row-black row-padding">
-        <el-col :span="24">应收帐款编号：{{item.receivableNo}}</el-col>
-      </el-row>
-      <el-row class="row-padding">
-        <el-col :span="5">
-          <el-col :span="24">货品名称：{{item.productName}}</el-col>
-          <el-col :span="24">货品数量：{{item.productQuantity}}</el-col>
-        </el-col>
-        <el-col :span="5">
-          <el-col :span="24">账款金额：{{item.isseAmt}}</el-col>
-          <el-col :span="24">付款方式：应收账款支付</el-col>
-          <el-col :span="24">到期日：{{item.dueDt}}</el-col>
-        </el-col>
-        <el-col :span="5">
-          <el-col :span="24">{{item.enterpriseName}}</el-col>
-        </el-col>
-        <el-col :span="5">
-          <el-col :span="24">{{item.status}}</el-col>
-        </el-col>
-        <el-col :span="4">
-          <el-col :span="24">
-            <router-link to="/allAccounts/signout/signout">签发账款</router-link>
+      <el-row class="dataTable">
+        <el-row class="el-row-header">
+          <el-col :span="24" style="margin-left: 19px;">应收帐款编号：{{item.receivableNo}}</el-col>
+        </el-row>
+        <el-row class="el-row-content">
+          <el-col :span="5" style="margin-left: 19px;">
+            <el-col :span="24">货品名称：{{item.productName}}</el-col>
+            <el-col :span="24">货品数量：{{item.productQuantity}}</el-col>
           </el-col>
-          <el-col :span="24">
-            <router-link to="/allAccounts/accounts/detail">查看详情</router-link>
+          <el-col :span="5">
+            <el-col :span="24">账款金额：{{item.isseAmt}}</el-col>
+            <el-col :span="24">付款方式：应收账款支付</el-col>
+            <el-col :span="24">到期日：{{item.dueDt}}</el-col>
           </el-col>
-        </el-col>
+          <el-col :span="5">
+            <el-col :span="24">{{item.enterpriseName}}</el-col>
+          </el-col>
+          <el-col :span="5">
+            <el-col :span="24">{{item.status}}</el-col>
+          </el-col>
+          <el-col :span="2">
+            <el-col :span="24">
+              <el-button size="mini" type="text"><router-link to="/allAccounts/signout/signout" class="buyerColor" style="text-decoration: none;">签发账款</router-link></el-button>
+            </el-col>
+            <el-col :span="24" style="margin-left: -9px">
+              <el-button size="small"><router-link to="/allAccounts/accounts/detail" style="color:black;text-decoration: none">查看详情</router-link></el-button>
+            </el-col>
+          </el-col>
+        </el-row>
       </el-row>
     </template>
     <el-pagination
