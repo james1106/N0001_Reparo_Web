@@ -11,7 +11,102 @@
       <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 入库待响应</el-col>
     </el-row>
 
-    <el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-card class="box-card mybox" style="width:100%">
+            <div slot="header" class="clearfix el-row-header">
+              <span class="keynote">交易详情</span><el-button size="mini" type="text" class="detailButton">查看详情 ></el-button>
+            </div>
+            <div class="box-card mycard1">
+              <el-row>
+                <el-col :span="6" class="msgName keynote">买家信息：</el-col>
+              </el-row>
+              <el-row class="">
+                <el-col :span="6" style="padding-left: 30px;" class="msgName" v-if="state.isBuyer==='true'">商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
+                <el-col :span="6" style="padding-left: 30px;" class="msgName" v-else>购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
+                <el-col :span="6" class="msgName">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
+                <el-col :span="6" class="msgName">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
+                <el-col :span="6" class="msgName">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="6" class="msgName keynote">订单信息：</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="6" class="msgName" style="padding-left: 30px;">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
+                <el-col :span="6" class="msgName">发起时间：{{orderDetail.txDetail.operationRecordList[0].operateTime | timeTransfer}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="6" class="msgName" style="padding-left: 30px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
+                <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
+                <el-col :span="6" class="msgName">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordList[orderDetail.txDetail.operationRecordList.length-1].state | transactionStatus}}</el-col>
+                <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="orderCollapse" :class="{rotate:isOrderCollapse, rotate1:!isOrderCollapse}"></i></el-col>
+              </el-row>
+              <!--<el-row class="">-->
+              <!--<el-col :span="8" v-if="(orderDetail.txDetail.orderState!==constantData.UNCONFIRMED)">交易确认：{{orderDetail.txDetail.orderConfirmTime | timeTransfer}}</el-col>-->
+              <!--</el-row>-->
+              <div v-show="isOrderCollapse">
+                <el-row v-show="isOrderCollapse">
+                  <template v-for="(item,index) in orderDetail.txDetail.operationRecordList">
+                    <el-row>
+                      <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordList.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                    </el-row>
+                  </template>
+                </el-row>
+              </div>
+            </div>
+
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-card class="box-card mybox" style="width:100%">
+            <div slot="header" class="clearfix el-row-header">
+              <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton">查看详情 ></el-button>
+            </div>
+            <div class="box-card mycard1" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
+              暂无应收账款信息!
+            </div>
+            <div class="box-card mycrad1" v-else-if="orderDetail.receOver.receLatestStatus===constantData.FORISSUE">
+              应收账款待签发!
+            </div>
+            <div class="box-card mycard1" v-else>
+              <el-row>
+                <el-col :span="6" class="msgName keynote">业务编号：{{orderDetail.receOver.receNo}}</el-col>
+                <el-col :span="6" class="msgName">签发时间：{{orderDetail.receOver.receGenerateTime | timeTransfer}}</el-col>
+                <el-col :span="6" class="msgName">到期日：{{orderDetail.receOver.dueDate}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="6" class="msgName">收款人：{{orderDetail.receOver.receivingSide}}</el-col>
+                <el-col :span="6" class="msgName">付款人：{{orderDetail.receOver.payingSide}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="6" class="msgName">账款金额(元)：{{orderDetail.receOver.receAmount}}</el-col>
+                <el-col :span="6" class="msgName">票面利息：{{orderDetail.receOver.coupon}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8" class="msgName">
+                  最新应收账款状态：{{orderDetail.receOver.receLatestStatus | receStatus}},({{orderDetail.receOver.receUpdateTime | timeTransfer}})
+                </el-col>
+                <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="receCollapse" :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i></el-col>
+              </el-row>
+
+              <el-row v-show="isReceCollapse">
+                <template v-for="(item,index) in receHistory">
+                  <el-row>
+                    <el-col :span="8" :class="{colorBlue:index==(receHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                  </el-row>
+                </template>
+              </el-row>
+            </div>
+
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row>
       <el-col :span="24">
         <el-card class="box-card mybox" style="width:100%">
 
@@ -49,7 +144,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row>
+      <el-row>
       <el-col :span="24">
         <el-card class="box-card mybox" style="width:100%">
           <div slot="header" class="clearfix el-row-header">
@@ -111,101 +206,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row>
-        <el-col :span="24">
-          <el-card class="box-card mybox" style="width:100%">
-            <div slot="header" class="clearfix el-row-header">
-              <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton">查看详情 ></el-button>
-            </div>
-            <div class="box-card mycard1" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
-              暂无应收账款信息!
-            </div>
-            <div class="box-card mycrad1" v-else-if="orderDetail.receOver.receLatestStatus===constantData.FORISSUE">
-              应收账款待签发!
-            </div>
-            <div class="box-card mycard1" v-else>
-              <el-row>
-                <el-col :span="6" class="msgName keynote">业务编号：{{orderDetail.receOver.receNo}}</el-col>
-                <el-col :span="6" class="msgName">签发时间：{{orderDetail.receOver.receGenerateTime | timeTransfer}}</el-col>
-                <el-col :span="6" class="msgName">到期日：{{orderDetail.receOver.dueDate}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="6" class="msgName">收款人：{{orderDetail.receOver.receivingSide}}</el-col>
-                <el-col :span="6" class="msgName">付款人：{{orderDetail.receOver.payingSide}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="6" class="msgName">账款金额(元)：{{orderDetail.receOver.receAmount}}</el-col>
-                <el-col :span="6" class="msgName">票面利息：{{orderDetail.receOver.coupon}}</el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="8" class="msgName">
-                  最新应收账款状态：{{orderDetail.receOver.receLatestStatus | receStatus}},({{orderDetail.receOver.receUpdateTime | timeTransfer}})
-                </el-col>
-                <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="receCollapse" :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i></el-col>
-              </el-row>
 
-              <el-row v-show="isReceCollapse">
-                <template v-for="(item,index) in receHistory">
-                  <el-row>
-                  <el-col :span="8" :class="{colorBlue:index==(receHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
-                  </el-row>
-                </template>
-              </el-row>
-            </div>
-
-          </el-card>
-        </el-col>
-      </el-row>
-    <el-row>
-    <el-col :span="24">
-      <el-card class="box-card mybox" style="width:100%">
-        <div slot="header" class="clearfix el-row-header">
-          <span class="keynote">交易详情</span><el-button size="mini" type="text" class="detailButton">查看详情 ></el-button>
-        </div>
-        <div class="box-card mycard1">
-          <el-row>
-            <el-col :span="6" class="msgName keynote">买家信息：</el-col>
-          </el-row>
-          <el-row class="">
-            <el-col :span="6" style="padding-left: 30px;" class="msgName" v-if="state.isBuyer==='true'">商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
-            <el-col :span="6" style="padding-left: 30px;" class="msgName" v-else>购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
-            <el-col :span="6" class="msgName">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
-            <el-col :span="6" class="msgName">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
-            <el-col :span="6" class="msgName">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="6" class="msgName keynote">订单信息：</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="6" class="msgName" style="padding-left: 30px;">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
-            <el-col :span="6" class="msgName">发起时间：{{orderDetail.txDetail.operationRecordList[0].operateTime | timeTransfer}}</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="6" class="msgName" style="padding-left: 30px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
-            <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
-            <el-col :span="6" class="msgName">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordList[orderDetail.txDetail.operationRecordList.length-1].state | transactionStatus}}</el-col>
-            <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="orderCollapse" :class="{rotate:isOrderCollapse, rotate1:!isOrderCollapse}"></i></el-col>
-          </el-row>
-          <!--<el-row class="">-->
-            <!--<el-col :span="8" v-if="(orderDetail.txDetail.orderState!==constantData.UNCONFIRMED)">交易确认：{{orderDetail.txDetail.orderConfirmTime | timeTransfer}}</el-col>-->
-          <!--</el-row>-->
-          <div v-show="isOrderCollapse">
-            <el-row v-show="isOrderCollapse">
-              <template v-for="(item,index) in orderDetail.txDetail.operationRecordList">
-                <el-row>
-                  <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordList.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
-                </el-row>
-              </template>
-            </el-row>
-          </div>
-        </div>
-
-      </el-card>
-    </el-col>
-  </el-row>
     </el-card>
   </div>
 </template>
@@ -291,7 +292,7 @@
             this.isWayBillCollapse=false;
             this.isBuyerRepoCollapse=false;
             this.isBuyeeRepoCollapse=false;
-            console.log("请求订单详情接口");
+            console.log("请求订单详情接口，不需要");
           }
       },
       receCollapse () {
