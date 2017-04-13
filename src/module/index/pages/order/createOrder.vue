@@ -1,5 +1,11 @@
 <template>
   <div class="launchOrder">
+    <div>
+      <el-breadcrumb separator=">">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <el-form ref="launchOrder" :model="launchOrder" :label-position="labelPosition" :rules="creationRules">
       <el-card class="boxcard">
         <div>    <!--slot="header" class="clearfix"-->

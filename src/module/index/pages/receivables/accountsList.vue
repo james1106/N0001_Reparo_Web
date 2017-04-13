@@ -1,6 +1,7 @@
 <template>
   <div id="list">
-    <el-tabs type="border-card" v-bind:value="state.accountsStatus">
+    <el-card>
+    <el-tabs  v-bind:value="state.accountsStatus">
       <el-tab-pane label="所有应收账款" name="all">
         <accounts-table :accountInfo="dataList" status="0" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
@@ -22,6 +23,7 @@
         <accounts-table :accountInfo="dataList" status="41" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
     </el-tabs>
+    </el-card>
   </div>
 </template>
 <script>
@@ -250,15 +252,26 @@
       //获取账单列表
       getAccountsList(){
         var role = this.getRole();
-        this.$http.get('/v1/receivable/list/',{roleCode:role},{emulateJSON:true}).then((res) => {
+        this.$http.post('/v1/receivable/receivableSimpleDeatilList',{roleCode:role},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
           if(code != 0){
             return;
           }
-          this.accountsList = data;
+          this.dataList = data;
         },(err) => {
+            this.dataList = [
+                {
+                  receivableNo:'12345',
+                  productName:'卡片',
+                  productQuantity:'1000',
+                  isseAmt:'20000',
+                  dueDt:'2017-11-20',
+                  enterpriseName:'A企业',
+                  status:21
+                }
+             ];
           console.log(err);
         })
       },
