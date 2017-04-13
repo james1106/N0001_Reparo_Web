@@ -1,12 +1,14 @@
 <template>
   <div>
     <div>
-      <el-breadcrumb separator=">">
+      <el-breadcrumb separator=">" class="bread">
+        <img src="../../assets/combinedShape.png" class="combinedShape">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-card>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="所有订单" name="first">
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -254,6 +256,7 @@
       </template>
     </el-tab-pane>
   </el-tabs>
+    </el-card>
   </div>
 </template>
 <script>

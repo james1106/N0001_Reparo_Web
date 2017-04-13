@@ -1,7 +1,8 @@
 <template>
   <div class="launchOrder">
     <div>
-      <el-breadcrumb separator=">">
+      <el-breadcrumb separator=">" class="bread">
+        <img src="../../assets/combinedShape.png" class="combinedShape">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
       </el-breadcrumb>
