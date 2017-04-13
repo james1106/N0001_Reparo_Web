@@ -75,7 +75,7 @@
 export default {
   name: 'wrapper',
   created: function () {
-    Store.commit('setIsBuyer','true');
+//    Store.commit('setIsBuyer','true');
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     //后面判断 每个不同公司进去主页后的首页面
