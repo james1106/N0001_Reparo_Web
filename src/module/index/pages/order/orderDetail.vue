@@ -36,6 +36,14 @@
               <el-col :span="8" class="msgName">
                 物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus | wayBillStatus}},（{{orderDetail.wayBillOver.wayBillUpdateTime | timeTransfer}}）
               </el-col>
+              <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="wayBillCollapse" :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i></el-col>
+            </el-row>
+            <el-row v-show="isWayBillCollapse">
+              <template v-for="(item,index) in wayBillHistory">
+                <el-row>
+                  <el-col :span="8" :class="{colorBlue:index==(wayBillHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                </el-row>
+              </template>
             </el-row>
           </div>
         </el-card>
@@ -61,7 +69,15 @@
             </el-row>
             <el-row>
               <el-col :span="6" class="msgName">最新仓储状态：{{orderDetail.repoOver.repoLatestStatus | repoStatus}},{{orderDetail.repoOver.receUpdateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="buyerRepoCollapse" :class="{rotate:isBuyerRepoCollapse, rotate1:!isBuyerRepoCollapse}"></i></el-col>
             </el-row>
+              <el-row v-show="isBuyerRepoCollapse">
+                <template v-for="(item,index) in buyerRepoHistory">
+                  <el-row>
+                    <el-col :span="8" :class="{colorBlue:index==(buyerRepoHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                  </el-row>
+                </template>
+              </el-row>
             </div>
           </div>
           <div class="box-card mycard1" v-if="state.isBuyer==='false'">
@@ -81,7 +97,15 @@
             </el-row>
             <el-row>
               <el-col :span="8" class="msgName">最新仓储状态：{{orderDetail.repoOver.repoLatestStatus | repoStatus}},{{orderDetail.repoOver.receUpdateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="buyeeRepoCollapse" :class="{rotate:isBuyeeRepoCollapse, rotate1:!isBuyeeRepoCollapse}"></i></el-col>
             </el-row>
+              <el-row v-show="isBuyeeRepoCollapse">
+                <template v-for="(item,index) in buyeeRepoHistory">
+                  <el-row>
+                    <el-col :span="8" :class="{colorBlue:index==(buyeeRepoHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                  </el-row>
+                </template>
+              </el-row>
             </div>
           </div>
         </el-card>
@@ -117,11 +141,14 @@
                 <el-col :span="8" class="msgName">
                   最新应收账款状态：{{orderDetail.receOver.receLatestStatus | receStatus}},({{orderDetail.receOver.receUpdateTime | timeTransfer}})
                 </el-col>
+                <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="receCollapse" :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i></el-col>
               </el-row>
-              <el-button type="text" @click="receCollapse">展开</el-button>
+
               <el-row v-show="isReceCollapse">
                 <template v-for="(item,index) in receHistory">
-                  <el-col :span="24" :class="{colorBlue:index==(receHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                  <el-row>
+                  <el-col :span="8" :class="{colorBlue:index==(receHistory.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                  </el-row>
                 </template>
               </el-row>
             </div>
@@ -160,17 +187,18 @@
           </el-row>
           <el-row>
             <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordList[orderDetail.txDetail.operationRecordList.length-1].state | transactionStatus}}</el-col>
+            <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="orderCollapse" :class="{rotate:isOrderCollapse, rotate1:!isOrderCollapse}"></i></el-col>
           </el-row>
           <!--<el-row class="">-->
             <!--<el-col :span="8" v-if="(orderDetail.txDetail.orderState!==constantData.UNCONFIRMED)">交易确认：{{orderDetail.txDetail.orderConfirmTime | timeTransfer}}</el-col>-->
           <!--</el-row>-->
-          <el-button type="text" @click="orderCollapse">展开</el-button>
           <div v-show="isOrderCollapse">
-            <el-row class="">
-              <el-col :span="8">交易发起：{{orderDetail.txDetail.orderGenerateTime | timeTransfer}}</el-col>
-            </el-row>
-            <el-row class="">
-              <el-col :span="8" v-if="(orderDetail.txDetail.orderState!==constantData.UNCONFIRMED)">交易确认：{{orderDetail.txDetail.orderConfirmTime | timeTransfer}}</el-col>
+            <el-row v-show="isOrderCollapse">
+              <template v-for="(item,index) in orderDetail.txDetail.operationRecordList">
+                <el-row>
+                  <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordList.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                </el-row>
+              </template>
             </el-row>
           </div>
         </div>
@@ -204,8 +232,29 @@
           {updateStatus:'state1',updateTime:'23:03:09'},
           {updateStatus:'state1',updateTime:'23:03:09'},
         ],
+        wayBillHistory:[
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+        ],
+        buyerRepoHistory:[
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+        ],
+        buyeeRepoHistory:[
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+          {updateStatus:'state1',updateTime:'23:03:09'},
+        ],
         isOrderCollapse:false,
         isReceCollapse:false,
+        isWayBillCollapse:false,
+        isBuyerRepoCollapse:false,
+        isBuyeeRepoCollapse:false,
       }
     },
     computed: {
@@ -232,13 +281,16 @@
         console.log("承兑签收");
       },
       orderCollapse () {
-          console.log(this.isOrderCollapse);
           if(this.isOrderCollapse){
             this.isOrderCollapse=false;
           }
           else {
             this.isOrderCollapse=true;
-            console.log("请求接口");
+            this.isReceCollapse=false;
+            this.isWayBillCollapse=false;
+            this.isBuyerRepoCollapse=false;
+            this.isBuyeeRepoCollapse=false;
+            console.log("请求订单详情接口");
           }
       },
       receCollapse () {
@@ -246,10 +298,59 @@
           this.isReceCollapse=false;
         }
         else {
+          this.isOrderCollapse=false;
           this.isReceCollapse=true;
-          console.log("请求接口");
+          this.isWayBillCollapse=false;
+          this.isBuyerRepoCollapse=false;
+          this.isBuyeeRepoCollapse=false;
+          console.log("请求应收详情接口");
+          /*this.$http.get("http://localhost/server_test/getData4.php").then(function(res){
+              this.receHistory=res.body.data;
+          },
+          function(err){
+             console.log(err);
+          });*/
         }
-      }
+      },
+      wayBillCollapse () {
+        if(this.isWayBillCollapse){
+          this.isWayBillCollapse=false;
+        }
+        else {
+          this.isOrderCollapse=false;
+          this.isReceCollapse=false;
+          this.isWayBillCollapse=true;
+          this.isBuyerRepoCollapse=false;
+          this.isBuyeeRepoCollapse=false;
+          console.log("请求物流详情接口");
+        }
+      },
+      buyerRepoCollapse () {
+        if(this.isBuyerRepoCollapse){
+          this.isBuyerRepoCollapse=false;
+        }
+        else {
+          this.isOrderCollapse=false;
+          this.isReceCollapse=false;
+          this.isWayBillCollapse=false;
+          this.isBuyerRepoCollapse=true;
+          this.isBuyeeRepoCollapse=false;
+          console.log("请求仓储详情接口");
+        }
+      },
+      buyeeRepoCollapse () {
+        if(this.isBuyeeRepoCollapse){
+          this.isBuyeeRepoCollapse=false;
+        }
+        else {
+          this.isOrderCollapse=false;
+          this.isReceCollapse=false;
+          this.isWayBillCollapse=false;
+          this.isBuyerRepoCollapse=false;
+          this.isBuyeeRepoCollapse=true;
+          console.log("请求仓储详情接口");
+        }
+      },
     },
     mounted() {
       console.log("the state checkId is:" + store.state.checkId);
@@ -357,5 +458,33 @@
     border-bottom:none;
     margin-bottom: 20px;
   }
-  .colorBlue {color:blue;}
+  .colorBlue {color:rgba(0,148,218,1);}
+  .collapseBtn {color: #666666;float: right !important;text-align: right !important;}
+
+  .rotate{
+    transform-origin:center center;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transition: transform 0.2s; //过度时间 可调
+  -moz-transition: -moz-transform 0.2s;
+    -moz-transition: -moz-transform 0.2s;
+    -o-transition: -o-transform 0.2s;
+    -ms-transition: -ms-transform 0.2s;
+  }
+  .rotate1{
+    transform-origin:center center;
+    transform: rotate(0deg); //返回原点
+  -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transition: transform 0.2s;
+    -moz-transition: -moz-transform 0.2s;
+    -moz-transition: -moz-transform 0.2s;
+    -o-transition: -o-transform 0.2s;
+    -ms-transition: -ms-transform 0.2s;
+  }
 </style>
