@@ -35,14 +35,14 @@
 /*.el-card__body{*/
 /*height: 90px;*/
 /*}*/
-.showName{
+showName{     /*.主页中的四个卡片上的名称*/
   font-size: 10px;
   color: #666666;
 }
-.showNum{
+.showNum{     /*.主页中的四个卡片上的数量*/
   font-size: 24px;
 }
-.showCard{
+.showCard{    /*.主页中的四个卡片上的背景*/
   /*width: 260px;*/
   width: 100%;
   height: 80px;
@@ -104,7 +104,7 @@
 }
 .msgName{
   text-align: left!important;
-  font-size: 14px;
+  font-size: 12px;
   color: #666666;
 }
 .keynote{
@@ -116,6 +116,7 @@
 .stateShow{
   margin-left: 10px;
   font-size: 14px;
+  text-align: left!important;
 }
 .statePosition{
   border-bottom:none;
@@ -123,13 +124,70 @@
 }
 .dataTable{
   border: 1px solid rgb(238,238,238);
-  height: 120px;
+  /*height: 120px;*/
+  height: auto;
   border-radius: 4px;
   padding: 10px;
   background-color: white;
+
 }
 .el-row-content{
-  font-size: 12px;
-  height: 80px;
+  font-size: 12px!important;
+  color: rgb(51,51,51);
+  /*height: 80px;*/
   line-height: 22px;
+}
+.el-tabs__item{
+  color: rgb(102,102,102)!important;
+  font-weight: bold;
+}
+.el-tabs__item.is-active{
+  color: #0096D7!important;
+}
+.doTip{
+  margin:0 10px 0 30px;
+  color: rgb(102,102,102);
+  font-size: 13px;
+}
+.dotipRow{
+  background-color: #F8F8F8;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+.cutoff{
+  padding-bottom: 10px!important;
+  margin-bottom: 10px!important;
+  border-bottom: 1px dashed rgb(221, 221, 221);
+}
+
+
+
+.signout .mybox {
+  margin-bottom: 20px !important;
+}
+
+.signout .el-form-item__label {
+  width: 30% !important;
+  color: rgb(51,51,51);
+}
+
+.signout .el-select .el-input {
+  width: 100% !important;
+  margin: 0px 0.2%!important;
+}
+
+.signout .el-select, .el-input {
+  width: 65% !important;
+  margin: 0px 2%!important;
+}
+
+.signout .el-button {
+  float: left;
+  width: 30%;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+.defaultMsg{    /*信息中默认填写的*/
+  padding-left: 10px;
+  font-size: 12px;
 }

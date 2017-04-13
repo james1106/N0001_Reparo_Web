@@ -1,5 +1,12 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
+  <div>
+    <div>
+      <el-breadcrumb separator=">">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="所有订单" name="first">
       <order-table :orderList="allOrder" status="all" pageSize="10"> </order-table>
     </el-tab-pane>
@@ -200,6 +207,7 @@
       <order-table :orderList="allOrder" status="forReceive" pageSize="10"> </order-table>
     </el-tab-pane>
   </el-tabs>
+  </div>
 </template>
 <script>
   import store from '../../vuex/store.js'

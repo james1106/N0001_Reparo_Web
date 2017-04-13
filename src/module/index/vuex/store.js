@@ -5,7 +5,7 @@ import * as getters from './getters'
 Vue.use(Vuex)
 
 const state={
-  checkId:'',//全部订单列表点击详情时记住Id
+  checkId:'',//全部订单列表点击详情时记住Id  /也可能是应收账款编号
   commonData:{
     "account_name":'A员工',
     "company_name":"A企业",

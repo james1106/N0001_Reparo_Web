@@ -34,6 +34,7 @@ Vue.filter('receStatus',function(value){
     case constantData.FORISSUE:readableStatus="待签发";break;
     case constantData.FORACCEPT:readableStatus="承兑待签收";break;
     case constantData.ACCEPTED:readableStatus="承兑已签收";break;
+    case constantData.DISCOUNTED:readableStatus="贴现待签收签收";break;
     default:readableStatus="暂无";break;
   }
   return readableStatus;
