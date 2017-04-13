@@ -90,7 +90,13 @@
             lixi:"4%",
             data:"2018-01-30"
           }
-        ]
+        ],
+        cashParam:{
+          receivableNo:'',       //应收款编号
+          applicantAcctId:'',    //申请人账号
+          replyerAcctId:'',      //回复人账号
+          discountApplyAmount:'' //申请贴现金额
+        }
       }
     },
     methods:{

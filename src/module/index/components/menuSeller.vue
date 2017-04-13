@@ -41,7 +41,7 @@
     },
     methods:{
       setStatus: function (status) {
-        Store.state.accountsStatus = status
+        Store.commit('setAccountsStatus',status);
       },
       confirmOrder () {
          Store.commit('setOrderTab',"second");

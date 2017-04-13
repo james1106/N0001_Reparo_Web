@@ -75,7 +75,7 @@
 export default {
   name: 'wrapper',
   created: function () {
-//      Store.commit('setIsBuyer','true');
+    Store.commit('setIsBuyer','true');
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     //后面判断 每个不同公司进去主页后的首页面
@@ -88,8 +88,6 @@ export default {
       msg: '',
       headerFixed : true,
       active:true,
-      isBuyer:true,
-      isSeller:false,
       companyType:'1'  //1.融资企业 2.仓储公司 3.物流公司
     }
   },
