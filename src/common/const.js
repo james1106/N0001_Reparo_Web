@@ -6,7 +6,6 @@ const constantData={
   CONFIRMED : 2,/*交易卖方已确认*/
 
   /*应收款状态*/
-  FORISSUE : 10,/*应收账款待签发 */
   FORACCEPT : 21,/*应收账款承兑待签收*/
   ACCEPTED : 26,/*应收账款承兑已签收*/
   DISCOUNTED:41,/*应收账款贴现待签收*/

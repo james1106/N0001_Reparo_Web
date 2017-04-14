@@ -27,18 +27,19 @@ Vue.filter('transactionStatus',function(value){
   }
   return readableStatus;
 })
-/*应收装款状态*/
+/*应收账款状态*/
 Vue.filter('receStatus',function(value){
   var readableStatus;
   switch(value){
-    case constantData.FORISSUE:readableStatus="待签发";break;
+    case constantData.CONFIRMED:readableStatus="待签发";break;
     case constantData.FORACCEPT:readableStatus="承兑待签收";break;
     case constantData.ACCEPTED:readableStatus="承兑已签收";break;
-    case constantData.DISCOUNTED:readableStatus="贴现待签收签收";break;
+    case constantData.DISCOUNTED:readableStatus="贴现待签收";break;
     default:readableStatus="暂无";break;
   }
   return readableStatus;
 })
+
 /*运单状态*/
 Vue.filter('wayBillStatus',function(value){
   var readableStatus;

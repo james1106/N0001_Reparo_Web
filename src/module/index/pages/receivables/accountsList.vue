@@ -3,24 +3,22 @@
     <el-card>
     <el-tabs  v-bind:value="state.accountsStatus">
       <el-tab-pane label="所有应收账款" name="all">
-        <accounts-table :accountInfo="dataList" status="0" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
+        <accounts-table :accountInfo="accountsList" status="0" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="待签发" name="signout" v-if="state.isBuyer === 'false'">
-
-        <!--<accounts-table :accountInfo="orderList" status="41" pageSize="10" > </accounts-table>-->
-
+        <accounts-table :accountInfo="orderList" status="2" pageSize="10" > </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="承兑待签收" name="accept" >
-        <accounts-table :accountInfo="dataList" status="21" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
+        <accounts-table :accountInfo="accountsList" status="21" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="待兑付" name="cash" v-if="state.isBuyer === 'true'">
-        <accounts-table :accountInfo="dataList" status="26" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
+        <accounts-table :accountInfo="accountsList" status="26" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="承兑已签收" name="discount" v-if="state.isBuyer === 'false'">
-        <accounts-table :accountInfo="dataList" status="26" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
+        <accounts-table :accountInfo="accountsList" status="26" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="贴现待签收" name="other" v-if="state.isBuyer === 'false'" >
-        <accounts-table :accountInfo="dataList" status="41" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
+        <accounts-table :accountInfo="accountsList" status="41" pageSize="10" :isBuyer="state.isBuyer"> </accounts-table>
       </el-tab-pane>
     </el-tabs>
     </el-card>
@@ -51,180 +49,7 @@
     data () {
       return {
         accountsList:[],
-        orderList:[],
-        dataList:[
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:21
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:26
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:26
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'26'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'26'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'26'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'26'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'26'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          },
-          {
-            receivableNo:'12345',
-            productName:'卡片',
-            productQuantity:'1000',
-            isseAmt:'20000',
-            dueDt:'2017-11-20',
-            enterpriseName:'A企业',
-            status:'41'
-          }
-        ]
+        orderList:[]
       }
     },
     methods:{
@@ -240,11 +65,10 @@
           }
           for(var i=0;i<data.length;i++){
               var item = data[i]
-;             if(item.status == constantData.FORISSUE){
+;             if(item.status == constantData.CONFIRMED){
                 this.orderList.push(item);
             }
           }
-
         },(err) => {
           console.log(err);
         })
@@ -259,19 +83,8 @@
           if(code != 0){
             return;
           }
-          this.dataList = data;
+          this.accountsList = data;
         },(err) => {
-            this.dataList = [
-                {
-                  receivableNo:'12345',
-                  productName:'卡片',
-                  productQuantity:'1000',
-                  isseAmt:'20000',
-                  dueDt:'2017-11-20',
-                  enterpriseName:'A企业',
-                  status:21
-                }
-             ];
           console.log(err);
         })
       },
