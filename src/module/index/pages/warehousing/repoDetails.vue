@@ -21,7 +21,8 @@
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓储业务编号：</el-col>
                 <el-col :span="8" class="msgName">仓储状态：</el-col>
-                <el-col :span="8" class="msgName">入库时间：</el-col>
+                <el-col :span="8" class="msgName" v-if="state.isBuyer==='true'">入库时间：</el-col>
+                <el-col :span="8" class="msgName" v-else>出库时间：</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓单编号：</el-col>
@@ -35,7 +36,6 @@
               <el-row>
                 <el-col :span="8" class="msgName">物流公司：</el-col>
                 <el-col :span="8" class="msgName">物流运单号：</el-col>
-                <el-col :span="8" class="msgName">入库时间：</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">仓储状态明细：</el-col>
@@ -48,16 +48,29 @@
   </div>
 </template>
 <script>
+  import store from '../../vuex/store'
   export default {
     name:'index',
     data () {
       return {
-        warehousing:{
+        repoDetails:{
           serialNumber:'20170403123456',
           state:'已入库',
           storageTime:'2017-08-01'
         }
       }
+    },
+    computed:{
+      state () {
+          return store.state
+      }
+    },
+    mounted () {
+        this.$http.get().then(function(){
+//            请求仓储详情数据
+        },function(){
+
+        });
     }
   }
 </script>
