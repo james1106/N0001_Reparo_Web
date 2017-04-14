@@ -4,7 +4,6 @@
       <img src="../../assets/combinedShape.png" class="combinedShape">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/warehousing/repoIn' }">我的仓储</el-breadcrumb-item>
       <el-breadcrumb-item>仓储详情</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
