@@ -20,7 +20,7 @@
         </el-row>
       </div>
     </el-card>
-  <el-form ref="orderDetail" :model="confirmOrder">
+  <el-form :model="confirmOrder">
   <el-card class="box-card mybox" style="width:100%;margin-top: 20px !important">
       <div slot="header" class="clearfix">
         <span style="line-height: 36px;">2. 请选择货品出库并确认订单</span>
@@ -28,10 +28,10 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="出库货品所在仓储：">
-              <el-select v-model="confirmOrder.payeeRepo" placeholder="请选择仓储">
-                <el-option label="仓储1m7o4k0" value="仓储1m7o4k0"></el-option>
-                <el-option label="B仓储企业" value="Bcangchu"></el-option>
-                <el-option label="C仓储企业" value="Ccangchu"></el-option>
+              <el-select v-model="confirmOrder.payeeRepoName" placeholder="请选择仓储">
+                <template v-for="item in repoList">
+                  <el-option :label="item" :value="item"></el-option>
+                </template>
               </el-select>
             </el-form-item>
           </el-col>
@@ -39,11 +39,7 @@
         <el-row class="">
           <el-col :span="12">
             <el-form-item label="货品的仓单编号：">
-              <el-select v-model="confirmOrder.payeeRepoCertNo" placeholder="请选择仓单编号">
-                <el-option label="123" value="1"></el-option>
-                <el-option label="234" value="2"></el-option>
-                <el-option label="456" value="3"></el-option>
-              </el-select>
+              <el-input v-model="confirmOrder.payeeRepoCertNo"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -134,7 +130,8 @@
           payeeRepoName:'',
           payeeRepoCertNo:'',
         },
-        showModal:false
+        showModal:false,
+        repoList:''
       }
     },
     methods: {
@@ -167,6 +164,12 @@
                 console.log(err);
           }
         );
+      this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
+        this.repoList=res.body.data;
+        console.log("the repo list: "+res.body.data);
+      },function(err){
+        console.log(err)
+      });
     }
   }
 </script>
