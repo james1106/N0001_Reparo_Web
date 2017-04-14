@@ -12,8 +12,8 @@
           <el-row class="el-row-header">
             <el-col :span="6" style="margin-left: 19px;">订单编号：{{item.orderNo}}</el-col>
             <el-col :span="6">创建时间：{{item.orderGenerateTime | timeTransfer}}</el-col>
-            <el-col :span="8" v-if="state.isBuyer==='true'">卖家：{{item.payeeAddress}}</el-col>
-            <el-col :span="8" v-else>买家：{{item.payerAddress}}</el-col>
+            <el-col :span="8" v-if="state.isBuyer==='true'">卖家：{{item.payeeCompanyName}}</el-col>
+            <el-col :span="8" v-else>买家：{{item.payerCompanyName}}</el-col>
             <el-col :span="2">操作</el-col>
           </el-row>
           <el-row class="el-row-content">
@@ -27,26 +27,26 @@
             </el-col>
             <el-col :span="2">
               <el-row>交易状态</el-row>
-              <el-row>{{item.txState | transactionStatus}}</el-row>
+              <el-row>{{item.transactionStatus | transactionStatus}}</el-row>
             </el-col>
             <el-col :span="2">
               <el-row>账款状态</el-row>
-              <el-row>{{item.receState | receStatus}}</el-row>
+              <el-row>{{item.receStatus | receStatus}}</el-row>
             </el-col>
             <el-col :span="2">
               <el-row>仓储状态</el-row>
-              <el-row>{{item.repoCertState | repoStatus}}</el-row>
+              <el-row>{{item.repoStatus | repoStatus}}</el-row>
             </el-col>
             <el-col :span="2">
               <el-row>物流状态</el-row>
-              <el-row>{{item.wayBillState | wayBillStatus}}</el-row>
+              <el-row>{{item.wayBillStatus | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="2">
               <el-button type="text" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.txState===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(item.orderNo)">确认订单</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receState===constantData.FORISSUE)" @click.native.prevent="signBill">签发</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receState===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receState===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
+              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(item.orderNo)">确认订单</el-button>
+              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)" @click.native.prevent="signBill">签发</el-button>
+              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
+              <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
             </el-col>
           </el-row>
         </el-row>

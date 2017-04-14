@@ -15,10 +15,10 @@
           <el-menu-item index="/allAccounts/signout" v-on:click="setStatus('signout')">签发</el-menu-item>
           <el-menu-item index="/allAccounts/discount" v-on:click="setStatus('discount')">贴现</el-menu-item>
         </el-submenu>
-        <el-submenu index="/yufu">
+        <el-submenu index="/logistics">
           <template slot="title"><img src="../assets/wl_g.png" class="menuImag">物流管理</template>
-          <el-menu-item index="/yufu/qianfa">发货</el-menu-item>
-          <el-menu-item index="/yufu/daichengdui">我的物流</el-menu-item>
+          <el-menu-item index="/logistics/deliver">发货</el-menu-item>
+          <el-menu-item index="/logistics/myWaybill">我的物流</el-menu-item>
         </el-submenu>
         <el-submenu index="/warehousing">
           <template slot="title"><img src="../assets/cc_g.png" class="menuImag">仓储管理</template>

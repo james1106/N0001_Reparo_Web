@@ -9,7 +9,7 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 承兑待签收</el-col>
+          <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> {{detailInfo.status | receStatus}}</el-col>
           <el-col class="dotipRow"><span class="doTip">卖家已签发应收账款，请您尽快</span><el-button size="small" style="border-color: rgb(0,150,215);color: rgb(0,150,215)">承兑确认</el-button></el-col>
         </el-row>
       </el-row>
@@ -114,47 +114,45 @@
           }
         ],
         detailInfo:{
-          receivableNo:'', //应收款编号
-          orderNo:'',       //订单编号
-          signer:'',//签发人账号
-          accptr:'',//承兑人账号
-          pyer:'',//付款人账号
-          pyee:'',//收款人账号
-          pyerEnterpriseName:'',//付款人企业名称
-          pyeeEnterpriseName:'',//收款人企业名称
-          pyerAcctSvcrName:'', //付款人开户行名称
-          pyeeAcctSvcrName:'',//付款人开户行名称
-          firstOwner:'',//本手持有人
-          secondOwner:'',//下手持有人
-          isseAmt:'',//票面金额
-          cashedAmount:'',//已兑付金额
-          status:'',//应收款上一状态
-          lastStatus:'',//应收款下一状态
-          isseDt:'',//签发日
-          signInDt:'',//签收日
-          dueDt:'', //到期日
-          rate:'',//利率
-          contractNo:'',//合同号
-          invoiceNo:'',//发票号
-          note:'', //备注
-          discounted:'',//贴现标志
-          discountInHandAmount:'',//贴现实际到手金额
-          pyeeLinkMan:'',//收款人联系人
-          pyerLinkMan:'',//付款人联系人
-          pyeePhone:'',//收款人联系方式
-          pyerPhone:''//付款人联系方式
+//          receivableNo:'', //应收款编号
+//          orderNo:'',       //订单编号
+//          signer:'',//签发人账号
+//          accptr:'',//承兑人账号
+//          pyer:'',//付款人账号
+//          pyee:'',//收款人账号
+//          pyerEnterpriseName:'',//付款人企业名称
+//          pyeeEnterpriseName:'',//收款人企业名称
+//          pyerAcctSvcrName:'', //付款人开户行名称
+//          pyeeAcctSvcrName:'',//付款人开户行名称
+//          firstOwner:'',//本手持有人
+//          secondOwner:'',//下手持有人
+//          isseAmt:'',//票面金额
+//          cashedAmount:'',//已兑付金额
+//          status:'',//应收款上一状态
+//          lastStatus:'',//应收款下一状态
+//          isseDt:'',//签发日
+//          signInDt:'',//签收日
+//          dueDt:'', //到期日
+//          rate:'',//利率
+//          contractNo:'',//合同号
+//          invoiceNo:'',//发票号
+//          note:'', //备注
+//          discounted:'',//贴现标志
+//          discountInHandAmount:'',//贴现实际到手金额
+//          pyeeLinkMan:'',//收款人联系人
+//          pyerLinkMan:'',//付款人联系人
+//          pyeePhone:'',//收款人联系方式
+//          pyerPhone:''//付款人联系方式
         }
       }
     },
     methods:{
         getDetail(){
-          this.$http.post('/v1/receivable/receivableInfo',{emulateJSON:true}).then((res) => {
+          this.$http.post('/v1/receivable/receivableInfo').then((res) => {
             console.log(res.body);
             var code =  res.body.code;
             var data =  res.body.data;
             if(code != 0){
-//            this.dialogVisible = true;
-//            this.msg = res.body.message;
               return;
             }
             this.detailInfo = data;
@@ -169,10 +167,4 @@
   }
 </script>
 <style>
-  /*.receiveDetails .el-button{*/
-    /*!*float: left;*!*/
-    /*width: 30%;*/
-    /*border-radius: 4px;*/
-    /*margin: 20px 0;*/
-  /*}*/
 </style>

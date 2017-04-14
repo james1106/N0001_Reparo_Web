@@ -4,13 +4,13 @@
         <el-menu-item>
           <i class="el-icon-date"></i>首页
         </el-menu-item>
-        <el-submenu index="/dingdan">
+        <el-submenu index="/warehousingCompany">
           <template slot="title"><i class="el-icon-menu"></i>仓储管理</template>
-          <el-menu-item index="/allWarehousing">我的仓储</el-menu-item>
-          <el-menu-item index="/receipts">我的仓单</el-menu-item>
-          <el-menu-item index="/inboundResponse">入库响应</el-menu-item>
-          <el-menu-item index="/inboundConfirm">入库确认</el-menu-item>
-          <el-menu-item index="/outboundConfirm">出库确认</el-menu-item>
+          <el-menu-item index="/warehousingCompany/companyAllReceipts">我的仓单</el-menu-item>
+          <el-menu-item index="/warehousingCompany/inResponse">入库响应</el-menu-item>
+          <el-menu-item index="/warehousingCompany/outConfirm">出库确认</el-menu-item>
+          <el-menu-item index="/warehousingCompany/inConfirm">入库确认</el-menu-item>
+          <el-menu-item index="/warehousingCompany/receiptApplyConfirm">仓单申请确认</el-menu-item>
         </el-submenu>
       </el-menu>
   </div>

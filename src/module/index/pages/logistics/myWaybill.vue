@@ -37,7 +37,7 @@
             label="查看"
             width="114">
             <template scope="scope">
-              <el-button><router-link to="/waybill/waybillDetails">立即查看</router-link></el-button>
+              <el-button><router-link to="/logistics/wayBillDetails">立即查看</router-link></el-button>
             </template>
           </el-table-column>
         </el-table>

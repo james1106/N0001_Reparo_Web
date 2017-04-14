@@ -19,26 +19,23 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="6" class="msgName keynote">应收账款编号：123456</el-col>
-                <el-col :span="6" class="msgName keynote">订单编号：</el-col>
-                <el-col :span="6" class="msgName">发起时间：</el-col>
-                <el-col :span="6" class="msgName">到期日：</el-col>
+                <el-col :span="6" class="msgName keynote">应收账款编号：{{detailInfo.receivableNo}}</el-col>
+                <el-col :span="6" class="msgName keynote">订单编号：{{detailInfo.orderNo}}</el-col>
+                <el-col :span="6" class="msgName">发起时间：{{detailInfo.isseDt}}</el-col>
+                <el-col :span="6" class="msgName">到期日：{{detailInfo.dueDt}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">收款人：</el-col>
-                <el-col :span="6" class="msgName">付款人：</el-col>
+                <el-col :span="6" class="msgName">收款人：{{detailInfo.orderNo}}</el-col>
+                <el-col :span="6" class="msgName">付款人：{{detailInfo.orderNo}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">账款金额（元）：</el-col>
-                <el-col :span="6" class="msgName">票面利息：</el-col>
+                <el-col :span="6" class="msgName">账款金额（元）：{{detailInfo.orderNo}}</el-col>
+                <el-col :span="6" class="msgName">票面利息：{{detailInfo.orderNo}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">应收账款状态明细：</el-col>
+                <el-col :span="6" class="msgName">应收账款状态明细：{{detailInfo.orderNo}}</el-col>
                 <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
-                  <label> 2017-04-03 10:00:00 签发</label>
-                </el-col>
-                <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
-                  <label>2017-04-03 11:00:00 承兑已签收</label>
+                  <label> 2017-04-03 10:00:00 承兑已签发</label>
                 </el-col>
               </el-row>
             </div>
@@ -54,28 +51,28 @@
             <div class="box-card mycard1">
               <el-row class="msgName keynote">收款人信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">收款人：11</el-col>
-                <el-col :span="6" class="msgName">收款人账号：3215351</el-col>
-                <el-col :span="6" class="msgName">收款人开户行：</el-col>
+                <el-col :span="6" class="msgName">收款人：{{detailInfo.pyeeEnterpriseName}}</el-col>
+                <el-col :span="6" class="msgName">收款人账号：{{detailInfo.pyee}}</el-col>
+                <el-col :span="6" class="msgName">收款人开户行：{{detailInfo.pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：23142</el-col>
-                <el-col :span="6" class="msgName">联系方式：234234</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.pyeeLinkMan}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.pyeePhone}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">付款人：eqfgef</el-col>
-                <el-col :span="6" class="msgName">付款人账号：324123412</el-col>
-                <el-col :span="6" class="msgName">付款人开户行：21</el-col>
+                <el-col :span="6" class="msgName">付款人：{{detailInfo.pyerEnterpriseName}}</el-col>
+                <el-col :span="6" class="msgName">付款人账号：{{detailInfo.pyer}}</el-col>
+                <el-col :span="6" class="msgName">付款人开户行：{{detailInfo.pyerAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：fff</el-col>
-                <el-col :span="6" class="msgName">联系方式：234234234</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.pyerLinkMan}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.pyerPhone}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">附加信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">合同编号：324123423</el-col>
-                <el-col :span="6" class="msgName">发票号：324123423423</el-col>
+                <el-col :span="6" class="msgName">合同编号：{{detailInfo.contractNo}}</el-col>
+                <el-col :span="6" class="msgName">发票号：{{detailInfo.invoiceNo}}</el-col>
                 <el-col :span="6" class="msgName">物流企业：暂无</el-col>
               </el-row>
               <el-row>
@@ -112,6 +109,8 @@
     </el-card>
   </div>
 </template>
+
+
 <script>
   export default {
     name:'discount',
@@ -128,16 +127,41 @@
           }
         ],
         discountParam:{
-          receivableNo:'',        //应收款编号
-          applicantAcctId:'',     //申请人账号
-          replyerAcctId:'',       //回复人账号
-          discountApplyAmount:'', //申请贴现金额
-          discountBank:''         //贴现银行
+          receivableNo:'',       //应收款编号
+          applicantAcctId:'',    //申请人账号
+          replyerAcctId:'',      //回复人账号
+          discountApplyAmount:'' //申请贴现金额
         },
-        discountRules:{
-          discountBank:[
-            {required:true, message:'请选择贴现银行'},
-          ]
+        detailInfo:{
+          receivableNo:'', //应收款编号
+          orderNo:'',       //订单编号
+          signer:'',//签发人账号
+          accptr:'',//承兑人账号
+          pyer:'',//付款人账号
+          pyee:'',//收款人账号
+          pyerEnterpriseName:'',//付款人企业名称
+          pyeeEnterpriseName:'',//收款人企业名称
+          pyerAcctSvcrName:'', //付款人开户行名称
+          pyeeAcctSvcrName:'',//付款人开户行名称
+          firstOwner:'',//本手持有人
+          secondOwner:'',//下手持有人
+          isseAmt:'',//票面金额
+          cashedAmount:'',//已兑付金额
+          status:'',//应收款上一状态
+          lastStatus:'',//应收款下一状态
+          isseDt:'',//签发日
+          signInDt:'',//签收日
+          dueDt:'', //到期日
+          rate:'',//利率
+          contractNo:'',//合同号
+          invoiceNo:'',//发票号
+          note:'', //备注
+          discounted:'',//贴现标志
+          discountInHandAmount:'',//贴现实际到手金额
+          pyeeLinkMan:'',//收款人联系人
+          pyerLinkMan:'',//付款人联系人
+          pyeePhone:'',//收款人联系方式
+          pyerPhone:''//付款人联系方式
         }
       }
     },
