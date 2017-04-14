@@ -65,7 +65,7 @@
       },
       checkDetail(repoNo){
         store.commit('setCheckId',repoNo);
-        this.$router.push('/warehousing/repoDetails');
+        this.$router.push('/warehousing/receiptsDetails');
       }
     },
     mounted () {
