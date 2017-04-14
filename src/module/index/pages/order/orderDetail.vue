@@ -441,11 +441,6 @@
     padding-right: 5px!important;
     color: #666666!important;
   }
-  .msgName{
-    text-align: left!important;
-    font-size: 14px;
-    color: #666666;
-  }
   .keynote{
     font-weight: bold;
   }

@@ -47,6 +47,9 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yszk_G"></use>
+        </svg>
         <span :class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
@@ -105,6 +108,7 @@
 
 <script>
   import '../../../../assets/css/style.css'
+  import '../../../../framework/iconfont.js'
 
 export default {
   name: 'app',

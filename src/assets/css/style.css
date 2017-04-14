@@ -1,3 +1,10 @@
+/*引入icon*/
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 .el-row{
   margin-bottom: 10px!important;
   padding: 0px!important;
@@ -257,4 +264,33 @@
 }
 .waybill .el-tabs__active-bar{
   background-color: rgb(57,202,166);
+}
+.confirmOrder .mybox {
+  margin-bottom: 20px !important;
+}
+
+.confirmOrder .el-form-item__label {
+  width: 30% !important;
+  color: rgb(51,51,51);
+}
+
+.confirmOrder .el-select .el-input {
+  width: 100% !important;
+  margin: 0px 0.2%!important;
+}
+
+.confirmOrder .el-select, .el-input {
+  width: 65% !important;
+  margin: 0px 2%!important;
+}
+.confirmOrder .el-button {
+  float: left;
+  width: 20%;
+  border-radius: 4px;
+  margin: 10px 0;
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.confirmCard .el-card__body{
+  border: 1px solid rgb(238,238,238);
 }
