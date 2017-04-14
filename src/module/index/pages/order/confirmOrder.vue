@@ -29,7 +29,7 @@
           <el-col :span="12">
             <el-form-item label="出库货品所在仓储：">
               <el-select v-model="confirmOrder.payeeRepoName" placeholder="请选择仓储">
-                <template v-for="item in repoList">
+                <template v-for="item in confirmOrder.repoList">
                   <el-option :label="item" :value="item"></el-option>
                 </template>
               </el-select>
@@ -129,9 +129,10 @@
           orderNo:'',
           payeeRepoName:'',
           payeeRepoCertNo:'',
+          repoList:''
         },
         showModal:false,
-        repoList:''
+
       }
     },
     methods: {
@@ -165,7 +166,7 @@
           }
         );
       this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
-        this.repoList=res.body.data;
+        this.confirmOrder.repoList=res.body.data;
         console.log("the repo list: "+res.body.data);
       },function(err){
         console.log(err)
