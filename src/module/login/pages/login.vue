@@ -1,7 +1,9 @@
 <template>
   <div id="login">
-    <img src="../assets/logo_login.png">
-    <h3 style="color: #666666">登录</h3>
+    <el-row>
+      <img src="../assets/logo_login.png">
+      <h3 style="color: #666666">登录</h3>
+    </el-row>
     <el-form :model="loginInfo" :rules="rules" ref="loginInfo" label-position="left" label-width="0px" class="login-container">
       <el-form-item prop="accountName">
         <el-input v-model="loginInfo.accountName"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
@@ -45,18 +47,18 @@
   window.onload = function () {
     particlesJS('app', {
       particles: {
-        color: '#fff',
+        color: '#ECEEEF',
         shape: 'circle', // "circle", "edge" or "triangle"
         opacity: 1,
-        size: 4,
+        size: 10,  //圈圈大小
         size_random: true,
         nb: 150,
         line_linked: {
           enable_auto: true,
-          distance: 100,
-          color: '#fff',
+          distance: 150,
+          color: '#ECEEEF',
           opacity: 1,
-          width: 1,
+          width: 2,   //线条宽度
           condensed_mode: {
             enable: false,
             rotateX: 600,
@@ -65,7 +67,7 @@
         },
         anim: {
           enable: true,
-          speed: 1
+          speed: 40    //速度
         }
       },
       interactivity: {

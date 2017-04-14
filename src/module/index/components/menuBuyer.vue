@@ -1,5 +1,5 @@
 <template>
-  <div id="menu" style="position: fixed">
+  <div id="menu">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
           <img src="../assets/home_b.png" style="padding-right: 10px">首页

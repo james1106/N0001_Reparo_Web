@@ -1,5 +1,9 @@
 <template>
   <div>
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-row>
       <el-col :span="6" style="margin-right: 15px">
         <el-row><el-card class="showCard">
