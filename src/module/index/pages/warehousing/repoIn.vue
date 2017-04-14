@@ -94,23 +94,23 @@
         <el-tab-pane label="已入库" name="fourth">已入库</el-tab-pane>
       </el-tabs>
     </el-card>
+    <el-card>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="所有仓储" name="first">
+          <repo-data-table :repoList="allRepoIn" status="all" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="入库待响应" name="second">
+          <repo-data-table :repoList="allRepoIn" status="inForResponse" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="待入库" name="third">
+          <repo-data-table :repoList="allRepoIn" status="forIn" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已入库" name="fourth">
+          <repo-data-table :repoList="allRepoIn" status="alreadyIn" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
   </div>
-  <el-card>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="所有仓储" name="first">
-        <repo-data-table :repoList="allRepoIn" status="all" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-      <el-tab-pane label="入库待响应" name="second">
-        <repo-data-table :repoList="allRepoIn" status="inForResponse" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-      <el-tab-pane label="待入库" name="third">
-        <repo-data-table :repoList="allRepoIn" status="forIn" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-      <el-tab-pane label="已入库" name="fourth">
-        <repo-data-table :repoList="allRepoIn" status="alreadyIn" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-    </el-tabs>
-  </el-card>
 </template>
 <script>
   import store from '../../vuex/store'

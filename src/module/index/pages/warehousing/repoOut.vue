@@ -55,20 +55,20 @@
         <el-tab-pane label="已入库" name="third">已入库</el-tab-pane>
       </el-tabs>
     </el-card>
+    <el-card>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="所有仓储" name="first">
+          <repo-data-table :repoList="allRepoOut" status="all" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="待出库" name="second">
+          <repo-data-table :repoList="allRepoOut" status="forOut" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已出库" name="third">
+          <repo-data-table :repoList="allRepoOut" status="alreadyOut" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
   </div>
-  <el-card>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="所有仓储" name="first">
-        <repo-data-table :repoList="allRepoOut" status="all" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-      <el-tab-pane label="待出库" name="second">
-        <repo-data-table :repoList="allRepoOut" status="forOut" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-      <el-tab-pane label="已出库" name="third">
-        <repo-data-table :repoList="allRepoOut" status="alreadyOut" pageSize="10"></repo-data-table>
-      </el-tab-pane>
-    </el-tabs>
-  </el-card>
 </template>
 <script>
   import store from '../../vuex/store'

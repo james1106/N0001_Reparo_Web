@@ -54,8 +54,7 @@
         <el-tab-pane label="已失效" name="fourth">已入库</el-tab-pane>
       </el-tabs>
     </el-card>
-  </div>
-  <el-card>
+    <el-card>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="所有仓单" name="first">
         <receipt-data-table :receiptList="allReceipts" status="all" pageSize="10"></receipt-data-table>
@@ -71,6 +70,7 @@
       </el-tab-pane>
     </el-tabs>
   </el-card>
+  </div>
 </template>
 <script>
   import store from '../../vuex/store'
