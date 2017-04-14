@@ -16,9 +16,9 @@
           <el-col :span="12">
             <el-form-item label="供应商" prop="payeeCompanyName">
               <el-select v-model="launchOrder.payeeCompanyName" placeholder="请选择供应商">
-                <el-option label="企业1ocqic" value="企业1i194k0"></el-option>
-                <el-option label="B企业" value="Bqiye"></el-option>
-                <el-option label="C企业" value="Cqiye"></el-option>
+                <template v-for="item in supplyList">
+                  <el-option :label="item" :value="item"></el-option>
+                </template>
               </el-select>
             </el-form-item>
           </el-col>
@@ -50,18 +50,14 @@
           <el-col :span="12">
             <el-form-item label="选择付款银行" prop="payerBank">
               <el-select v-model="launchOrder.payerBank" placeholder="请选择付款行">
-                <el-option label="浙商银行（默认）" value="浙商银行"></el-option>
-                <el-option label="工商银行" value="gongshang"></el-option>
-                <el-option label="兴业银行" value="xingye"></el-option>
+                <el-option :label="launchOrder.payerBank" :value="launchOrder.payerBank"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="选择付款账户" prop="payerAccount">
               <el-select v-model="launchOrder.payerAccount" placeholder="请选择付款账户">
-                <el-option label="111111111（默认账户）" :value="UserInfo.acctIds"></el-option>
-                <el-option label="234567" value="234567"></el-option>
-                <el-option label="345678" value="345678"></el-option>
+                <el-option :label="launchOrder.payerAccount" :value="launchOrder.payerAccount"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -78,9 +74,9 @@
           <el-col :span="12">
             <el-form-item label="选择申请入库的仓储" prop="payerRepo">
               <el-select v-model="launchOrder.payerRepo" placeholder="请选择入库仓储">
-                <el-option label="仓储36hru64" value="仓储1m7o4k0"></el-option>
-                <el-option label="B企业" value="Bqiye"></el-option>
-                <el-option label="C企业" value="Cqiye"></el-option>
+                <template v-for="item in repoList">
+                  <el-option :label="item" :value="item"></el-option>
+                </template>
               </el-select>
             </el-form-item>
           </el-col>
@@ -152,7 +148,9 @@
           payerRepo:[
             {required:true, message:'请选择入库仓储', },
           ]
-        }
+        },
+        supplyList:'',
+        repoList:''
       }
     },
     computed:{
@@ -198,7 +196,7 @@
           }
         });//validate
 
-      }//submit
+      },//submit
     },
     mounted () {
       var userInfo = Store.fetchUserInfo();
@@ -215,6 +213,18 @@
         default:
           break;
       }
+      this.$http.get("/v1/account/allEnterpriseName?roleCode=0").then(function(res){
+        this.supplyList=res.body.data;
+        console.log("the supply list: "+res.body.data);
+      },function(err){
+        console.log(err)
+      });
+      this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
+        this.repoList=res.body.data;
+        console.log("the repo list: "+res.body.data);
+      },function(err){
+        console.log(err)
+      });
     }
   }
 </script>
