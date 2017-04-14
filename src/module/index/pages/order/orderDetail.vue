@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-card>
-    <el-row style="margin:10px 0;float: right;z-index:999">
-      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
-      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill">签发应收账款</el-button>
-      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
-      <el-button type="primary" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
-    </el-row>
     <el-row class="el-row-header statePosition">
-      <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 入库待响应</el-col>
+      <el-col :class="{buyerColor:state.isBuyer==='true',buyeeColor:state.isBuyer==='false',stateShow:true,}" :span="8"><i class="el-icon-information"></i>&emsp;{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
+      <el-col :span="8">
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill">签发应收账款</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
+      </el-col>
     </el-row>
 
       <el-row>
@@ -451,6 +451,9 @@
   }
   .buyerColor{
     color: #0096D7;
+  }
+  .buyeeColor{
+    color:rgba(103,196,146,1);
   }
   .stateShow{
     margin-left: 10px;

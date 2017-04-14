@@ -245,7 +245,7 @@
           return constantData;
       },
       activeName () {
-        if(store.state.isBuyer==='false'){
+        if(store.state.isBuyer==='false'){/*防止变成买家tab也变掉*/
           return store.state.orderTab;}
         else {
           return "first";
