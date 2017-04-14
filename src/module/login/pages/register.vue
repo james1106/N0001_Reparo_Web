@@ -48,9 +48,9 @@
       var validateUserName = (rule, value, callback) => {
         var regp =/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/;
         if(value === ''){
-          callback(new Error('用户名，英文+数字不超过20位'));
-        }else if (!regp.test(value) || value.length>20){
           callback(new Error('请输入用户名'));
+        }else if (!regp.test(value) || value.length>20){
+          callback(new Error('用户名，英文+数字不超过20位'));
         }else {
           callback();
         }
