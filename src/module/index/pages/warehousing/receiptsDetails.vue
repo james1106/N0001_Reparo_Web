@@ -20,7 +20,6 @@
             <div class="box-card mycard1">
               <el-row>
                 <el-col :span="6" class="msgName keynote">仓单编号：</el-col>
-                <el-col :span="6" class="msgName">仓储业务编号：</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">保管人：</el-col>
@@ -47,7 +46,16 @@
   export default {
     name:'index',
     data () {
-      return {}
+      return {
+        receiptsDetails:''
+      }
+    },
+    mounted () {
+        this.$http.get().then(function(){
+//            请求仓单详情列表
+        },function(){
+
+        });
     }
   }
 </script>
