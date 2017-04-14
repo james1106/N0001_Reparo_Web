@@ -38,7 +38,9 @@
   export default {
     name:'list',
     created: function () {
-      this.getSignoutOrderList()
+      if(Store.state.isBuyer == 'false'){
+        this.getSignoutOrderList()
+      }
       this.getAccountsList()
     },
     components:{
@@ -61,8 +63,7 @@
     methods:{
       //获取订单列表（主要是获取待签收列表）
       getSignoutOrderList(){
-        var role = this.getRole();
-        this.$http.get('/v1/order/order_list/'+role,{emulateJSON:true}).then((res) => {
+        this.$http.get('/v1/order/order_list/1',{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
@@ -71,7 +72,7 @@
           }
           for(var i=0;i<data.length;i++){
               var item = data[i]
-;             if(item.status == constantData.CONFIRMED){
+;             if(item.transactionStatus == constantData.CONFIRMED){
                 this.orderList.push(item);
             }
           }
@@ -82,7 +83,7 @@
       //获取账单列表
       getAccountsList(){
         var role = this.getRole();
-        this.$http.post('/v1/receivable/receivableSimpleDeatilList',{roleCode:role},{emulateJSON:true}).then((res) => {
+        this.$http.post('/v1/receivable/receivableSimpleDetailList',{roleCode:role},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
@@ -95,7 +96,7 @@
         })
       },
       getRole(){
-          if(Store.state.isBuyer){
+          if(Store.state.isBuyer == 'true'){
               return 0
           }else{
               return 1

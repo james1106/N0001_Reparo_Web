@@ -20,7 +20,8 @@ const state={
   },
   accountsStatus:'all',  //应收账款中当前选中的状态
   isBuyer:"true",   //我是买家
-  orderTab:"first"
+  orderTab:"first",
+  // accountStatusNo:0
 }
 
 /* 从本地存储读取数据 */
@@ -38,6 +39,10 @@ const mutations={
     state.accountsStatus=status;
     localStorage.setItem('accountsStatus',status);
   },
+  // setAccountsStatusNo (state, statusNo) {
+  //   state.accountStatusNo=statusNo;
+  //   localStorage.setItem('accountStatusNo',statusNo);
+  // },
   setIsBuyer (state, buyer) {
     state.isBuyer=buyer;
     localStorage.setItem('isBuyer',buyer);

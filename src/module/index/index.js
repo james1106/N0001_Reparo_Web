@@ -67,9 +67,11 @@ Vue.filter('payingMethod',function(value){
   }
   return readableStatus;
 })
+
 Vue.filter('timeTransfer',function(value){
   return new Date(value).toLocaleString().replace(/\//g, "-");
 })
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

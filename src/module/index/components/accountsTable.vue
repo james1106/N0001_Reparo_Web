@@ -31,6 +31,7 @@
           </el-col>
           <el-col :span="2">
             <el-col :span="24">
+              <el-button size="mini" type="text" class="buyerColor" v-if="item.status===constantData.CONFIRMED" @click.native.prevent="signout(item.orderNo)">签发订单</el-button>
               <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='true')&&(item.status===constantData.FORACCEPT)" @click.native.prevent="confirmAccept(item.receivableNo)">承兑确认</el-button>
               <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='true')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmCash(item.receivableNo)">兑付确认</el-button>
               <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='false')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmDiscount(item.receivableNo)">贴现账款</el-button>
@@ -89,20 +90,19 @@
           for(var i=0;i<this.tableData.length;i++ ){
             var item = this.tableData[i];
             if(item.status == this.accountsStatus){
-                if(this.accountsStatus == 2){
-                  var orderInfo = {
-                    receivableNo:'暂未生成',
-                    productName:item.productName,
-                    productQuantity:item.productNum,
-                    isseAmt:item.totalPrice,
-                    dueDt:'暂无',
-                    enterpriseName:item.payeeAccount,
-                    status:2,
-                  }
-                  res.push(orderInfo)
-                }else {
-                  res.push(item)
-                }
+              res.push(item)
+            }else if(item.transactionStatus == 2){
+              var orderInfo = {
+                receivableNo:'暂未生成',
+                orderNo:item.orderNo,
+                productName:item.productName,
+                productQuantity:item.productQuantity,
+                isseAmt:item.productTotalPrice,
+                dueDt:'暂无',
+                enterpriseName:item.payerCompanyName,
+                status:2,
+              }
+              res.push(orderInfo)
             }
           }
           this.tableData = res
@@ -117,6 +117,10 @@
       showDetail(receivableNo){
         Store.commit('setCheckId',receivableNo);
         this.$router.push("/allAccounts/detail/detail");
+      },
+      signout(orderNo){
+        Store.commit('setCheckId',orderNo);
+        this.$router.push("/allAccounts/signout/signout");
       },
       confirmAccept(receivableNo){
         Store.commit('setCheckId',receivableNo);
