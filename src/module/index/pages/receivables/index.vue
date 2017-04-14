@@ -1,11 +1,5 @@
 <template>
   <div>
-    <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>应收账款</el-breadcrumb-item>
-      <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
-    </el-breadcrumb>
     <transition name="fade">
       <router-view class="view"></router-view>
     </transition>
