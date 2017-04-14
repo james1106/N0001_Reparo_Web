@@ -1,5 +1,5 @@
 <template>
-  <div id="menu" style="position: fixed">
+  <div id="menu" style="position: fixed;overflow-y: scroll;">
       <el-menu is-opened default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/" style="background-color: rgb(244,250,249)">
           <img src="../assets/home_g.png" style="padding-right: 10px"><span>首页</span>

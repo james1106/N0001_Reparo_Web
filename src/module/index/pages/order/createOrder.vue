@@ -254,11 +254,7 @@
     margin: 20px 0;
   }
   .el-form-item__error {left:33% !important;top: 20%!important;}
-  .buyerStepTitle{
-    color:rgb(0,150,215);
-    line-height: 50px;
-    font-size: 14px;
-  }
+
   .el-form-item__content{
     border:1px solid #EEEEEE;
     /*line-height: 41px!important;*/

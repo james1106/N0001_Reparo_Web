@@ -4,7 +4,6 @@
   <header class="header" :class="[{'seller': state.isBuyer==='false', 'buyer': state.isBuyer==='true' ,'header-fixed':headerFixed}] ">
   <el-row>
     <el-col :span="24">
-
       <el-col :span="1" class="logo">
         <img src="../assets/logoWhiteCopy.png" style="margin-top: 8px">
 			</el-col>
@@ -128,11 +127,12 @@ export default {
         Store.commit('setIsBuyer',"false");
         this.$router.push('/false');
 
+      },
+      logout(){
+        window.location.href='login.html';
       }
-    },
-    logout(){
-      window.location.href='login.html';
     }
+
   }
 </script>
 

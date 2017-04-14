@@ -1,5 +1,11 @@
 <template>
   <div id="list">
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>应收账款</el-breadcrumb-item>
+      <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
     <el-tabs  v-bind:value="state.accountsStatus">
       <el-tab-pane label="所有应收账款" name="all">

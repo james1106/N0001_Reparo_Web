@@ -1,5 +1,11 @@
 <template>
   <div id="detail" class="receiveDetails">
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>应收账款</el-breadcrumb-item>
+      <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">

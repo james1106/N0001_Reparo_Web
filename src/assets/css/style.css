@@ -189,6 +189,31 @@
   border-radius: 4px;
   margin: 20px 0;
 }
+.discount .el-select .el-input {
+  width: 100% !important;
+  margin: 0px 0.2%!important;
+}
+
+.discount .el-select, .el-input {
+  width: 65% !important;
+  margin: 0px 2%!important;
+}
+.discount .el-form-item__label {
+  width: 30% !important;
+  color: rgb(51,51,51);
+}
+.discount .el-button {
+  float: left;
+  width: 40%;
+  border-radius: 4px;
+  margin: 20px 0;
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.discount .el-button:hover{
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
 .defaultMsg{    /*信息中默认填写的*/
   padding-left: 10px;
   font-size: 12px;
@@ -199,4 +224,14 @@
 }
 .bread{
   margin-bottom: 23px
+}
+.buyerStepTitle{
+  color:rgb(0,150,215);
+  line-height: 50px;
+  font-size: 14px;
+}
+.sellerStepTtle{
+  color: rgb(57,202,166);
+  line-height: 50px;
+  font-size: 14px;
 }

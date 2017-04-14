@@ -1,12 +1,16 @@
 <template>
-  <div id="detail" class="receiveDetails">
+  <div id="discount" class="discount">
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>应收账款</el-breadcrumb-item>
+      <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
+      <el-breadcrumb-item>贴现</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
-      <el-row>
-        <el-row class="el-row-header statePosition">
-          <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 承兑待签收</el-col>
-          <el-col class="dotipRow"><span class="doTip">卖家已签发应收账款，请您尽快</span><el-button size="small" style="border-color: rgb(0,150,215);color: rgb(0,150,215)">承兑确认</el-button></el-col>
-        </el-row>
-      </el-row>
+      <div>
+        <span class="sellerStepTtle">1. 请确认账款信息</span>
+      </div>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
@@ -32,9 +36,6 @@
                 <el-col :span="6" class="msgName">应收账款状态明细：{{detailInfo.orderNo}}</el-col>
                 <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
                   <label> 2017-04-03 10:00:00 承兑已签发</label>
-                </el-col>
-                <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
-                  <label>2017-04-03 11:00:00 承兑已签收</label>
                 </el-col>
               </el-row>
             </div>
@@ -81,20 +82,31 @@
               </el-row>
             </div>
           </el-card>
-
-          <el-col :span="24">
-            <label>选择贴现银行</label>
-            <el-select placeholder="请选择开户行">
-              <el-option label="农业银行（默认）" value="4"></el-option>
-              <el-option label="工商银行" value="5"></el-option>
-              <el-option label="兴业银行" value="6"></el-option>
-            </el-select>
+        </el-col>
+      </el-row>
+      <div>
+        <span class="sellerStepTtle">2. 请选择贴现银行</span>
+      </div>
+      <el-row>
+        <el-form ref="discount" :model="discountParam" :label-position="labelPosition" :rules="discountRules">
+          <el-col :span="12">
+            <el-form-item label="请选择贴现银行" prop="discountBank">
+              <el-select v-model="discountParam.discountBank" placeholder="请选择开户行">
+                <el-option label="农业银行（默认）" value="4"></el-option>
+                <el-option label="工商银行" value="5"></el-option>
+                <el-option label="兴业银行" value="6"></el-option>
+              </el-select>
+            </el-form-item>
           </el-col>
+        </el-form>
+      </el-row>
 
+      <el-row>
+        <el-col :span="12">
+          <el-button type="primary" @click.native.prevent="onSubmit('launchOrder')">贴现确认</el-button>
         </el-col>
       </el-row>
     </el-card>
-
   </div>
 </template>
 
