@@ -28,7 +28,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="货品单价" prop="productUnitPrice">
+            <el-form-item label="货品单价(元)" prop="productUnitPrice">
               <el-input v-model="launchOrder.productUnitPrice"></el-input>
             </el-form-item>
           </el-col>
@@ -135,15 +135,24 @@
             {required:true, message:'请选择供应商'},
           ],
           productName:[
-            {required:true, message:'请输入货品名称', trigger:'blur'}
+            {required:true, message:'请输入货品名称', }
           ],
           productUnitPrice:[
-            {required:true, message:'请输入货品单价', trigger:'blur'},
+            {required:true, message:'请输入货品单价', },
             {validator:validatePass, trigger:'blur'}
           ],
           productQuantity:[
-            {required:true, message:'请输入货品数量', trigger:'blur'},
+            {required:true, message:'请输入货品数量',},
             {validator:validatePass1,trigger:'blur'}
+          ],
+          payerBank:[
+            {required:true, message:'请输入付款行', }
+          ],
+          payerAccount:[
+            {required:true, message:'请输入付款账户', }
+          ],
+          payingMethod:[
+            {required:true, message:'请输入收款方式', }
           ],
           payerRepo:[
             {required:true, message:'请选择入库仓储', },
@@ -215,12 +224,14 @@
       }
       this.$http.get("/v1/account/allEnterpriseName?roleCode=0").then(function(res){
         this.supplyList=res.body.data;
+        this.launchOrder.payeeCompanyName=this.supplyList[0];
         console.log("the supply list: "+res.body.data);
       },function(err){
         console.log(err)
       });
       this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
         this.repoList=res.body.data;
+        this.launchOrder.payerRepo=this.repoList[0];
         console.log("the repo list: "+res.body.data);
       },function(err){
         console.log(err)

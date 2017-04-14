@@ -163,7 +163,8 @@
           })
       },
       cash(){
-        this.$http.post('/v1/receivable/accept',this.acceptParam,{emulateJSON:true}).then((data) => {
+        //
+        this.$http.post('/v1/receivable/cash',this.acceptParam,{emulateJSON:true}).then((data) => {
 
         },(err) => {
           console.log(err);

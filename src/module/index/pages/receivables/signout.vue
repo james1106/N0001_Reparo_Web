@@ -6,24 +6,24 @@
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
-          <el-col :span="6" style="margin-left: 19px;">订单编号：{{orderDetail.orderNo}}</el-col>
-          <el-col :span="6">发起时间：{{orderDetail.orderGenerateTime}}</el-col>
+          <el-col :span="6" style="margin-left: 19px;">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
+          <el-col :span="6">发起时间：{{orderDetail.txDetail.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
         </el-row>
         <el-row class="el-row-content" >
           <el-row class="el-row-content">
-            <el-col :span="6" style="margin-left: 19px;">购买人：{{orderDetail.oppositeAccount}}</el-col>
-            <el-col :span="6">订单金额：{{orderDetail.totalPrice}}</el-col>
+            <el-col :span="6" style="margin-left: 19px;">购买人：{{orderDetail.txDetail.payerAccount}}</el-col>
+            <el-col :span="6">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
             <el-col :span="6">付款方式：应收账款支付</el-col>
           </el-row>
           <el-row class="el-row-content">
-            <el-col :span="6"  style="margin-left: 19px;">货品名称：{{orderDetail.productName}}</el-col>
-            <el-col :span="6" >货品数量：{{orderDetail.productNum}}</el-col>
-            <el-col :span="6">仓储机构：{{orderDetail.payerRepoCompany}}</el-col>
-            <el-col :span="4">仓单编号：{{orderDetail.repoCertNo}}</el-col>
+            <el-col :span="6"  style="margin-left: 19px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
+            <el-col :span="6" >货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
+            <el-col :span="6">仓储机构：{{orderDetail.txDetail.payerRepo}}</el-col>
+            <el-col :span="4">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
           </el-row>
           <el-row class="el-row-content">
-            <el-col :span="6" style="margin-left: 19px;">支付银行：{{orderDetail.payerBank}}</el-col>
-            <el-col :span="6">付款账户：{{orderDetail.payerBankAccount}}</el-col>
+            <el-col :span="6" style="margin-left: 19px;">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
+            <el-col :span="6">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
           </el-row>
         </el-row>
       </el-row>
@@ -39,7 +39,7 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="账款金额" prop="isseAmt">
-            <el-label class="clearfix" v-model="signoutInfo.isseAmt">{{signoutInfo.isseAmt}}</el-label>
+            <el-label class="defaultMsg" v-model="signoutInfo.isseAmt">{{signoutInfo.isseAmt}}</el-label>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -75,9 +75,7 @@
         <el-col :span="12">
           <el-form-item label="收款人开户行" prop="pyeeBank">
             <el-select v-model="signoutInfo.pyeeBank" name="农业银行" placeholder="">
-              <el-option label="农业银行（默认）" value="农业银行"></el-option>
-              <el-option label="工商银行" value="工商银行"></el-option>
-              <el-option label="兴业银行" value="兴业银行"></el-option>
+                <el-option :label="signoutInfo.pyeeBank" :value="signoutInfo.pyeeBank"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -89,9 +87,7 @@
         <el-col :span="12">
           <el-form-item label="收款人账户" prop="pyee">
             <el-select v-model="signoutInfo.pyee" name="1" placeholder="">
-              <el-option label="1234567(默认)" value="1"></el-option>
-              <el-option label="2222222" value="2"></el-option>
-              <el-option label="3444444" value="3"></el-option>
+              <el-option :label="signoutInfo.pyee" :value="signoutInfo.pyee"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -118,27 +114,32 @@
 <script>
   import '../../../../assets/css/style.css'
   import Store from '../../vuex/store'
+  import LocalStore from '../../../../common/store'
+  import constantData from '../../../../common/const'
 
   export default {
     name:'signout',
-    created:function () {
+    mounted:function () {
+      var userInfo = LocalStore.fetchUserInfo();
+      this.signoutInfo.pyeeBank = userInfo.acctSvcrName
+      this.signoutInfo.pyee = userInfo.acctIds
       this.getOrderDetail()
     },
     data () {
       return {
-        orderDetail:{},
+        orderDetail:{
+        },
         signoutInfo:{
           isseAmt:'',    //票面金额
           dueDt:'',      //到期日
           rate:'',       //带息利率
           contractNo:'', //合同编号
           invoiceNo:'',   //发票号
-
-          pyerName:'杭州好牛信息科技有限公司',   //付款人名称
-          pyeeName:'杭州趣链科技有限公司',   //收款人名称
-          pyerBank:'农业银行',   //付款人开户行
+          pyerName:'',   //付款人名称
+          pyeeName:'',   //收款人名称
+          pyerBank:'',   //付款人开户行
           pyeeBank:'',    //收款人开户行
-          pyer:'123456',       //付款人账号
+          pyer:'',       //付款人账号
           pyee:''       //收款人账号
         },
         options: [{
@@ -156,13 +157,13 @@
             { type: 'date',required: true, message: '请选择账款到期日', trigger: 'blur' }
           ],
           rate: [
-            { required: true, message: '请输入带息利率', trigger: 'change' }
+            { required: true, message: '请输入带息利率', trigger: 'blur' }
           ],
           pyeeBank: [
-            { required: true, message: '请选择开户行', trigger: 'change' }
+            { required: true, message: '请选择开户行', trigger: 'blur' }
           ],
           pyee:[
-            { required: true, message: '请选择账户', trigger: 'change' }
+            { required: true, message: '请选择账户', trigger: 'blur' }
           ]
         }
       }
@@ -171,23 +172,25 @@
       signout(formName){
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            var data = new Date(this.signoutInfo.dueDt);
             var signParam = {
-              orderNo:this.orderDetail.orderNo,
+              orderNo:this.orderDetail.txDetail.orderId,
               pyer:this.signoutInfo.pyer,
               pyee:this.signoutInfo.pyee,
               isseAmt:this.signoutInfo.isseAmt,
-              dueDt:this.signoutInfo.dueDt,//要转时间戳
+              dueDt:data.getTime(),
               rate:this.signoutInfo.rate,
               contractNo:this.signoutInfo.contractNo,
               invoiceNo:this.signoutInfo.invoiceNo
             };
             this.$http.post('/v1/receivable/sign',signParam,{emulateJSON:true}).then((res) => {
-              console.log(res.body);
+              console.log(res.body.data);
               var code =  res.body.code;
               if(code != 0){
                 return;
               }
               //跳到详情
+              Store.commit('setCheckId',res.body.data);
               this.$router.push('/allAccounts/signout/detail')
             },(err) => {
               console.log(err);
@@ -203,15 +206,14 @@
           console.log("the state checkId is:" + Store.state.checkId);
           this.$http.get("/v1/order/detail?orderNo=" + Store.state.checkId).then(
             function (res) {
-              console.log(res.body);
+              console.log(res.body.data);
               this.orderDetail = res.body.data;
-
               //将订单详情的值赋予签发表单
-              this.signoutInfo.isseAmt = this.orderDetail.receAmount;
-              this.signoutInfo.pyee = this.orderDetail.receivingSide;
-              this.signoutInfo.pyer = this.orderDetail.payerBankAccount;
-              this.signoutInfo.pyerName = this.orderDetail.payingSide;
-              this.signoutInfo.pyerBank = this.orderDetail.payerBank;
+              this.signoutInfo.isseAmt = this.orderDetail.txDetail.productTotalPrice;
+              this.signoutInfo.pyeeName = this.orderDetail.txDetail.payeeCompanyName;
+              this.signoutInfo.pyer = this.orderDetail.txDetail.payerAccount;
+              this.signoutInfo.pyerName = this.orderDetail.txDetail.payerCompanyName;
+              this.signoutInfo.pyerBank = this.orderDetail.txDetail.payerBank;
             }, function (res) {
               console.log(res);
             }
