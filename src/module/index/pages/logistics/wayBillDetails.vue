@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-    <span>发货申请单详情</span>
+    <span>运单详情</span>
     <el-row class="row-black row-padding">
       <el-col :span="8">运单编号：{{item.orderId}}</el-col>
       <el-col :span="8">发起时间：{{item.timeStamp}}</el-col>
@@ -16,12 +16,10 @@
           <el-col :span="12">货物价值：{{item.value}}</el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">发货日期：{{item.sendTime}}</el-col>
           <el-col :span="12">物流公司：{{item.logistics}}</el-col>
         </el-row>
       </el-col>
-    </el-row>
-    <el-row>
-      <el-button type="primary">确认</el-button><el-button type="primary">拒绝</el-button>
     </el-row>
   </div>
 </template>
@@ -36,8 +34,9 @@
           sender:'A企业',
           receiver:'B企业',
           goods:'卡纸',
-          logistics:'ABC公司',
-          value:'20,000'
+          value:'20,000',
+          sendTime:'2017-03-20',
+          logistics:'ABC公司'
         }
       }
     }

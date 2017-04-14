@@ -1,5 +1,7 @@
 <template>
-  <div>运单详情</div>
+  <div>
+  发货确认
+  </div>
 </template>
 <script>
   export default {

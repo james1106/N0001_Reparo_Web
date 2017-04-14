@@ -2,8 +2,8 @@
   <div>
     <el-card>
     <el-row style="margin:10px 0;float: right;z-index:999">
-      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordList[orderDetail.txDetail.operationRecordList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
-      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordList[orderDetail.txDetail.operationRecordList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill">签发应收账款</el-button>
+      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
+      <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill">签发应收账款</el-button>
       <el-button type="primary" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
       <el-button type="primary" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
     </el-row>
@@ -33,7 +33,7 @@
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName" style="padding-left: 30px;">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
-                <el-col :span="6" class="msgName">发起时间：{{orderDetail.txDetail.operationRecordList[0].operateTime | timeTransfer}}</el-col>
+                <el-col :span="6" class="msgName">发起时间：{{orderDetail.txDetail.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName" style="padding-left: 30px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
@@ -41,7 +41,7 @@
                 <el-col :span="6" class="msgName">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordList[orderDetail.txDetail.operationRecordList.length-1].state | transactionStatus}}</el-col>
+                <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
                 <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="orderCollapse" :class="{rotate:isOrderCollapse, rotate1:!isOrderCollapse}"></i></el-col>
               </el-row>
               <!--<el-row class="">-->
@@ -49,9 +49,9 @@
               <!--</el-row>-->
               <div v-show="isOrderCollapse">
                 <el-row v-show="isOrderCollapse">
-                  <template v-for="(item,index) in orderDetail.txDetail.operationRecordList">
+                  <template v-for="(item,index) in orderDetail.txDetail.operationRecordVoList">
                     <el-row>
-                      <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordList.length-1)}">{{item.updateStatus}}：{{item.updateTime}}</el-col>
+                      <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordVoList.length-1)}">{{item.state | transactionStatus}}：{{item.operateTime | timeTransfer}}</el-col>
                     </el-row>
                   </template>
                 </el-row>
@@ -89,7 +89,7 @@
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">
-                  最新应收账款状态：{{orderDetail.receOver.receLatestStatus | receStatus}},({{orderDetail.receOver.receUpdateTime | timeTransfer}})
+                  最新应收账款状态：{{orderDetail.receOver.receLatestStatus | receStatus}}
                 </el-col>
                 <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="receCollapse" :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i></el-col>
               </el-row>
@@ -129,7 +129,7 @@
             </el-row>
             <el-row>
               <el-col :span="8" class="msgName">
-                物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus | wayBillStatus}},（{{orderDetail.wayBillOver.wayBillUpdateTime | timeTransfer}}）
+                物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus | wayBillStatus}}
               </el-col>
               <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="wayBillCollapse" :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i></el-col>
             </el-row>
@@ -156,14 +156,14 @@
             </div>
             <div v-else>
             <el-row>
-              <el-col :span="6" class="msgName keynote">仓储流水号：{{orderDetail.repoOver.repoSerialNo}}</el-col>
-              <el-col :span="6" class="msgName">入库申请时间：{{orderDetail.repoOver.repoGenerateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="msgName keynote">仓储流水号：{{orderDetail.repoOver.payerRepoBusinessNo}}</el-col>
+              <el-col :span="6" class="msgName">入库申请时间：{{orderDetail.repoOver.inApplyTime | timeTransfer}}</el-col>
             </el-row>
             <el-row>
               <el-col :span="6" class="msgName">仓储公司：{{orderDetail.repoOver.payeeRepoCompany}}</el-col>
             </el-row>
             <el-row>
-              <el-col :span="6" class="msgName">最新仓储状态：{{orderDetail.repoOver.repoLatestStatus | repoStatus}},{{orderDetail.repoOver.receUpdateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="msgName">最新仓储状态：{{orderDetail.repoOver.payerRepoBusiState | repoStatus}}</el-col>
               <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="buyerRepoCollapse" :class="{rotate:isBuyerRepoCollapse, rotate1:!isBuyerRepoCollapse}"></i></el-col>
             </el-row>
               <el-row v-show="isBuyerRepoCollapse">
@@ -181,9 +181,9 @@
             </div>
             <div v-else>
             <el-row>
-              <el-col :span="6" class="msgName keynote">仓储流水号：{{orderDetail.repoOver.repoSerialNo}}</el-col>
-              <el-col :span="6" class="msgName">仓单编号：{{orderDetail.repoOver.repoCertNo}}</el-col>
-              <el-col :span="6" class="msgName">出库申请时间：{{orderDetail.repoOver.repoGenerateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="msgName keynote">仓储流水号：{{orderDetail.repoOver.payeeRepoBusinessNo}}</el-col>
+              <el-col :span="6" class="msgName">仓单编号：{{orderDetail.repoOver.payerRepoCertNo}}</el-col>
+              <el-col :span="6" class="msgName" v-if="orderDetail.repoOver.payeeRepoBusiState>=constantData.CONFIRMED">出库申请时间：{{orderDetail.repoOver.outApplyTime | timeTransfer}}</el-col>
             </el-row>
             <el-row>
               <el-col :span="6" class="msgName">仓储公司：{{orderDetail.repoOver.payerRepoCompany}}</el-col>
@@ -191,7 +191,7 @@
               <el-col :span="6" class="msgName">持有人：{{orderDetail.repoOver.payerRepoCompany}}</el-col>
             </el-row>
             <el-row>
-              <el-col :span="8" class="msgName">最新仓储状态：{{orderDetail.repoOver.repoLatestStatus | repoStatus}},{{orderDetail.repoOver.receUpdateTime | timeTransfer}}</el-col>
+              <el-col :span="8" class="msgName">最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}</el-col>
               <el-col :span="6" class="collapseBtn"><i class="el-icon-arrow-down" @click="buyeeRepoCollapse" :class="{rotate:isBuyeeRepoCollapse, rotate1:!isBuyeeRepoCollapse}"></i></el-col>
             </el-row>
               <el-row v-show="isBuyeeRepoCollapse">
@@ -220,7 +220,7 @@
       return {
         orderDetail: {
           txDetail: {
-            operationRecordList:[
+            operationRecordVoList:[
               {state:'',operateTime:''}
             ],
           },
