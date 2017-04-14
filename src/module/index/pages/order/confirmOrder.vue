@@ -29,7 +29,7 @@
           <el-col :span="12">
             <el-form-item label="出库货品所在仓储：">
               <el-select v-model="confirmOrder.payeeRepo" placeholder="请选择仓储">
-                <el-option label="A仓储企业" value="Acangchu"></el-option>
+                <el-option label="仓储1m7o4k0" value="仓储1m7o4k0"></el-option>
                 <el-option label="B仓储企业" value="Bcangchu"></el-option>
                 <el-option label="C仓储企业" value="Ccangchu"></el-option>
               </el-select>
@@ -131,7 +131,7 @@
         },
         confirmOrder: {
           orderNo:'',
-          payeeRepo:'',
+          payeeRepoName:'',
           payeeRepoCertNo:'',
         },
         showModal:false

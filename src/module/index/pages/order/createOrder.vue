@@ -186,7 +186,7 @@
             this.$http.post("/v1/order/creation", temp, {emulateJSON: true}).then(
               function (res) {
                 console.log(res.body);
-                store.commit('setCheckId', res.body.data);
+                store.commit('setCheckId', res.body.data.orderNo);
                 console.log("now the state checkId is:" + store.state.checkId);
                 this.$router.push('/order/orderDetail');
               },

@@ -1,8 +1,6 @@
 <template>
-  <div id="index">
-    <transition name="fade">
-      <router-view class="view"></router-view>
-    </transition>
+  <div>
+  收货确认
   </div>
 </template>
 <script>

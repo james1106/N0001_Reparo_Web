@@ -15,6 +15,12 @@ import SignoutPage from './pages/receivables/signout.vue'
 import DiscountPage from './pages/receivables/discount.vue'
 import AccountsDetailPage from './pages/receivables/detail.vue'
 
+/*企业物流*/
+import logisticsIndex from './pages/logistics/index.vue'
+import deliver from './pages/logistics/deliver.vue'
+import myWaybill from './pages/logistics/myWaybill.vue'
+import wayBillDetails from './pages/logistics/wayBillDetails.vue'
+
 /*企业仓储*/
 import warehousingIndex from './pages/warehousing/index.vue'
 import repoIn from './pages/warehousing/repoIn.vue'
@@ -22,140 +28,99 @@ import repoOut from './pages/warehousing/repoOut.vue'
 import myReceipts from './pages/warehousing/myReceipts.vue'
 import repoDetails from './pages/warehousing/repoDetails.vue'
 import receiptsDetails from './pages/warehousing/receiptsDetails.vue'
+
 /*仓储公司*/
 import warehousingCompanyIndex from './pages/warehousingCompany/index.vue'
-import ReceiptsIndex from './pages/warehousingCompany/receipts/index.vue'
-import Receipts from './pages/warehousingCompany/receipts/receipts.vue'
-import ReceiptsDetails from './pages/warehousingCompany/receipts/receiptsDetails.vue'
-import allWarehousingIndex from './pages/warehousingCompany/allWarehousing/index.vue'
-import allWarehousing from './pages/warehousingCompany/allWarehousing/allWarehousing.vue'
-import allWarehousingDetails from './pages/warehousingCompany/allWarehousing/allWarehousingDetails.vue'
-import inboundConfirmIndex from './pages/warehousingCompany/inboundConfirm/index.vue'
-import inboundConfirm from './pages/warehousingCompany/inboundConfirm/inboundConfirm.vue'
-import inConfirmDetails from './pages/warehousingCompany/inboundConfirm/inConfirmDetails.vue'
-import inboundResponseIndex from './pages/warehousingCompany/inboundResponse/index.vue'
-import inboundResponse from './pages/warehousingCompany/inboundResponse/inboundResponse.vue'
-import inResponseDetails from './pages/warehousingCompany/inboundResponse/inResponseDetails.vue'
-import outboundConfirmIndex from './pages/warehousingCompany/outboundConfirm/index.vue'
-import outboundConfirm from './pages/warehousingCompany/outboundConfirm/outboundConfirm.vue'
-import outConfirmDetails from './pages/warehousingCompany/outboundConfirm/outConfirmDetails.vue'
+import companyAllReceipts from './pages/warehousingCompany/companyAllReceipts.vue'
+import companyReceiptsDetails from './pages/warehousingCompany/companyReceiptsDetails.vue'
+import inResponse from './pages/warehousingCompany/inResponse.vue'
+import outConfirm from './pages/warehousingCompany/outConfirm.vue'
+import inConfirm from './pages/warehousingCompany/inConfirm.vue'
+import receiptApplyConfirm from './pages/warehousingCompany/receiptApplyConfirm.vue'
 
 /*物流公司*/
-import logisticsIndex from './pages/logistics/index.vue'
-import deliveryConfirmIndex from './pages/logistics/deliveryConfirm/index.vue'
-import deliveryConfirm from './pages/logistics/deliveryConfirm/deliveryConfirm.vue'
-import deliveryDetails from './pages/logistics/deliveryConfirm/deliveryDetails.vue'
-import receiveConfirmIndex from './pages/logistics/receiveConfirm/index.vue'
-import receiveConfirm from './pages/logistics/receiveConfirm/receiveConfirm.vue'
-import receiveDetails from './pages/logistics/receiveConfirm/receiveDetails.vue'
-import waybillIndex from './pages/logistics/waybill/index.vue'
-import waybill from './pages/logistics/waybill/waybill.vue'
-import waybillDetails from './pages/logistics/waybill/waybillDetails.vue'
+import logisticsCompanyIndex from './pages/logisticsCompany/index.vue'
+import companyAllBill from './pages/logisticsCompany/companyAllBill.vue'
+import companyBillDetails from './pages/logisticsCompany/companyBillDetails.vue'
+import sendConfirm from './pages/logisticsCompany/sendConfirm.vue'
+import receiveConfirm from './pages/logisticsCompany/receiveConfirm.vue'
 
 export default [
   {
-    path:'/',component:HomePage,
+    path: '/', component: HomePage,
   },
   {
-    path:'/:isBuyer',component:HomePage,
+    path: '/:isBuyer', component: HomePage,
   },
+
   /*订单路由*/
   {
-    path:'/order',component:order,
-    children:[
-      {path:'allOrder/:value',component:allOrder},
-      {path:'orderDetail',component:orderDetail},
-      {path:'createOrder',component:createOrder},
-      {path:'confirmOrder',component:confirmOrder},
+    path: '/order', component: order,
+    children: [
+      {path: 'allOrder/:value', component: allOrder},
+      {path: 'orderDetail', component: orderDetail},
+      {path: 'createOrder', component: createOrder},
+      {path: 'confirmOrder', component: confirmOrder},
     ]
   },
 
   //应收账款
   {
-    path:'/allAccounts/:status',component:AllAccountsPage,
-    children:[
-      {path:'',component:AccountListPage},
-      {path:'signout',component:SignoutPage},
-      {path:'accept',component:AcceptPage},
-      {path:'cash',component:CashPage},
-      {path:'discount',component:DiscountPage},
-      {path:'detail',component:AccountsDetailPage}
+    path: '/allAccounts/:status', component: AllAccountsPage,
+    children: [
+      {path: '', component: AccountListPage},
+      {path: 'signout', component: SignoutPage},
+      {path: 'accept', component: AcceptPage},
+      {path: 'cash', component: CashPage},
+      {path: 'discount', component: DiscountPage},
+      {path: 'detail', component: AccountsDetailPage}
     ]
   },
 
-  /*仓储路由*/
-  {path:'/warehousing',component:warehousingIndex,
+  /*企业物流*/
+  {
+    path:'/logistics',component:logisticsIndex,
     children:[
-      {path:'repoIn',component:repoIn},
-      {path:'repoOut',component:repoOut},
-      {path:'myReceipts',component:myReceipts},
-      {path:'repoDetails',component:repoDetails},
-      {path:'receiptsDetails',component:receiptsDetails},
+      {path:'deliver',component:deliver},
+      {path:'myWaybill',component:myWaybill},
+      {path:'wayBillDetails',component:wayBillDetails},
+    ]
+  },
 
-    ]},
+  /*企业仓储*/
+  {
+    path: '/warehousing', component: warehousingIndex,
+    children: [
+      {path: 'repoIn', component: repoIn},
+      {path: 'repoOut', component: repoOut},
+      {path: 'myReceipts', component: myReceipts},
+      {path: 'repoDetails', component: repoDetails},
+      {path: 'receiptsDetails', component: receiptsDetails},
+
+    ]
+  },
+
   // 仓储公司
   {
     path:'/warehousingCompany',component:warehousingCompanyIndex,
-  },
-  {
-    path:'/receipts',component:ReceiptsIndex,
-    children:[
-      {path:'',component:Receipts},
-      {path:'ReceiptsDetails',component:ReceiptsDetails}
-    ]
-  },
-  {
-    path:'/allWarehousing',component:allWarehousingIndex,
-    children:[
-      {path:'',component:allWarehousing},
-      {path:'allWarehousingDetails',component:allWarehousingDetails}
-    ]
-  },
-  {
-    path:'/inboundConfirm',component:inboundConfirmIndex,
-    children:[
-      {path:'',component:inboundConfirm},
-      {path:'inConfirmDetails',component:inConfirmDetails}
-    ]
-  },
-  {
-    path:'/inboundResponse',component:inboundResponseIndex,
-    children:[
-      {path:'',component:inboundResponse},
-      {path:'inResponseDetails',component:inResponseDetails}
-    ]
-  },
-  {
-    path:'/outboundConfirm',component:outboundConfirmIndex,
-    children:[
-      {path:'',component:outboundConfirm},
-      {path:'outConfirmDetails',component:outConfirmDetails}
-    ]
+    children: [
+      {path:'companyAllReceipts',component:companyAllReceipts},
+      {path:'companyReceiptsDetails',component:companyReceiptsDetails},
+      {path:'outConfirm',component:outConfirm},
+      {path:'inResponse',component:inResponse},
+      {path:'inConfirm',component:inConfirm},
+      {path:'receiptApplyConfirm',component:receiptApplyConfirm},
+  ]
   },
 
   //物流公司
   {
-    path:'/logistics',component:logisticsIndex
-  },
-  {
-    path:'/deliveryConfirm',component:deliveryConfirmIndex,
+    path:'/logisticsCompany',component:logisticsCompanyIndex,
     children:[
-      {path:'',component:deliveryConfirm},
-      {path:'deliveryDetails',component:deliveryDetails}
+      {path:'companyAllBill',component:companyAllBill},
+      {path:'companyBillDetails',component:companyBillDetails},
+      {path:'sendConfirm',component:sendConfirm},
+      {path:'receiveConfirm',component:receiveConfirm},
     ]
-  },
-  {
-    path:'/receiveConfirm',component:receiveConfirmIndex,
-    children:[
-      {path:'',component:receiveConfirm},
-      {path:'receiveDetails',component:receiveDetails}
-    ]
-  },
-  {
-    path:'/waybill',component:waybillIndex,
-    children:[
-      {path:'',component:waybill},
-      {path:'waybillDetails',component:waybillDetails}
-    ]
-  },
+  }
 ]
