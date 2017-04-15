@@ -39,7 +39,7 @@
       <el-card style="width:100%;" class="confirmCard">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="出库货品所在仓储：">
+            <el-form-item label="出库货品所在仓储">
               <el-select v-model="confirmOrder.payeeRepoName" placeholder="请选择仓储">
                 <template v-for="item in confirmOrder.repoList">
                   <el-option :label="item" :value="item"></el-option>
@@ -48,13 +48,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="货品的仓单编号：">
+            <el-form-item label="货品的仓单编号">
               <el-input v-model="confirmOrder.payeeRepoCertNo"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
       </el-card>
-      <el-row>
+      <el-row class="confirmBtn">
         <el-col :span="24" style="text-align: left;margin-top: 10px">
           <el-button type="primary" @click="onSubmit">确认订单</el-button>
         </el-col>
@@ -138,7 +138,7 @@
           </el-row>
           </el-form>
         </div>
-      <div>
+      <div class="confirmBtn">
         <el-row>
           <el-col :span="24">
             <el-button size="small" type="primary" @click="confirm">确定订单</el-button>

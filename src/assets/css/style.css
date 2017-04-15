@@ -291,10 +291,10 @@
   background-color: rgb(57,202,166);
   border-color: rgb(57,202,166);
 }
-.confirmOrder .el-button--primary:focus, .el-button--primary:hover{
-  background-color: rgb(57,202,166)!important;
-  border-color: rgb(57,202,166)!important;
-}
+/*.confirmOrder .el-button--primary:focus, .el-button--primary:hover{*/
+  /*background-color: rgb(57,202,166)!important;*/
+  /*border-color: rgb(57,202,166)!important;*/
+/*}*/
 .confirmCard .el-card__body{
   border: 1px solid rgb(238,238,238);
 }
