@@ -64,64 +64,89 @@
 
   <!--自定义弹框-->
   <transition name="modal">
-  <div class="modal-mask" v-show="showModal">
-    <div class="modal-confirm">
-      <h3 class="confirm-header">
-       确认订单
-      </h3>
-      <div class="confirm-content">
+    <div class="modal-mask" v-show="showModal">
+      <div class="modal-confirm">
+        <el-row class="el-row-header">
+          <span class="confirm-header sellerColor">确认订单</span>
+        </el-row>
+        <div class="confirm-content">
+          <el-form :label-position="labelPosition">
+          <el-row>
+            <el-col :span="12">
+              <span style="font-size: 12px;margin-left: 4%;">订单编号：{{orderDetail.txDetail.orderId}}</span>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="购买人">
+                <el-label>{{orderDetail.txDetail.payerCompanyName}}</el-label>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="付款方式">
+                <el-label>{{orderDetail.txDetail.payingMethod | payingMethod}}</el-label>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="订单金额">
+                <el-label>{{orderDetail.txDetail.productTotalPrice}}</el-label>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="支付银行">
+                <el-label>{{orderDetail.txDetail.payerBank}}</el-label>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="货品名称">
+                <el-label>{{orderDetail.txDetail.productName}}</el-label>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="付款账户">
+                <el-label>{{orderDetail.txDetail.payerAccount}}</el-label>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="货品数量">
+                <el-label>{{orderDetail.txDetail.productQuantity}}</el-label>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="订单出库仓储">
+                <el-label>{{confirmOrder.payeeRepo}}</el-label>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="货品单价">
+                <el-label>{{orderDetail.txDetail.productQuantity}}</el-label>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="订单出库仓单编号">
+                <el-label>{{confirmOrder.payeeRepoCertNo}}</el-label>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          </el-form>
+        </div>
+      <div>
         <el-row>
-          <el-col :span="12">
-            订单编号：{{orderDetail.txDetail.orderId}}
+          <el-col :span="24">
+            <el-button size="small" type="primary" @click="confirm">确定订单</el-button>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="12">
-            购买人：{{orderDetail.txDetail.payerCompanyName}}
-          </el-col>
-          <el-col :span="12">
-            订单金额：{{orderDetail.txDetail.productTotalPrice}}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            货品名称：{{orderDetail.txDetail.productName}}
-          </el-col>
-          <el-col :span="12">
-            货品数量：{{orderDetail.txDetail.productQuantity}}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            支付银行：{{orderDetail.txDetail.payerBank}}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            付款账户：{{orderDetail.txDetail.payerAccount}}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            订单出库仓储：{{confirmOrder.payeeRepo}}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            订单出库仓单编号：{{confirmOrder.payeeRepoCertNo}}
-          </el-col>
-        </el-row>
-       </div>
-      <div class="confirm-btns">
-        <el-button type="primary" @click="confirm">确 定</el-button>
       </div>
     </div>
-  </div>
+    </div>
   </transition>
 </div>
 </template>
@@ -235,15 +260,14 @@
     justify-content: center;
   }
   .modal-confirm{
-    width: 650px;
-    height: 400px;
+    width: 600px;
+    height: 320px;
     box-sizing: border-box;
-    padding: 30px 40px;
     background-color: #fff;
-    border-radius: 6px;
+    border-radius: 4px;
   }
-  .confirm-content el-row {margin-bottom: 2px !important;}
-  .confirm-btns {float:right;margin-top: 5px}
+  .confirm-header{margin-left: 4%}
+  .confirm-content{padding: 10px 15px;}
   @media only screen and (max-width: 640px) {
     .modal-confirm{
       width: 100%;
