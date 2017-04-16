@@ -29,6 +29,7 @@
       </el-col>
       <el-col :span="14" class="userinfo" v-else="">
         <el-dropdown trigger="hover">
+          <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
           <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
@@ -39,9 +40,9 @@
     </el-col>
   </el-row>
   </header>
-  <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
+  <!--<div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>-->
   <main>
-    <aside class="main-left" v-if="companyType === 0">
+    <aside class="main-left" id="main-left" v-if="companyType === 0">
       <menu-by v-if="state.isBuyer==='true'"></menu-by>
       <menu-sl v-else></menu-sl>
     </aside>
@@ -70,7 +71,19 @@
   import MenuWh from './menuWarehousing.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
-
+  window.onload=
+    function(){
+      var oDiv = document.getElementById("main-left");
+      window.onscroll = function()
+      {
+        var s = document.body.scrollTop || document.documentElement.scrollTop;
+        if(s>60) {
+          oDiv.style = "position:fixed;top:0";
+        } else {
+          oDiv.style = ""
+        }
+      }
+    }
 export default {
   name: 'wrapper',
   created: function () {
@@ -148,7 +161,7 @@ export default {
     background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(0,148,218)), to(rgb(0,176,182))); /*兼容Safari／Chrome*/
     background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
     transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
-  header.header-fixed{position: fixed;top: 0;left: 0;right: 0;}
+  /*header.header-fixed{top: 0;left: 0;right: 0;}*/
   header .el-menu-demo{padding-left: 300px!important;}
   .logo { width:230px;height:60px;color:white;font-size: 22px;padding-left:20px;padding-right:20px;padding-top:5px;border:0px}
   .userinfo {
@@ -172,8 +185,21 @@ export default {
   }
   /* 主内容区 */
   main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 0px #E9ECF1;  background-color: #FCFCFC;  }
-  .main-left{text-align: left;-webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;}
-  .main-right{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 20px 30px; overflow: scroll;background-color: rgb(246,246,246);}
+  .main-left{
+      position:absolute;top:60px;left:0;
+      width: 170px;
+      text-align: left;
+      -webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;
+      height: 100%;
+  }
+  /*.main-left::after{*/
+    /*position:fixed;top:0px;left:0;*/
+    /*text-align: left;*/
+    /*-webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;*/
+  /*}*/
+  .main-right{
+    margin-left: 170px;
+    -webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 20px 30px; overflow: scroll;background-color: rgb(246,246,246);}
   .el-menu{background-color: transparent!important;}
   /* 路由切换动效 */
   .fade-enter-active, .fade-leave-active {
