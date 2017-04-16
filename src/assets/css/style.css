@@ -1,8 +1,9 @@
-.buyerTitle{
-  color: rgb(0,150,215);
-}
-.sellerTitle{
-  color: rgb(57,202,166);
+/*引入icon*/
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 .el-row{
   margin-bottom: 10px!important;
@@ -115,6 +116,9 @@
 .buyerColor{
   color: #0096D7;
 }
+.sellerColor{
+  color: rgb(57,202,166);;
+}
 .stateShow{
   margin-left: 10px;
   font-size: 14px;
@@ -170,9 +174,9 @@
 }
 
 .signout .el-form-item__label {
-  width: 30% !important;
-  color: rgb(51,51,51);
-}
+   width: 30% !important;
+   color: rgb(51,51,51);
+ }
 
 .signout .el-select .el-input {
   width: 100% !important;
@@ -183,6 +187,25 @@
   width: 65% !important;
   margin: 0px 2%!important;
 }
+.deliver .mybox {
+  margin-bottom: 20px !important;
+}
+
+.deliver .el-form-item__label {
+  width: 30% !important;
+  color: rgb(51,51,51);
+}
+
+.deliver .el-select .el-input {
+  width: 100% !important;
+  margin: 0px 0.2%!important;
+}
+
+.deliver .el-select, .el-input {
+  width: 65% !important;
+  margin: 0px 2%!important;
+}
+
 
 .signout .el-button {
   float: left;
@@ -231,8 +254,67 @@
   line-height: 50px;
   font-size: 14px;
 }
-.sellerStepTtle{
+.sellerStepTitle{
   color: rgb(57,202,166);
   line-height: 50px;
   font-size: 14px;
+}
+.waybill .el-tabs__item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.waybill .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+.confirmOrder .mybox {
+  margin-bottom: 20px !important;
+}
+
+.confirmOrder .el-form-item__label {
+  width: 30% !important;
+  color: rgb(51,51,51);
+}
+
+.confirmOrder .el-select .el-input {
+  width: 100% !important;
+  margin: 0px 0.2%!important;
+}
+
+.confirmOrder .el-select, .el-input {
+  width: 65% !important;
+  margin: 0px 2%!important;
+}
+.confirmOrder .el-button {
+  float: left;
+  width: 20%;
+  border-radius: 4px;
+  margin: 10px 0;
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+/*.confirmOrder .el-button--primary:focus, .el-button--primary:hover{*/
+  /*background-color: rgb(57,202,166)!important;*/
+  /*border-color: rgb(57,202,166)!important;*/
+/*}*/
+.confirmCard .el-card__body{
+  border: 1px solid rgb(238,238,238);
+}
+
+/*弹出框样式*/
+.modal-confirm .el-form-item__label {
+  width: 45% !important;
+  height: 31px;
+  color: #666666;
+  line-height: 11px!important;
+}
+.modal-confirm .el-row{
+  margin-bottom: 0px!important;
+}
+.modal-confirm .el-col-12{
+  height: 31px;
+}
+.modal-confirm .el-button{
+  width: 20%;
+  float: right;
+  margin-right: 2.5%;
+  border-radius: 3px;
 }

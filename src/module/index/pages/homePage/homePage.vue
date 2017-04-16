@@ -47,6 +47,9 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yszk_G"></use>
+        </svg>
         <span :class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
@@ -64,8 +67,7 @@
               <el-col :span="8">卖家:{{item.payeeAccount}}</el-col>
               <el-col :span="2"></el-col>
             </el-row>
-            <el-row>
-              <el-row class="el-row-content">
+            <el-row class="el-row-content">
                 <el-col :span="6" style="margin-left: 19px;">
                   <el-row>货品名称:{{item.productName}}</el-row>
                   <el-row>货品数量:{{item.productNum}}</el-row>
@@ -95,7 +97,6 @@
                   <el-row style="text-align: center;"><el-button size="mini" type="text"  style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
                   <el-row style="text-align: center;"><el-button size="mini" style="height: 25px">查看详情</el-button></el-row>
                 </el-col>
-              </el-row>
             </el-row>
           </el-row>
         </div>
@@ -107,6 +108,7 @@
 
 <script>
   import '../../../../assets/css/style.css'
+  import '../../../../framework/iconfont.js'
 
 export default {
   name: 'app',

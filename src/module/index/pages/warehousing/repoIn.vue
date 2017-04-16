@@ -1,103 +1,130 @@
 <template>
-  <el-card>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="所有仓储" name="first">
-        <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-          <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
-          <el-col :span="4">所在仓储</el-col>
-          <el-col :span="4">仓储状态</el-col>
-          <el-col :span="4">仓单编号</el-col>
-          <el-col :span="4">仓单状态</el-col>
-          <el-col :span="2">操作</el-col>
-        </el-row>
-        <template v-for="(item,index) in allRepoIn">
-          <div>
-            <el-row class="dataTable">
-              <el-row class="el-row-header">
-                <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.orderNo}}</el-col>
-                <el-col :span="8">订单编号：{{item.orderGenerateTime | timeTransfer}}</el-col>
+  <div>
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
+      <el-breadcrumb-item>入库管理</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-card>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="所有仓储" name="first">
+          <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+            <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
+            <el-col :span="4">所在仓储</el-col>
+            <el-col :span="4">仓储状态</el-col>
+            <el-col :span="4">仓单编号</el-col>
+            <el-col :span="4">仓单状态</el-col>
+            <el-col :span="2">操作</el-col>
+          </el-row>
+          <template v-for="(item,index) in allRepoIn">
+            <div>
+              <el-row class="dataTable">
+                <el-row class="el-row-header">
+                  <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.orderNo}}</el-col>
+                  <el-col :span="8">订单编号：{{item.orderGenerateTime | timeTransfer}}</el-col>
+                </el-row>
+                <el-row class="el-row-content">
+                  <el-col :span="4" style="margin-left: 19px;">
+                    <el-row>货品名称：{{item.productName}}</el-row>
+                    <el-row>货品数量：{{item.productQuantity}}</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>ABC仓储：{{item.productTotalPrice}}</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>待入库</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>暂无</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>暂无</el-row>
+                  </el-col>
+                  <el-col :span="3">
+                    <el-button type="primary" size="small" @click.native.prevent="checkDetail('1')">查看详情</el-button>
+                  </el-col>
+                </el-row>
               </el-row>
-              <el-row class="el-row-content">
-                <el-col :span="4" style="margin-left: 19px;">
-                  <el-row>货品名称：{{item.productName}}</el-row>
-                  <el-row>货品数量：{{item.productQuantity}}</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>ABC仓储：{{item.productTotalPrice}}</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>待入库</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>暂无</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>暂无</el-row>
-                </el-col>
-                <el-col :span="3">
-                  <el-button type="primary" size="small" @click.native.prevent="checkDetail('1')">查看详情</el-button>
-                </el-col>
+            </div>
+          </template>
+        </el-tab-pane>
+        <el-tab-pane label="入库待响应" name="second">
+          <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+            <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
+            <el-col :span="4">所在仓储</el-col>
+            <el-col :span="4">仓储状态</el-col>
+            <el-col :span="4">仓单编号</el-col>
+            <el-col :span="4">仓单状态</el-col>
+            <el-col :span="2">操作</el-col>
+          </el-row>
+          <template v-for="(item,index) in allRepoIn">
+            <div>
+              <el-row class="dataTable">
+                <el-row class="el-row-header">
+                  <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.orderNo}}</el-col>
+                  <el-col :span="8">订单编号：{{item.orderGenerateTime | timeTransfer}}</el-col>
+                </el-row>
+                <el-row class="el-row-content">
+                  <el-col :span="4" style="margin-left: 19px;">
+                    <el-row>货品名称：{{item.productName}}</el-row>
+                    <el-row>货品数量：{{item.productQuantity}}</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>ABC仓储：{{item.productTotalPrice}}</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>待入库</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>暂无</el-row>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-row>暂无</el-row>
+                  </el-col>
+                  <el-col :span="3">
+                    <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+                  </el-col>
+                </el-row>
               </el-row>
-            </el-row>
-          </div>
-        </template>
-      </el-tab-pane>
-      <el-tab-pane label="入库待响应" name="second">
-        <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-          <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
-          <el-col :span="4">所在仓储</el-col>
-          <el-col :span="4">仓储状态</el-col>
-          <el-col :span="4">仓单编号</el-col>
-          <el-col :span="4">仓单状态</el-col>
-          <el-col :span="2">操作</el-col>
-        </el-row>
-        <template v-for="(item,index) in allRepoIn">
-          <div>
-            <el-row class="dataTable">
-              <el-row class="el-row-header">
-                <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.orderNo}}</el-col>
-                <el-col :span="8">订单编号：{{item.orderGenerateTime | timeTransfer}}</el-col>
-              </el-row>
-              <el-row class="el-row-content">
-                <el-col :span="4" style="margin-left: 19px;">
-                  <el-row>货品名称：{{item.productName}}</el-row>
-                  <el-row>货品数量：{{item.productQuantity}}</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>ABC仓储：{{item.productTotalPrice}}</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>待入库</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>暂无</el-row>
-                </el-col>
-                <el-col :span="4">
-                  <el-row>暂无</el-row>
-                </el-col>
-                <el-col :span="3">
-                  <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-                </el-col>
-              </el-row>
-            </el-row>
-          </div>
-        </template>
-      </el-tab-pane>
-      <el-tab-pane label="待入库" name="third">待入库</el-tab-pane>
-      <el-tab-pane label="已入库" name="fourth">已入库</el-tab-pane>
-    </el-tabs>
-  </el-card>
-
+            </div>
+          </template>
+        </el-tab-pane>
+        <el-tab-pane label="待入库" name="third">待入库</el-tab-pane>
+        <el-tab-pane label="已入库" name="fourth">已入库</el-tab-pane>
+      </el-tabs>
+    </el-card>
+    <el-card>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="所有仓储" name="first">
+          <repo-data-table :repoList="allRepoIn" status="all" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="入库待响应" name="second">
+          <repo-data-table :repoList="allRepoIn" status="inForResponse" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="待入库" name="third">
+          <repo-data-table :repoList="allRepoIn" status="forIn" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已入库" name="fourth">
+          <repo-data-table :repoList="allRepoIn" status="alreadyIn" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
+  </div>
 </template>
 <script>
   import store from '../../vuex/store'
+  import repoDataTable from '../../components/repoDataTable.vue'
   export default {
     name:'index',
     data () {
       return {
         activeName: 'first',
-        allRepoIn:[{},{},{}],
+        allRepoIn:[{aaa:1},{aaa:2},{aaa:3},{aaa:3},{aaa:3}],
       };
+    },
+    components:{
+        repoDataTable
     },
     methods: {
       handleClick(tab, event){
