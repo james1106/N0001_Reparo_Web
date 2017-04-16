@@ -38,7 +38,7 @@
               <el-row>
                 <el-col :span="6" class="msgName" style="padding-left: 30px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
-                <el-col :span="6" class="msgName">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+                <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>

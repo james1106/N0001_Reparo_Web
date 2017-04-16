@@ -11,7 +11,7 @@
         <el-tab-pane label="所有运单" name="first">
           <logistics-company-data-table :logisticsCompanyList="allWaybill" status="all" pageSize="10"></logistics-company-data-table>
         </el-tab-pane>
-        <el-tab-pane label="发货待响应" name="second">
+        <el-tab-pane label="发货待确认" name="second">
           <logistics-company-data-table :logisticsCompanyList="allWaybill" status="sendForResponse" pageSize="10"></logistics-company-data-table>
         </el-tab-pane>
         <el-tab-pane label="已发货" name="third">
