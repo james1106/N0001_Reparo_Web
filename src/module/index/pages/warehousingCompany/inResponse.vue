@@ -17,13 +17,19 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button type="primary">同意入库</el-button><el-button type="primary">拒绝</el-button>
+      <el-button type="primary" @click="inResponse">同意入库</el-button>
+      <el-button type="primary" @click="">拒绝</el-button>
     </el-row>
   </div>
 </template>
 <script>
+  import Store from '../../vuex/store.js'
+
   export default {
     name:'index',
+    mounted(){
+      this.getDetails()
+    },
     data () {
       return {
         item:{
@@ -35,6 +41,33 @@
           value:'20,000'
         }
       }
+    },
+    methods:{
+        getDetails(){
+          var param = {repoBusinessNo:Store.state.checkId}
+          this.$http.get('/v1/repository/getRepoBusiHistoryList  ',param,{emulateJSON:true}).then((res) => {
+            console.log(res.body);
+            var code =  res.body.code;
+            if(code != 0){
+              return;
+            }
+            this.item = res.body.data
+          },(err) => {
+            console.log(err);
+          })
+        },
+        inResponse(){
+          var param = {repoBusinessNo:Store.state.checkId}
+          this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
+            console.log(res.body);
+            var code =  res.body.code;
+            if(code != 0){
+              return;
+            }
+          },(err) => {
+            console.log(err);
+          })
+        }
     }
   }
 </script>

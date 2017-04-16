@@ -31,12 +31,12 @@ import receiptsDetails from './pages/warehousing/receiptsDetails.vue'
 
 /*仓储公司*/
 import warehousingCompanyIndex from './pages/warehousingCompany/index.vue'
-import companyAllReceipts from './pages/warehousingCompany/companyAllReceipts.vue'
-import companyReceiptsDetails from './pages/warehousingCompany/companyReceiptsDetails.vue'
+import myRepo from './pages/warehousingCompany/myRepo.vue'
+import repoDetail from './pages/warehousingCompany/repoDetails.vue'
 import inResponse from './pages/warehousingCompany/inResponse.vue'
 import outConfirm from './pages/warehousingCompany/outConfirm.vue'
 import inConfirm from './pages/warehousingCompany/inConfirm.vue'
-import receiptApplyConfirm from './pages/warehousingCompany/receiptApplyConfirm.vue'
+import myReceipt from './pages/warehousingCompany/myReceipt.vue'
 
 /*物流公司*/
 import logisticsCompanyIndex from './pages/logisticsCompany/index.vue'
@@ -104,12 +104,12 @@ export default [
   {
     path:'/warehousingCompany',component:warehousingCompanyIndex,
     children: [
-      {path:'companyAllReceipts',component:companyAllReceipts},
-      {path:'companyReceiptsDetails',component:companyReceiptsDetails},
+      {path:'myRepo/:status',component:myRepo},
+      {path:'repoDetails',component:repoDetail},
       {path:'outConfirm',component:outConfirm},
       {path:'inResponse',component:inResponse},
       {path:'inConfirm',component:inConfirm},
-      {path:'receiptApplyConfirm',component:receiptApplyConfirm},
+      {path:'myReceipt',component:myReceipt},
   ]
   },
 

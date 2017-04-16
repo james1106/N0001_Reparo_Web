@@ -2,7 +2,7 @@
   <div class="box-card">
     <span>出库确认</span>
     <el-row class="row-black row-padding">
-      <el-col :span="8">仓单号：{{item.receiptNum}}</el-col>
+      <el-col :span="8">仓单号：{{item.repoCertNo}}</el-col>
       <el-col :span="8">发起时间：{{item.timeStamp}}</el-col>
     </el-row>
     <el-row class="row-padding">
@@ -30,13 +30,17 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button type="primary">出库确认</el-button><el-button type="primary">取消</el-button>
+      <el-button type="primary" @click="outConfirm()">出库确认</el-button><el-button type="primary">取消</el-button>
     </el-row>
   </div>
 </template>
 <script>
+  import Store from '../../vuex/store.js'
   export default {
     name:'index',
+    mounted(){
+      this.getDetails();
+    },
     data () {
       return {
         item:{
@@ -53,6 +57,33 @@
           remarks:'无',
           value:'20,000'
         }
+      }
+    },
+    methods:{
+      getDetails(){
+        var param = {repoBusinessNo:Store.state.checkId}
+        this.$http.get('/v1/repository/getRepoBusiHistoryList  ',param,{emulateJSON:true}).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.item = res.body.data
+        },(err) => {
+          console.log(err);
+        })
+      },
+      outConfirm(){
+        var param = {repoBusinessNo:Store.state.checkId}
+        this.$http.put('/v1/repository/incomeConfirm',param,{emulateJSON:true}).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+        },(err) => {
+          console.log(err);
+        })
       }
     }
   }
