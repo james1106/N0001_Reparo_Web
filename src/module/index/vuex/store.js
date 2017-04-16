@@ -23,6 +23,7 @@ const state={
   orderTab:"first",//控制订单选中tab
   logisticsTab:"first",//控制物流选中tab
   logisticsCompanyTab:"first",//物流公司选中tab
+  repoCompanyTab:'all' //仓储公司中选中tab
   // accountStatusNo:0
 }
 
@@ -65,6 +66,10 @@ const mutations={
     state.logisticsCompanyTab=logisticsCompanyTab;
     localStorage.setItem('logisticsCompanyTab',logisticsCompanyTab);
   },
+  setRepoCompanyTab (state,repoCompanyTab) {
+    state.repoCompanyTab=repoCompanyTab;
+    localStorage.setItem('repoCompanyTab',repoCompanyTab);
+  }
 }
 
 export default new Vuex.Store({

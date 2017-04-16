@@ -46,7 +46,10 @@ Vue.filter('wayBillStatus',function(value){
   var readableStatus;
   switch(value){
     case constantData.FORSEND:readableStatus="待发货";break;
-    case constantData.SENDED:readableStatus="已发货";break;
+    case constantData.SENDFORRESPONSE:readableStatus="发货待响应";break;
+    case constantData.SENDRED:readableStatus="已发货";break;
+    case constantData.ARRIVED:readableStatus="已送达";break;
+    case constantData.REJECTED:readableStatus="发货被拒绝";break;
     default:readableStatus="暂无";break;
   }
   return readableStatus;

@@ -287,7 +287,7 @@
       }
         this.$http.get("/v1/order/order_list/"+tempRole).then(function(res){
 //        this.$http.get("http://localhost/server_test/getData1.php").then(function(res){
-            console.log("获取到的所有订单: "+res.body);
+            console.log("获取到的所有订单: "+res.body.data.length);
             this.allOrder=res.body.data;
         },
         function(err){

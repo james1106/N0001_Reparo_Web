@@ -66,13 +66,13 @@
       <div>
         <span class="sellerStepTitle">3. 请填写物流信息</span>
       </div>
-      <el-form :model="sendGoodForm" ref="sendGoodForm">
+      <el-form :model="sendGoodForm1" ref="sendGoodForm1">
         <el-tabs v-model="activeName" type="card" @tab-click="">
         <el-tab-pane label="在线选择" name="first">
           <el-col :span="12">
             <el-form-item label="选择物流企业">
-              <el-select v-model="sendGoodForm.logisticsEnterpriseName" placeholder="请选择物流企业" style="width:50%">
-                <template v-for="item in sendGoodForm.logisticsList">
+              <el-select v-model="sendGoodForm1.logisticsEnterpriseName" placeholder="请选择物流企业" style="width:50%">
+                <template v-for="item in sendGoodForm1.logisticsList">
                   <el-option :label="item" :value="item"></el-option>
                 </template>
               </el-select>
@@ -81,10 +81,10 @@
         </el-tab-pane>
         <el-tab-pane label="自己联系" name="second">
           <el-col :span="12">
-            <el-form-item label="填写物流企业"><el-input v-model="sendGoodForm.logistics1"></el-input></el-form-item>
+            <el-form-item label="填写物流企业"><el-input v-model="sendGoodForm1.logistics1"></el-input></el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="填写运单号"><el-input v-model="sendGoodForm.No"></el-input></el-form-item>
+            <el-form-item label="填写运单号"><el-input v-model="sendGoodForm1.No"></el-input></el-form-item>
           </el-col>
         </el-tab-pane>
       </el-tabs>
@@ -114,13 +114,22 @@
           logisticsEnterpriseName:'',
           logisticsList:''
         },
+        sendGoodForm1:{
+          logisticsEnterpriseName:'',
+          logistics1:'',
+          logisticsList:'',
+          No:''
+        },
         activeName: "first",
         orderDetail:''
       }
     },
     methods:{
         confirmSend () {
-            this.$http.post("/v1/waybill/unConfirmedWaybill",sendGoodForm,{emulateJSON:true}).then(function(res){
+          this.sendGoodForm.logisticsEnterpriseName = this.sendGoodForm1.logisticsEnterpriseName
+          this.sendGoodForm.logisticsList = this.sendGoodForm1.logisticsList
+          console.log(this.sendGoodForm)
+            this.$http.post("/v1/waybill/unConfirmedWaybill",this.sendGoodForm,{emulateJSON:true}).then(function(res){
                 console.log(res.body);
                 this.sendGoodForm=res.body.data;
             },function(err){
@@ -131,11 +140,12 @@
     mounted () {
         /*请求物流企业列表*/
         this.$http.get("/v1/account/allEnterpriseName?roleCode=1").then(function(res){
-            this.sendGoodForm.logisticsList=res.body.data;
+            this.sendGoodForm1.logisticsList=res.body.data;
         },function(err){
             console.log(err);
         });
         /*根据订单号请求订单详情并填写*/
+
       this.$http.get("/v1/order/detail?orderNo=" + store.state.checkId).then(
         function (res) {
           // 处理成功的结果

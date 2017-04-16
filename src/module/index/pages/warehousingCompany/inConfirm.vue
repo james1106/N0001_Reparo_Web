@@ -21,13 +21,20 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button type="primary">入库确认</el-button><el-button type="primary">取消</el-button>
+      <el-button type="primary" @click="inConfirm()">入库确认</el-button><
+      el-button type="primary">取消</el-button>
     </el-row>
   </div>
 </template>
 <script>
+  import Store from '../../vuex/store.js'
+
   export default {
     name:'index',
+
+    mounted(){
+      this.getDetails();
+    },
     data () {
       return {
         item:{
@@ -39,6 +46,33 @@
           logistics:'xx物流',
           value:'20,000'
         }
+      }
+    },
+    methods:{
+      getDetails(){
+        var param = {repoBusinessNo:Store.state.checkId}
+        this.$http.get('/v1/repository/getRepoBusiHistoryList  ',param,{emulateJSON:true}).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.item = res.body.data
+        },(err) => {
+          console.log(err);
+        })
+      },
+      inConfirm(){
+        var param = {repoBusinessNo:Store.state.checkId}
+        this.$http.put('/v1/repository/incomeConfirm',param,{emulateJSON:true}).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+        },(err) => {
+          console.log(err);
+        })
       }
     }
   }

@@ -25,7 +25,6 @@
     name:'index',
     data () {
       return {
-//        activeName: 'first',
         allWaybill:[{},{},{}],
       };
     },
@@ -45,8 +44,8 @@
     mounted () {
       this.$http.get("/v1/waybill/allWayBillDetail").then(function(res){
         /*获取企业物流列表*/
-        console.log(res.body);
-        this.allWaybill=res.body.data;
+        console.log('获取物流列表：'+res.body);
+        this.allWaybill=res.body.data.wayBillDetailVoList;
       },function(err){
         console.log(err);
       });
