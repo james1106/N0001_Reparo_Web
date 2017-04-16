@@ -5,6 +5,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>应收账款</el-breadcrumb-item>
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
+      <el-breadcrumb-item>详情</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
       <el-row>
@@ -115,6 +116,31 @@
           isShowHandleBtn:false
         },
         detailInfo:{
+          detailVoList:[{
+            receivableNo:'',
+            orderNo:'',
+            isseDt:'',
+            dueDt:'',
+            pyeeEnterpriseName:'',
+            pyerEnterpriseName:'',
+            isseAmt:'',
+            rate:'',
+            pyeeEnterpriseName:'',
+            pyee:'',
+            pyeeAcctSvcrName:'',
+            pyeeLinkman:'',
+            pyeePhone:'',
+            pyerEnterpriseName:'',
+            pyer:'',
+            pyerAcctSvcrName:'',
+            pyerLinkMan:'',
+            pyerPhone:'',
+            contractNo:'',
+            invoiceNo:''
+          }
+          ],
+          serialVoList: [{
+          }]
         },
         dialogVisible:false,
         msg:''
@@ -160,15 +186,18 @@
           replyerAcctId:'1',//回复人账号
           response:0       //回复意见 0.同意 1.拒绝
         }
-        this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((data) => {
-          console.log(res.body);
+        this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
+          console.log('承兑操作'+res.body);
           var code =  res.body.code;
           if(code != 0){
             return;
           }
           this.dialogVisible = true
           this.msg = "承兑成功"
+
+          this.detailInfo.detailVoList[0].status = constantData.ACCEPTED
           this.currentStatusInfo.isShowHandleBtn = false
+          this.currentStatusInfo.statusSubTitle = '该应收帐款已承兑,您可以进行兑付'
         },(err) => {
           console.log(err);
         })
@@ -177,8 +206,8 @@
         var detailInfo = this.detailInfo.detailVoList[0];
         var cashParam = {
           receivableNo:detailInfo.receivableNo, //应收款编号
-          cashedAmount:detailInfo.isseAmt,//兑付金额
-          response:0       //回复意见 0.同意 1.拒绝
+          cashedAmount:detailInfo.isseAmt,      //兑付金额
+          response:0                            //回复意见 0.同意 1.拒绝
         }
         this.$http.post('/v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
@@ -189,14 +218,29 @@
           this.dialogVisible = true
           this.msg = "兑付成功"
           this.currentStatusInfo.isShowHandleBtn = false
+
+          this.detailInfo.detailVoList[0].status = constantData.FINISH
+          this.currentStatusInfo.isShowHandleBtn = false
+          this.currentStatusInfo.statusSubTitle = '该笔应收帐款已兑付'
         },(err) => {
           console.log(err);
         })
       },
+      /**
+      *  左上角当情详情的信息设置
+      **/
       setStatusInfo(data){
-        //左上角状态信息
         var status = data.detailVoList[0].status;
         var isBuyer = Store.state.isBuyer;
+
+        if(status == constantData.FINISH){ //已结清
+          this.currentStatusInfo.statusSubTitle = '该笔应收帐款已结清'
+          return
+        }
+        if(status == constantData.DISCOUNTED){ //贴现待签收
+          this.currentStatusInfo.statusSubTitle = '贴现待签收'
+          return
+        }
 
         if(isBuyer == 'false'){
           this.currentStatusInfo.statusSubTitle = '等待对方买家操作'
@@ -208,7 +252,7 @@
           this.currentStatusInfo.btnTitle = '承兑确认'
           this.currentStatusInfo.isShowHandleBtn = true
         }else if(isBuyer == 'true' && status == constantData.ACCEPTED){
-          this.currentStatusInfo.statusSubTitle = '改应收帐款已承兑,您可以进行兑付'
+          this.currentStatusInfo.statusSubTitle = '该笔应收帐款已承兑,您可以进行兑付'
           this.currentStatusInfo.btnTitle = '兑付确认'
           this.currentStatusInfo.isShowHandleBtn = true
         }else if(isBuyer == 'false' && status == constantData.ACCEPTED){

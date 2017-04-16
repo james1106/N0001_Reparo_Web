@@ -37,7 +37,7 @@
               <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='false')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmDiscount(item.receivableNo)">贴现账款</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
-              <el-button size="small" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
+              <el-button size="small" @click.native.prevent="showDetail(item.receivableNo,item.orderNo,item.status)">查看详情</el-button>
             </el-col>
           </el-col>
         </el-row>
@@ -114,9 +114,14 @@
             this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
           }
       },
-      showDetail(receivableNo){
-        Store.commit('setCheckId',receivableNo);
-        this.$router.push("/allAccounts/detail/detail");
+      showDetail(receivableNo,orderNo,status){
+        if(status == constantData.CONFIRMED){
+          Store.commit('setCheckId',orderNo);
+          this.$router.push("/order/orderDetail");
+        }else{
+          Store.commit('setCheckId',receivableNo);
+          this.$router.push("/allAccounts/detail/detail");
+        }
       },
       signout(orderNo){
         Store.commit('setCheckId',orderNo);
