@@ -115,6 +115,31 @@
           isShowHandleBtn:false
         },
         detailInfo:{
+          detailVoList:[{
+            receivableNo:'',
+            orderNo:'',
+            isseDt:'',
+            dueDt:'',
+            pyeeEnterpriseName:'',
+            pyerEnterpriseName:'',
+            isseAmt:'',
+            rate:'',
+            pyeeEnterpriseName:'',
+            pyee:'',
+            pyeeAcctSvcrName:'',
+            pyeeLinkman:'',
+            pyeePhone:'',
+            pyerEnterpriseName:'',
+            pyer:'',
+            pyerAcctSvcrName:'',
+            pyerLinkMan:'',
+            pyerPhone:'',
+            contractNo:'',
+            invoiceNo:''
+          }
+          ],
+          serialVoList: [{
+          }]
         },
         dialogVisible:false,
         msg:''

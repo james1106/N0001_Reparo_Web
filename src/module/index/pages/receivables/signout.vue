@@ -128,6 +128,18 @@
     data () {
       return {
         orderDetail:{
+          txDetail:{
+            orderId:'',
+            payerAccount:'',
+            productTotalPrice:'',
+            productName:'',
+            productQuantity:'',
+            payerRepo:'',
+            payeeRepoCertNo:'',
+            payerBank:'',
+            payerAccount:'',
+            operationRecordVoList:[{}]
+          }
         },
         signoutInfo:{
           isseAmt:'',    //票面金额
