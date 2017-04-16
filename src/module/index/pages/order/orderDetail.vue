@@ -38,7 +38,7 @@
               <el-row>
                 <el-col :span="6" class="msgName" style="padding-left: 30px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
-                <el-col :span="6" class="msgName">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+                <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
@@ -151,8 +151,8 @@
             <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton">查看详情 ></el-button>
           </div>
           <div class="box-card mycard1" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
-            <div v-if="orderDetail.repoOver.repoLatestStatus===constantData.NOMESSAGE"><!--买家和卖家状态字段不同-->
-              暂无仓储信息！
+            <div v-if="orderDetail.repoOver.payerRepoBusiState<constantData.INFORRESPONSE"><!--买家和卖家状态字段不同-->
+              暂无仓储信息！<!--买家在入库待响应时开始有显示-->
             </div>
             <div v-else>
             <el-row>
@@ -160,7 +160,7 @@
               <el-col :span="6" class="msgName">入库申请时间：{{orderDetail.repoOver.inApplyTime | timeTransfer}}</el-col>
             </el-row>
             <el-row>
-              <el-col :span="6" class="msgName">仓储公司：{{orderDetail.repoOver.payeeRepoCompany}}</el-col>
+              <el-col :span="6" class="msgName">仓储公司：{{orderDetail.txDetail.payerRepo}}</el-col>
             </el-row>
             <el-row>
               <el-col :span="6" class="msgName">最新仓储状态：{{orderDetail.repoOver.payerRepoBusiState | repoStatus}}</el-col>
@@ -176,8 +176,8 @@
             </div>
           </div>
           <div class="box-card mycard1" v-if="state.isBuyer==='false'">
-            <div v-if="orderDetail.repoOver.repoLatestStatus===constantData.NOMESSAGE">
-              暂无仓储信息！
+            <div v-if="orderDetail.repoOver.payeeRepoBusiState<constantData.OUTFORRESPONSE">
+              暂无仓储信息！<!--卖家在出库待响应时开始有显示-->
             </div>
             <div v-else>
             <el-row>
@@ -186,7 +186,8 @@
               <el-col :span="6" class="msgName" v-if="orderDetail.repoOver.payeeRepoBusiState>=constantData.CONFIRMED">出库申请时间：{{orderDetail.repoOver.outApplyTime | timeTransfer}}</el-col>
             </el-row>
             <el-row>
-              <el-col :span="6" class="msgName">仓储公司：{{orderDetail.repoOver.payerRepoCompany}}</el-col>
+              <el-col :span="6" class="msgName" v-if="orderDetail.txDetail.payeeRepo===''">暂无仓储信息</el-col>
+              <el-col :span="6" class="msgName" v-else>仓储公司：{{orderDetail.txDetail.payeeRepo}}</el-col>
               <!--注意这里多了一个字段-->
               <el-col :span="6" class="msgName">持有人：{{orderDetail.repoOver.payerRepoCompany}}</el-col>
             </el-row>

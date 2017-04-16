@@ -46,7 +46,10 @@ Vue.filter('wayBillStatus',function(value){
   var readableStatus;
   switch(value){
     case constantData.FORSEND:readableStatus="待发货";break;
-    case constantData.SENDED:readableStatus="已发货";break;
+    case constantData.SENDFORRESPONSE:readableStatus="发货待响应";break;
+    case constantData.SENDRED:readableStatus="已发货";break;
+    case constantData.ARRIVED:readableStatus="已送达";break;
+    case constantData.REJECTED:readableStatus="发货被拒绝";break;
     default:readableStatus="暂无";break;
   }
   return readableStatus;
@@ -55,10 +58,28 @@ Vue.filter('wayBillStatus',function(value){
 Vue.filter('repoStatus',function(value){
   var readableStatus;
   switch(value){
+    case constantData.INFORRESPONSE:readableStatus="入库待响应";break;
+    case constantData.FORIN:readableStatus="待入库";break;
+    case constantData.ALREADYIN:readableStatus="已入库";break;
+    case constantData.OUTFORRESPONSE:readableStatus="出库待响应";break;
+    case constantData.FOROUT:readableStatus="待出库";break;
+    case constantData.ALREADYOUT:readableStatus="已出库";break;
     default:readableStatus="暂无";break;
   }
   return readableStatus;
 })
+/*仓单状态*/
+Vue.filter('repoCertStatus',function(value){
+  var readableStatus;
+  switch(value){
+    case constantData.CANFLOW:readableStatus="可流转";break;
+    case constantData.FROZEN:readableStatus="冻结中";break;
+    case constantData.DISABLED:readableStatus="已失效";break;
+    default:readableStatus="暂无";break;
+  }
+  return readableStatus;
+})
+/*支付方式*/
 Vue.filter('payingMethod',function(value){
   var readableStatus;
   switch(value){
@@ -68,11 +89,20 @@ Vue.filter('payingMethod',function(value){
   }
   return readableStatus;
 })
-
+/*时间转化*/
 Vue.filter('timeTransfer',function(value){
+  if(value===''||value===0){
+    return "暂无"
+  }
   return new Date(value).toLocaleString().replace(/\//g, "-");
 })
-
+/*数据为空的情况统一处理*/
+Vue.filter('nullSituation',function(value){
+  if(value===''){
+    return "暂无";
+  }
+  return value;
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -44,8 +44,10 @@
       },
     },
     mounted () {
-      this.$http.get().then(function(res){
+      this.$http.get("/v1/repository/getRepoCertInfoList").then(function(res){
         /*获取所有仓单列表*/
+        console.log(res.body);
+        this.allReceipts=res.body.data;
       },function(err){
         console.log(err);
       });

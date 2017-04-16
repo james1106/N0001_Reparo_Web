@@ -19,9 +19,9 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="6" class="msgName keynote">运单号：</el-col>
-                <el-col :span="6" class="msgName">物流公司：</el-col>
-                <el-col :span="6" class="msgName">入库时间：</el-col>
+                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.orderNo}}</el-col>
+                <el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName}}</el-col>
+                <el-col :span="6" class="msgName">入库时间：{{}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">物流跟踪：</el-col>
@@ -39,20 +39,20 @@
             <div class="box-card mycard1">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">运单号：</el-col>
-                <el-col :span="6" class="msgName">发货仓储：</el-col>
-                <el-col :span="6" class="msgName">货品仓单编号：</el-col>
+                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.waybillNo}}</el-col>
+                <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
+                <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">收货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">收货人：</el-col>
-                <el-col :span="6" class="msgName">收货仓储：</el-col>
+                <el-col :span="6" class="msgName">收货人：{{logisticsDetail.receiverEnterpriseName}}</el-col>
+                <el-col :span="6" class="msgName">收货仓储：{{logisticsDetail.receiverRepoEnterpriseName}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">货品信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">货品信息：</el-col>
-                <el-col :span="6" class="msgName">货品数量(箱)：</el-col>
-                <el-col :span="6" class="msgName">货品单价(元)：</el-col>
+                <el-col :span="6" class="msgName">货品名称：{{logisticsDetail.productName}}</el-col>
+                <el-col :span="6" class="msgName">货品数量：{{logisticsDetail.productQuantity}}</el-col>
+                <el-col :span="6" class="msgName">货品单价(元)：{{logisticsDetail.productValue/logisticsDetail.productQuantity}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -63,10 +63,23 @@
 
 </template>
 <script>
+  import store from '../../vuex/store'
+  import constantData from '../../../../common/const'
   export default {
     name:'index',
     data () {
-      return {}
+      return {
+          logisticsDetail:''
+      }
+    },
+    mounted () {
+//        请求物流详情接口　
+        this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(function(res){
+            console.log(res.body);
+            this.logisticsDetail=res.body.data;
+        },function(err) {
+            console.log(err);
+        });
     }
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>仓单详情</div>
+  <div>入库响应</div>
 </template>
 <script>
   export default {

@@ -31,7 +31,8 @@
             </el-col>
             <el-col :span="2">
               <el-row>账款状态</el-row>
-              <el-row>{{item.receStatus | receStatus}}</el-row>
+              <el-row v-if="item.transactionStatus===constantData.CONFIRMED">{{constantData.CONFIRMED | receStatus}}</el-row>
+              <el-row v-else>{{item.receStatus | receStatus}}</el-row>
             </el-col>
             <el-col :span="2">
               <el-row>仓储状态</el-row>
@@ -90,13 +91,6 @@
       constantData () {
         return constantData;
       },
-      activeName () {
-        if(store.state.isBuyer==='false'){
-          return store.state.orderTab;}
-        else {
-          return "first";
-        }
-      }
     },
     methods:{
       currentChange(val){

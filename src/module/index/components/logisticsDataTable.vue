@@ -1,30 +1,38 @@
 <template>
-  <div id="receiptDataTable">
+  <div id="logisticsDataTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-      <el-col :span="6" style="margin-left: 19px">货品信息</el-col>
-      <el-col :span="6">所在仓储</el-col>
-      <el-col :span="6">仓单状态</el-col>
-      <el-col :span="4">操作</el-col>
+      <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
+      <el-col :span="6">货品信息</el-col>
+      <el-col :span="6">物流状态</el-col>
+      <el-col :span="4" style="text-align: center">操作</el-col>
     </el-row>
     <template v-for="(item,index) in showData">
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoBusinessNo | nullSituation}}</el-col><!--后台的数据传的是仓储业务编号 不对吧:(-->
+            <el-col :span="6" style="margin-left: 19px;">运单编号：{{item.waybillNo}}</el-col>
+            <el-col :span="6">订单编号：{{item.orderNo}}</el-col>
+            <el-col :span="8">收货人：{{item.receiverEnterpriseName}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">
+              <el-row>物流公司：{{item.logisticsEnterpriseName}}</el-row>
+              <el-row>货品仓储：{{item.senderRepoEnterpriseName}}</el-row>
+            </el-col>
+            <el-col :span="6">
               <el-row>货品名称：{{item.productName}}</el-row>
               <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
             <el-col :span="6">
-              <el-row>{{item.repoEnterpriseName}}</el-row>
-            </el-col>
-            <el-col :span="6">
-              <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
+              <el-row>已发货</el-row>
             </el-col>
             <el-col :span="4">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusinessNo)">查看详情</el-button><!--根据仓储业务编号竟然查到了仓单信息，是这样嘛？-->
+              <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.FORSEND"><!--待发货-->
+                <el-button size="mini" type="text" @click.native.prevent="deliver(item.orderNo)">申请发货</el-button>
+              </el-row>
+              <el-row style="text-align: center;">
+                <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+              </el-row>
             </el-col>
           </el-row>
         </el-row>
@@ -44,23 +52,24 @@
   import constantData from '../../../common/const'
   import '../../../assets/css/style.css'
   export default {
-    name: 'receiptDataTable',
-    props: ['receiptList','status','pageSize'],
+    name: 'logisticsDataTable',
+    props: ['logisticsList','status','pageSize'],
     data(){
       return{
-        tableData:this.receiptList,
+        tableData:this.logisticsList,
         showData:[],
-        accountsStatus:this.status
+        accountsStatus:this.status,
+        detailPath:''
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
-      console.log(this.receiptList);
+      console.log(this.logisticsList);
 
       this.getDataByStatus();
       this.getDataByPageNum(0);
     },
     watch:{
-      receiptList(curVal){
+      logisticsList(curVal){
         console.log(curVal);
         this.tableData=curVal;
         this.getDataByStatus();
@@ -82,29 +91,11 @@
       getDataByStatus(){/*筛选出各个Tab状态*/
         switch(this.status){
           case 'all':break;
-          case 'canFlow':/*可流转*/
+          case 'forSend':/*待发货*/
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.repoCertStatus===constantData.CANFLOW){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-          case 'frozen':/*冻结中*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.repoCertStatus===constantData.FROZEN){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-          case 'disabled':/*已失效*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.repoCertStatus===constantData.DISABLED){
+              if(item.waybillStatusCode===constantData.FORSEND){
                 res.push(item)
               }
             }
@@ -120,13 +111,17 @@
         }
       },
 
-      checkDetail (checkId) {
+      checkDetail (orderNo) {
 //        alert(this.tableData);
 
-        store.commit('setCheckId',checkId);
+        store.commit('setCheckId',orderNo);
         console.log(store.state.checkId);
-        this.$router.push("/warehousing/receiptsDetails");
+        this.$router.push("/logistics/wayBillDetails");
       },
+      deliver(orderNo){
+        store.commit('setCheckId',orderNo);
+        this.$router.push('/logistics/deliver');
+      }
     }
   }
 </script>

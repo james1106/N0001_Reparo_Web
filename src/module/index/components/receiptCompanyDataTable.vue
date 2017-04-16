@@ -50,7 +50,8 @@
       return{
         tableData:this.receiptList,
         showData:[],
-        accountsStatus:this.status
+        receiptStatus:this.status,
+        detailPath:''
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
@@ -80,37 +81,17 @@
         this.getDataByPageNum(val - 1)
       },
       getDataByStatus(){/*筛选出各个Tab状态*/
-        switch(this.status){
-          case 'all':break;
-          case 'canFlow':/*可流转*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.repoCertStatus===constantData.CANFLOW){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-          case 'frozen':/*冻结中*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.repoCertStatus===constantData.FROZEN){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-          case 'disabled':/*已失效*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.repoCertStatus===constantData.DISABLED){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-          default:break;
+        if(this.repoStatus == 0){
+          return
         }
+        var res=[];
+        for(var i=0;i<this.tableData.length;i++ ){
+          var item = this.tableData[i];
+          if(item.status == this.repoStatus){
+            res.push(item)
+          }
+        }
+        this.tableData = res;
       },
       getDataByPageNum(pageNum){
         if((pageNum + 1) * this.pageSize > this.tableData.length){
@@ -119,13 +100,10 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
         }
       },
-
       checkDetail (checkId) {
-//        alert(this.tableData);
-
         store.commit('setCheckId',checkId);
         console.log(store.state.checkId);
-        this.$router.push("/warehousing/receiptsDetails");
+        this.$router.push('');
       },
     }
   }

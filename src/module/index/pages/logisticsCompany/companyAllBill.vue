@@ -1,75 +1,61 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="所有运单" name="first">
-      <el-card>
-        <el-table
-          :data="tableData"
-          border:false
-          class="el-table"
-          style="width: auto;">
-          <el-table-column
-            prop="receiptNum"
-            label="仓单编号"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="owner"
-            label="持有人"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="state"
-            label="状态"
-            width="100">
-          </el-table-column>
-          <el-table-column
-            prop="operateTime"
-            label="操作时间"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="option"
-            label="查看"
-            width="114">
-            <template scope="scope">
-              <el-button><router-link to="/logisticsCompany/companyBillDetails">立即查看</router-link></el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
-    </el-tab-pane>
-    <el-tab-pane label="已发货" name="second">已发货</el-tab-pane>
-    <el-tab-pane label="已收货" name="third">已收货</el-tab-pane>
-  </el-tabs>
+  <div class="waybill">
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>运单管理</el-breadcrumb-item>
+      <el-breadcrumb-item>我的运单</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-card>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="所有运单" name="first">
+          <logistics-company-data-table :logisticsCompanyList="allWaybill" status="all" pageSize="10"></logistics-company-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="发货待确认" name="second">
+          <logistics-company-data-table :logisticsCompanyList="allWaybill" status="sendForResponse" pageSize="10"></logistics-company-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已发货" name="third">
+          <logistics-company-data-table :logisticsCompanyList="allWaybill" status="sended" pageSize="10"></logistics-company-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已送达" name="fourth">
+          <logistics-company-data-table :logisticsCompanyList="allWaybill" status="received" pageSize="10"></logistics-company-data-table>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
+  </div>
 </template>
 <script>
+  import store from '../../vuex/store'
+  import logisticsCompanyDataTable from '../../components/logisticsCompanyDataTable.vue'
   export default {
     name:'index',
     data () {
       return {
-        activeName: 'first',
-        tableData:[{
-          receiptNum: '2017-03-31 10:00:00',
-          owner: 'A公司',
-          state:'可质押',
-          operateTime: ''
-        }, {
-          receiptNum: '20170403234567',
-          owner: 'B公司',
-          state:'可质押',
-          operateTime: '2017-03-31 10:00:00'
-        }, {
-          receiptNum: '20170403123567',
-          owner: 'C公司',
-          state:'已失效',
-          operateTime: '2017-03-31 10:00:00'
-        }]
+//        activeName: 'first',
+        allWaybill:[{},{},{}],
       };
+    },
+    computed:{
+      activeName () {
+        return store.state.logisticsCompanyTab;
+      }
+    },
+    components:{
+      logisticsCompanyDataTable
     },
     methods: {
       handleClick(tab, event){
         console.log(tab, event);
-      }
+      },
+    },
+    mounted () {
+      this.$http.get("/v1/waybill/allWayBillDetail").then(function(res){
+        /*获取企业物流列表*/
+        console.log(res.body);
+        this.allWaybill=res.body.data;
+      },function(err){
+        console.log(err);
+      });
     }
   }
 </script>

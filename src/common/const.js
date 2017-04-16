@@ -13,11 +13,11 @@ const constantData={
   FINISH:1,/*应收账款已结清*/
 
   /*运单状态*/
-  FORSEND : 1,/*待发货 未定*/
+  FORSEND : 0,/*待发货*/
   SENDFORRESPONSE:1,/*发货待响应*/
-  SENDREJECTED:2,/*发货被拒绝*/
-  SENDED : 3,/*已发货*/
-  RECEIVED:4,/*已送达*/
+  SENDRED:2,/*已发货*/
+  ARRIVED : 3,/*已送达*/
+  REJECTED:4,/*发货被拒绝*/
 
   /*仓储状态*/
   INFORRESPONSE:1,/*入库待响应*/
@@ -26,6 +26,11 @@ const constantData={
   OUTFORRESPONSE:4,/*出库待响应*/
   FOROUT:5,/*待出库*/
   ALREADYOUT:6,/*已出库*/
+
+  /*仓单状态*/
+  CANFLOW:1,/*可流转，所有已入库货品的仓单*/
+  FROZEN:2,/*冻结中，所有待出库货品*/
+  DISABLED:3,/*已失效，所有已出库货品*/
 }
 
 export default constantData

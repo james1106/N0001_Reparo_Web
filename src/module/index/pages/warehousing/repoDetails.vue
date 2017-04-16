@@ -18,26 +18,30 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="8" class="msgName keynote">仓储业务编号：</el-col>
-                <el-col :span="8" class="msgName">仓储状态：</el-col>
-                <el-col :span="8" class="msgName" v-if="state.isBuyer==='true'">入库时间：</el-col>
-                <el-col :span="8" class="msgName" v-else>出库时间：</el-col>
+                <el-col :span="8" class="msgName keynote">仓储业务编号：{{repoDetails.repoBusiNo}}</el-col>
+                <el-col :span="8" class="msgName">仓储状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col><!--卖家和买家会显示混合-->
+                <el-col :span="8" class="msgName" v-if="state.isBuyer==='true'">入库时间：{{repoDetails.inRepoTime | timeTransfer}}</el-col>
+                <el-col :span="8" class="msgName" v-else>出库时间：{{repoDetails.outRepoTime | timeTransfer}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName keynote">仓单编号：</el-col>
-                <el-col :span="8" class="msgName">仓储机构：</el-col>
+                <el-col :span="8" class="msgName keynote" v-if="repoDetails.repoCertNo===''">仓单编号：暂无</el-col>
+                <el-col :span="8" class="msgName keynote" v-else>仓单编号：{{repoDetails.repoCertNo}}</el-col>
+                <el-col :span="8" class="msgName">仓储机构：{{repoDetails.repoEnterpriceName}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">货品名称：</el-col>
-                <el-col :span="8" class="msgName">货品数量：</el-col>
-                <el-col :span="8" class="msgName">货品总额(元)：</el-col>
+                <el-col :span="8" class="msgName">货品名称：{{repoDetails.productName}}</el-col>
+                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}</el-col>
+                <el-col :span="8" class="msgName">货品总额(元)：{{repoDetails.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">物流公司：</el-col>
-                <el-col :span="8" class="msgName">物流运单号：</el-col>
+                <el-col :span="8" class="msgName">物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">物流运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">仓储状态明细：</el-col>
+              </el-row>
+              <el-row v-for="item in repoDetails.operationRecordVoList">
+                <el-col :span="8" class="msgName">{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -48,6 +52,7 @@
 </template>
 <script>
   import store from '../../vuex/store'
+  import constantData from '../../../../common/const'
   export default {
     name:'index',
     data () {
@@ -55,7 +60,8 @@
         repoDetails:{
           serialNumber:'20170403123456',
           state:'已入库',
-          storageTime:'2017-08-01'
+          storageTime:'2017-08-01',
+          operationRecordVoList:[],
         }
       }
     },
@@ -65,10 +71,24 @@
       }
     },
     mounted () {
-        this.$http.get().then(function(){
+        this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkId).then(function(res){
 //            请求仓储详情数据
-        },function(){
-
+          console.log(res.body);
+          this.repoDetails=res.body.data;
+          for(item in this.repoDetails.operationRecordVoList){
+              if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
+                  this.repoDetails.inRepoTime=item.operateTime;
+                  break;
+              }
+          }
+          for(item in this.repoDetails.operationRecordVoList){
+              if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
+                  this.repoDetails.outRepoTime=item.operateTime;
+                  break;
+              }
+          }
+        },function(err){
+            console.log(err)
         });
     }
   }

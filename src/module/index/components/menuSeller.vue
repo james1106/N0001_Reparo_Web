@@ -55,6 +55,12 @@
         console.log(Store.state.orderTab);
 //        this.$router.push("/order/allOrder");
       },
+      sendGood () {
+         Store.commit('setLogisticsTab',"second");
+      },
+      myLogistics () {
+         Store.commit('setLogisticsTab',"first");
+      }
 
     }
   }

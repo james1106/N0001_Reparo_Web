@@ -12,8 +12,8 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.orderNo}}</el-col>
-            <el-col :span="8">订单编号：{{item.orderGenerateTime | timeTransfer}}</el-col>
+            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusinessNo}}</el-col>
+            <el-col :span="8">订单编号：{{item.orderNo}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="4" style="margin-left: 19px;">
@@ -21,19 +21,20 @@
               <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-row>ABC仓储：{{item.productTotalPrice}}</el-row>
+              <el-row>{{item.repoEnterpriceName}}</el-row><!--所在仓储-->
             </el-col>
             <el-col :span="4">
-              <el-row>待入库</el-row>
+              <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->
             </el-col>
             <el-col :span="4">
-              <el-row>暂无</el-row>
+              <el-row v-if="item.repoCertNo===''">暂无</el-row><!--仓单编号-->
+              <el-row v-else>{{item.repoCertNo}}</el-row><!--仓单编号-->
             </el-col>
             <el-col :span="4">
-              <el-row>暂无</el-row>
+              <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row><!--仓单状态-->
             </el-col>
             <el-col :span="3">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail()">查看详情</el-button>
+              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusinessNo)">查看详情</el-button>
             </el-col>
           </el-row>
         </el-row>
@@ -84,13 +85,6 @@
       constantData () {
         return constantData;
       },
-      activeName () {
-        if(store.state.isBuyer==='false'){
-          return store.state.orderTab;}
-        else {
-          return "first";
-        }
-      }
     },
     methods:{
       currentChange(val){
@@ -103,7 +97,7 @@
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.transactionStatus===constantData.UNCONFIRMED){
+              if(item.curRepoBusiStatus===constantData.INFORRESPONSE){
                 res.push(item)
               }
             }
@@ -112,7 +106,7 @@
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if((item.receStatus===constantData.FORACCEPT)||(item.transactionStatus===constantData.CONFIRMED)){
+              if(item.curRepoBusiStatus===constantData.FORIN){
                 res.push(item)
               }
             }
@@ -121,7 +115,7 @@
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.receStatus===constantData.ACCEPTED){
+              if(item.curRepoBusiStatus===constantData.ALREADYIN){
                 res.push(item)
               }
             }
@@ -130,7 +124,7 @@
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.wayBillStatus===constantData.SENDED){
+              if(item.curRepoBusiStatus===constantData.FOROUT){
                 res.push(item)
               }
             }
@@ -139,7 +133,7 @@
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.wayBillStatus===constantData.SENDED){
+              if(item.curRepoBusiStatus===constantData.ALREADYOUT){
                 res.push(item)
               }
             }
@@ -155,10 +149,10 @@
         }
       },
 
-      checkDetail () {
+      checkDetail (checkId) {
 //        alert(this.tableData);
 
-//        store.commit('setCheckId',orderNo);
+        store.commit('setCheckId',checkId);
         console.log(store.state.checkId);
         this.$router.push("/warehousing/repoDetails");
       },
