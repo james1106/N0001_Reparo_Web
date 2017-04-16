@@ -13,7 +13,7 @@
         </el-submenu>
         <el-submenu index="/cangdan">
         <template slot="title"><i class="el-icon-menu"></i>仓单管理</template>
-          <el-menu-item index="/warehousingCompany/companyAllReceipts">我的仓单</el-menu-item>
+          <el-menu-item index="/warehousingCompany/myReceipt">我的仓单</el-menu-item>
           <el-menu-item index="/warehousingCompany/receiptApplyConfirm">仓单申请确认</el-menu-item>
         </el-submenu>
       </el-menu>

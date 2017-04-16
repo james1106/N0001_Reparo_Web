@@ -100,13 +100,10 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
         }
       },
-
       checkDetail (checkId) {
-//        alert(this.tableData);
-
         store.commit('setCheckId',checkId);
         console.log(store.state.checkId);
-        this.$router.push("/warehousing/receiptsDetails");
+        this.$router.push('');
       },
     }
   }
