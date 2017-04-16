@@ -20,7 +20,9 @@ const state={
   },
   accountsStatus:'all',  //应收账款中当前选中的状态
   isBuyer:"true",   //我是买家
-  orderTab:"first",
+  orderTab:"first",//控制订单选中tab
+  logisticsTab:"first",//控制物流选中tab
+  logisticsCompanyTab:"first",//物流公司选中tab
   // accountStatusNo:0
 }
 
@@ -54,7 +56,15 @@ const mutations={
   setOrderTab (state,orderTab) {
     state.orderTab=orderTab;
     localStorage.setItem('orderTab',orderTab);
-  }
+  },
+  setLogisticsTab (state,logisticsTab) {
+    state.logisticsTab=logisticsTab;
+    localStorage.setItem('logisticsTab',logisticsTab);
+  },
+  setLogisticsCompanyTab (state,logisticsCompanyTab) {
+    state.logisticsCompanyTab=logisticsCompanyTab;
+    localStorage.setItem('logisticsCompanyTab',logisticsCompanyTab);
+  },
 }
 
 export default new Vuex.Store({

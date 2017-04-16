@@ -1,40 +1,41 @@
 <template>
-  <div id="repoDataTable">
+  <div id="logisticsCompanyDataTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-      <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
-      <el-col :span="4">所在仓储</el-col>
-      <el-col :span="4">仓储状态</el-col>
-      <el-col :span="4">仓单编号</el-col>
-      <el-col :span="4">仓单状态</el-col>
-      <el-col :span="2">操作</el-col>
+      <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
+      <el-col :span="6">货品信息</el-col>
+      <el-col :span="6">物流状态</el-col>
+      <el-col :span="4" style="text-align: center">操作</el-col>
     </el-row>
     <template v-for="(item,index) in showData">
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusinessNo}}</el-col>
-            <el-col :span="8">订单编号：{{item.orderNo}}</el-col>
+            <el-col :span="6" style="margin-left: 19px;">运单编号：{{item.waybillNo}}</el-col>
+            <el-col :span="6">订单编号：{{item.orderNo}}</el-col>
+            <el-col :span="8">收货人：{{item.receiverEnterpriseName}}</el-col>
           </el-row>
           <el-row class="el-row-content">
-            <el-col :span="4" style="margin-left: 19px;">
+            <el-col :span="6" style="margin-left: 19px;">
+              <el-row>物流公司：{{item.logisticsCompanyEnterpriseName}}</el-row>
+              <el-row>货品仓储：{{item.senderRepoEnterpriseName}}</el-row>
+            </el-col>
+            <el-col :span="6">
               <el-row>货品名称：{{item.productName}}</el-row>
               <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
-            <el-col :span="4">
-              <el-row>{{item.repoEnterpriceName}}</el-row><!--所在仓储-->
+            <el-col :span="6">
+              <el-row>已发货</el-row>
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->
-            </el-col>
-            <el-col :span="4">
-              <el-row v-if="item.repoCertNo===''">暂无</el-row><!--仓单编号-->
-              <el-row v-else>{{item.repoCertNo}}</el-row><!--仓单编号-->
-            </el-col>
-            <el-col :span="4">
-              <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row><!--仓单状态-->
-            </el-col>
-            <el-col :span="3">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusinessNo)">查看详情</el-button>
+              <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.SENDFORRESPONSE"><!--发货待响应-->
+                <el-button size="mini" type="text" @click.native.prevent="sendConfirm(item.orderNo)">发货确认</el-button>
+              </el-row>
+              <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.SENDED"><!--已发货-->
+                <el-button size="mini" type="text" @click.native.prevent="receiveConfirm(item.orderNo)">收货确认</el-button>
+              </el-row>
+              <el-row style="text-align: center;">
+                <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+              </el-row>
             </el-col>
           </el-row>
         </el-row>
@@ -54,25 +55,25 @@
   import constantData from '../../../common/const'
   import '../../../assets/css/style.css'
   export default {
-    name: 'repoDataTable',
-    props: ['repoList','status','pageSize'],
+    name: 'logisticsCompanyDataTable',
+    props: ['logisticsCompanyList','status','pageSize'],
     data(){
       return{
-        tableData:this.repoList,
+        tableData:this.logisticsCompanyList,
         showData:[],
         accountsStatus:this.status,
         detailPath:''
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
-      console.log(this.repoList);
+      console.log(this.logisticsCompanyList);
 
       this.getDataByStatus();
       this.getDataByPageNum(0);
     },
     watch:{
-      repoList(curVal){
-          console.log(curVal);
+      logisticsCompanyList(curVal){
+        console.log(curVal);
         this.tableData=curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
@@ -93,47 +94,29 @@
       getDataByStatus(){/*筛选出各个Tab状态*/
         switch(this.status){
           case 'all':break;
-          case 'inForResponse':/*入库待响应*/
+          case 'sendForResponse':/*发货待响应*/
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.INFORRESPONSE){
+              if(item.waybillStatusCode===constantData.SENDFORRESPONSE){
                 res.push(item)
               }
             }
             this.tableData = res;break;
-          case 'forIn':/*待入库*/
+          case 'sended':/*已发货*/
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.FORIN){
+              if(item.waybillStatusCode===constantData.SENDED){
                 res.push(item)
               }
             }
             this.tableData = res;break;
-          case 'alreadyIn':/*已入库*/
+          case 'received':/*已送达*/
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.ALREADYIN){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-          case 'forOut':/*待出库*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.FOROUT){
-                res.push(item)
-              }
-            }
-            this.tableData = res;break;
-            case 'alreadyOut':/*已出库*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
-              var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.ALREADYOUT){
+              if(item.waybillStatusCode===constantData.RECEIVED){
                 res.push(item)
               }
             }
@@ -149,13 +132,22 @@
         }
       },
 
-      checkDetail (checkId) {
+      checkDetail (orderNo) {
 //        alert(this.tableData);
 
-        store.commit('setCheckId',checkId);
+        store.commit('setCheckId',orderNo);
         console.log(store.state.checkId);
-        this.$router.push("/warehousing/repoDetails");
+        this.$router.push("/logisticsCompany/companyBillDetails");
       },
+      sendConfirm(orderNo){
+        store.commit('setCheckId',orderNo);
+        this.$router.push('/logisticsCompany/sendConfirm');
+      },
+      receiveConfirm(orderNo){
+        store.commit('setCheckId',orderNo);
+        this.$router.push('/logisticsCompany/receiveConfirm');
+      },
+
     }
   }
 </script>

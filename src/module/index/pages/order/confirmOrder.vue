@@ -96,7 +96,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            订单出库仓储：{{confirmOrder.payeeRepo}}
+            订单出库仓储：{{confirmOrder.payeeRepoName}}
           </el-col>
         </el-row>
         <el-row>

@@ -24,6 +24,11 @@ const constantData={
   OUTFORRESPONSE:4,/*出库待响应*/
   FOROUT:5,/*待出库*/
   ALREADYOUT:6,/*已出库*/
+
+  /*仓单状态*/
+  CANFLOW:1,/*可流转，所有已入库货品的仓单*/
+  FROZEN:2,/*冻结中，所有待出库货品*/
+  DISABLED:3,/*已失效，所有已出库货品*/
 }
 
 export default constantData

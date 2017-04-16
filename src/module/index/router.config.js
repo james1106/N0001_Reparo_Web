@@ -82,7 +82,7 @@ export default [
     path:'/logistics',component:logisticsIndex,
     children:[
       {path:'deliver',component:deliver},
-      {path:'myWaybill',component:myWaybill},
+      {path:'myWaybill/:value',component:myWaybill},
       {path:'wayBillDetails',component:wayBillDetails},
     ]
   },
@@ -117,7 +117,7 @@ export default [
   {
     path:'/logisticsCompany',component:logisticsCompanyIndex,
     children:[
-      {path:'companyAllBill',component:companyAllBill},
+      {path:'companyAllBill/:value',component:companyAllBill},
       {path:'companyBillDetails',component:companyBillDetails},
       {path:'sendConfirm',component:sendConfirm},
       {path:'receiveConfirm',component:receiveConfirm},

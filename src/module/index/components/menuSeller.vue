@@ -17,8 +17,8 @@
         </el-submenu>
         <el-submenu index="/logistics">
           <template slot="title"><img src="../assets/wl_g.png" class="menuImag">物流管理</template>
-          <el-menu-item index="/logistics/deliver">发货</el-menu-item>
-          <el-menu-item index="/logistics/myWaybill">我的物流</el-menu-item>
+          <el-menu-item index="/logistics/myWaybill/a" @click="sendGood">发货</el-menu-item>
+          <el-menu-item index="/logistics/myWaybill/b" @click="myLogistics">我的物流</el-menu-item>
         </el-submenu>
         <el-submenu index="/warehousing">
           <template slot="title"><img src="../assets/cc_g.png" class="menuImag">仓储管理</template>
@@ -53,6 +53,12 @@
         console.log(Store.state.orderTab);
 //        this.$router.push("/order/allOrder");
       },
+      sendGood () {
+         Store.commit('setLogisticsTab',"second");
+      },
+      myLogistics () {
+         Store.commit('setLogisticsTab',"first");
+      }
 
     }
   }
