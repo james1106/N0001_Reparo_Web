@@ -75,12 +75,13 @@
       accept(){
         var acceptParam = {
             receivableNo:this.detailInfo.detailVoList[0].receivableNo, //应收款编号
-            replyerAcctId:'',//回复人账号
+            replyerAcctId:'1',//回复人账号
             response:0       //回复意见 0.同意 1.拒绝
         }
 
         this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
+          var code = res.body.code
           if(code != 0){
             return;
           }

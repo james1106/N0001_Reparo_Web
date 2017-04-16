@@ -53,7 +53,7 @@
 
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="onSubmit('launchOrder')">贴现确认</el-button>
+          <el-button type="primary" @click.native.prevent="discount()">贴现确认</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -98,15 +98,16 @@
       }
     },
     methods:{
-      accept(){
+      discount(){
         var discountParam = {
             receivableNo:this.detailInfo.detailVoList[0].receivableNo,       //应收款编号
             applicantAcctId:LocalStore.fetchUserInfo().acctIds,   //申请人(本人)账号
-            replyerAcctId:'',      //回复人账号
+            replyerAcctId:'1',      //回复人账号
             discountApplyAmount:this.detailInfo.detailVoList[0].isseAmt //申请贴现金额
         }
         this.$http.post('/v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
+          var code =  res.body.code;
           if(code != 0){
             return;
           }

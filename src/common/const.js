@@ -9,6 +9,8 @@ const constantData={
   FORACCEPT : 21,/*应收账款承兑待签收*/
   ACCEPTED : 26,/*应收账款承兑已签收*/
   DISCOUNTED:41,/*应收账款贴现待签收*/
+  CASHED:31,/*应收账款已兑付*/
+  FINISH:1,/*应收账款已结清*/
 
   /*运单状态*/
   FORSEND : 1,/*待发货 未定*/
