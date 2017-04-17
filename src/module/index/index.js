@@ -91,6 +91,7 @@ Vue.filter('payingMethod',function(value){
 })
 /*时间转化*/
 Vue.filter('timeTransfer',function(value){
+  console.log(value);
   if(value===''||value===0){
     return "暂无"
   }
@@ -98,7 +99,7 @@ Vue.filter('timeTransfer',function(value){
 })
 /*数据为空的情况统一处理*/
 Vue.filter('nullSituation',function(value){
-  if(value===''){
+  if(value===''||value===0){
     return "暂无";
   }
   return value;

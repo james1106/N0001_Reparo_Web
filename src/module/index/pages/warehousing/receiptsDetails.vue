@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow "><i class="el-icon-information"></i> 仓单当前状态</el-col>
+        <el-col class="buyerColor stateShow "><i class="el-icon-information"></i> 仓单当前状态：{{receiptsDetails.repoCertStatus | repoCertStatus}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -22,20 +22,20 @@
                 <el-col :span="6" class="msgName keynote">仓单编号：{{receiptsDetails.repoCertNo | nullSituation}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">保管人：{{receiptsDetails.storerAddress}}</el-col>
-                <el-col :span="6" class="msgName">持有人：{{receiptsDetails.holderAddress}}</el-col>
-                <el-col :span="6" class="msgName">保管仓储：{{receiptsDetails.repoEnterpriseAddress}}</el-col><!--productLocation字段是什么-->
-                <el-col :span="6" class="msgName">签发时间：{{receiptsDetails.repoCreateDate | timeTransfer}}</el-col><!--传的是数字-->
+                <el-col :span="6" class="msgName">保管人：{{receiptsDetails.storerName}}</el-col>
+                <el-col :span="6" class="msgName">持有人：{{receiptsDetails.holderName}}</el-col>
+                <el-col :span="6" class="msgName">保管仓储：{{receiptsDetails.repoEnterpriseName}}</el-col>
+                <el-col :span="6" class="msgName">签发时间：{{receiptsDetails.repoCreateDate}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">货品名称：{{receiptsDetails.productName}}</el-col>
-                <el-col :span="6" class="msgName">货品数量：{{receiptsDetails.productQuantity}}</el-col>
+                <el-col :span="6" class="msgName">货品数量：{{receiptsDetails.productQuantity}}{{receiptsDetails.measureUnit}}</el-col>
                 <el-col :span="6" class="msgName">货品总额(元)：{{receiptsDetails.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">仓单状态明细：</el-col>
               </el-row>
-              <el-row v-for="item in receiptsDetails.operationRecordVoList">
+              <el-row v-for="item in receiptsDetails.repoCertHisList">
                 <el-col :span="8" class="msgName">{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>

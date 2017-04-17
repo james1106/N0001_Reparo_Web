@@ -62,6 +62,8 @@
           state:'已入库',
           storageTime:'2017-08-01',
           operationRecordVoList:[],
+          inRepoTime:'',
+          outRepoTime:''
         }
       }
     },
@@ -75,14 +77,18 @@
 //            请求仓储详情数据
           console.log(res.body);
           this.repoDetails=res.body.data;
-          for(item in this.repoDetails.operationRecordVoList){
+          this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
+          this.repoDetails.outRepoTime='';
+          for(var item in this.repoDetails.operationRecordVoList){
               if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
+                console.log("筛选入库时间");
                   this.repoDetails.inRepoTime=item.operateTime;
                   break;
               }
           }
-          for(item in this.repoDetails.operationRecordVoList){
+          for(var item in this.repoDetails.operationRecordVoList){
               if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
+                console.log("筛选出库时间");
                   this.repoDetails.outRepoTime=item.operateTime;
                   break;
               }

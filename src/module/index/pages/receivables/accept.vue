@@ -38,7 +38,7 @@
 </template>
 <script>
   import Store from '../../vuex/store'
-
+import userInfo from '../../../../common/store'
   export default {
     name:'signout',
     created:function () {
@@ -75,7 +75,7 @@
       accept(){
         var acceptParam = {
             receivableNo:this.detailInfo.detailVoList[0].receivableNo, //应收款编号
-            replyerAcctId:'1',//回复人账号
+            replyerAcctId:userInfo.fetchUserInfo().acctIds,//回复人账号
             response:0       //回复意见 0.同意 1.拒绝
         }
 

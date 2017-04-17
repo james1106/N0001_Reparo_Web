@@ -120,7 +120,7 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="订单出库仓储">
-                <el-label>{{confirmOrder.payeeRepo}}</el-label>
+                <el-label>{{confirmOrder.payeeRepoName}}</el-label>
               </el-form-item>
             </el-col>
           </el-row>
@@ -190,7 +190,7 @@
          function(res){console.log(res.body);},
          function(err){console.log(err)}
          );
-//        this.$router.push('/forDeliver(发货 后面用到)');
+        this.$router.push("/allAccounts/signout/signout");//签发应收账款
       }
     },
     mounted () {

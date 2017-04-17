@@ -48,7 +48,7 @@
       }
     },
     mounted () {
-        this.$http.get("/v1/repository/getRepoBusiList?role=0").then(function(res){
+        this.$http.get("/v1/repository/getRepoBusiList?role=1").then(function(res){
             /*获取入库管理列表*/
             console.log(res.body);
             this.allRepoIn=res.body.data;

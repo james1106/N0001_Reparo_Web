@@ -12,7 +12,7 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusinessNo}}</el-col>
+            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo}}</el-col>
             <el-col :span="8">订单编号：{{item.orderNo}}</el-col>
           </el-row>
           <el-row class="el-row-content">
@@ -31,10 +31,10 @@
               <el-row v-else>{{item.repoCertNo}}</el-row><!--仓单编号-->
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row><!--仓单状态-->
+              <el-row>{{item.repoCertStatus | repoCertStatus | nullSituation}}</el-row><!--仓单状态-->
             </el-col>
             <el-col :span="3">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusinessNo)">查看详情</el-button>
+              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
             </el-col>
           </el-row>
         </el-row>

@@ -69,7 +69,9 @@
     name:'index',
     data () {
       return {
-          logisticsDetail:''
+          logisticsDetail:{
+              inRepoTime:''
+          }
       }
     },
     mounted () {
@@ -77,6 +79,12 @@
         this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(function(res){
             console.log(res.body);
             this.logisticsDetail=res.body.data;
+          for(item in this.logisticsDetail.operationRecordVoList){
+            if(item.state===constantData.ARRIVED){/*筛选入库时间*/
+              this.repoDetails.inRepoTime=item.operateTime;
+              break;
+            }
+          }
         },function(err) {
             console.log(err);
         });

@@ -10,7 +10,7 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoBusinessNo | nullSituation}}</el-col><!--后台的数据传的是仓储业务编号 不对吧:(-->
+            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoCertNo | nullSituation}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">
@@ -24,7 +24,7 @@
               <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusinessNo)">查看详情</el-button><!--根据仓储业务编号竟然查到了仓单信息，是这样嘛？-->
+              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoCertNo)">查看详情</el-button>
             </el-col>
           </el-row>
         </el-row>

@@ -13,11 +13,11 @@ const constantData={
   FINISH:1,/*应收账款已结清*/
 
   /*运单状态*/
-  FORSEND : 0,/*待发货*/
-  SENDFORRESPONSE:1,/*发货待响应*/
-  SENDRED:2,/*已发货*/
-  ARRIVED : 3,/*已送达*/
-  REJECTED:4,/*发货被拒绝*/
+  FORSEND : 1,/*待发货*/
+  SENDFORRESPONSE:2,/*发货待响应*/
+  SENDRED:4,/*已发货*/
+  ARRIVED : 5,/*已送达*/
+  REJECTED:3,/*发货被拒绝*/
 
   /*仓储状态*/
   INFORRESPONSE:1,/*入库待响应*/
