@@ -39,7 +39,7 @@
             <div class="box-card mycard1">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.waybillNo}}</el-col>
+                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo}}</el-col>
                 <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
                 <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>

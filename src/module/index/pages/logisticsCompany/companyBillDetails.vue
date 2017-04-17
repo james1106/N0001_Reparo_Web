@@ -44,7 +44,7 @@
             <div class="box-card mycard1">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.waybillNo}}</el-col>
+                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo}}</el-col>
                 <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
                 <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>
@@ -92,7 +92,7 @@
       this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(function(res){
         console.log(res.body);
         this.logisticsDetail=res.body.data;
-        this.logisticsDetail.productPrice=(this.logisticsDetail.productQuantity===''||this.logisticsDetail.productQuantity===0) ? '暂无':logisticsDetail.productValue/logisticsDetail.productQuantity;
+        this.logisticsDetail.productPrice=(this.logisticsDetail.productQuantity===''||this.logisticsDetail.productQuantity===0) ? '暂无':this.logisticsDetail.productValue/this.logisticsDetail.productQuantity;
       },function(err) {
         console.log(err);
       });
