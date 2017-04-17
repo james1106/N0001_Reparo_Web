@@ -37,11 +37,11 @@
               <el-input v-model="launchOrder.productQuantity"></el-input>
             </el-form-item>
           </el-col>
-          <!--<el-col :span="12">
+          <el-col :span="12">
             <el-form-item label="订单金额">
-              <el-input v-model="launchOrder.totalPrice"></el-input>
+              <div class="el-input">{{launchOrder.productUnitPrice*launchOrder.productQuantity}}</div>
             </el-form-item>
-          </el-col>-->
+          </el-col>
         </el-row>
         <div>
           <span class="buyerStepTitle">2. 请填写付款信息</span>
