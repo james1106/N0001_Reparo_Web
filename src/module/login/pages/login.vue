@@ -52,7 +52,7 @@
         opacity: 1,
         size: 10,  //圈圈大小
         size_random: true,
-        nb: 150,
+        nb: 70,  //数量
         line_linked: {
           enable_auto: true,
           distance: 150,
@@ -61,13 +61,13 @@
           width: 2,   //线条宽度
           condensed_mode: {
             enable: false,
-            rotateX: 600,
-            rotateY: 600
+            rotateX: 1000,
+            rotateY: 1000
           }
         },
         anim: {
           enable: true,
-          speed: 40    //速度
+          speed: 5   //速度
         }
       },
       interactivity: {
@@ -154,14 +154,23 @@
     /*border-bottom: 20px solid transparent;*/
     /*border-left: 20px solid darkkhaki;*/
   /*}*/
+  html,body, canvas{
+    height:140%!important;
+    width: 100%!important;
+    overflow:hidden;
+  }
+  body{
+    margin: 0px!important;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    /*font-family: 'PingFangSC-Regular'!important;*/
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 50px;
+    padding-top: 50px;
+    width: 100%;
+    height: 100%;
   }
   .login-container {
     position: relative;

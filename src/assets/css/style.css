@@ -49,7 +49,6 @@
   height: 80px;
   background-image: url("../../module/index/assets/bg.png");
   background-repeat: no-repeat;
-  float: right!important;
 }
 .showMesg{
   margin-left: 10%;
@@ -318,3 +317,27 @@
   margin-right: 2.5%;
   border-radius: 3px;
 }
+
+
+li .el-menu-item{
+  padding-left: 28.4%!important;
+}
+.el-icon-arrow-down:before{
+  content: ""!important;
+}
+.el-submenu .el-menu-item:hover, .el-submenu__title:hover{
+  background-color: #f4f4f4!important;
+}
+
+body{
+  min-width: 1225px!important;
+  overflow: auto;
+  /*height: 100%;*/
+}
+/*html{*/
+  /*height: 100%;*/
+/*}*/
+.el-menu{
+  height: 100%;
+}
+

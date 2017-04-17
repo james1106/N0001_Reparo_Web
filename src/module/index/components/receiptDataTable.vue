@@ -50,8 +50,7 @@
       return{
         tableData:this.receiptList,
         showData:[],
-        accountsStatus:this.status,
-        detailPath:''
+        accountsStatus:this.status
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/

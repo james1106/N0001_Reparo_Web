@@ -533,7 +533,7 @@ window.particlesJS = function(tag_id, params){
   canvas_el.style.width = "100%";
   canvas_el.style.height = "100%";
   canvas_el.style.marginTop = "-100%";
-  // canvas_el.style.backgroundColor = "rgb(249,250,250)";
+  canvas_el.style.backgroundColor = "#f9fafa";
 
   /* append canvas */
   var canvas = document.getElementById(tag_id).appendChild(canvas_el);
@@ -542,5 +542,4 @@ window.particlesJS = function(tag_id, params){
   if(canvas != null){
     launchParticlesJS(tag_id, params);
   }
-
 };

@@ -1,11 +1,8 @@
 <template>
-  <div id="repoCompany">
-  <el-tabs :value="state.repoCompanyTab">
+  <div id="receiptCompany">
+  <el-tabs value="state.repoCompanyTab">
     <el-tab-pane label="所有仓单" name="all">
       <receipt-data-table :receiptList="receiptList" status="0" pageSize="10"></receipt-data-table>
-    </el-tab-pane>
-    <el-tab-pane label="待确认" name="inResponse">
-      <receipt-data-table :receiptList="receiptList" status="1" pageSize="10"></receipt-data-table>
     </el-tab-pane>
     <el-tab-pane label="可质押" name="inResponse">
      <receipt-data-table :receiptList="receiptList" status="1" pageSize="10"></receipt-data-table>
@@ -21,9 +18,9 @@
   import Store from '../../vuex/store.js'
 
   export default {
-    name:'repoCompany',
+    name:'receiptCompany',
     mounted () {
-      this.getRepoList()
+      this.getReceiptList()
     },
     components:{
       receiptDataTable
@@ -40,36 +37,33 @@
       return {
         activeName: 'first',
         receiptList:[{
-          repoBusiNo:'1111',
-          status:3,
-          repoCertNo:'343242',
-          repoCertStatus:'ssds'
+          repoBusinessNo:'1111',
+          productName:3,
+          productQuantity:'343242',
+          repoEnterpriseName:'ssds',
+          repoCertStatus:'',
         },
           {
-            repoBusiNo:'1111',
-            status:2,
-            repoCertNo:'343242',
-            repoCertStatus:'ssds'
+            repoBusinessNo:'1111',
+            productName:3,
+            productQuantity:'343242',
+            repoEnterpriseName:'ssds',
+            repoCertStatus:'',
           },
           {
-            repoBusiNo:'1111',
-            status:1,
-            repoCertNo:'343242',
-            repoCertStatus:'ssds'
-          },
-          {
-            repoBusiNo:'1111',
-            status:1,
-            repoCertNo:'343242',
-            repoCertStatus:'ssds'
+            repoBusinessNo:'1111',
+            productName:3,
+            productQuantity:'343242',
+            repoEnterpriseName:'ssds',
+            repoCertStatus:'',
           }]
       };
     },
     methods: {
-        getRepoList(){
-          this.$http.get("/v1/repository/getRepoBusiList?role=2").then(function(res){
+      getReceiptList(){
+          this.$http.get("/v1/repository/getRepoCertInfoList").then(function(res){
             console.log(res.body);
-            this.repoList=res.body.data;
+            this.receiptList=res.body.data;
           },function(err){
             console.log(err);
           });

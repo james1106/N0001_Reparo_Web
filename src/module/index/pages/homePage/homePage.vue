@@ -1,56 +1,89 @@
 <template>
   <div>
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
+      <!--<img src="../../assets/combinedShape.png" class="combinedShape">-->
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
     </el-breadcrumb>
+    <el-row v-if="$route.params.isBuyer==='true'">  <!--买家-->
+      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">买入的订单</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-yszk_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">应付账款</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-cc_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">我的仓储</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="6" style="float: right">
+        <img src="../../assets/mai_B.png" style="height: 80px;float: right">
+      </el-col>
+    </el-row>
+    <el-row v-else>  <!--卖家-->
+      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">卖出的订单</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-yszk_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">应收账款</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-cc_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">我的物流</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+        <el-card class="showCard">
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-cc_o"></use> </svg>
+          <div class="showMesg">
+            <span class="showName">待确认订单</span> <br>
+            <span class="showNum">1000</span>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="4" style="float: right">
+        <img src="../../assets/mai_G.png" style="height: 80px;float: right">
+      </el-col>
+    </el-row>
     <el-row>
-      <el-col :span="6" style="margin-right: 15px">
-        <el-row><el-card class="showCard">
-          <img src="../../assets/dd.png" style="float: left">
-          <div class="showMesg">
-            <span class="showName">全部订单</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card></el-row>
-        <el-row><el-card class="showCard">
-          <img src="../../assets/wl.png" style="float: left">
-          <div class="showMesg">
-            <span class="showName">全部订单</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card></el-row>
-      </el-col>
-      <el-col :span="6" style="margin-right: 15px">
-        <el-row><el-card class="showCard">
-          <img src="../../assets/yszk.png" style="float: left">
-          <div class="showMesg">
-            <span class="showName">全部订单</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card></el-row>
-        <el-row><el-card class="showCard">
-          <img src="../../assets/cc.png" style="float: left">
-          <div class="showMesg">
-            <span class="showName">全部订单</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card></el-row>
-      </el-col>
-      <el-col :span="11">
-        <el-row >
-          <el-card style="height: 170px;width: 100%;">
-
-          </el-card>
-        </el-row>
-      </el-col>
+      <img src="../../assets/ad.png" style="width: 100%">
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-yszk_G"></use>
-        </svg>
-        <span :class="[{buyerTitle:$route.params.isBuyer==='true',sellerTitle:$route.params.isBuyer==='false'}]">待办订单</span>
+        <span :class="[{buyerColor:$route.params.isBuyer==='true',sellerColor:$route.params.isBuyer==='false'}]">待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -109,7 +142,6 @@
 <script>
   import '../../../../assets/css/style.css'
   import '../../../../framework/iconfont.js'
-
 export default {
   name: 'app',
   mounted: function (){
