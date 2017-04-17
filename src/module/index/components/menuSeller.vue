@@ -18,8 +18,8 @@
           </el-submenu>
           <el-submenu index="/logistics">
             <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>物流管理</template>
-            <el-menu-item index="/logistics/deliver">发货</el-menu-item>
-            <el-menu-item index="/logistics/myWaybill">我的物流</el-menu-item>
+            <el-menu-item index="/logistics/myWaybill/a" @click="sendGood">发货</el-menu-item>
+            <el-menu-item index="/logistics/myWaybill/b" @click="myLogistics">我的物流</el-menu-item>
           </el-submenu>
           <el-submenu index="/warehousing">
             <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>仓储管理</template>

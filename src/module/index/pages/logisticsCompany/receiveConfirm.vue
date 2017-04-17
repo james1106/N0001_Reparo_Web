@@ -63,16 +63,20 @@
         console.log("发货确认");
         this.confirmSend.orderNo=store.state.checkId;
         console.log(this.confirmSend);
-        this.$http.post("/v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
-          function(res){console.log(res.body);},
-          function(err){console.log(err)}
+        this.$http.put("/v1/waybill/receivedStatus?orderNo="+store.state.checkId).then(
+          function(res){
+            console.log(res.body);
+          },
+          function(err){
+            console.log(err);
+          }
         );
 //        this.$router.push('/forDeliver(发货 后面用到)');
       },
       cancelConfirm () {}
     },
     mounted () {
-      this.$http.put("/v1/waybill/receivedStatus?orderNo="+store.state.checkId).then(
+      this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(
         function(res){
           console.log(res.body);
           this.companyBillDetail=res.body.data;
