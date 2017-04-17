@@ -191,12 +191,9 @@ export default {
       text-align: left;
       -webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;
       height: 100%;
+      background-color: white;
+      z-index: 999;
   }
-  /*.main-left::after{*/
-    /*position:fixed;top:0px;left:0;*/
-    /*text-align: left;*/
-    /*-webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;*/
-  /*}*/
   .main-right{
     margin-left: 170px;
     -webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 20px 30px; overflow: scroll;background-color: rgb(246,246,246);}
