@@ -15,7 +15,7 @@ const constantData={
   /*运单状态*/
   FORSEND : 1,/*待发货*/
   SENDFORRESPONSE:2,/*发货待响应*/
-  SENDRED:4,/*已发货*/
+  SENDED:4,/*已发货*/
   ARRIVED : 5,/*已送达*/
   REJECTED:3,/*发货被拒绝*/
 

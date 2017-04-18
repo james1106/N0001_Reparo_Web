@@ -9,10 +9,10 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow " :span="8"><i class="el-icon-information"></i> 物流当前状态：{{}}从list中取</el-col>
+        <el-col class="sellerColor stateShow " :span="8"><i class="el-icon-information"></i> 物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
         <el-col :span="8">
-          <el-button type="success" size="small" v-if="0" @click.native.prevent="sendConfirm">发货确认</el-button>
-          <el-button type="success" size="small" v-if="0" @click.native.prevent="receiveConfirm">送达确认</el-button>
+          <el-button type="success" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDFORRESPONSE" @click.native.prevent="sendConfirm(logisticsDetail.orderNo)">发货确认</el-button>
+          <el-button type="success" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDED" @click.native.prevent="receiveConfirm(logisticsDetail.orderNo)">送达确认</el-button>
         </el-col>
       </el-row>
 
@@ -24,12 +24,15 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.orderNo}}</el-col>
+                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | wayBillStatus}}</el-col>
                 <!--<el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName}}</el-col>-->
-                <el-col :span="6" class="msgName">入库时间：{{}}</el-col>
+                <el-col :span="6" class="msgName">入库时间：{{logisticsDetail.inRepoTime | timeTransfer | nullSituation}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">物流跟踪：</el-col>
+              </el-row>
+              <el-row v-for="item in logisticsDetail.operationRecordVo">
+                <el-col :span="6">{{item.state | wayBillStatus}}:{{item.operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -44,7 +47,7 @@
             <div class="box-card mycard1">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo}}</el-col>
+                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | wayBillStatus}}</el-col>
                 <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
                 <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>
@@ -75,16 +78,24 @@
     data () {
       return {
         logisticsDetail:{
-            productPrice:''
+            productPrice:'',
+          inRepoTime:''
         },
       }
     },
+    computed:{
+        constantData () {
+            return constantData;
+        }
+    },
     methods:{
-      sendConfirm () {
-
+      sendConfirm (checkId) {
+          store.commit('setCheckId',checkId);
+          this.$router.push("/logisticsCompany/sendConfirm");
       },
-      receiveConfirm () {
-
+      receiveConfirm (checkId) {
+          store.commit('setCheckId',checkId);
+          this.$router.push("/logisticsCompany/receiveConfirm");
       }
     },
     mounted () {
@@ -93,6 +104,14 @@
         console.log(res.body);
         this.logisticsDetail=res.body.data;
         this.logisticsDetail.productPrice=(this.logisticsDetail.productQuantity===''||this.logisticsDetail.productQuantity===0) ? '暂无':this.logisticsDetail.productValue/this.logisticsDetail.productQuantity;
+        this.logisticsDetail.inRepoTime='';
+        for(var item in this.logisticsDetail.operationRecordVo){
+            var temp=this.logisticsDetail.operationRecordVo[item];
+          if(temp.state===constantData.ARRIVED){/*筛选入库时间*/
+            this.logisticsDetail.inRepoTime=temp.operateTime;
+            break;
+          }
+        }
       },function(err) {
         console.log(err);
       });

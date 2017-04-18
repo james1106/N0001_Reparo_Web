@@ -25,7 +25,7 @@
     name:'index',
     data () {
       return {
-        allWaybill:[{},{},{}],
+        allWaybill:[],
       };
     },
     computed:{
