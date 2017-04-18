@@ -44,37 +44,13 @@
     },
     data () {
       return {
-        activeName: 'first',
-        repoList:[{
-          repoBusiNo:'1111',
-          status:3,
-          repoCertNo:'343242',
-          repoCertStatus:'ssds'
-        },
-          {
-            repoBusiNo:'1111',
-            status:2,
-            repoCertNo:'343242',
-            repoCertStatus:'ssds'
-          },
-          {
-            repoBusiNo:'1111',
-            status:1,
-            repoCertNo:'343242',
-            repoCertStatus:'ssds'
-          },
-          {
-            repoBusiNo:'1111',
-            status:1,
-            repoCertNo:'343242',
-            repoCertStatus:'ssds'
-          }]
+        repoList:[]
       };
     },
     methods: {
         getRepoList(){
-          this.$http.get("/v1/repository/getRepoBusiList?role=2").then(function(res){
-            console.log(res.body);
+          this.$http.get("/v1/repository/getRepoBusiList?role=3").then(function(res){
+            console.log(res.body.data);
             this.repoList=res.body.data;
           },function(err){
             console.log(err);

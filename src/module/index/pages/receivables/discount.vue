@@ -40,11 +40,13 @@
         <span class="sellerStepTtle">2. 请选择贴现银行</span>
       </div>
       <el-row>
-        <el-form ref="discount" :model="discountParam" :label-position="labelPosition" :rules="discountRules">
+        <el-form ref="discount" :model="bankOption" :label-position="labelPosition" :rules="discountRules">
           <el-col :span="12">
             <el-form-item label="请选择贴现银行" prop="bankOption">
-              <el-select v-model="bankOption" placeholder="请选择开户行">
-                <el-option :label="bankOption" :value="bankOption"></el-option>
+              <el-select v-model="bankOption.bankSvcr" placeholder="请选择开户行">
+                <template v-for="item in bankOption.bankList">
+                  <el-option :label="item.bankName" :value="item.bankSvcr"></el-option>
+                </template>
               </el-select>
             </el-form-item>
           </el-col>
@@ -63,25 +65,19 @@
 <script>
   import LocalStore from '../../../../common/store'
   import Store from '../../vuex/store'
+
   export default {
     name:'discount',
     created:function () {
-      this.bankOption = LocalStore.fetchUserInfo().acctSvcrName
       this.getDetail()
+      this.getBankList();
     },
     data () {
       return {
-        bankOption:'',
-        data:[
-          {
-            bianhao:"20170403123456",
-            shoukuanfang:"A企业",
-            fukuanfang:"B企业",
-            zhandan:"20，000",
-            lixi:"4%",
-            data:"2018-01-30"
-          }
-        ],
+        bankOption:{
+          bankSvcr:'',
+          bankList:[]
+        },
         detailInfo:{
           detailVoList:[{
             receivableNo:'',
@@ -102,7 +98,7 @@
         var discountParam = {
             receivableNo:this.detailInfo.detailVoList[0].receivableNo,       //应收款编号
             applicantAcctId:LocalStore.fetchUserInfo().acctIds,   //申请人(本人)账号
-            replyerAcctId:'1',      //回复人账号
+            replyerAcctId:this.bankOption.bankSvcr,      //回复人账号
             discountApplyAmount:this.detailInfo.detailVoList[0].isseAmt //申请贴现金额
         }
         this.$http.post('/v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
@@ -131,6 +127,19 @@
           //详情数据
           this.detailInfo = data;
           this.setStatusInfo(data);
+        },(err) => {
+          console.log(err);
+        })
+      },
+      getBankList(){
+        this.$http.post('/v1/receivable/discountApplyBankList').then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          var data =  res.body.data;
+          if(code != 0){
+            return;
+          }
+          this.bankOption.bankList = data;
         },(err) => {
           console.log(err);
         })

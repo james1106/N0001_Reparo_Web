@@ -11,14 +11,14 @@
       <el-form-item prop="acctSvcrName" >
         <el-input v-model="ruleForm.acctSvcrName"  type="text"  auto-complete="off" placeholder="开户行"></el-input>
       </el-form-item>
-      <el-form-item prop="acctIds">
+      <el-form-item prop="acctIds>
         <el-input v-model="ruleForm.acctIds"  placeholder="账号"></el-input>    <!--v-model传值-->
       </el-form-item>
       <el-form-item prop="roleCode" style="height: 20px;text-align: left">
         <el-radio-group v-model="ruleForm.roleCode">
           <el-radio name="roleCode" label="0">融资企业</el-radio>
-          <el-radio name="roleCode" label="1">仓储公司</el-radio>
-          <el-radio name="roleCode" label="2">物流公司</el-radio>
+          <el-radio name="roleCode" label="2">仓储公司</el-radio>
+          <el-radio name="roleCode" label="1">物流公司</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-row class="agreeMsg"><span class="tip">点击注册表示你已阅读并同意<span style="color:rgb(57,202,166);">《xxx条款》</span></span></el-row>

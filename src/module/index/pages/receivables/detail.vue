@@ -102,6 +102,7 @@
 <script>
   import Store from '../../vuex/store'
   import constantData from '../../../../common/const'
+  import LocalStore from '../../../../common/store'
 
   export default {
     name:'detail',
@@ -150,7 +151,7 @@
         getDetail(){
           var detailParam = {
             receivableNo:Store.state.checkId,
-            operatorAcctId:''
+            operatorAcctId:LocalStore.fetchUserInfo().acctIds
           }
           this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
             console.log(res.body);
@@ -183,7 +184,7 @@
         var detailInfo = this.detailInfo.detailVoList[0];
         var acceptParam = {
           receivableNo:detailInfo.receivableNo, //应收款编号
-          replyerAcctId:'1',//回复人账号
+          replyerAcctId:LocalStore.fetchUserInfo().acctIds,//回复人账号
           response:0       //回复意见 0.同意 1.拒绝
         }
         this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {

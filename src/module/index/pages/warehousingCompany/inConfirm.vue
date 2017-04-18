@@ -2,18 +2,18 @@
   <div class="box-card">
     <span>发货申请单详情</span>
     <el-row class="row-black row-padding">
-      <el-col :span="8">业务编号：{{item.orderId}}</el-col>
+      <el-col :span="8">业务编号：{{item.repoBusiNo}}</el-col>
       <el-col :span="8">发起时间：{{item.timeStamp}}</el-col>
     </el-row>
     <el-row class="row-padding">
       <el-col :span="16">
         <el-row>
-          <el-col :span="12">申请人：{{item.sender}}</el-col>
-          <el-col :span="12">运单号：{{item.logisticNum}}</el-col>
+          <el-col :span="12">申请人：{{item.storeEnterpriseName}}</el-col>
+          <el-col :span="12">运单号：{{item.waybillNo}}</el-col>
         </el-row>
         <el-row>
-          <el-col :span="12">物流公司：{{item.logistics}}</el-col>
-          <el-col :span="12">货物价值：{{item.value}}</el-col>
+          <el-col :span="12">物流公司：{{item.logisticsEntepsName}}</el-col>
+          <el-col :span="12">货物价值：{{item.productTotalPrice}}</el-col>
         </el-row>
         <el-row>
           <el-col :span="12">仓库编号:<el-input></el-input></el-col>
