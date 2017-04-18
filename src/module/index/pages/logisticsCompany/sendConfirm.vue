@@ -29,10 +29,10 @@
           <el-col :span="6" class="msgName" style="margin-left: 19px">物流公司：{{companyBillDetail.logisticsEnterpriseName}}</el-col>
         </el-row>
       </el-row>
-      <el-row class="confirmBtn">
+      <el-row >
         <el-col :span="12" style="text-align: left;margin-top: 10px">
-          <el-button type="primary" @click="sendConfirm(companyBillDetail.orderNo)">确认</el-button>
-          <el-button type="primary" @click="cancelConfirm">取消</el-button>
+          <el-button class="confirmBtn" type="primary" @click="sendConfirm(companyBillDetail.orderNo)">确认</el-button>
+          <el-button class="confirmBtn" type="primary" @click="cancelConfirm">取消</el-button>
         </el-col>
       </el-row>
     </el-card>
