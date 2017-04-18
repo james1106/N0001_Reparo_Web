@@ -322,9 +322,9 @@
 li .el-menu-item{
   padding-left: 28.4%!important;
 }
-.el-icon-arrow-down:before{
+/*.el-icon-arrow-down:before{
   content: ""!important;
-}
+}*/
 .el-submenu .el-menu-item:hover, .el-submenu__title:hover{
   background-color: #f4f4f4!important;
 }

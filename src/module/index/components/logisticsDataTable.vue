@@ -10,13 +10,13 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="6" style="margin-left: 19px;">运单编号：{{item.wayBillNo}}</el-col>
+            <el-col :span="6" style="margin-left: 19px;">运单编号：{{item.wayBillNo | nullSituation}}</el-col>
             <el-col :span="6">订单编号：{{item.orderNo}}</el-col>
             <el-col :span="8">收货人：{{item.receiverEnterpriseName}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">
-              <el-row>物流公司：{{item.logisticsEnterpriseName}}</el-row>
+              <el-row>物流公司：{{item.logisticsEnterpriseName | nullSituation}}</el-row>
               <el-row>货品仓储：{{item.senderRepoEnterpriseName}}</el-row>
             </el-col>
             <el-col :span="6">
@@ -24,7 +24,7 @@
               <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
             <el-col :span="6">
-              <el-row>已发货</el-row>
+              <el-row>{{item.waybillStatusCode | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="4">
               <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.FORSEND"><!--待发货-->
@@ -65,8 +65,8 @@
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
       console.log(this.logisticsList);
 
-      this.getDataByStatus();
-      this.getDataByPageNum(0);
+     /* this.getDataByStatus();
+      this.getDataByPageNum(0);*/
     },
     watch:{
       logisticsList(curVal){

@@ -135,6 +135,8 @@
             },function(err){
                 console.log(err);
             });
+          store.commit('setCheckId',this.sendGoodForm.orderNo);
+          this.$router.push("/logistics/wayBillDetails");
         }
     },
     mounted () {
