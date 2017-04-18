@@ -12,75 +12,86 @@
         <div>    <!--slot="header" class="clearfix"-->
           <span class="buyerStepTitle">1. 请填写订单详情</span>
         </div>
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="供应商" prop="payeeCompanyName">
-              <el-select v-model="launchOrder.payeeCompanyName" placeholder="请选择供应商">
-                <template v-for="item in supplyList">
-                  <el-option :label="item" :value="item"></el-option>
-                </template>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="货品名称" prop="productName">
-              <el-input class="clearfix" v-model="launchOrder.productName"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="货品单价(元)" prop="productUnitPrice">
-              <el-input v-model="launchOrder.productUnitPrice"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="货品数量" prop="productQuantity">
-              <el-input v-model="launchOrder.productQuantity"></el-input>
-            </el-form-item>
-          </el-col>
-          <!--<el-col :span="12">
-            <el-form-item label="订单金额">
-              <el-input v-model="launchOrder.totalPrice"></el-input>
-            </el-form-item>
-          </el-col>-->
-        </el-row>
+        <el-card>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="供应商" prop="payeeCompanyName">
+                <el-select v-model="launchOrder.payeeCompanyName" placeholder="请选择供应商">
+                  <template v-for="item in supplyList">
+                    <el-option :label="item" :value="item"></el-option>
+                  </template>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="货品名称" prop="productName">
+                <el-input class="clearfix" v-model="launchOrder.productName"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="货品单价(元)" prop="productUnitPrice">
+                <el-input v-model="launchOrder.productUnitPrice"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="货品数量" prop="productQuantity">
+                <el-input v-model="launchOrder.productQuantity"></el-input>
+              </el-form-item>
+            </el-col>
+            <!--<el-col :span="8">
+              <el-form-item label="订单金额">
+                <el-input v-model="launchOrder.totalPrice"></el-input>
+              </el-form-item>
+            </el-col>-->
+          </el-row>
+        </el-card>
         <div>
           <span class="buyerStepTitle">2. 请填写付款信息</span>
         </div>
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="选择付款银行" prop="payerBank">
-              <el-select v-model="launchOrder.payerBank" placeholder="请选择付款行">
-                <el-option :label="launchOrder.payerBank" :value="launchOrder.payerBank"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="选择付款账户" prop="payerAccount">
-              <el-select v-model="launchOrder.payerAccount" placeholder="请选择付款账户">
-                <el-option :label="launchOrder.payerAccount" :value="launchOrder.payerAccount"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="收款方式" prop="payingMethod">
-              <el-checkbox v-model="launchOrder.payingMethod" class="defaultMsg">应收账款支付</el-checkbox>
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <el-card>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="选择付款银行" prop="payerBank">
+                <el-select v-model="launchOrder.payerBank" placeholder="请选择付款行">
+                  <el-option :label="launchOrder.payerBank" :value="launchOrder.payerBank"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="选择付款账户" prop="payerAccount">
+                <el-select v-model="launchOrder.payerAccount" placeholder="请选择付款账户">
+                  <el-option :label="launchOrder.payerAccount" :value="launchOrder.payerAccount"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="收款方式" prop="payingMethod">
+                <el-checkbox v-model="launchOrder.payingMethod" class="defaultMsg">应收账款支付</el-checkbox>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-card>
         <div>
           <span class="buyerStepTitle">3. 请选择货品入库仓储</span>
         </div>
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="选择申请入库的仓储" prop="payerRepo">
-              <el-select v-model="launchOrder.payerRepo" placeholder="请选择入库仓储">
-                <template v-for="item in repoList">
-                  <el-option :label="item" :value="item"></el-option>
-                </template>
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <el-card>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="选择申请入库的仓储" prop="payerRepo">
+                <el-select v-model="launchOrder.payerRepo" placeholder="请选择入库仓储">
+                  <template v-for="item in repoList">
+                    <el-option :label="item" :value="item"></el-option>
+                  </template>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-card>
+
         <el-row>
           <el-col :span="12">
             <el-button type="primary" @click.native.prevent="onSubmit('launchOrder')">发起订单</el-button>
@@ -246,6 +257,7 @@
 
   .launchOrder .el-form-item__label {
     width: 30% !important;
+    float: none;
   }
 
   .launchOrder .el-select .el-input {
@@ -254,7 +266,7 @@
   }
 
   .launchOrder .el-select, .el-input {
-    width: 65% !important;
+    width: 90% !important;
     margin: 0px 2%!important;
   }
 
@@ -266,11 +278,6 @@
   }
   .el-form-item__error {left:33% !important;top: 20%!important;}
 
-  .el-form-item__content{
-    border:1px solid #EEEEEE;
-    /*line-height: 41px!important;*/
-    /*padding: 5px 10px;*/
-  }
   .el-input__inner{
     width: 100% !important;
     height: 30px!important;
@@ -278,19 +285,25 @@
     border-radius: 2px!important;
   }
   .el-form-item__label{
-    line-height: normal!important;
-    background-color: #F7F7F7;
-    border-right: 1px solid #EEEEEE;
+    /*line-height: normal!important;*/
+    /*background-color: #F7F7F7;*/
+    /*border-right: 1px solid #EEEEEE;*/
     font-size: 12px!important;
-  }
-  .el-input{
-    /*margin: 0 20px!important;*/
-    /*margin: 0px 2%!important;*/
   }
   .el-col-12{
     height:40px;
   }
   .el-checkbox__input{
     margin-left: 10px;
+  }
+  .launchOrder .el-row{
+    height: 70px!important;
+  }
+  .launchOrder .el-card{
+    border: 1px solid rgb(238,238,238)!important;
+    padding-bottom: 10px!important;
+  }
+  .launchOrder .el-card__body{
+    padding-bottom: 0px!important;
   }
 </style>

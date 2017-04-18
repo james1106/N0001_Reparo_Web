@@ -30,84 +30,93 @@
       <div>
         <span class="buyerStepTitle">2. 请填写应收账款信息</span>
       </div>
-      <el-form :label-position="labelPosition" :model="signoutInfo" :rules="signoutRules" ref="signoutInfo">
+      <el-card class="signoutMsg">
+        <el-form :label-position="labelPosition" :model="signoutInfo" :rules="signoutRules" ref="signoutInfo">
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="账款金额" prop="isseAmt">
+                <el-input v-model="signoutInfo.isseAmt">{{signoutInfo.isseAmt}}</el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="账款到期日" prop="dueDt">
+                <el-date-picker
+                  v-model="signoutInfo.dueDt"
+                  type="date"
+                  placeholder=""
+                  :picker-options="pickerOptions0">
+                </el-date-picker>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="带息利率(%)" prop="rate">
+                <el-input v-model="signoutInfo.rate">{{signoutInfo.rate}}</el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="付款人名称" prop="pyerName">
+                <el-input v-model="signoutInfo.pyerName" :disabled="true">{{signoutInfo.pyerName}}</el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="付款人开户行" prop="pyerBank">
+                <el-input v-model="signoutInfo.pyerBank" :disabled="true">{{signoutInfo.pyerBank}}</el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="16" class="pyer">
+              <el-form-item label="付款人账户" prop="pyer">
+                <el-input v-model="signoutInfo.pyer" :disabled="true">{{signoutInfo.pyer}}</el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="收款人名称" prop="pyeeName" >
+                <el-input v-model="signoutInfo.pyeeName" :disabled="true">{{signoutInfo.pyeeName}}</el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="收款人开户行" prop="pyeeBank" :disabled="true">
+                <el-select v-model="signoutInfo.pyeeBank" name="农业银行" placeholder="">
+                  <el-option :label="signoutInfo.pyeeBank" :value="signoutInfo.pyeeBank">{{signoutInfo.pyeeBank}}</el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="16" class="pyee" >
+              <el-form-item label="收款人账户" prop="pyee">
+                <el-select v-model="signoutInfo.pyee" name="1" placeholder="">
+                  <el-option :label="signoutInfo.pyee" :value="signoutInfo.pyee"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="合同编号" prop="contractNo">
+                <el-input v-model="signoutInfo.contractNo">{{signoutInfo.contractNo}}</el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="发票号" prop="invoiceNo">
+                <el-input v-model="signoutInfo.invoiceNo">{{signoutInfo.invoiceNo}}</el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
         <el-row>
-        <el-col :span="12">
-          <el-form-item label="应收账款编号" prop="accountNo">
-            <el-label class="clearfix defaultMsg" v-model="signoutInfo.isseAmt">这个要去掉</el-label>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="账款金额" prop="isseAmt">
-            <el-label class="defaultMsg" v-model="signoutInfo.isseAmt">{{signoutInfo.isseAmt}}</el-label>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="账款到期日" prop="dueDt">
-            <el-date-picker
-              v-model="signoutInfo.dueDt"
-              type="date"
-              placeholder=""
-              :picker-options="pickerOptions0">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="带息利率(%)" prop="rate">
-            <el-input v-model="signoutInfo.rate"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="付款人名称" prop="pyerName">
-            <el-label v-model="signoutInfo.pyerName" class="defaultMsg">{{signoutInfo.pyerName}}</el-label>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="收款人名称" prop="pyeeName">
-            <el-label v-model="signoutInfo.pyeeName" class="defaultMsg">{{signoutInfo.pyeeName}}</el-label>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="付款人开户行" prop="pyerBank">
-            <el-label v-model="signoutInfo.pyerBank" class="defaultMsg">{{signoutInfo.pyerBank}}</el-label>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="收款人开户行" prop="pyeeBank">
-            <el-select v-model="signoutInfo.pyeeBank" name="农业银行" placeholder="">
-                <el-option :label="signoutInfo.pyeeBank" :value="signoutInfo.pyeeBank"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="付款人账户" prop="pyer">
-            <el-label v-model="signoutInfo.pyer" class="defaultMsg">{{signoutInfo.pyer}}</el-label>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="收款人账户" prop="pyee">
-            <el-select v-model="signoutInfo.pyee" name="1" placeholder="">
-              <el-option :label="signoutInfo.pyee" :value="signoutInfo.pyee"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="合同编号" prop="invoiceNo">
-            <el-input v-model="signoutInfo.contractNo"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="发票号" prop="invoiceNo">
-            <el-input v-model="signoutInfo.invoiceNo"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      </el-form>
-      <el-row>
-        <el-col :span="12">
-          <el-button type="primary" @click="signout('signoutInfo')">确认签发</el-button>
-        </el-col>
-      </el-row>
+          <el-col :span="12">
+            <el-button type="primary" @click="signout('signoutInfo')">确认签发</el-button>
+          </el-col>
+        </el-row>
+      </el-card>
     </el-card>
   </div>
 </template>

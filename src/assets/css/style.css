@@ -172,20 +172,20 @@
   margin-bottom: 20px !important;
 }
 
-.signout .el-form-item__label {
-   width: 30% !important;
-   color: rgb(51,51,51);
- }
+/*.signout .el-form-item__label {*/
+   /*width: 30% !important;*/
+   /*color: rgb(51,51,51);*/
+ /*}*/
 
-.signout .el-select .el-input {
-  width: 100% !important;
-  margin: 0px 0.2%!important;
-}
+/*.signout .el-select .el-input {*/
+  /*width: 100% !important;*/
+  /*margin: 0px 0.2%!important;*/
+/*}*/
 
-.signout .el-select, .el-input {
-  width: 65% !important;
-  margin: 0px 2%!important;
-}
+/*.signout .el-select, .el-input {*/
+  /*width: 65% !important;*/
+  /*margin: 0px 2%!important;*/
+/*}*/
 .deliver .mybox {
   margin-bottom: 20px !important;
 }
@@ -332,12 +332,46 @@ li .el-menu-item{
 body{
   min-width: 1225px!important;
   overflow: auto;
-  /*height: 100%;*/
 }
-/*html{*/
-  /*height: 100%;*/
-/*}*/
+
 .el-menu{
   height: 100%;
 }
+.signout .el-form-item__label {
+  width: 30% !important;
+  float: none;
+  margin-left: 2%;
+}
+.signout .el-select{
+  width: 100%!important;
+}
+.signout .el-input{
+  width: 90%!important;
+}
+.signoutMsg .el-row{
+  height: 70px!important;
+}
+.signout .el-card{
+  border: 1px solid rgb(238,238,238)!important;
+  padding-bottom: 10px!important;
+}
+/*.signout .el-card__body{*/
+  /*padding-bottom: 0px!important;*/
+/*}*/
+
+.pyer .el-input{
+  width: 95%!important;
+  margin-left: 1%!important;
+}
+.pyer .el-form-item__label{
+  margin-left: 1%;
+}
+.pyee .el-input{
+  width: 95%!important;
+  margin-left: 1%!important;
+}
+.pyee .el-form-item__label{
+  margin-left: 1%;
+}
+
 
