@@ -70,9 +70,9 @@
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
       console.log(this.logisticsCompanyList);
-
+/*
       this.getDataByStatus();
-      this.getDataByPageNum(0);
+      this.getDataByPageNum(0);*/
     },
     watch:{
       logisticsCompanyList(curVal){
@@ -119,7 +119,7 @@
             var res=[];
             for(var i=0;i<this.tableData.length;i++ ){
               var item = this.tableData[i];
-              if(item.waybillStatusCode===constantData.RECEIVED){
+              if(item.waybillStatusCode===constantData.ARRIVED){
                 res.push(item)
               }
             }

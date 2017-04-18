@@ -14,8 +14,8 @@
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
-          <el-col :span="6" style="margin-left: 19px">运单编号：{{companyBillDetail.waybillNo}}</el-col>
-          <el-col :span="6">发起时间：{{}}</el-col><!--发货待响应的时间-->
+          <el-col :span="6" style="margin-left: 19px">运单编号：{{companyBillDetail.wayBillNo}}</el-col>
+          <el-col :span="6">发起时间：{{companyBillDetail.wayBillCreateTime | timeTransfer | nullSituation}}</el-col><!--发货待响应的时间-->
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">发货人：{{companyBillDetail.senderEnterpriseName}}</el-col>
@@ -31,7 +31,7 @@
       </el-row>
       <el-row class="confirmBtn">
         <el-col :span="12" style="text-align: left;margin-top: 10px">
-          <el-button type="primary" @click="receiveConfirm">确认</el-button>
+          <el-button type="primary" @click="receiveConfirm(companyBillDetail.orderNo)">确认</el-button>
           <el-button type="primary" @click="cancelConfirm">取消</el-button>
         </el-col>
       </el-row>
@@ -42,6 +42,7 @@
 <script>
   import store from "../../vuex/store"
   import '../../../../assets/css/style.css'
+  import constantData from '../../../../common/const'
   export default {
     name: 'index',
     data () {
@@ -50,7 +51,8 @@
           txDetail: {},
           receDetail: {},
           repoDetail: {},
-          wayBillDetail: {}
+          wayBillDetail: {},
+          wayBillCreateTime:''
         },
         confirmSend: {
           orderNo:'',
@@ -59,7 +61,7 @@
       }
     },
     methods: {
-      receiveConfirm () {
+      receiveConfirm (checkId) {
         console.log("发货确认");
         this.confirmSend.orderNo=store.state.checkId;
         console.log(this.confirmSend);
@@ -71,7 +73,8 @@
             console.log(err);
           }
         );
-//        this.$router.push('/forDeliver(发货 后面用到)');
+        store.commit('setCheckId',checkId);
+        this.$router.push('/logisticsCompany/companyBillDetails');
       },
       cancelConfirm () {}
     },
@@ -80,6 +83,16 @@
         function(res){
           console.log(res.body);
           this.companyBillDetail=res.body.data;
+          this.companyBillDetail.wayBillCreateTime='';
+          for(var item in this.companyBillDetail.operationRecordVo){
+              var temp=this.companyBillDetail.operationRecordVo[item];
+              console.log(temp.state);
+            if(temp.state===constantData.SENDFORRESPONSE){/*筛选发起（发货待响应）时间*/
+              console.log(temp.state);
+              this.companyBillDetail.wayBillCreateTime=temp.operateTime;
+              break;
+            }
+          }
         },
         function(err){
           console.log(err);

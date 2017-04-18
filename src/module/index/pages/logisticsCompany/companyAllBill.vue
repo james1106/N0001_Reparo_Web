@@ -32,7 +32,7 @@
     data () {
       return {
 //        activeName: 'first',
-        allWaybill:[{},{},{}],
+        allWaybill:[],
       };
     },
     computed:{
@@ -52,7 +52,7 @@
       this.$http.get("/v1/waybill/allWayBillDetail").then(function(res){
         /*获取企业物流列表*/
         console.log(res.body);
-        this.allWaybill=res.body.data;
+        this.allWaybill=res.body.data.wayBillDetailVoList;
       },function(err){
         console.log(err);
       });

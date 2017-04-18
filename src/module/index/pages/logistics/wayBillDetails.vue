@@ -9,7 +9,8 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow "><i class="el-icon-information"></i> 物流当前状态：已送达</el-col>
+        <el-col class="sellerColor stateShow " :span="8"><i class="el-icon-information"></i> 物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
+        <el-col :span="8"><el-button type="primary" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.FORSEND" @click="sendGood(logisticsDetail.orderNo)">发货</el-button></el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -19,12 +20,15 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.orderNo}}</el-col>
-                <el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">入库时间：{{}}</el-col>
+                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">入库时间：{{logisticsDetail.inRepoTime | timeTransfer | nullSituation}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">物流跟踪：</el-col>
+              </el-row>
+              <el-row v-for="item in logisticsDetail.operationRecordVo">
+                <el-col :span="6">{{item.state | wayBillStatus}}:{{item.operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -39,7 +43,7 @@
             <div class="box-card mycard1">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo}}</el-col>
+                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
                 <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>
@@ -52,7 +56,7 @@
               <el-row>
                 <el-col :span="6" class="msgName">货品名称：{{logisticsDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{logisticsDetail.productQuantity}}</el-col>
-                <el-col :span="6" class="msgName">货品单价(元)：{{logisticsDetail.productValue/logisticsDetail.productQuantity}}</el-col>
+                <el-col :span="6" class="msgName">货品单价(元)：{{(logisticsDetail.productQuantity===''||logisticsDetail.productQuantity===0)?0:logisticsDetail.productValue/logisticsDetail.productQuantity}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -70,18 +74,33 @@
     data () {
       return {
           logisticsDetail:{
-              inRepoTime:''
+              inRepoTime:'',
+            productQuantity:'',
+            operationRecordVo:[],
           }
       }
+    },
+    computed:{
+      constantData () {
+          return constantData;
+      }
+    },
+    methods:{
+        sendGood (checkId) {
+            store.commit('setCheckId',checkId);
+            this.$router.push("/logistics/deliver");
+        }
     },
     mounted () {
 //        请求物流详情接口　
         this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(function(res){
             console.log(res.body);
             this.logisticsDetail=res.body.data;
-          for(item in this.logisticsDetail.operationRecordVoList){
-            if(item.state===constantData.ARRIVED){/*筛选入库时间*/
-              this.repoDetails.inRepoTime=item.operateTime;
+            this.logisticsDetail.inRepoTime='';
+          for(var item in this.logisticsDetail.operationRecordVo){
+              var temp=this.logisticsDetail.operationRecordVo[item];
+            if(temp.state===constantData.ARRIVED){/*筛选入库时间*/
+              this.logisticsDetail.inRepoTime=temp.operateTime;
               break;
             }
           }
