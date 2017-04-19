@@ -100,8 +100,8 @@
             if(value=='') {
                 callback(new Error("请输入货品单价"));
             }
-            else if(!/^(\+)?\d+(\.\d+)?$/.test(value)){
-              callback(new Error("请输入正确货品单价"));
+            else if(!/^(\+)?\d+(\.\d{1,2})?$/.test(value)){
+              callback(new Error("请输入正确货品单价，最高精确到小数点后两位"));
             }
             else {
                 callback();

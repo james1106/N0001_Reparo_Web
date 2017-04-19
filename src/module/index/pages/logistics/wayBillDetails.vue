@@ -28,7 +28,7 @@
                 <el-col :span="6" class="msgName">物流跟踪：</el-col>
               </el-row>
               <el-row v-for="item in logisticsDetail.operationRecordVo">
-                <el-col :span="6">{{item.state | wayBillStatus}}:{{item.operateTime | timeTransfer}}</el-col>
+                <el-col :span="6" class="stateShow">{{item.state | wayBillStatus}}:{{item.operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>
           </el-card>
