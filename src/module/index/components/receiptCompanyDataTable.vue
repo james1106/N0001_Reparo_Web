@@ -10,7 +10,7 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoBusinessNo | nullSituation}}</el-col><!--后台的数据传的是仓储业务编号 不对吧:(-->
+            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoBusiNo}}</el-col><!--后台的数据传的是仓储业务编号 不对吧:(-->
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">
@@ -51,18 +51,15 @@
         tableData:this.receiptList,
         showData:[],
         receiptStatus:this.status,
-        detailPath:''
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
       console.log(this.receiptList);
-
       this.getDataByStatus();
       this.getDataByPageNum(0);
     },
     watch:{
       receiptList(curVal){
-        console.log(curVal);
         this.tableData=curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);

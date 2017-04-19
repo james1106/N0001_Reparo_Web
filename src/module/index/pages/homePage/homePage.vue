@@ -134,7 +134,6 @@
           </el-row>
         </div>
       </template>
-      </el-table>
     </el-card>
   </div>
 </template>
