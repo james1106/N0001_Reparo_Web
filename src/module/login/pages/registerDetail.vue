@@ -11,8 +11,8 @@
       <el-form-item prop="acctSvcrName" >
         <el-input v-model="ruleForm.acctSvcrName"  type="text"  auto-complete="off" placeholder="开户行"></el-input>
       </el-form-item>
-      <el-form-item prop="acctIds>
-        <el-input v-model="ruleForm.acctIds"  placeholder="账号"></el-input>    <!--v-model传值-->
+      <el-form-item prop="acctIds">
+        <el-input v-model="ruleForm.acctIds" placeholder="账号"></el-input>    <!--v-model传值-->
       </el-form-item>
       <el-form-item prop="roleCode" style="height: 20px;text-align: left">
         <el-radio-group v-model="ruleForm.roleCode">

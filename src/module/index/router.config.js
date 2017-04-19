@@ -37,6 +37,7 @@ import inResponse from './pages/warehousingCompany/inResponse.vue'
 import outConfirm from './pages/warehousingCompany/outConfirm.vue'
 import inConfirm from './pages/warehousingCompany/inConfirm.vue'
 import myReceipt from './pages/warehousingCompany/myReceipt.vue'
+import receiptsDetail from './pages/warehousingCompany/receiptsDetails.vue'
 
 /*物流公司*/
 import logisticsCompanyIndex from './pages/logisticsCompany/index.vue'
@@ -110,6 +111,7 @@ export default [
       {path:'inResponse',component:inResponse},
       {path:'inConfirm',component:inConfirm},
       {path:'myReceipt',component:myReceipt},
+      {path:'receiptDetails',component:receiptsDetail}
   ]
   },
 

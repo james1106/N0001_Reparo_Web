@@ -11,24 +11,36 @@
     <template v-for="(item,index) in showData">
       <div>
         <el-row class="dataTable">
+          <el-row class="el-row-header">
+            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo}}</el-col>
+            <el-col :span="8">订单编号：{{item.orderNo}}</el-col>
+          </el-row>
           <el-row class="el-row-content">
             <el-col :span="4" style="margin-left: 19px;">
-              <el-row>{{item.repoBusiNo | nullSituation}}</el-row>
+              <el-row>货品名称：{{item.productName}}</el-row>
+              <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.holderEnterpriseName}}</el-row>
+              <el-row>{{item.repoEnterpriceName}}</el-row><!--所在仓储-->
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row>
+              <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.repoCertNo | nullSituation}}</el-row>
+              <el-row>{{item.repoCertNo | nullSituation}}</el-row><!--仓单编号-->
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
+              <el-row>{{item.repoCertStatus | repoCertStatus | nullSituation}}</el-row><!--仓单状态-->
             </el-col>
             <el-col :span="3">
-              <el-button size="small" @click.native.prevent="showDetail(item.repoBusiNo,item.curRepoBusiStatus)">查看详情</el-button>
+              <el-col :span="24">
+                <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.INFORRESPONSE" @click.native.prevent="inResponse(item.repoBusiNo)">入库响应</el-button>
+                <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FORIN" @click.native.prevent="inConfirm(item.repoBusiNo)">入库确认</el-button>
+                <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FOROUT" @click.native.prevent="outConfirm(item.repoBusiNo)">出库确认</el-button>
+              </el-col>
+              <el-col :span="24" style="margin-left: -9px">
+                <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
+              </el-col>
             </el-col>
           </el-row>
         </el-row>
@@ -97,22 +109,21 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
-      showDetail(repoBusinessNo,status){
+      showDetail(repoBusinessNo){
         store.commit('setCheckId',repoBusinessNo);
-        var path = '';
-        switch (status){
-          case constantData.INFORRESPONSE:
-            path = '/warehousingCompany/inResponse'
-            break;
-          case constantData.FORIN:
-            path = '/warehousingCompany/inConfirm'
-            break;
-          case constantData.FOROUT:
-            path = '/warehousingCompany/outConfirm'
-            break;
-          default:
-        }
-        this.$router.push(path)
+        this.$router.push('/warehousingCompany/repoDetails')
+      },
+      inResponse(repoBusinessNo){
+        store.commit('setCheckId',repoBusinessNo);
+        this.$router.push('/warehousingCompany/inResponse')
+      },
+      outConfirm(repoBusinessNo){
+        store.commit('setCheckId',repoBusinessNo);
+        this.$router.push('/warehousingCompany/inConfirm')
+      },
+      outConfirm(repoBusinessNo){
+        store.commit('setCheckId',repoBusinessNo);
+        this.$router.push('/warehousingCompany/outConfirm')
       }
     }
   }

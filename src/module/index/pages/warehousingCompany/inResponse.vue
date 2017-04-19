@@ -1,38 +1,73 @@
 <template>
-  <div class="box-card">
-    <el-row class="row-black row-padding">
-      <el-col :span="8">业务编号：{{item.repoBusiNo}}</el-col>
-      <el-col :span="8">发起时间：{{item.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
-    </el-row>
-    <el-row class="row-padding">
-      <el-col :span="16">
-        <el-row>
-          <el-col :span="12">申请人：{{item.storeEnterpriseName}}</el-col>
-          <el-col :span="12">运单号：{{item.repoCertNo | nullSituation}}</el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">物流公司：{{item.logisticsEntepsName | nullSituation}}</el-col>
-          <el-col :span="12">货物价值：{{item.productTotalPrice}}</el-col>
-        </el-row>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-button type="primary" @click="inResponse">同意入库</el-button>
-      <el-button type="primary" @click="">拒绝</el-button>
-    </el-row>
+  <div id="inResponse" class="box-card">
+    <el-breadcrumb separator=">" class="bread">
+      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
+      <el-breadcrumb-item>我的仓储</el-breadcrumb-item>
+      <el-breadcrumb-item>入库待响应</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-card>
+      <el-row class="el-row-header statePosition">
+        <el-col class="buyerColor stateShow"><i class="el-icon-information"></i>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-card class="box-card mybox" style="width:100%">
+            <div slot="header" class="clearfix el-row-header">
+              <el-row>
+                <el-col :span="8">业务编号：{{repoDetails.repoBusiNo}}</el-col>
+                <el-col :span="8">发起时间：{{repoDetails.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
+              </el-row>
+            </div>
+            <div class="box-card mycard1">
+              <el-row>
+                <el-col :span="8" class="msgName">申请人：{{repoDetails.storeEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo}}</el-col>
+                <el-col :span="8" class="msgName">物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8" class="msgName">货品名称：{{repoDetails.productName}}</el-col>
+                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}（{{repoDetails.measureUnit}}）</el-col>
+                <el-col :span="8" class="msgName">货物总额（元）：{{repoDetails.productTotalPrice}}</el-col>
+              </el-row>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-button type="primary" @click.native.prevent="inResponse()">同意入库</el-button>
+        </el-col>
+      </el-row>
+    </el-card>
   </div>
 </template>
 <script>
   import Store from '../../vuex/store.js'
 
   export default {
-    name:'index',
+    name:'inResponse',
     mounted(){
       this.getDetails()
     },
     data () {
       return {
-        item:{
+        repoDetails:{
+          repoBusiNo:'',
+          curRepoBusiStatus:'',
+          opgTimeOfCurStatus:'',
+          repoEnterpriceName:'',
+          repoCertNo:'',
+          productName:'',
+          productQuantity:'',
+          measureUnit: '',
+          productTotalPrice:'',
+          logisticsEntepsName:'',
+          waybillNo:'',
+          operationRecordVoList: [{
+            operateTime:''
+          }]
         }
       }
     },
@@ -44,7 +79,7 @@
             if(code != 0){
               return;
             }
-            this.item = res.body.data
+            this.repoDetails = res.body.data
           },(err) => {
             console.log(err);
           })
@@ -57,6 +92,7 @@
             if(code != 0){
               return;
             }
+            this.$router.push('/warehousingCompany/repoDetails');
           },(err) => {
             console.log(err);
           })

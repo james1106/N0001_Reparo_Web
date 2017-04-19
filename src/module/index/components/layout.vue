@@ -9,8 +9,16 @@
 			</el-col>
       <el-col :span="4" style="margin-left: 10px;margin-top: 20px;color: white">
         <span >趣链科技</span><span> | </span>
-        <span style="font-size: 14px" v-if="state.isBuyer === 'true'">买家中心</span>
-        <span style="font-size: 14px" v-else >卖家中心</span>
+        <template v-if="companyType === 0">
+          <span style="font-size: 14px" v-if="state.isBuyer === 'true'">买家中心</span>
+          <span style="font-size: 14px" v-else >卖家中心</span>
+        </template>
+        <template v-else-if="companyType === 2">
+          <span style="font-size: 14px" >仓储中心</span>
+        </template>
+        <template v-else>
+          <span style="font-size: 14px" >物流中心</span>
+        </template>
       </el-col>
       <el-col :span="2" v-if="companyType === 0">
         <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:state.isBuyer==='false'}" v-on:click="toSeller()">我是卖家</el-button>
@@ -46,10 +54,10 @@
       <menu-by v-if="state.isBuyer==='true'"></menu-by>
       <menu-sl v-else></menu-sl>
     </aside>
-    <aside class="main-left" v-else-if="companyType === 2">
+    <aside class="main-left" id="main-left" v-else-if="companyType === 2">
       <menu-wh></menu-wh>
     </aside>
-    <aside class="main-left" v-else>
+    <aside class="main-left" id="main-left" v-else>
       <menu-lg></menu-lg>
     </aside>
     <div class="main-right">
@@ -71,23 +79,23 @@
   import MenuWh from './menuWarehousing.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
-  window.onload=
-    function(){
-      var oDiv = document.getElementById("main-left");
-      window.onscroll = function()
-      {
-        var s = document.body.scrollTop || document.documentElement.scrollTop;
-        if(s>60) {
-          oDiv.style = "position:fixed;top:0";
-        } else {
-          oDiv.style = ""
-        }
+
+  window.onload=function(){
+    var oDiv = document.getElementById("main-left");
+    window.onscroll = function()
+    {
+      var s = document.body.scrollTop || document.documentElement.scrollTop;
+      if(s > 60) {
+        oDiv.style = "position:fixed;top:0";
+      } else {
+        oDiv.style = "";
       }
     }
+  }
+
 export default {
   name: 'wrapper',
   created: function () {
-//    Store.commit('setIsBuyer','true');
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     //后面判断 每个不同公司进去主页后的首页面
@@ -112,13 +120,7 @@ export default {
       FooterA,MenuBy,MenuSl,MenuLg,MenuWh
     },
     methods:{
-      toBuyer: function () {
-        /*if(this.isBuyer == true){
-         return
-         }
-         this.isBuyer = !this.isBuyer
-         this.$router.push('/');
-         Store.state.isBuyer = this.isBuyer*/
+      toBuyer() {
         if(Store.state.isBuyer==='true'){
           return;
         }
@@ -126,14 +128,7 @@ export default {
         this.$router.push('/true');
 
       },
-      toSeller: function () {
-        /*if(!this.isBuyer){
-         return
-         }
-         this.isBuyer = !this.isBuyer
-         this.$router.push('/');
-         Store.state.isBuyer = this.isBuyer*/
-
+      toSeller() {
         if(Store.state.isBuyer==="false"){
           return;
         }
@@ -145,7 +140,6 @@ export default {
         window.location.href='login.html';
       }
     }
-
   }
 </script>
 

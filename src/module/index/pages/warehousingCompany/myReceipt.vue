@@ -39,37 +39,17 @@
     data () {
       return {
         activeName: 'first',
-        receiptList:[{
-          repoBusinessNo:'1111',
-          productName:3,
-          productQuantity:'343242',
-          repoEnterpriseName:'ssds',
-          repoCertStatus:'',
-        },
-          {
-            repoBusinessNo:'1111',
-            productName:3,
-            productQuantity:'343242',
-            repoEnterpriseName:'ssds',
-            repoCertStatus:'',
-          },
-          {
-            repoBusinessNo:'1111',
-            productName:3,
-            productQuantity:'343242',
-            repoEnterpriseName:'ssds',
-            repoCertStatus:'',
-          }]
+        receiptList:[]
       };
     },
     methods: {
       getReceiptList(){
-//          this.$http.get("/v1/repository/getRepoCertInfoList").then(function(res){
-//            console.log(res.body);
-//            this.receiptList=res.body.data;
-//          },function(err){
-//            console.log(err);
-//          });
+          this.$http.get("/v1/repository/getRepoCertInfoList").then(function(res){
+            console.log(res.body);
+            this.receiptList=res.body.data;
+          },function(err){
+            console.log(err);
+          });
         }
     }
   }
