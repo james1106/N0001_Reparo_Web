@@ -37,12 +37,22 @@
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">应收账款状态明细:</el-col>
-                <template v-for="item in detailInfo.serialVoList">
+              </el-row>
+
+                <!--<template v-for="item in detailInfo.serialVoList">
                 <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
                   <label> {{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</label>
                 </el-col>
-                </template>
-              </el-row>
+                </template>-->
+
+                <el-row class="collapseTop">
+                  <template v-for="(item,index) in detailInfo.serialVoList">
+                    <el-row class="status-list" :class="{circleBlue:index==(detailInfo.serialVoList.length-1)}">
+                      <el-col :span="24" :class="{colorBlue:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</span></el-col>
+                    </el-row>
+                  </template>
+                </el-row>
+
             </div>
           </el-card>
         </el-col>
