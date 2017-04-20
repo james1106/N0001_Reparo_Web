@@ -138,6 +138,24 @@
           console.log(err);
         })
       }
+    },
+    created () {
+      /* 获取指定cookie */
+      function getCookie(name) {
+        var strCookie = document.cookie;
+        console.log(strCookie);
+        var arrCookie = strCookie.split("; ");
+        for (var i = 0; i < arrCookie.length; i++) {
+          var arr = arrCookie[i].split("=");
+          if (arr[0] == name)
+            return arr[1];
+        }
+        return "";
+      }
+      if(getCookie('token')!==''){
+          console.log("hello");
+        window.location.href='index.html';
+      }
     }
   }
 

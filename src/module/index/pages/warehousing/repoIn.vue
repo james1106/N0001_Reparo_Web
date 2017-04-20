@@ -32,7 +32,7 @@
     data () {
       return {
         activeName: 'first',
-        allRepoIn:[{aaa:1},{aaa:2},{aaa:3},{aaa:3},{aaa:3}],
+        allRepoIn:[],
       };
     },
     components:{

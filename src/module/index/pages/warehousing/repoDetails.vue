@@ -8,7 +8,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 仓储当前状态</el-col>
+        <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 仓储当前状态:{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -20,8 +20,8 @@
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓储业务编号：{{repoDetails.repoBusiNo}}</el-col>
                 <el-col :span="8" class="msgName">仓储状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col><!--卖家和买家会显示混合-->
-                <el-col :span="8" class="msgName" v-if="state.isBuyer==='true'">入库时间：{{repoDetails.inRepoTime | timeTransfer}}</el-col>
-                <el-col :span="8" class="msgName" v-else>出库时间：{{repoDetails.outRepoTime | timeTransfer}}</el-col>
+                <el-col :span="8" class="msgName" v-if="state.isBuyer==='true'">入库时间：{{repoDetails.inRepoTime | timeTransfer}}</el-col><!--筛选-->
+                <el-col :span="8" class="msgName" v-else>出库时间：{{repoDetails.outRepoTime | timeTransfer}}</el-col><!--筛选-->
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName keynote" v-if="repoDetails.repoCertNo===''">仓单编号：暂无</el-col>
@@ -80,16 +80,18 @@
           this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
           this.repoDetails.outRepoTime='';
           for(var item in this.repoDetails.operationRecordVoList){
-              if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
+              var temp=this.repoDetails.operationRecordVoList[item];
+              if(temp.state===constantData.ALREADYIN){/*筛选入库时间*/
                 console.log("筛选入库时间");
-                  this.repoDetails.inRepoTime=item.operateTime;
+                  this.repoDetails.inRepoTime=temp.operateTime;
                   break;
               }
           }
           for(var item in this.repoDetails.operationRecordVoList){
-              if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
+              var temp=this.repoDetails.operationRecordVoList[item];
+              if(temp.state===constantData.ALREADYOUT){/*筛选出库时间*/
                 console.log("筛选出库时间");
-                  this.repoDetails.outRepoTime=item.operateTime;
+                  this.repoDetails.outRepoTime=temp.operateTime;
                   break;
               }
           }

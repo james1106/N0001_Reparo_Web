@@ -38,7 +38,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="订单金额">
+            <el-form-item label="订单金额（元）">
               <div class="el-input">{{launchOrder.productUnitPrice*launchOrder.productQuantity}}</div>
             </el-form-item>
           </el-col>
