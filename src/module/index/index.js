@@ -8,7 +8,6 @@ import 'element-ui/lib/theme-default/index.css'
 import constantData from "../../common/const"
 
 Vue.use(VueRouter)
-// Vue.use(echarts)
 Vue.use(resource)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
@@ -104,12 +103,11 @@ Vue.filter('nullSituation',function(value){
   }
   return value;
 })
+
 /* eslint-disable no-new */
-new Vue({
+var app = new Vue({
   el: '#app',
   router,
   template: '<Layout/>',
   components: { Layout }
 })
-
-

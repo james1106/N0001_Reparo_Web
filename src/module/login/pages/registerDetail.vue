@@ -4,7 +4,7 @@
       <img src="../assets/logo_login.png">
       <h3 style="color: #666666">完善信息</h3>
     </el-row>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="login-container">
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="login-container" v-loading="loading" element-loading-text="正在玩命注册...">
       <el-form-item prop="enterpriseName">
         <el-input v-model="ruleForm.enterpriseName"  type="text"  auto-complete="off" placeholder="企业名"></el-input>    <!--v-model传值-->
       </el-form-item>
@@ -46,6 +46,7 @@
       return{
         dialogVisible:false,
         msg:'',
+        loading:false,
         ruleForm: {
           accountName: '',     //用户名
           password:'',         //密码
@@ -82,7 +83,9 @@
 
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.loading = true;
             this.$http.post('/v1/account/user',this.ruleForm,{emulateJSON:true}).then((res) => {
+              this.loading = false;
               console.log(res.body);
               var code =  res.body.code;
               var data =  res.body.data;
@@ -94,6 +97,7 @@
               Store.saveUserInfo(data);
               this.$router.push('/registerSuccess')
             },(err) => {
+              this.loading = false;
               console.log(err);
             })
           } else {
