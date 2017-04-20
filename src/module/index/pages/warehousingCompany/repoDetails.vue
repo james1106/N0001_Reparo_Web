@@ -42,9 +42,20 @@
               <el-row>
                 <el-col :span="8" class="msgName">仓储状态明细：</el-col>
               </el-row>
-              <el-row v-for="item in repoDetails.operationRecordVoList">
+
+
+              <!--<el-row v-for="item in repoDetails.operationRecordVoList">
                 <el-col :span="8" class="msgName">{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</el-col>
+              </el-row>-->
+
+              <el-row class="collapseTop">
+                <template v-for="(item,index) in repoDetails.operationRecordVoList">
+                  <el-row class="status-list" :class="{circleBlue:index==(repoDetails.operationRecordVoList.length-1)}">
+                    <el-col :span="8" :class="{colorBlue:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                  </el-row>
+                </template>
               </el-row>
+
             </div>
           </el-card>
         </el-col>

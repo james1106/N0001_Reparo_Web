@@ -537,9 +537,10 @@
   }
   .status-list {
     margin-left: 5px;
-    font-size: 14px;
     text-align: left!important;
     position:relative;
+    font-size: 12px;
+    color: rgb(102,102,102)
   }
   .status-list:before {
     content: '';
