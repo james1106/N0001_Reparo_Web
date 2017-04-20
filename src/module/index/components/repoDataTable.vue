@@ -12,8 +12,8 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo}}</el-col>
-            <el-col :span="8">订单编号：{{item.orderNo}}</el-col>
+            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo | nullSituation}}</el-col>
+            <el-col :span="8">订单编号：{{item.orderNo | nullSituation}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="4" style="margin-left: 19px;">

@@ -47,15 +47,13 @@
               <!--<el-row class="">-->
               <!--<el-col :span="8" v-if="(orderDetail.txDetail.orderState!==constantData.UNCONFIRMED)">交易确认：{{orderDetail.txDetail.orderConfirmTime | timeTransfer}}</el-col>-->
               <!--</el-row>-->
-              <div v-show="isOrderCollapse">
-                <el-row v-show="isOrderCollapse">
+                <el-row v-show="isOrderCollapse" class="collapseTop">
                   <template v-for="(item,index) in orderDetail.txDetail.operationRecordVoList">
-                    <el-row class="stateShow">
-                      <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordVoList.length-1)}">{{item.state | transactionStatus}}：{{item.operateTime | timeTransfer}}</el-col>
+                    <el-row class="status-list" :class="{circleBlue:index==(orderDetail.txDetail.operationRecordVoList.length-1)}">
+                      <el-col :span="8" :class="{colorBlue:index==(orderDetail.txDetail.operationRecordVoList.length-1)}"><span>{{item.state | transactionStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                     </el-row>
                   </template>
                 </el-row>
-              </div>
             </div>
 
           </el-card>
@@ -94,10 +92,10 @@
                 <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="receCollapse" :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i></el-col>
               </el-row>
 
-              <el-row v-show="isReceCollapse">
+              <el-row v-show="isReceCollapse" class="collapseTop">
                 <template v-for="(item,index) in receHistory">
-                  <el-row class="stateShow">
-                    <el-col :span="8" :class="{colorBlue:index==(receHistory.length-1)}">{{item.receivableStatus | receStatus}}：{{item.time | timeTransfer}}</el-col>
+                  <el-row class="status-list" :class="{circleBlue:index==(receHistory.length-1)}">
+                    <el-col :span="8" :class="{colorBlue:index==(receHistory.length-1)}"><span>{{item.receivableStatus | receStatus}}：{{item.time | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -133,10 +131,10 @@
               </el-col>
               <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="wayBillCollapse" :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i></el-col>
             </el-row>
-            <el-row v-show="isWayBillCollapse">
+            <el-row v-show="isWayBillCollapse" class="collapseTop">
               <template v-for="(item,index) in wayBillHistory">
-                <el-row class="stateShow">
-                  <el-col :span="8" :class="{colorBlue:index==(wayBillHistory.length-1)}">{{item.state | wayBillStatus}}：{{item.operateTime | timeTransfer}}</el-col>
+                <el-row class="status-list" :class="{circleBlue:index==(wayBillHistory.length-1)}">
+                  <el-col :span="8" :class="{colorBlue:index==(wayBillHistory.length-1)}"><span>{{item.state | wayBillStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                 </el-row>
               </template>
             </el-row>
@@ -169,10 +167,10 @@
               <el-col :span="6" class="msgName">最新仓储状态：{{orderDetail.repoOver.payerRepoBusiState | repoStatus}}</el-col>
               <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="buyerRepoCollapse" :class="{rotate:isBuyerRepoCollapse, rotate1:!isBuyerRepoCollapse}"></i></el-col>
             </el-row>
-              <el-row v-show="isBuyerRepoCollapse">
+              <el-row v-show="isBuyerRepoCollapse" class="collapseTop">
                 <template v-for="(item,index) in buyerRepoHistory">
-                  <el-row class="stateShow">
-                    <el-col :span="8" :class="{colorBlue:index==(buyerRepoHistory.length-1)}">{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</el-col>
+                  <el-row class="status-list" :class="{circleBlue:index==(buyerRepoHistory.length-1)}">
+                    <el-col :span="8" :class="{colorBlue:index==(buyerRepoHistory.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -198,10 +196,10 @@
               <el-col :span="8" class="msgName">最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}</el-col>
               <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="buyeeRepoCollapse" :class="{rotate:isBuyeeRepoCollapse, rotate1:!isBuyeeRepoCollapse}"></i></el-col>
             </el-row>
-              <el-row v-show="isBuyeeRepoCollapse">
+              <el-row v-show="isBuyeeRepoCollapse" class="collapseTop">
                 <template v-for="(item,index) in buyeeRepoHistory">
-                  <el-row class="stateShow">
-                    <el-col :span="8" :class="{colorBlue:index==(buyeeRepoHistory.length-1)}">{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</el-col>
+                  <el-row class="status-list" :class="{circleBlue:index==(buyeeRepoHistory.length-1)}">
+                    <el-col :span="8" :class="{colorBlue:index==(buyeeRepoHistory.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -502,7 +500,7 @@
     border-bottom:none;
     margin-bottom: 20px;
   }
-  .colorBlue {color:rgba(0,148,218,1);}
+  .colorBlue {color:rgba(0,148,218,1); border-left: none !important;}
   .collapseBtn {color: #666666;float: right !important;text-align: right !important;}
 
   .rotate{
@@ -530,5 +528,47 @@
     -moz-transition: -moz-transform 0.2s;
     -o-transition: -o-transform 0.2s;
     -ms-transition: -ms-transform 0.2s;
+  }
+  .circleBlue:before {
+    background-color: rgba(0,148,218,1) !important;
+  }
+  .collapseTop {
+    margin-top: 10px;
+  }
+  .status-list {
+    margin-left: 5px;
+    font-size: 14px;
+    text-align: left!important;
+    position:relative;
+  }
+  .status-list:before {
+    content: '';
+    border: 2px solid rgba(0,148,218,1);
+    background-color: rgba(255,255,255,1);
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-left: -4px;
+    margin-right: 10px;
+    position: absolute;
+    top:0px;
+    z-index: 9999;
+  }
+  .status-list .el-col {
+    height:30px;
+    text-align: left !important;
+    box-sizing: border-box !important;
+    padding-top: 0;
+    padding-left: 20px !important;
+    border-left: 2px solid rgba(0,148,218,1);
+    -webkit-border-radius:0 !important;
+    -moz-border-radius:0 !important;
+    border-radius:0 !important;
+    position: relative;
+  }
+  .status-list .el-col span {
+    position: absolute;
+    top:-5px;
   }
 </style>

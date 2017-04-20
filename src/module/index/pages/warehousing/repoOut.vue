@@ -31,7 +31,7 @@
     data () {
       return {
         activeName: 'first',
-        allRepoOut:[{aaa:1},{aaa:2},{aaa:3},{aaa:3},{aaa:3}],
+        allRepoOut:[],
       };
     },
     components:{

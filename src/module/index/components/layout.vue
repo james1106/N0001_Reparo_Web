@@ -137,6 +137,10 @@ export default {
 
       },
       logout(){
+        function delete_cookie(name) {
+          document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; //删除cookie，必须显示声明path
+        }
+        delete_cookie("token");
         window.location.href='login.html';
       }
     }

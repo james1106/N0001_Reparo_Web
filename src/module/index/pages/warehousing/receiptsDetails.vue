@@ -25,7 +25,7 @@
                 <el-col :span="6" class="msgName">保管人：{{receiptsDetails.storerName}}</el-col>
                 <el-col :span="6" class="msgName">持有人：{{receiptsDetails.holderName}}</el-col>
                 <el-col :span="6" class="msgName">保管仓储：{{receiptsDetails.repoEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">签发时间：{{receiptsDetails.repoCreateDate}}</el-col>
+                <el-col :span="6" class="msgName">签发时间：{{receiptsDetails.repoCreateDate | timeTransfer}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">货品名称：{{receiptsDetails.productName}}</el-col>
@@ -35,7 +35,7 @@
               <el-row>
                 <el-col :span="8" class="msgName">仓单状态明细：</el-col>
               </el-row>
-              <el-row v-for="item in receiptsDetails.repoCertHisList">
+              <el-row v-for="item in receiptsDetails.recordVos">
                 <el-col :span="8" class="msgName">{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>

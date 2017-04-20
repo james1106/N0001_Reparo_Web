@@ -32,7 +32,7 @@
     data () {
       return {
         activeName: 'first',
-        allReceipts:[{},{},{}],
+        allReceipts:[],
       };
     },
     components:{
