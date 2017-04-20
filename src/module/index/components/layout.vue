@@ -62,12 +62,18 @@
     </aside>
     <div class="main-right">
     <transition name="fade" mode="out-in">
-      <router-view class="view"></router-view>
+      <router-view v-loading="loading" element-loading-text="加载中" class="view"></router-view>
     </transition>
     </div>
   </main>
   <!--尾部信息-->
   <footer-a></footer-a>
+  <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+    <span>{{msg}}</span>
+    <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+  </el-dialog>
 </div>
 </template>
 
@@ -79,6 +85,10 @@
   import MenuWh from './menuWarehousing.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
+
+  import Vue from 'vue'
+  import resource from 'vue-resource'
+  Vue.use(resource)
 
   window.onload=function(){
     var oDiv = document.getElementById("main-left");
@@ -98,11 +108,29 @@ export default {
   created: function () {
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
-    //后面判断 每个不同公司进去主页后的首页面
-    //使用this.$router.push(...);
+
+    /*****  设置http拦截器 start  ******/
+    let _this = this;
+    Vue.http.interceptors.push(function(request, next) {
+      //请求开始的时候
+      _this.loading = true;
+      next(function(response) {
+        //请求响应完成后
+        _this.loading = false;
+        if(!response.ok){
+            _this.dialogVisible = true;
+            _this.msg = '服务异常，请稍后再试';
+        }
+        return response
+      });
+    });
+    /*****  设置http拦截器 end  ******/
   },
   data () {
     return {
+      loading:false,
+      dialogVisible:false,
+      msg:'',
       Buyer:'true',
       Seller:'false',
       msg: '',

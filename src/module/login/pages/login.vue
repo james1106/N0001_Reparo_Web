@@ -4,7 +4,7 @@
       <img src="../assets/logo_login.png">
       <h3 style="color: #666666">登录</h3>
     </el-row>
-    <el-form :model="loginInfo" :rules="rules" ref="loginInfo" label-position="left" label-width="0px" class="login-container">
+    <el-form :model="loginInfo" :rules="rules" ref="loginInfo" label-position="left" label-width="0px" class="login-container" v-loading="loading" element-loading-text="正在玩命登录...">
       <el-form-item prop="accountName">
         <el-input v-model="loginInfo.accountName"  type="text"  auto-complete="off" placeholder="用户名"></el-input>    <!--v-model传值-->
       </el-form-item>
@@ -32,8 +32,7 @@
     <el-dialog title="提示" v-model="dialogVisible" size="tiny">
       <span>{{msg}}</span>
       <span slot="footer" class="dialog-footer">
-      <!--<dialog-view v-model="showDialogView" isShow={showDialogView}></dialog-view>-->
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
   </div>
@@ -86,7 +85,8 @@
             mode: 'push', // "push" or "remove" (particles)
             nb: 4
           }
-        }
+        },
+        loading:false
       },
       /* Retina Display Support */
       retina_detect: true
@@ -98,6 +98,7 @@
       return{
         dialogVisible:false,
         msg:'',
+        loading:false,
         checked:true,
         loginInfo: {
           account_name: '',
@@ -117,8 +118,10 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.loading = true;
             this.$http.post('/v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
               console.log(res.body);
+              this.loading = false;
               var code =  res.body.code;
               var data =  res.body.data;
               if(code != 0){
@@ -129,6 +132,7 @@
               Store.saveUserInfo(data);
               window.location.href='index.html';
             },(err) => {
+              this.loading = false;
               console.log(err);
             })
           } else {
@@ -137,11 +141,8 @@
         },(err) => {
           console.log(err);
         })
-      }
-    },
-    created () {
-      /* 获取指定cookie */
-      function getCookie(name) {
+      },
+      getCookie(name){/* 获取指定cookie */
         var strCookie = document.cookie;
         console.log(strCookie);
         var arrCookie = strCookie.split("; ");
@@ -152,7 +153,9 @@
         }
         return "";
       }
-      if(getCookie('token')!==''){
+    },
+    created () {
+      if(this.getCookie('token')!==''){
           console.log("hello");
         window.location.href='index.html';
       }
