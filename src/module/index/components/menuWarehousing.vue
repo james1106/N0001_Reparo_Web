@@ -32,6 +32,8 @@ export default {
   },
   methods:{
       setTab(status){
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
         Store.commit('setRepoCompanyTab',status);
       }
   }

@@ -42,6 +42,8 @@
       },
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       this.$http.get("/v1/waybill/allWayBillDetail").then(function(res){
         /*获取企业物流列表*/
         console.log('获取物流列表：'+res.body);

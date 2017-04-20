@@ -126,20 +126,22 @@
     },
     methods:{
         confirmSend () {
-          this.sendGoodForm.logisticsEnterpriseName = this.sendGoodForm1.logisticsEnterpriseName
-          this.sendGoodForm.logisticsList = this.sendGoodForm1.logisticsList
+          this.sendGoodForm.logisticsEnterpriseName = this.sendGoodForm1.logisticsEnterpriseName;
+          this.sendGoodForm.logisticsList = this.sendGoodForm1.logisticsList;
           console.log(this.sendGoodForm)
             this.$http.post("/v1/waybill/unConfirmedWaybill",this.sendGoodForm,{emulateJSON:true}).then(function(res){
                 console.log(res.body);
-                this.sendGoodForm=res.body.data;
+              store.commit('setCheckId',this.sendGoodForm.orderNo);
+              console.log(store.state.checkId);
+              this.$router.push("/logistics/wayBillDetails");
             },function(err){
                 console.log(err);
             });
-          store.commit('setCheckId',this.sendGoodForm.orderNo);
-          this.$router.push("/logistics/wayBillDetails");
         }
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
         /*请求物流企业列表*/
         this.$http.get("/v1/account/allEnterpriseName?roleCode=1").then(function(res){
             this.sendGoodForm1.logisticsList=res.body.data;
@@ -154,6 +156,7 @@
           console.log(res.body);
           this.orderDetail = res.body.data;
           this.sendGoodForm.orderNo=this.orderDetail.txDetail.orderId;/*订单编号	*/
+          console.log("sendGoodForm: "+this.sendGoodForm.orderNo);
           this.sendGoodForm.launchOrderTime=this.orderDetail.txDetail.operationRecordVoList[0].operateTime;/*订单发起时间，只显示用*/
           this.sendGoodForm.payingMethod=this.orderDetail.txDetail.payingMethod;/*付款方式，显示用*/
           this.sendGoodForm.payerBank=this.orderDetail.txDetail.payerBank;/*支付银行*/

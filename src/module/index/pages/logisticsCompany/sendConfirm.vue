@@ -75,6 +75,8 @@
       cancelConfirm () {}
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(
         function(res){
           console.log(res.body);

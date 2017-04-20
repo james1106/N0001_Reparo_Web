@@ -187,13 +187,17 @@
          this.confirmOrder.orderNo=store.state.checkId;
          console.log(this.confirmOrder);
          this.$http.post("/v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
-         function(res){console.log(res.body);},
+         function(res){
+             console.log(res.body);
+           this.$router.push("/allAccounts/signout/signout");//签发应收账款
+         },
          function(err){console.log(err)}
          );
-        this.$router.push("/allAccounts/signout/signout");//签发应收账款
       }
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
         this.$http.get("/v1/order/detail?orderNo="+store.state.checkId).then(
             function(res){
                 console.log(res.body);

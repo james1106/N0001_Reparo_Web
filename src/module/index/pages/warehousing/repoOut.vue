@@ -47,6 +47,8 @@
       }
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       this.$http.get("/v1/repository/getRepoBusiList?role=2").then(function(res){
         /*获取出库管理列表*/
         console.log(res.body);

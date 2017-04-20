@@ -29,6 +29,8 @@
   export default {
     name:'repoCompany',
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       this.getRepoList()
     },
     components:{

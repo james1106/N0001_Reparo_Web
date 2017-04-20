@@ -15,6 +15,7 @@ Vue.config.productionTip = false
 
 //定义路由
 const router = new VueRouter({
+  // mode:'history',
   routes: routerConfig
 })
 /*订单交易状态*/

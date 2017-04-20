@@ -144,9 +144,8 @@
 export default {
   name: 'app',
   mounted: function (){
-    this.$nextTick(function () {
-
-    });
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
   },
   created:function () {
 

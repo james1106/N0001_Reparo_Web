@@ -278,6 +278,8 @@
       }
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       console.log(this.activeName);
       var tempRole;
       switch(store.state.isBuyer){

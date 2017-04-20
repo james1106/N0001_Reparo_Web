@@ -37,11 +37,20 @@
 
   export default {
     name:'list',
-    created: function () {
+    mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       if(Store.state.isBuyer == 'false'){
         this.getSignoutOrderList()
       }
       this.getAccountsList()
+    },
+    created: function () {
+
+      /*if(Store.state.isBuyer == 'false'){
+        this.getSignoutOrderList()
+      }
+      this.getAccountsList()*/
     },
     components:{
       AccountsTable
@@ -102,6 +111,6 @@
               return 1
           }
       }
-    }
+    },
   }
 </script>

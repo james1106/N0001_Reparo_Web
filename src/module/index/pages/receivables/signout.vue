@@ -129,6 +129,8 @@
   export default {
     name:'signout',
     mounted:function () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       var userInfo = LocalStore.fetchUserInfo();
       this.signoutInfo.pyeeBank = userInfo.acctSvcrName
       this.signoutInfo.pyee = userInfo.acctIds

@@ -355,6 +355,8 @@
       }
     },
     mounted() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       console.log("the state checkId is:" + store.state.checkId);
       this.$http.get("/v1/order/detail?orderNo=" + store.state.checkId).then(
         function (res) {

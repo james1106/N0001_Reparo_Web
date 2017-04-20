@@ -43,22 +43,32 @@
     },
     methods:{
       setStatus: function (status) {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
         Store.commit('setAccountsStatus',status);
       },
       confirmOrder () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
          Store.commit('setOrderTab',"second");
          console.log(Store.state.orderTab);
 //         this.$router.push("/order/allOrder");
       },
       allOrder () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
          Store.commit('setOrderTab',"first");
         console.log(Store.state.orderTab);
 //        this.$router.push("/order/allOrder");
       },
       sendGood () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
          Store.commit('setLogisticsTab',"second");
       },
       myLogistics () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
          Store.commit('setLogisticsTab',"first");
       }
 

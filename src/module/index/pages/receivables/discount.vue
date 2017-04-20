@@ -68,7 +68,9 @@
 
   export default {
     name:'discount',
-    created:function () {
+    mounted:function () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       this.getDetail()
       this.getBankList();
     },

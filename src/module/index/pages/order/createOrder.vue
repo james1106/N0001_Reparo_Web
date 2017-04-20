@@ -208,6 +208,8 @@
       },//submit
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       var userInfo = Store.fetchUserInfo();
       this.launchOrder.payerBank = userInfo.acctSvcrName;
       this.launchOrder.payerAccount = userInfo.acctIds;

@@ -44,6 +44,8 @@
       },
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       this.$http.get("/v1/repository/getRepoCertInfoList").then(function(res){
         /*获取所有仓单列表*/
         console.log(res.body);

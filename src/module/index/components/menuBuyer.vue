@@ -38,6 +38,8 @@
     },
     methods:{
       setStatus: function (status) {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
         Store.commit('setAccountsStatus',status);
       }
     }

@@ -105,6 +105,8 @@
       }
     },
     mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
 //        请求物流详情接口　
       this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(function(res){
         console.log(res.body);

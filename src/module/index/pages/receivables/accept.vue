@@ -41,8 +41,14 @@
 import userInfo from '../../../../common/store'
   export default {
     name:'signout',
-    created:function () {
+    /*created:function () {
       this.getDetail();
+    },*/
+    mounted () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      this.getDetail();
+
     },
     data () {
       return {
@@ -104,6 +110,6 @@ import userInfo from '../../../../common/store'
           console.log(err);
         })
       }
-    }
+    },
   }
 </script>

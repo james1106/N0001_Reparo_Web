@@ -27,12 +27,18 @@ export default {
   },
   methods:{
     companyAllBill () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
         store.commit('setLogisticsCompanyTab',"first");
     },
     sendConfirm () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
         store.commit('setLogisticsCompanyTab',"second");
     },
     receiveConfirm () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
         store.commit('setLogisticsCompanyTab',"third");
     },
   }
