@@ -31,7 +31,8 @@
             </el-col>
             <el-col :span="2">
               <el-row>账款状态</el-row>
-              <el-row v-if="item.transactionStatus===constantData.CONFIRMED">{{constantData.CONFIRMED | receStatus}}</el-row>
+              <el-row v-if="item.transactionStatus===constantData.CONFIRMED">{{constantData.CONFIRMED | receStatus}}
+              </el-row>
               <el-row v-else>{{item.receStatus | receStatus}}</el-row>
             </el-col>
             <el-col :span="2">
@@ -44,10 +45,19 @@
             </el-col>
             <el-col :span="2">
               <el-button type="text" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(item.orderNo)">确认订单</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)" @click.native.prevent="signBill(item.orderNo)">签发</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
-              <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
+              <el-button type="text"
+                         v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
+                         @click.native.prevent="confirmOrder(item.orderNo)">确认订单
+              </el-button>
+              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)"
+                         @click.native.prevent="signBill(item.orderNo)">签发
+              </el-button>
+              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"
+                         @click.native.prevent="sendGood(item.orderNo)">发货
+              </el-button>
+              <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
+                         @click.native.prevent="acceptBill(item.orderNo)">签收账款
+              </el-button>
             </el-col>
           </el-row>
         </el-row>
@@ -68,22 +78,22 @@
   import '../../../assets/css/style.css'
   export default {
     name: 'orderDataTable',
-    props: ['orderList','status','pageSize'],
+    props: ['orderList', 'status', 'pageSize'],
     data(){
-      return{
-        tableData:this.orderList,
-        showData:[],
-        accountsStatus:this.status,
-        detailPath:''
+      return {
+        tableData: this.orderList,
+        showData: [],
+        accountsStatus: this.status,
+        detailPath: ''
       }
     },
-    watch:{
+    watch: {
       orderList(curVal){
-        this.tableData=curVal;
+        this.tableData = curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
-    }
-  },
+      }
+    },
     computed: {
       state () {
         return store.state;
@@ -92,80 +102,95 @@
         return constantData;
       },
     },
-    methods:{
+    methods: {
       currentChange(val){
         this.getDataByPageNum(val - 1)
       },
       getDataByStatus(){/*筛选出各个Tab状态*/
-          switch(this.status){
-            case 'all':break;
-            case 'forConfirm':
-              var res=[];
-              for(var i=0;i<this.tableData.length;i++ ){
-                var item = this.tableData[i];
-                if(item.transactionStatus===constantData.UNCONFIRMED){
-                  res.push(item)
-                }
+        switch (this.status) {
+          case 'all':
+            break;
+          case 'forConfirm':
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
+              var item = this.tableData[i];
+              if (item.transactionStatus === constantData.UNCONFIRMED) {
+                res.push(item)
               }
-              this.tableData = res;break;
-            case 'forPay':
-              var res=[];
-              for(var i=0;i<this.tableData.length;i++ ){
-                var item = this.tableData[i];
-                if((item.receStatus===constantData.FORACCEPT)||(item.transactionStatus===constantData.CONFIRMED)){
-                  res.push(item)
-                }
+            }
+            this.tableData = res;
+            break;
+          case 'forPay':
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
+              var item = this.tableData[i];
+              if ((item.receStatus === constantData.FORACCEPT) || (item.transactionStatus === constantData.CONFIRMED)) {
+                res.push(item)
               }
-              this.tableData = res;break;
-            case 'forSend':
-              var res=[];
-              for(var i=0;i<this.tableData.length;i++ ){
-                var item = this.tableData[i];
-                if(item.receStatus===constantData.ACCEPTED){
-                  res.push(item)
-                }
+            }
+            this.tableData = res;
+            break;
+          case 'forSend':
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
+              var item = this.tableData[i];
+              if (item.receStatus === constantData.ACCEPTED) {
+                res.push(item)
               }
-              this.tableData = res;break;
-            case 'forReceive':
-              var res=[];
-              for(var i=0;i<this.tableData.length;i++ ){
-                var item = this.tableData[i];
-                if(item.wayBillStatus===constantData.SENDED){
-                  res.push(item)
-                }
+            }
+            this.tableData = res;
+            break;
+          case 'forReceive':
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
+              var item = this.tableData[i];
+              if (item.wayBillStatus === constantData.SENDED) {
+                res.push(item)
               }
-              this.tableData = res;break;
-            default:break;
-          }
+            }
+            this.tableData = res;
+            break;
+          default:
+            break;
+        }
       },
       getDataByPageNum(pageNum){
-        if((pageNum + 1) * this.pageSize > this.tableData.length){
+        if ((pageNum + 1) * this.pageSize > this.tableData.length) {
           this.showData = this.tableData.slice(pageNum * this.pageSize);
-        }else {
-          this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
+        } else {
+          this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
 
       checkDetail (orderNo) {
-        store.commit('setCheckIdOrder',orderNo);
+        store.commit('setCheckIdOrder', orderNo);
         console.log(store.state.checkIdOrder);
         this.$router.push("/order/orderDetail");
       },
       confirmOrder (orderNo) {
         console.log("确认订单！");
-        store.commit('setCheckIdOrder',orderNo);
+        store.commit('setCheckIdOrder', orderNo);
         this.$router.push("/order/confirmOrder");
       },
       signBill (checkId) {
-        console.log("签发应收账款");//需要修改
-        store.commit('setCheckId',checkId);
+        console.log("签发应收账款");//签发用的是orderId
+        store.commit('setCheckIdOrder', checkId);
         this.$router.push("/allAccounts/signout/signout");
       },
-      sendGood () {
+      sendGood (checkId) {
         console.log("发货");
+        store.commit('setCheckIdOrder', checkId);
+        this.$router.push("/logistics/deliver");
       },
-      acceptBill () {
+      acceptBill (checkId) {
         console.log("签收账款");
+        this.$http.get("/v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
+          console.log(res.body.data);
+          store.commit("setCheckIdRece", res.body.data.receOver.receNo);
+          this.$router.push("/allAccounts/accept/accept");
+        }, function (err) {
+          console.log(err);
+        });
       }
     }
   }

@@ -5,9 +5,9 @@
       <el-col :class="{buyerColor:state.isBuyer==='true',buyeeColor:state.isBuyer==='false',stateShow:true,}" :span="8"><i class="el-icon-information"></i>&emsp;{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
       <el-col :span="8">
         <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
-        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill">签发应收账款</el-button>
-        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood">发货</el-button>
-        <el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill">签收账款</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill(orderDetail.receOver.receNo)">签收账款</el-button>
       </el-col>
     </el-row>
 
@@ -15,7 +15,7 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <span class="keynote">交易详情</span><el-button size="mini" type="text" class="detailButton">查看详情 ></el-button>
+              <span class="keynote">交易详情</span>
             </div>
             <div class="box-card mycard1">
               <el-row>
@@ -109,7 +109,7 @@
         <el-card class="box-card mybox" style="width:100%">
 
           <div slot="header" class="clearfix el-row-header">
-            <span class="keynote">物流信息</span><el-button size="mini" type="text" class="detailButton" @click="logisticsDetailPage(orderDetail.txDetail.orderId)">查看详情 ></el-button>
+            <span class="keynote">物流信息</span><el-button size="mini" type="text" class="detailButton" @click="logisticsDetailPage(orderDetail.txDetail.orderId)" v-if="state.isBuyer==='false'">查看详情 ></el-button>
           </div>
           <div class="box-card mycard1" v-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.NOMESSAGE">
             暂无物流信息！
@@ -257,17 +257,23 @@
     methods: {
       confirmOrder (checkId) {
         console.log("确认订单！");
-        store.commit('setCheckId',checkId);
+        store.commit('setCheckIdOrder',checkId);
         this.$router.push("/order/confirmOrder");
       },
-      signBill () {
+      signBill (checkId) {
         console.log("签发应收账款");
+        store.commit('setCheckIdOrder',checkId);
+        this.$router.push("/allAccounts/signout/signout");
       },
-      sendGood () {
+      sendGood (checkId) {
         console.log("发货");
+        store.commit('setCheckIdOrder',checkId);
+        this.$router.push("/logistics/deliver");
       },
-      acceptBill () {
+      acceptBill (checkId) {
         console.log("承兑签收");
+        store.commit('setCheckIdRece',checkId);
+        this.$router.push("/allAccounts/accept/accept");
       },
       orderCollapse () {
           if(this.isOrderCollapse){
