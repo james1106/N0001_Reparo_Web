@@ -75,7 +75,7 @@
     },
     methods:{
         getDetails(){
-          this.$http.get('/v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkId).then((res) => {
+          this.$http.get('/v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
             console.log(res.body);
             var code =  res.body.code;
             if(code != 0){
@@ -87,7 +87,7 @@
           })
         },
         inResponse(){
-          var param = {repoBusinessNo:Store.state.checkId}
+          var param = {repoBusinessNo:Store.state.checkIdRepo}
           this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
             console.log(res.body);
             var code =  res.body.code;

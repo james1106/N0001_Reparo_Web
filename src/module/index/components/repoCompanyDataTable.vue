@@ -109,20 +109,20 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
-      showDetail(repoBusinessNo){
-        store.commit('setCheckId',repoBusinessNo);
+      checkDetail(repoBusinessNo){
+        store.commit('setCheckIdRepo',repoBusinessNo);
         this.$router.push('/warehousingCompany/repoDetails')
       },
       inResponse(repoBusinessNo){
-        store.commit('setCheckId',repoBusinessNo);
+        store.commit('setCheckIdRepo',repoBusinessNo);
         this.$router.push('/warehousingCompany/inResponse')
       },
-      outConfirm(repoBusinessNo){
-        store.commit('setCheckId',repoBusinessNo);
+      inConfirm(repoBusinessNo){
+        store.commit('setCheckIdRepo',repoBusinessNo);
         this.$router.push('/warehousingCompany/inConfirm')
       },
       outConfirm(repoBusinessNo){
-        store.commit('setCheckId',repoBusinessNo);
+        store.commit('setCheckIdRepo',repoBusinessNo);
         this.$router.push('/warehousingCompany/outConfirm')
       }
     }

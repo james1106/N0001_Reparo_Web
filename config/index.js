@@ -23,17 +23,18 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8088,
+    port: 8087,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/v1': {
-        target: 'http://172.16.100.8:8080/reparo',
+        target: 'http://localhost:8080/reparo',
         changeOrigin: true,
         pathRewrite: {
           '^/v1': '/v1'
-        }//ldy172.16.100.8
+        }//ldy172.16.100.8  8088
+        //zgj 172.16.100.30 8088
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

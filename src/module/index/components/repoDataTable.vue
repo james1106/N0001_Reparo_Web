@@ -152,8 +152,8 @@
       checkDetail (checkId) {
 //        alert(this.tableData);
 
-        store.commit('setCheckId',checkId);
-        console.log(store.state.checkId);
+        store.commit('setCheckIdRepo',checkId);
+        console.log(store.state.checkIdRepo);
         this.$router.push("/warehousing/repoDetails");
       },
     }

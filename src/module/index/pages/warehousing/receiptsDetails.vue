@@ -73,7 +73,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-        this.$http.get("/v1/repository/getRepoCert?repoCertNo="+store.state.checkId).then(function(res){
+        this.$http.get("/v1/repository/getRepoCert?repoCertNo="+store.state.checkIdRepoCert).then(function(res){
 //            请求仓单详情列表
           console.log(res.body);
           this.receiptsDetails=res.body.data;

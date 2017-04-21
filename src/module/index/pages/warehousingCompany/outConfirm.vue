@@ -77,7 +77,7 @@
     },
     methods:{
       getDetails(){
-        this.$http.get('/v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkId).then((res) => {
+        this.$http.get('/v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
           console.log(res.body);
         var code =  res.body.code;
         if(code != 0){
@@ -89,7 +89,7 @@
         })
       },
       outConfirm(){
-        this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkId).then((res) => {
+        this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){

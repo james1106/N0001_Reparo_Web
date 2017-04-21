@@ -147,17 +147,17 @@
       },
 
       checkDetail (orderNo) {
-        store.commit('setCheckId',orderNo);
-        console.log(store.state.checkId);
+        store.commit('setCheckIdOrder',orderNo);
+        console.log(store.state.checkIdOrder);
         this.$router.push("/order/orderDetail");
       },
       confirmOrder (orderNo) {
         console.log("确认订单！");
-        store.commit('setCheckId',orderNo);
+        store.commit('setCheckIdOrder',orderNo);
         this.$router.push("/order/confirmOrder");
       },
       signBill (checkId) {
-        console.log("签发应收账款");
+        console.log("签发应收账款");//需要修改
         store.commit('setCheckId',checkId);
         this.$router.push("/allAccounts/signout/signout");
       },

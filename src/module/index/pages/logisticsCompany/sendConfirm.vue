@@ -63,13 +63,13 @@
     methods: {
       sendConfirm (checkId) {
         console.log("发货确认");
-        this.confirmSend.orderNo=store.state.checkId;
+        this.confirmSend.orderNo=store.state.checkIdOrder;
         console.log(this.confirmSend);
         this.$http.post("/v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
           function(res){console.log(res.body);},
           function(err){console.log(err)}
         );
-        store.commit('setCheckId',checkId);
+        store.commit('setCheckIdOrder',checkId);
         this.$router.push('/logisticsCompany/companyBillDetails');
       },
       cancelConfirm () {}
@@ -77,7 +77,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkId).then(
+      this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
         function(res){
           console.log(res.body);
           this.companyBillDetail=res.body.data;

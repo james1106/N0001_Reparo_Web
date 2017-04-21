@@ -116,27 +116,27 @@
       },
       showDetail(receivableNo,orderNo,status){
         if(status == constantData.CONFIRMED){
-          Store.commit('setCheckId',orderNo);
+          Store.commit('setCheckIdOrder',orderNo);
           this.$router.push("/order/orderDetail");
         }else{
-          Store.commit('setCheckId',receivableNo);
+          Store.commit('setCheckIdRece',receivableNo);
           this.$router.push("/allAccounts/detail/detail");
         }
       },
       signout(orderNo){
-        Store.commit('setCheckId',orderNo);
+        Store.commit('setCheckIdOrder',orderNo);
         this.$router.push("/allAccounts/signout/signout");
       },
       confirmAccept(receivableNo){
-        Store.commit('setCheckId',receivableNo);
+        Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/allAccounts/accept/accept");
       },
       confirmCash(receivableNo){
-        Store.commit('setCheckId',receivableNo);
+        Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/allAccounts/cash/cash");
       },
       confirmDiscount(receivableNo){
-        Store.commit('setCheckId',receivableNo);
+        Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/allAccounts/discount/discount");
       }
     }

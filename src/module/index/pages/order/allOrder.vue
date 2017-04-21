@@ -258,13 +258,13 @@
       },
       checkDetail (orderNo) {
 //          store.state.checkId=orderNo;
-        store.commit('setCheckId',orderNo);
-          console.log(store.state.checkId);
+        store.commit('setCheckIdOrder',orderNo);
+          console.log(store.state.checkIdOrder);
           this.$router.push("/order/orderDetail");
       },
       confirmOrder (orderNo) {
           console.log("确认订单！");
-          store.commit('setCheckId',orderNo);
+          store.commit('setCheckIdOrder',orderNo);
           this.$router.push("/order/confirmOrder");
       },
       signBill () {

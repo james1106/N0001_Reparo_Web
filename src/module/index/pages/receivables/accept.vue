@@ -97,7 +97,7 @@ import userInfo from '../../../../common/store'
         })
       },
       getDetail(){
-        var receivableNo = Store.state.checkId;
+        var receivableNo = Store.state.checkIdRece;
         this.$http.post('/v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;

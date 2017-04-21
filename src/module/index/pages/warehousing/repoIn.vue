@@ -43,7 +43,7 @@
         console.log(tab, event);
       },
       checkDetail(repoNo){
-        store.commit('setCheckId',repoNo);
+        store.commit('setCheckIdRepo',repoNo);
         this.$router.push('/warehousing/repoDetails');
       }
     },

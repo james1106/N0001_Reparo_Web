@@ -101,7 +101,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkId).then(function(res){
+      this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkIdRepo).then(function(res){
 //            请求仓储详情数据
         console.log(res.body);
         if(res.body.code != 0){
@@ -158,7 +158,7 @@
       }
     },
     inResponse(){
-      var param = {repoBusinessNo:Store.state.checkId}
+      var param = {repoBusinessNo:Store.state.checkIdRepo}
       this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
         console.log(res.body);
         var code =  res.body.code;
@@ -172,7 +172,7 @@
       })
     },
     inConfirm(){
-      this.$http.put('/v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkId).then((res) => {
+      this.$http.put('/v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
         console.log(res.body);
         var code =  res.body.code;
         if(code != 0){
@@ -185,7 +185,7 @@
       })
     },
     outConfirm(){
-      this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkId).then((res) => {
+      this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
         console.log(res.body);
         var code =  res.body.code;
         if(code != 0){

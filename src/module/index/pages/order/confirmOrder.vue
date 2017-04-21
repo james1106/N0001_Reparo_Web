@@ -184,12 +184,12 @@
       confirm () {
           this.showModal=false;
         console.log("订单确认");
-         this.confirmOrder.orderNo=store.state.checkId;
+         this.confirmOrder.orderNo=store.state.checkIdOrder;
          console.log(this.confirmOrder);
          this.$http.post("/v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
          function(res){
              console.log(res.body);
-           this.$router.push("/allAccounts/signout/signout");//签发应收账款
+           this.$router.push("/allAccounts/signout/signout");//跳转到签发应收账款
          },
          function(err){console.log(err)}
          );
@@ -198,7 +198,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-        this.$http.get("/v1/order/detail?orderNo="+store.state.checkId).then(
+        this.$http.get("/v1/order/detail?orderNo="+store.state.checkIdOrder).then(
             function(res){
                 console.log(res.body);
                 this.orderDetail=res.body.data;

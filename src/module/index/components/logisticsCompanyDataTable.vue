@@ -138,16 +138,16 @@
       checkDetail (orderNo) {
 //        alert(this.tableData);
 
-        store.commit('setCheckId',orderNo);
-        console.log(store.state.checkId);
+        store.commit('setCheckIdOrder',orderNo);
+        console.log(store.state.checkIdOrder);
         this.$router.push("/logisticsCompany/companyBillDetails");
       },
       sendConfirm(orderNo){
-        store.commit('setCheckId',orderNo);
+        store.commit('setCheckIdOrder',orderNo);
         this.$router.push('/logisticsCompany/sendConfirm');
       },
       receiveConfirm(orderNo){
-        store.commit('setCheckId',orderNo);
+        store.commit('setCheckIdOrder',orderNo);
         this.$router.push('/logisticsCompany/receiveConfirm');
       },
 

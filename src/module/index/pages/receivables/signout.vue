@@ -213,7 +213,7 @@
                 return;
               }
               //跳到详情
-              Store.commit('setCheckId',res.body.data);
+              Store.commit('setCheckIdRece',res.body.data);
               this.$router.push('/allAccounts/signout/detail')
             },(err) => {
               console.log(err);
@@ -226,8 +226,8 @@
         })
       },
       getOrderDetail(){
-          console.log("the state checkId is:" + Store.state.checkId);
-          this.$http.get("/v1/order/detail?orderNo=" + Store.state.checkId).then(
+          console.log("the state checkIdOrder is:" + Store.state.checkIdOrder);
+          this.$http.get("/v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
             function (res) {
               console.log(res.body.data);
               this.orderDetail = res.body.data;

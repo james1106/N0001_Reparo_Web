@@ -342,23 +342,23 @@
         }
       },
       receDetailPage (checkId) {
-          store.commit('setCheckId',checkId);
+          store.commit('setCheckIdRece',checkId);
         this.$router.push("/allAccounts/detail/detail");
       },
       logisticsDetailPage(checkId){
-          store.commit('setCheckId',checkId);
+          store.commit('setCheckIdOrder',checkId);
         this.$router.push("/logistics/wayBillDetails");
       },
       repoDetailPage(checkId){
-        store.commit('setCheckId',checkId);
+        store.commit('setCheckIdRepo',checkId);
         this.$router.push("/warehousing/repoDetails");
       }
     },
     mounted() {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      console.log("the state checkId is:" + store.state.checkId);
-      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkId).then(
+      console.log("the state checkIdOrder is:" + store.state.checkIdOrder);
+      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
         function (res) {
           // 处理成功的结果
           console.log(res.body);

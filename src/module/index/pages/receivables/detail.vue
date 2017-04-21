@@ -162,7 +162,7 @@
     methods:{
         getDetail(){
           var detailParam = {
-            receivableNo:Store.state.checkId,
+            receivableNo:Store.state.checkIdRece,
             operatorAcctId:LocalStore.fetchUserInfo().acctIds
           }
           this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
@@ -240,7 +240,7 @@
         })
       },
       /**
-      *  左上角当情详情的信息设置
+      *  左上角当前详情的信息设置
       **/
       setStatusInfo(data){
         var status = data.detailVoList[0].status;

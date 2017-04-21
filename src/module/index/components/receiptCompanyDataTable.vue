@@ -98,7 +98,7 @@
         }
       },
       checkDetail (checkId) {
-        store.commit('setCheckId',checkId);
+        store.commit('setCheckIdRepoCert',checkId);
         this.$router.push('/warehousingCompany/receiptDetails');
       },
     }

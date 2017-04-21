@@ -116,7 +116,7 @@
       },
       getDetail(){
         var detailParam = {
-          receivableNo:Store.state.checkId,
+          receivableNo:Store.state.checkIdRece,
           operatorAcctId:''
         }
         this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {

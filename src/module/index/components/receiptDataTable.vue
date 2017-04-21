@@ -123,8 +123,8 @@
       checkDetail (checkId) {
 //        alert(this.tableData);
 
-        store.commit('setCheckId',checkId);
-        console.log(store.state.checkId);
+        store.commit('setCheckIdRepoCert',checkId);
+        console.log(store.state.checkIdRepoCert);
         this.$router.push("/warehousing/receiptsDetails");
       },
     }

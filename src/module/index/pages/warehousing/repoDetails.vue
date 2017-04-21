@@ -85,7 +85,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-        this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkId).then(function(res){
+        this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkIdRepo).then(function(res){
 //            请求仓储详情数据
           console.log(res.body);
           this.repoDetails=res.body.data;

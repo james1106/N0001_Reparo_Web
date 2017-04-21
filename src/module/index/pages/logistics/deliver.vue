@@ -131,8 +131,8 @@
           console.log(this.sendGoodForm)
             this.$http.post("/v1/waybill/unConfirmedWaybill",this.sendGoodForm,{emulateJSON:true}).then(function(res){
                 console.log(res.body);
-              store.commit('setCheckId',this.sendGoodForm.orderNo);
-              console.log(store.state.checkId);
+              store.commit('setCheckIdOrder',this.sendGoodForm.orderNo);
+              console.log(store.state.checkIdOrder);
               this.$router.push("/logistics/wayBillDetails");
             },function(err){
                 console.log(err);
@@ -150,7 +150,7 @@
         });
         /*根据订单号请求订单详情并填写*/
 
-      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkId).then(
+      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
         function (res) {
           // 处理成功的结果
           console.log(res.body);

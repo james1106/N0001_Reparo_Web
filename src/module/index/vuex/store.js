@@ -5,7 +5,10 @@ import * as getters from './getters'
 Vue.use(Vuex)
 
 const state={
-  checkId:'',//全部订单列表点击详情时记住Id  /也可能是应收账款编号
+  checkIdOrder:'',//全部订单列表点击详情时记住Id  /也可能是应收账款编号
+  checkIdRece:'',//应收账款编号
+  checkIdRepo:'',//仓储编号
+  checkIdRepoCert:'',//仓单编号
   commonData:{
     "account_name":'A员工',
     "company_name":"A企业",
@@ -34,9 +37,21 @@ for(var item in state){
 }
 
 const mutations={
-  setCheckId (state, id) {
-    state.checkId=id;
-    localStorage.setItem('checkId',id);
+  setCheckIdOrder (state, id) {
+    state.checkIdOrder=id;
+    localStorage.setItem('checkIdOrder',id);
+  },
+  setCheckIdRece (state, id) {
+    state.checkIdRece=id;
+    localStorage.setItem('checkIdRece',id);
+  },
+  setCheckIdRepo (state, id) {
+    state.checkIdRepo=id;
+    localStorage.setItem('checkIdRepo',id);
+  },
+  setCheckIdRepoCert (state, id) {
+    state.checkIdRepoCert=id;
+    localStorage.setItem('checkIdRepoCert',id);
   },
   setAccountsStatus (state, status) {
     state.accountsStatus=status;
