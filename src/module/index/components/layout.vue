@@ -35,7 +35,7 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
-      <el-col :span="14" class="userinfo" v-else="">
+      <el-col :span="14" class="userinfo" v-else>
         <el-dropdown trigger="hover">
           <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
           <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>

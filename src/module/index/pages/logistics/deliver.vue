@@ -89,8 +89,8 @@
         </el-tab-pane>
       </el-tabs>
       </el-form>
+      <el-button type="primary" @click="confirmSend">确认发货</el-button>
     </el-card>
-    <el-button type="success" @click="confirmSend">确认发货</el-button>
   </div>
 </template>
 <script>

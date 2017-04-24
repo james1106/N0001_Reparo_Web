@@ -34,7 +34,7 @@
         </el-card>
       </el-col>
       <el-col :span="6" style="float: right">
-        <img src="../../assets/mai_B.png" style="height: 80px;float: right">
+        <img :src="imgUrl.maiB" style="height: 80px;float: right">
       </el-col>
     </el-row>
     <el-row v-else>  <!--卖家-->
@@ -75,11 +75,11 @@
         </el-card>
       </el-col>
       <el-col :span="4" style="float: right">
-        <img src="../../assets/mai_G.png" style="height: 80px;float: right">
+        <img :src="imgUrl.maiG" style="height: 80px;float: right">
       </el-col>
     </el-row>
     <el-row>
-      <img src="../../assets/ad.png" style="width: 100%">
+      <img :src="imgUrl.adImg" style="width: 100%">
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
@@ -141,7 +141,12 @@
 <script>
   import '../../../../assets/css/style.css'
   import '../../../../framework/iconfont.js'
-export default {
+  import adImg from '../../assets/ad.png'
+  import maiB from '../../assets/mai_B.png'
+  import maiG from  '../../assets/mai_G.png'
+
+
+  export default {
   name: 'app',
   mounted: function (){
       document.body.scrollTop = 0;
@@ -152,6 +157,11 @@ export default {
   },
   data () {
     return {
+      imgUrl:{
+        adImg:adImg,
+        maiB:maiB,
+        maiG:maiG
+      },
       showOrder:[
         {
           "orderNo":"1111111122",

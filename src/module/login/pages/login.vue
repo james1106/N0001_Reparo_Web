@@ -119,7 +119,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true;
-            this.$http.post('/v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
+            this.$http.post('../v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
               console.log(res.body);
               this.loading = false;
               var code =  res.body.code;
@@ -130,7 +130,7 @@
                 return;
               }
               Store.saveUserInfo(data);
-              window.location.href='index.html';
+              window.location.href='main.html';
             },(err) => {
               this.loading = false;
               console.log(err);
@@ -157,7 +157,7 @@
     created () {
       if(this.getCookie('token')!==''){
           console.log("hello");
-        window.location.href='index.html';
+        window.location.href='main.html';
       }
     }
   }

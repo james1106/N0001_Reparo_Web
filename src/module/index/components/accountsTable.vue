@@ -21,10 +21,10 @@
           <el-col :span="5">
             <el-col :span="24">账款金额：{{item.isseAmt}}</el-col>
             <el-col :span="24">付款方式：应收账款支付</el-col>
-            <el-col :span="24">到期日：{{item.dueDt}}</el-col>
+            <el-col :span="24">到期日：{{item.dueDt | timeTransfer}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">{{item.enterpriseName}}</el-col>
+            <el-col :span="24">{{item.enterpriseName | nullSituation}}</el-col>
           </el-col>
           <el-col :span="5">
             <el-col :span="24">{{item.status | receStatus}}</el-col>

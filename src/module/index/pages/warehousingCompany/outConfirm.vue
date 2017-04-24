@@ -22,8 +22,8 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="8" class="msgName">仓单号：{{repoDetails.repoCertNo}}</el-col>
-                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo}}</el-col>
+                <el-col :span="8" class="msgName">仓单号：{{repoDetails.repoCertNo | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
                 <el-col :span="8" class="msgName">持有人：{{repoDetails.repoEnterpriceName}}</el-col>
               </el-row>
               <el-row>

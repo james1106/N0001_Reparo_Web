@@ -44,7 +44,7 @@
                   v-model="signoutInfo.dueDt"
                   type="date"
                   placeholder=""
-                  :picker-options="pickerOptions0">
+                  :picker-options="pickerOptions">
                 </el-date-picker>
               </el-form-item>
             </el-col>
@@ -138,6 +138,11 @@
     },
     data () {
       return {
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() < Date.now() - 8.64e7;
+          }
+        },
         orderDetail:{
           txDetail:{
             orderId:'',

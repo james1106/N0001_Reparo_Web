@@ -10,7 +10,7 @@
     <el-card>
       <el-row class="el-row-header statePosition">
         <el-col class="buyerColor stateShow"><i class="el-icon-information"></i>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
-          <el-button v-if="handleInfo.showHandleBtn" size="small" @click="handle()" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">相关操作</el-button>
+          <el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">{{handleInfo.title}}</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -70,7 +70,7 @@
   </div>
 </template>
 <script>
-  import store from '../../vuex/store'
+  import Store from '../../vuex/store'
   import constantData from '../../../../common/const'
   export default {
     name:'index',
@@ -95,56 +95,62 @@
     },
     computed:{
       state () {
-        return store.state
+        return Store.state
       }
     },
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkIdRepo).then(function(res){
-//            请求仓储详情数据
-        console.log(res.body);
-        if(res.body.code != 0){
-            return;
-        }
-
-        this.repoDetails=res.body.data;
-        this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
-        this.repoDetails.outRepoTime='';
-        for(var item in this.repoDetails.operationRecordVoList){
-          if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
-            console.log("筛选入库时间");
-            this.repoDetails.inRepoTime=item.operateTime;
-            break;
-          }
-        }
-        for(var item in this.repoDetails.operationRecordVoList){
-          if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
-            console.log("筛选出库时间");
-            this.repoDetails.outRepoTime=item.operateTime;
-            break;
-          }
-        }
-        switch (this.repoDetails.curRepoBusiStatus){
-          case constantData.INFORRESPONSE:
-            this.handleInfo.showHandleBtn = true;
-            this.handleInfo.title = '入库响应';
-            break;
-          case constantData.FORIN:
-            this.handleInfo.showHandleBtn = true;
-            this.handleInfo.title = '入库确认';
-            break;
-          case constantData.FOROUT:
-            this.handleInfo.showHandleBtn = true;
-            this.handleInfo.title = '出库确认';
-            break;
-        }
-
-      },function(err){
-        console.log(err)
-      });
+      this.getDetail();
     },
-    handle(){
+    methods:{
+      getDetail(){
+        this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+Store.state.checkIdRepo).then(function(res){
+//            请求仓储详情数据
+          console.log(res.body);
+          if(res.body.code != 0){
+            return;
+          }
+
+          this.repoDetails=res.body.data;
+          this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
+          this.repoDetails.outRepoTime='';
+          for(var item in this.repoDetails.operationRecordVoList){
+            if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
+              console.log("筛选入库时间");
+              this.repoDetails.inRepoTime=item.operateTime;
+              break;
+            }
+          }
+          for(var item in this.repoDetails.operationRecordVoList){
+            if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
+              console.log("筛选出库时间");
+              this.repoDetails.outRepoTime=item.operateTime;
+              break;
+            }
+          }
+          alert("ss");
+          this.handleInfo.showHandleBtn = false;
+          switch (this.repoDetails.curRepoBusiStatus){
+            case constantData.INFORRESPONSE:
+              this.handleInfo.showHandleBtn = true;
+              this.handleInfo.title = '入库响应';
+              break;
+            case constantData.FORIN:
+              this.handleInfo.showHandleBtn = true;
+              this.handleInfo.title = '入库确认';
+              break;
+            case constantData.FOROUT:
+              this.handleInfo.showHandleBtn = true;
+              this.handleInfo.title = '出库确认';
+              break;
+          }
+
+        },function(err){
+          console.log(err)
+        });
+      },
+      handle(){
       switch (this.repoDetails.curRepoBusiStatus){
         case constantData.INFORRESPONSE:
             this.inResponse();
@@ -155,47 +161,51 @@
         case constantData.FOROUT:
             this.outConfirm();
           break;
+        }
+      },
+      inResponse(){
+        var param = {repoBusinessNo:Store.state.checkIdRepo}
+        this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.dialogVisible = true;
+          this.msg = '已入库响应';
+          this.getDetail();
+        },(err) => {
+          console.log(err);
+        })
+      },
+      inConfirm(){
+        this.$http.put('/v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.dialogVisible = true;
+          this.msg = '已入库确认';
+          this.getDetail();
+        },(err) => {
+          console.log(err);
+        })
+      },
+      outConfirm(){
+        this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.dialogVisible = true;
+          this.msg = '已出库确认';
+          this.getDetail();
+        },(err) => {
+          console.log(err);
+        })
       }
-    },
-    inResponse(){
-      var param = {repoBusinessNo:Store.state.checkIdRepo}
-      this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
-        console.log(res.body);
-        var code =  res.body.code;
-        if(code != 0){
-          return;
-        }
-        this.dialogVisible = true;
-        this.msg = '已入库响应';
-      },(err) => {
-        console.log(err);
-      })
-    },
-    inConfirm(){
-      this.$http.put('/v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
-        console.log(res.body);
-        var code =  res.body.code;
-        if(code != 0){
-          return;
-        }
-        this.dialogVisible = true;
-        this.msg = '已入库确认';
-      },(err) => {
-        console.log(err);
-      })
-    },
-    outConfirm(){
-      this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
-        console.log(res.body);
-        var code =  res.body.code;
-        if(code != 0){
-          return;
-        }
-        this.dialogVisible = true;
-        this.msg = '已出库确认';
-      },(err) => {
-        console.log(err);
-      })
     }
   }
 </script>
