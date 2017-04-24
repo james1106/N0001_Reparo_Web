@@ -33,32 +33,52 @@
   background-color: rgb(201,201,201)!important;
   width: 100%;
 }
-/*.el-card__body{*/
-/*height: 90px;*/
-/*}*/
-.showName{     /*.主页中的四个卡片上的名称*/
+/*.主页中的四个卡片上的名称*/
+.showName{
   font-size: 10px!important;
   color: #666666;
 }
-.showNum{     /*.主页中的四个卡片上的数量*/
+/*.主页中的四个卡片上的数量*/
+.showNum{
   font-size: 24px;
 }
-.showCard{    /*.主页中的四个卡片上的背景*/
+/*.主页中的四个卡片上的背景*/
+.showCard{
   /*width: 260px;*/
   width: 100%;
   height: 80px;
   background-image: url("../../module/index/assets/bg.png");
   background-repeat: no-repeat;
 }
+/*.主页中的四个卡片上的信息*/
 .showMesg{
   margin-left: 10%;
   float: left;
-  /*margin-top: 13px;*/
 }
+/*面包屑*/
+.bread{
+  margin-bottom: 23px
+}
+.buyerColor{
+  color: #0096D7;
+}
+.sellerColor{
+  color: rgb(57,202,166);;
+}
+/*买卖家操作步骤标题样式，第一二三步之类的*/
+.buyerStepTitle{
+  color:rgb(0,150,215);
+  line-height: 50px;
+  font-size: 14px;
+}
+.sellerStepTitle{
+  color: rgb(57,202,166);
+  line-height: 50px;
+  font-size: 14px;
+}
+/*数据列表的首要表头*/
 .el-row-header{
-  /*background-color: rgb(242,246,247);*/
   background-color: rgb(248,248,248);
-  /*background-color: darkseagreen;*/
   font-size: 14px;
   height: 40px;
   line-height: 40px;
@@ -67,89 +87,79 @@
   color: #666666;
   border-bottom: 1px solid #EEEEEE;
 }
-.mycard1 {
-  /*width: 90% !important;*/
-  float: inherit !important;
-  /*margin: 10px auto !important;*/
-  /*background-color: rgba(242,242,242,1)*/
-}
-
-.mycard1 .el-row {
-  margin-bottom: 0 !important;
-}
-
-.mycard1 .el-col {
-  text-align: center;
-  box-sizing: border-box;
-  padding: 5px 0;
-}
-
-.mybox {
-  margin: 0 auto !important;
-  border: 1px solid rgb(138,176,200)!important;
-  border-radius: 0px!important;
-}
-
-.mybox .el-card__header {
-  padding: 0px!important;
-}
-
-/*.mycard11 .row-padding-bottom {*/
-/*box-sizing: border-box;*/
-/*padding-bottom: 10px;*/
-/*}*/
-.detailButton{
-  float: right;
-  line-height: 30px!important;
-  padding-right: 5px!important;
-  color: #666666!important;
-}
-.msgName{
-  text-align: left!important;
-  font-size: 12px;
-  color: #666666;
-}
-.keynote{
-  font-weight: bold;
-}
-.buyerColor{
-  color: #0096D7;
-}
-.sellerColor{
-  color: rgb(57,202,166);;
-}
-.stateShow{
-  margin-left: 10px;
-  font-size: 14px;
-  text-align: left!important;
-  /*font-weight: bold;*/
-}
-.statePosition{
-  border-bottom:none;
-  margin-bottom: 20px;
-}
-.dataTable{
-  border: 1px solid rgb(238,238,238);
-  /*height: 120px;*/
-  height: auto;
-  border-radius: 4px;
-  padding: 10px;
-  background-color: white;
-
-}
+/*数据列表的内容*/
 .el-row-content{
   font-size: 12px!important;
   color: rgb(51,51,51);
   /*height: 80px;*/
   line-height: 22px;
 }
+/*慎用，参照已用页面*/
+.dataTable{
+  border: 1px solid rgb(238,238,238);
+  height: auto;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: white;
+}
+.mycard1 {
+  float: inherit !important;
+}
+.mycard1 .el-row {
+  margin-bottom: 0 !important;
+}
+.mycard1 .el-col {
+  text-align: center;
+  box-sizing: border-box;
+  padding: 5px 0;
+}
+.mybox {
+  margin: 0 auto !important;
+  border: 1px solid rgb(138,176,200)!important;
+  border-radius: 0px!important;
+}
+.mybox .el-card__header {
+  padding: 0px!important;
+}
+/*四个状态信息的查询详情，好像不要了，暂留*/
+.detailButton{
+  float: right;
+  line-height: 30px!important;
+  padding-right: 5px!important;
+  color: #666666!important;
+}
+/*订单等页面内容的字段名称*/
+.msgName{
+  text-align: left!important;
+  font-size: 12px;
+  color: #666666;
+}
+/*重要的信息，加粗*/
+.keynote{
+  font-weight: bold;
+}
+/*信息详情中的状态*/
+.stateShow{
+  margin-left: 10px;
+  font-size: 14px;
+  text-align: left!important;
+  font-weight: bold;
+}
+/*信息详情中的状态位置*/
+.statePosition{
+  border-bottom:none;
+  margin-bottom: 20px;
+}
+/*标签页的字体颜色*/
 .el-tabs__item{
   color: rgb(102,102,102)!important;
   font-weight: bold;
 }
+/*标签页的选中字体颜色*/
 .el-tabs__item.is-active{
   color: #0096D7!important;
 }
+/*提示用户接下来操作的信息*/
 .doTip{
   margin:0 10px 0 30px;
   color: rgb(102,102,102);
@@ -160,32 +170,13 @@
   margin-bottom: 10px;
   padding-bottom: 5px;
 }
+/*显示信息的卡片中需要添加分割线的*/
 .cutoff{
   padding-bottom: 10px!important;
   margin-bottom: 10px!important;
   border-bottom: 1px dashed rgb(221, 221, 221);
 }
-
-
-
-.signout .mybox {
-  margin-bottom: 20px !important;
-}
-
-.signout .el-form-item__label {
-   width: 30% !important;
-   color: rgb(51,51,51);
- }
-
-.signout .el-select .el-input {
-  width: 100% !important;
-  margin: 0px 0.2%!important;
-}
-
-.signout .el-select, .el-input {
-  width: 65% !important;
-  margin: 0px 2%!important;
-}
+/*发货页面的样式*/
 .deliver .mybox {
   margin-bottom: 20px !important;
 }
@@ -204,19 +195,54 @@
   width: 65% !important;
   margin: 0px 2%!important;
 }
-
-
+/*签发页面的样式*/
+.signout .mybox {
+  margin-bottom: 20px !important;
+}
 .signout .el-button {
   float: left;
   width: 30%;
   border-radius: 4px;
   margin: 20px 0;
 }
+.signout .el-form-item__label {
+  width: 30% !important;
+  float: none;
+  margin-left: 2%;
+}
+.signout .el-select{
+  width: 100%!important;
+}
+.signout .el-input{
+  width: 90%!important;
+}
+.signoutMsg .el-row{
+  height: 70px!important;
+}
+.signout .el-card{
+  border: 1px solid rgb(238,238,238)!important;
+  padding-bottom: 10px!important;
+}
+/*签发页面有些选择框样式不一样，所以单独定义*/
+.pyer .el-input{
+  width: 95%!important;
+  margin-left: 1%!important;
+}
+.pyer .el-form-item__label{
+  margin-left: 1%;
+}
+.pyee .el-input{
+  width: 95%!important;
+  margin-left: 1%!important;
+}
+.pyee .el-form-item__label{
+  margin-left: 1%;
+}
+/*贴现页面样式*/
 .discount .el-select .el-input {
   width: 100% !important;
   margin: 0px 0.2%!important;
 }
-
 .discount .el-select, .el-input {
   width: 65% !important;
   margin: 0px 2%!important;
@@ -237,33 +263,13 @@
   background-color: rgb(57,202,166);
   border-color: rgb(57,202,166);
 }
-.defaultMsg{    /*信息中默认填写的*/
-  padding-left: 10px;
-  font-size: 12px;
-}
-.combinedShape{
-  float: left;
-  margin-right: 0.5%;
-}
-.bread{
-  margin-bottom: 23px
-}
-.buyerStepTitle{
-  color:rgb(0,150,215);
-  line-height: 50px;
-  font-size: 14px;
-}
-.sellerStepTitle{
-  color: rgb(57,202,166);
-  line-height: 50px;
-  font-size: 14px;
-}
 .waybill .el-tabs__item.is-active{
   color:rgb(57,202,166)!important;
 }
 .waybill .el-tabs__active-bar{
   background-color: rgb(57,202,166);
 }
+/*确认订单样式*/
 .confirmOrder .mybox {
   margin-bottom: 20px !important;
 }
@@ -322,9 +328,9 @@
 li .el-menu-item{
   padding-left: 28.4%!important;
 }
-.el-icon-arrow-down:before{
+/*.el-icon-arrow-down:before{
   content: ""!important;
-}
+}*/
 .el-submenu .el-menu-item:hover, .el-submenu__title:hover{
   background-color: #f4f4f4!important;
 }
@@ -332,12 +338,18 @@ li .el-menu-item{
 body{
   min-width: 1225px!important;
   overflow: auto;
-  /*height: 100%;*/
 }
-/*html{*/
-  /*height: 100%;*/
-/*}*/
+
 .el-menu{
   height: 100%;
 }
+.confirmSend .el-button{
+  float: left;
+  width: 30%;
+  border-radius: 4px;
+  margin: 10px 0;
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+
 
