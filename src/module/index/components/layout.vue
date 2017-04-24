@@ -85,7 +85,7 @@
   import MenuWh from './menuWarehousing.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
-
+  import Common from "../../../common/common.js"
   import Vue from 'vue'
   import resource from 'vue-resource'
   Vue.use(resource)
@@ -154,7 +154,7 @@ export default {
         }
         Store.commit('setIsBuyer',"true");
         this.$router.push('/true');
-
+//        Common.loadCss('../../assets/css/blueStyle');
       },
       toSeller() {
         if(Store.state.isBuyer==="false"){
@@ -162,7 +162,7 @@ export default {
         }
         Store.commit('setIsBuyer',"false");
         this.$router.push('/false');
-
+//        Common.loadCss('../../assets/css/greenStyle');
       },
       logout(){
         function delete_cookie(name) {

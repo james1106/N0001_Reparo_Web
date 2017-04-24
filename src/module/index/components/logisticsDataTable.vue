@@ -62,15 +62,8 @@
         detailPath:''
       }
     },
-    mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
-      console.log(this.logisticsList);
-
-     /* this.getDataByStatus();
-      this.getDataByPageNum(0);*/
-    },
     watch:{
       logisticsList(curVal){
-        console.log(curVal);
         this.tableData=curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
@@ -112,8 +105,6 @@
       },
 
       checkDetail (orderNo) {
-//        alert(this.tableData);
-
         store.commit('setCheckIdOrder',orderNo);
         console.log(store.state.checkIdOrder);
         this.$router.push("/logistics/wayBillDetails");
