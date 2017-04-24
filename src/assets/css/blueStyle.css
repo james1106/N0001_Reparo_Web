@@ -1,0 +1,9 @@
+.waybill .el-tabs__item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.waybill .el-tabs__active-bar{
+  background-color: rgb(0,150,222);
+}
+.el-menu-item.is-active {
+  color: rgb(0,150,222);
+}
