@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>物流管理</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/logistics/myWaybill'}">我的物流</el-breadcrumb-item>
@@ -16,7 +16,8 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">物流信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>
+              <span class="keynote">物流信息</span>
             </div>
             <div class="box-card mycard1">
               <el-row>
@@ -44,7 +45,8 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">其他信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-qita"></use> </svg>
+              <span class="keynote">其他信息</span>
             </div>
             <div class="box-card mycard1">
               <el-row class="msgName keynote">发货信息：</el-row>

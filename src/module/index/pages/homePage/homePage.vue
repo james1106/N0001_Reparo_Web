@@ -2,7 +2,6 @@
   <div>
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
-      <!--<img src="../../assets/combinedShape.png" class="combinedShape">-->
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row v-if="$route.params.isBuyer==='true'">  <!--买家-->
@@ -58,7 +57,7 @@
       </el-col>
       <el-col :span="5" style="margin-right: 1.7%;width: 18%">
         <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-cc_o"></use> </svg>
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-wl_o"></use> </svg>
           <div class="showMesg">
             <span class="showName">我的物流</span> <br>
             <span class="showNum">1000</span>

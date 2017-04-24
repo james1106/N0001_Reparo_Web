@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
       <el-breadcrumb-item>我的仓储</el-breadcrumb-item>
@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><i class="el-icon-information"></i>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
+        <el-col class="buyerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
           <el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">{{handleInfo.title}}</el-button>
         </el-col>
       </el-row>
@@ -17,9 +17,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">仓储信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
+              <span class="keynote">仓储信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓储业务编号：{{repoDetails.repoBusiNo}}</el-col>
                 <el-col :span="8" class="msgName">仓储状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col><!--卖家和买家会显示混合-->

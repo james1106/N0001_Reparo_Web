@@ -44,20 +44,28 @@
               <el-row>{{item.wayBillStatus | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="2">
-              <el-button type="text" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-              <el-button type="text"
-                         v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
-                         @click.native.prevent="confirmOrder(item.orderNo)">确认订单
-              </el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)"
-                         @click.native.prevent="signBill(item.orderNo)">签发
-              </el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"
-                         @click.native.prevent="sendGood(item.orderNo)">发货
-              </el-button>
-              <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
-                         @click.native.prevent="acceptBill(item.orderNo)">签收账款
-              </el-button>
+              <el-row>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
+                           @click.native.prevent="confirmOrder(item.orderNo)">确认订单
+                </el-button>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)"
+                           @click.native.prevent="signBill(item.orderNo)">签发
+                </el-button>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"
+                           @click.native.prevent="sendGood(item.orderNo)">发货
+                </el-button>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
+                           @click.native.prevent="acceptBill(item.orderNo)">签收账款
+                </el-button>
+              </el-row>
+              <el-row>
+                <el-button size="mini"
+                           @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+              </el-row>
             </el-col>
           </el-row>
         </el-row>
