@@ -2,9 +2,9 @@
   <div>
     <div>
       <el-breadcrumb separator=">" class="bread">
-        <img src="../../assets/combinedShape.png" class="combinedShape">
+        <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
+        <el-breadcrumb-item>卖出的订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <el-card>

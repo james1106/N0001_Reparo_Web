@@ -5,6 +5,9 @@
   fill: currentColor;
   overflow: hidden;
 }
+.el-form-item__content{
+  top: 4px;
+}
 .el-row{
   margin-bottom: 10px!important;
   padding: 0px!important;
@@ -19,7 +22,9 @@
   padding-bottom: 10px!important;
   height: 40px!important;
 }
-.el-card__body{padding-top: 12px!important;}
+.el-card__body{
+  padding-top: 12px!important;
+}
 .el-table th.is-leaf{
   border-bottom: 0px!important;
   background-color: transparent;
@@ -32,6 +37,11 @@
 .el-table__fixed-header-wrapper thead div, .el-table__header-wrapper thead div{
   background-color: rgb(201,201,201)!important;
   width: 100%;
+}
+/*首页的location图标*/
+.combinedShape{
+  float: left;
+  margin-right: 0.3%;
 }
 /*.主页中的四个卡片上的名称*/
 .showName{
@@ -79,7 +89,7 @@
 /*数据列表的首要表头*/
 .el-row-header{
   background-color: rgb(248,248,248);
-  font-size: 14px;
+  font-size: 13px;
   height: 40px;
   line-height: 40px;
   border-radius: 1%;
@@ -115,13 +125,13 @@
 }
 .mybox {
   margin: 0 auto !important;
-  border: 1px solid rgb(138,176,200)!important;
-  border-radius: 0px!important;
+  border: 1px solid rgb(203,221,225)!important;
+  border-radius: 4px!important;
 }
 .mybox .el-card__header {
   padding: 0px!important;
 }
-/*四个状态信息的查询详情，好像不要了，暂留*/
+/*四个状态信息的查询详情按钮，好像不要了，暂留*/
 .detailButton{
   float: right;
   line-height: 30px!important;
@@ -336,7 +346,7 @@ li .el-menu-item{
 }
 
 body{
-  min-width: 1225px!important;
+  min-width: 1230px!important;
   overflow: auto;
 }
 
@@ -351,5 +361,26 @@ body{
   background-color: rgb(57,202,166);
   border-color: rgb(57,202,166);
 }
+/*详情页面详情模块的icon位置*/
+.detailIcon{
+  margin-right: 0.3%;
+  font-size: 12px;
+}
+/*详情内容的位置*/
+.detailContent{
+  margin-left: 13px;
+}
+/*确认订单此类的操作按钮*/
+/*.operateBtn{*/
+  /*color: rgb(57,202,166)!important;*/
+  /*height: 22px;*/
+  /*text-align: center;*/
+/*}*/
 
-
+/*查看详情操作的按钮*/
+/*.detailBtn{*/
+  /*text-align: center!important;*/
+  /*height: 25px;*/
+  /*margin-left: -4px!important;*/
+  /*margin-top: 5px!important;*/
+/*}*/

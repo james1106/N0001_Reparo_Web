@@ -13,7 +13,7 @@
           <el-menu-item index="/warehousingCompany/myRepo/outConfirm" @click="setTab('outConfirm')">出库确认</el-menu-item>
         </el-submenu>
         <el-submenu index="/cangdan">
-        <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>仓单管理</template>
+        <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>仓单管理</template>
           <el-menu-item index="/warehousingCompany/myReceipt">我的仓单</el-menu-item>
         </el-submenu>
       </div>

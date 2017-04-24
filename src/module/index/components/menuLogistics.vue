@@ -3,10 +3,10 @@
 
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item>
-          <i class="el-icon-date"></i>首页
+          <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px;color: #00a9dd">   <use xlink:href="#icon-home_G"></use> </svg>首页
         </el-menu-item>
         <el-submenu index="/logisticsCompany">
-          <template slot="title"><i class="el-icon-menu"></i>运单管理</template>
+          <template slot="title"><svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-order_G"></use> </svg>运单管理</template>
           <el-menu-item index="/logisticsCompany/companyAllBill/a" @click="companyAllBill">我的运单</el-menu-item>
           <el-menu-item index="/logisticsCompany/companyAllBill/b" @click="sendConfirm">发货确认</el-menu-item>
           <el-menu-item index="/logisticsCompany/companyAllBill/c" @click="receiveConfirm">收货确认</el-menu-item>

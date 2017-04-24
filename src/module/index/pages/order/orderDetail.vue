@@ -1,42 +1,49 @@
 <template>
   <div>
+    <el-breadcrumb separator=">" class="bread">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>我买入的订单</el-breadcrumb-item>
+      <el-breadcrumb-item>订单详情</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
-    <el-row class="el-row-header statePosition">
-      <el-col :class="{buyerColor:state.isBuyer==='true',buyeeColor:state.isBuyer==='false',stateShow:true,}" :span="8"><i class="el-icon-information"></i>&emsp;{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
-      <el-col :span="8">
-        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
-        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>
-        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>
-        <el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill(orderDetail.receOver.receNo)">签收账款</el-button>
-      </el-col>
-    </el-row>
-
+    <!--订单的状态显示，UI图上没有-->
+    <!--<el-row class="el-row-header statePosition">-->
+      <!--<el-col :class="{buyerColor:state.isBuyer==='true',buyeeColor:state.isBuyer==='false',stateShow:true,}" :span="8"><i class="el-icon-information"></i>&emsp;{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>-->
+      <!--<el-col :span="8">-->
+        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>-->
+        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>-->
+        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>-->
+        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill(orderDetail.receOver.receNo)">签收账款</el-button>-->
+      <!--</el-col>-->
+    <!--</el-row>-->
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <span class="keynote">交易详情</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>
+              <span class="keynote">订单详情</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">买家信息：</el-col>
               </el-row>
               <el-row class="">
-                <el-col :span="6" style="padding-left: 30px;" class="msgName" v-if="state.isBuyer==='true'">商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
-                <el-col :span="6" style="padding-left: 30px;" class="msgName" v-else>购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
+                <el-col :span="6" class="msgName" v-if="state.isBuyer==='true'">商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
+                <el-col :span="6" class="msgName" v-else>购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
                 <el-col :span="6" class="msgName">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
                 <el-col :span="6" class="msgName">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
                 <el-col :span="6" class="msgName">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
               </el-row>
-              <el-row>
+              <el-row style="margin-top: 10px;">
                 <el-col :span="6" class="msgName keynote">订单信息：</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName" style="padding-left: 30px;">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
+                <el-col :span="6" class="msgName">订单编号：{{orderDetail.txDetail.orderId}}</el-col>
                 <el-col :span="6" class="msgName">发起时间：{{orderDetail.txDetail.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName" style="padding-left: 30px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
+                <el-col :span="6" class="msgName">货品名称：{{orderDetail.txDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
                 <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice}}</el-col>
               </el-row>
@@ -55,7 +62,6 @@
                   </template>
                 </el-row>
             </div>
-
           </el-card>
         </el-col>
       </el-row>
@@ -63,15 +69,16 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
               <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton" @click="receDetailPage(orderDetail.receOver.receNo)">查看详情 ></el-button>
             </div>
-            <div class="box-card mycard1" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
-              暂无应收账款信息!
+            <div class="box-card mycard1 detailContent" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
+              <span class="msgName">暂无应收账款信息!</span>
             </div>
-            <div class="box-card mycrad1" v-else-if="orderDetail.receOver.receLatestStatus===constantData.FORISSUE">
-              应收账款待签发!
+            <div class="box-card mycrad1 detailContent" v-else-if="orderDetail.receOver.receLatestStatus===constantData.FORISSUE">
+              <span class="msgName">应收账款待签发!</span>
             </div>
-            <div class="box-card mycard1" v-else>
+            <div class="box-card mycard1 detailContent" v-else>
               <el-row>
                 <el-col :span="6" class="msgName keynote">业务编号：{{orderDetail.receOver.receNo}}</el-col>
                 <el-col :span="6" class="msgName">签发时间：{{orderDetail.receOver.receGenerateTime | timeTransfer}}</el-col>
@@ -107,17 +114,17 @@
       <el-row>
       <el-col :span="24">
         <el-card class="box-card mybox" style="width:100%">
-
           <div slot="header" class="clearfix el-row-header">
+            <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>
             <span class="keynote">物流信息</span><el-button size="mini" type="text" class="detailButton" @click="logisticsDetailPage(orderDetail.txDetail.orderId)" v-if="state.isBuyer==='false'">查看详情 ></el-button>
           </div>
-          <div class="box-card mycard1" v-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.NOMESSAGE">
-            暂无物流信息！
+          <div class="box-card mycard1 detailContent" v-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.NOMESSAGE">
+            <span class="msgName">暂无物流信息！</span>
           </div>
-          <div class="box-card mycard1" v-else-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.FORSEND">
-            待发货！
+          <div class="box-card mycard1 detailContent" v-else-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.FORSEND">
+            <span class="msgName">待发货！</span>
           </div>
-          <div class="box-card mycard1" v-else>
+          <div class="box-card mycard1 detailContent" v-else>
             <el-row>
               <el-col :span="6" class="msgName keynote">运单号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
               <el-col :span="6" class="msgName">下单时间：{{orderDetail.wayBillOver.wayBillGenerateTime | timeTransfer}}</el-col>
@@ -146,14 +153,16 @@
       <el-col :span="24">
         <el-card class="box-card mybox" style="width:100%">
           <div slot="header" class="clearfix el-row-header" v-if="state.isBuyer==='true'">
+            <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
             <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
           </div>
           <div slot="header" class="clearfix el-row-header" v-else>
             <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情 ></el-button>
           </div>
-          <div class="box-card mycard1" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
+          <div class="box-card mycard1 detailContent" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
             <div v-if="orderDetail.repoOver.payerRepoBusiState<constantData.INFORRESPONSE"><!--买家和卖家状态字段不同-->
-              暂无仓储信息！<!--买家在入库待响应时开始有显示-->
+              <span class="msgName">暂无仓储信息！</span>
+              <!--买家在入库待响应时开始有显示-->
             </div>
             <div v-else>
             <el-row>
@@ -176,9 +185,10 @@
               </el-row>
             </div>
           </div>
-          <div class="box-card mycard1" v-if="state.isBuyer==='false'">
+          <div class="box-card mycard1 detailContent" v-if="state.isBuyer==='false'">
             <div v-if="orderDetail.repoOver.payeeRepoBusiState<constantData.OUTFORRESPONSE">
-              暂无仓储信息！<!--卖家在出库待响应时开始有显示-->
+              <span class="msgName">暂无仓储信息！</span>
+              <!--卖家在出库待响应时开始有显示-->
             </div>
             <div v-else>
             <el-row>
@@ -208,7 +218,6 @@
         </el-card>
       </el-col>
     </el-row>
-
     </el-card>
   </div>
 </template>
@@ -470,43 +479,12 @@
     box-sizing: border-box;
     padding: 5px 0;
   }
-
-  .mybox {
-    margin: 0 auto !important;
-    border: 1px solid rgb(138,176,200)!important;
-    border-radius: 0px!important;
-  }
-
-  .mybox .el-card__header {
-    padding: 0px!important;
-  }
-
   /*.mycard11 .row-padding-bottom {*/
     /*box-sizing: border-box;*/
     /*padding-bottom: 10px;*/
   /*}*/
-  .detailButton{
-    float: right;
-    line-height: 30px!important;
-    padding-right: 5px!important;
-    color: #666666!important;
-  }
-  .keynote{
-    font-weight: bold;
-  }
-  .buyerColor{
-    color: #0096D7;
-  }
   .buyeeColor{
     color:rgba(103,196,146,1);
-  }
-  .stateShow{
-    margin-left: 10px;
-    font-size: 14px;
-  }
-  .statePosition{
-    border-bottom:none;
-    margin-bottom: 20px;
   }
   .colorBlue {color:rgba(0,148,218,1); border-left: none !important;}
   .collapseBtn {color: #666666;float: right !important;text-align: right !important;}
@@ -561,7 +539,7 @@
     margin-left: -4px;
     margin-right: 10px;
     position: absolute;
-    top:0px;
+    top:-5px;
     z-index: 9999;
   }
   .status-list .el-col {
@@ -578,6 +556,6 @@
   }
   .status-list .el-col span {
     position: absolute;
-    top:-5px;
+    top:0px;
   }
 </style>

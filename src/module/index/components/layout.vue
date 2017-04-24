@@ -26,16 +26,17 @@
       <el-col :span="2" v-if="companyType === 0">
         <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:state.isBuyer==='true'}" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
-      <el-col :span="14" class="userinfo" v-if="companyType === '0'">
+      <el-col :span="14" class="userinfo" v-if="companyType === 0">
         <el-dropdown trigger="hover">
-          <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOG OUT</span>
+          <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
+          <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
-      <el-col :span="14" class="userinfo" v-else="">
+      <el-col :span="18" class="userinfo" v-else>
         <el-dropdown trigger="hover">
           <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
           <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
