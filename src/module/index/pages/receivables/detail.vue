@@ -74,8 +74,8 @@
                 <el-col :span="6" class="msgName">收款人开户行：{{detailInfo.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkman}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeePhone}}</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkman | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeePhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
@@ -84,13 +84,13 @@
                 <el-col :span="6" class="msgName">付款人开户行：{{detailInfo.detailVoList[0].pyerAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerPhone}}</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">附加信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">合同编号：{{detailInfo.detailVoList[0].contractNo}}</el-col>
-                <el-col :span="6" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo}}</el-col>
+                <el-col :span="6" class="msgName">合同编号：{{detailInfo.detailVoList[0].contractNo | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">物流企业：暂无</el-col>
               </el-row>
               <el-row>
