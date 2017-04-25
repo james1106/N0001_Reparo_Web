@@ -29,7 +29,7 @@
       <el-col :span="14" class="userinfo" v-if="companyType === 0">
         <el-dropdown trigger="hover">
           <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
-          <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
+          <span class="el-dropdown-link" style="cursor:pointer">{{userName}}</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
@@ -39,7 +39,7 @@
       <el-col :span="18" class="userinfo" v-else>
         <el-dropdown trigger="hover">
           <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
-          <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
+          <span class="el-dropdown-link" style="cursor:pointer">{{userName}}</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
@@ -107,8 +107,10 @@
 export default {
   name: 'wrapper',
   created: function () {
+
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
+    this.userName = userInfo.company_name;
 
     /*****  设置http拦截器 start  ******/
     let _this = this;
@@ -137,7 +139,8 @@ export default {
       msg: '',
       headerFixed : true,
       active:true,
-      companyType:0  //0.融资企业 1.仓储公司 2.物流公司
+      companyType:0,  //0.融资企业 1.仓储公司 2.物流公司
+      userName:''
     }
   },
     computed: {
