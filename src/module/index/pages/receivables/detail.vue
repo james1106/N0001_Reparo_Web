@@ -166,7 +166,7 @@
             receivableNo:Store.state.checkIdRece,
             operatorAcctId:LocalStore.fetchUserInfo().acctIds
           }
-          this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
+          this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
             console.log(res.body);
             var code =  res.body.code;
             var data =  res.body.data;
@@ -200,7 +200,7 @@
           replyerAcctId:LocalStore.fetchUserInfo().acctIds,//回复人账号
           response:0       //回复意见 0.同意 1.拒绝
         }
-        this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
           console.log('承兑操作'+res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -223,7 +223,7 @@
           cashedAmount:detailInfo.isseAmt,      //兑付金额
           response:0                            //回复意见 0.同意 1.拒绝
         }
-        this.$http.post('/v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){

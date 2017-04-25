@@ -2,8 +2,8 @@
   <div id="menu">
 
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
-        <el-menu-item>
-          <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px;color: #00a9dd">   <use xlink:href="#icon-home_G"></use> </svg>首页
+        <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
+          <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_G"></use> </svg>首页
         </el-menu-item>
         <el-submenu index="/logisticsCompany">
           <template slot="title"><svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-order_G"></use> </svg>运单管理</template>

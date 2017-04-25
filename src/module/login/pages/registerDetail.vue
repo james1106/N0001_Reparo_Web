@@ -85,7 +85,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true;
-            this.$http.post('/v1/account/user',this.ruleForm,{emulateJSON:true}).then((res) => {
+            this.$http.post('../v1/account/user',this.ruleForm,{emulateJSON:true}).then((res) => {
               this.loading = false;
               console.log(res.body);
               var code =  res.body.code;

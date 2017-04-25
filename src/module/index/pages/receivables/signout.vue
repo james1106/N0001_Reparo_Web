@@ -211,7 +211,7 @@
               contractNo:this.signoutInfo.contractNo,
               invoiceNo:this.signoutInfo.invoiceNo
             };
-            this.$http.post('/v1/receivable/sign',signParam,{emulateJSON:true}).then((res) => {
+            this.$http.post('../v1/receivable/sign',signParam,{emulateJSON:true}).then((res) => {
               console.log(res.body.data);
               var code =  res.body.code;
               if(code != 0){

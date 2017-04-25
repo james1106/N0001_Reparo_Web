@@ -87,7 +87,7 @@ import userInfo from '../../../../common/store'
             response:0       //回复意见 0.同意 1.拒绝
         }
 
-        this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code = res.body.code
           if(code != 0){
@@ -100,7 +100,7 @@ import userInfo from '../../../../common/store'
       },
       getDetail(){
         var receivableNo = Store.state.checkIdRece;
-        this.$http.post('/v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;

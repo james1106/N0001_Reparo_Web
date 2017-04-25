@@ -103,7 +103,7 @@
             replyerAcctId:this.bankOption.bankSvcr,      //回复人账号
             discountApplyAmount:this.detailInfo.detailVoList[0].isseAmt //申请贴现金额
         }
-        this.$http.post('/v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -119,7 +119,7 @@
           receivableNo:Store.state.checkIdRece,
           operatorAcctId:''
         }
-        this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
@@ -134,7 +134,7 @@
         })
       },
       getBankList(){
-        this.$http.post('/v1/receivable/discountApplyBankList').then((res) => {
+        this.$http.post('../v1/receivable/discountApplyBankList').then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;

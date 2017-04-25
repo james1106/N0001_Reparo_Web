@@ -165,7 +165,7 @@
       },
       inResponse(){
         var param = {repoBusinessNo:Store.state.checkIdRepo}
-        this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -179,7 +179,7 @@
         })
       },
       inConfirm(){
-        this.$http.put('/v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+        this.$http.put('../v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -193,7 +193,7 @@
         })
       },
       outConfirm(){
-        this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+        this.$http.put('../v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
