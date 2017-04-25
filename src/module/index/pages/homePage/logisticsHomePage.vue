@@ -1,43 +1,7 @@
 <template>
-  <div id="homePage">
-    <el-breadcrumb separator=">" class="bread">
-      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
-    </el-breadcrumb>
-    <template v-if="companyType == 0">
-    <el-row v-if="$route.params.isBuyer==='true'">  <!--买家-->
-      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
-        <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
-          <div class="showMesg">
-            <span class="showName">买入的订单</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
-        <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-yszk_o"></use> </svg>
-          <div class="showMesg">
-            <span class="showName">应付账款</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
-        <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-cc_o"></use> </svg>
-          <div class="showMesg">
-            <span class="showName">我的仓储</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="6" style="float: right">
-        <img :src="imgUrl.maiB" style="height: 80px;float: right">
-      </el-col>
-    </el-row>
-    <el-row v-else>  <!--卖家-->
+  <div>
+    <el-row id="logisticsHp">
+      <div>我是物流首页</div>
       <el-col :span="5" style="margin-right: 1.7%;width: 18%">
         <el-card class="showCard">
           <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
@@ -83,7 +47,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span :class="[{buyerColor:$route.params.isBuyer==='true',sellerColor:$route.params.isBuyer==='false'}]">待办订单</span>
+        <span>待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -135,13 +99,6 @@
         </div>
       </template>
     </el-card>
-    </template>
-    <template v-else-if="companyType == 1">
-      <logistics-homepage></logistics-homepage>
-    </template>
-    <template v-else>
-      <repo-homepage></repo-homepage>
-    </template>
   </div>
 </template>
 
@@ -151,31 +108,23 @@
   import adImg from '../../assets/ad.png'
   import maiB from '../../assets/mai_B.png'
   import maiG from  '../../assets/mai_G.png'
-  import LocalStore from "../../../../common/store.js"
-  import logisticsHomepage from "./logisticsHomePage.vue"
-  import repoHomepage from "./repoHomePage.vue"
+
 
   export default {
-  name: 'homePage',
-
+  name: 'logisticsHp',
   mounted: function (){
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
   },
   created:function () {
-    var userInfo = LocalStore.fetchUserInfo();
-    this.companyType = userInfo.roleCode;
-  },
-  components:{
-    logisticsHomepage,repoHomepage
+
   },
   data () {
     return {
       imgUrl:{
         adImg:adImg,
         maiB:maiB,
-        maiG:maiG,
-        companyType:0  //0.融资企业 1.仓储公司 2.物流公司
+        maiG:maiG
       },
       showOrder:[
         {

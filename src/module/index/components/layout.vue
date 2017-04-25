@@ -119,8 +119,8 @@ export default {
         //请求响应完成后
         _this.loading = false;
         if(!response.ok){
-            _this.dialogVisible = true;
-            _this.msg = '服务异常，请稍后再试';
+          _this.dialogVisible = true;
+          _this.msg = '服务异常，请稍后再试';
         }
         return response
       });
@@ -137,7 +137,7 @@ export default {
       msg: '',
       headerFixed : true,
       active:true,
-      companyType:'1'  //1.融资企业 2.仓储公司 3.物流公司
+      companyType:0  //0.融资企业 1.仓储公司 2.物流公司
     }
   },
     computed: {
