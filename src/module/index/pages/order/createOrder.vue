@@ -16,7 +16,7 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="供应商" prop="payeeCompanyName">
-              <el-select v-model="launchOrder.payeeCompanyName" placeholder="请选择供应商">
+              <el-select v-model="launchOrder.payeeCompanyName">
                 <template v-for="item in supplyList">
                   <el-option :label="item" :value="item"></el-option>
                 </template>
@@ -58,14 +58,14 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="选择付款银行" prop="payerBank">
-              <el-select v-model="launchOrder.payerBank" placeholder="请选择付款行">
+              <el-select v-model="launchOrder.payerBank">
                 <el-option :label="launchOrder.payerBank" :value="launchOrder.payerBank"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="选择付款账户" prop="payerAccount">
-              <el-select v-model="launchOrder.payerAccount" placeholder="请选择付款账户">
+              <el-select v-model="launchOrder.payerAccount">
                 <el-option :label="launchOrder.payerAccount" :value="launchOrder.payerAccount"></el-option>
               </el-select>
             </el-form-item>
@@ -86,7 +86,7 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="选择申请入库的仓储" prop="payerRepo">
-              <el-select v-model="launchOrder.payerRepo" placeholder="请选择入库仓储">
+              <el-select v-model="launchOrder.payerRepo">
                 <template v-for="item in repoList">
                   <el-option :label="item" :value="item"></el-option>
                 </template>

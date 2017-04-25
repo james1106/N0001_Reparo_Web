@@ -19,7 +19,7 @@
             <el-col :span="6"  style="margin-left: 19px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
             <el-col :span="6" >货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
             <el-col :span="6">仓储机构：{{orderDetail.txDetail.payerRepo}}</el-col>
-            <el-col :span="4">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
+            <el-col :span="5">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>

@@ -312,6 +312,14 @@
   /*background-color: rgb(57,202,166)!important;*/
   /*border-color: rgb(57,202,166)!important;*/
 /*}*/
+.confirmOrder .el-button:hover{
+background-color: rgb(57,202,166)!important;
+border-color: rgb(57,202,166)!important;
+}
+.confirmOrder .el-button:focus{
+  background-color: rgb(57,202,166)!important;
+  border-color: rgb(57,202,166)!important;
+}
 .confirmCard .el-card__body{
   border: 1px solid rgb(238,238,238);
 }
@@ -338,17 +346,19 @@
   background-color: rgb(57,202,166);
   border-color: rgb(57,202,166);
 }
+.modal-confirm .el-button:hover{
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
 .modal-confirm .el-form-item__content{
   top: 0px!important;
   border: 1px solid rgb(238,238,238);
   line-height: 30px;
   font-size: 12px;
 }
-.modal-confirm .el-form-item__content .el-label{
+.modal-confirm .el-label{
   margin-left: 3%!important;
 }
-
-
 li .el-menu-item{
   padding-left: 28.4%!important;
 }
@@ -397,3 +407,11 @@ body{
   /*margin-left: -4px!important;*/
   /*margin-top: 5px!important;*/
 /*}*/
+.agreeBtn{
+  width:50%;
+}
+.closeBtn{
+  margin-right: 15px;
+  line-height: 40px!important;
+  float: right;
+}

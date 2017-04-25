@@ -67,7 +67,7 @@
     <div class="modal-mask" v-show="showModal">
       <div class="modal-confirm">
         <el-row class="el-row-header">
-          <span class="confirm-header sellerColor">确认订单</span>
+          <span class="confirm-header sellerColor">确认订单</span><i class="el-icon-close closeBtn" @click="close"></i>
         </el-row>
         <div class="confirm-content">
           <el-form :label-position="labelPosition">
@@ -181,8 +181,11 @@
         });*/
         this.showModal=true;
       },
+      close(){
+        this.showModal=false;
+      },
       confirm () {
-          this.showModal=false;
+        this.showModal=false;
         console.log("订单确认");
          this.confirmOrder.orderNo=store.state.checkIdOrder;
          console.log(this.confirmOrder);

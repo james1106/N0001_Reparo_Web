@@ -17,14 +17,14 @@
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
               <el-row>
-                <el-col :span="8">业务编号：{{repoDetails.repoBusiNo}}</el-col>
+                <el-col :span="8" class="keynote">业务编号：{{repoDetails.repoBusiNo}}</el-col>
                 <el-col :span="8">发起时间：{{repoDetails.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>
-            <div class="box-card mycard1 detailContent">
+            <div class="box-card mycard1">
               <el-row>
-                <el-col :span="8" class="msgName">申请人：{{repoDetails.storeEnterpriseName}}</el-col>
                 <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">申请人：{{repoDetails.storeEnterpriseName}}</el-col>
                 <el-col :span="8" class="msgName">物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
               </el-row>
               <el-row>
@@ -38,7 +38,7 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="inResponse()">同意入库</el-button>
+          <el-button class="agreeBtn" type="primary" @click.native.prevent="inResponse()">同意入库</el-button>
         </el-col>
       </el-row>
     </el-card>
