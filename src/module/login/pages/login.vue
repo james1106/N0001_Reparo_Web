@@ -20,7 +20,7 @@
           </el-col>
         </el-row>
         <el-form-item style="width:100%;">
-          <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
+          <el-button type="primary" id="loginBtn" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
         </el-form-item>
       </el-form>
       <el-row>
@@ -161,7 +161,21 @@
       }
     }
   }
-
+//  enter键操作
+  document.onkeydown=function(event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    var x = document.getElementById('loginBtn');
+    var y = document.getElementById('nextBtn');
+    var z = document.getElementById('registerBtn');
+    if (e && e.keyCode == 13) { // 按 enter
+      if(x)
+      x.click();
+      else if(y)
+      y.click();
+      else
+      z.click();
+    }
+  }
 
 
 </script>
@@ -182,6 +196,7 @@
   }
   body{
     margin: 0px!important;
+    border-top:4px solid #38CAA6;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

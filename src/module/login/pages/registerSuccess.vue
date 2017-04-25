@@ -6,7 +6,7 @@
     </el-row>
     <el-form label-position="left" label-width="100px" class="login-container">
       <el-row style="margin: 50px auto">
-        <img src="../assets/group.png">
+        <img src="../assets/success.png">
       </el-row>
       <el-row style="margin: 20px auto">
         <el-button type="primary" class="successButton" @click="toHomePage()">进入后台</el-button>

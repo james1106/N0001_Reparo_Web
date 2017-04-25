@@ -23,7 +23,7 @@
       </el-form-item>
       <el-row class="agreeMsg"><span class="tip">点击注册表示你已阅读并同意<span style="color:rgb(57,202,166);">《xxx条款》</span></span></el-row>
       <el-form-item style="width:100%;">
-        <el-button type="primary" class="nextButton" @click="register('ruleForm')">注册</el-button>
+        <el-button type="primary" class="nextButton" id="registerBtn" @click="register('ruleForm')">注册</el-button>
       </el-form-item>
     </el-form>
     <el-row style="text-align: center">
@@ -40,6 +40,7 @@
 
 <script>
   import Store from "../../../common/store.js"
+
   export default {
     name: 'register',
     data(){

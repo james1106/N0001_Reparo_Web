@@ -9,15 +9,15 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow "><i class="el-icon-information"></i> 仓单当前状态：{{receiptsDetails.repoCertStatus | repoCertStatus}}</el-col>
+        <el-col class="buyerColor stateShow "><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg> 仓单当前状态：{{receiptsDetails.repoCertStatus | repoCertStatus}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">仓单信息</span>
+              <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-danzi"></use> </svg><span class="keynote">仓单信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">仓单编号：{{receiptsDetails.repoCertNo | nullSituation}}</el-col>
               </el-row>

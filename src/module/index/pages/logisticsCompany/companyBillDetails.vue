@@ -9,7 +9,8 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow " :span="8"><i class="el-icon-information"></i> 物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
+        <el-col class="sellerColor stateShow " :span="8"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+          物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
         <el-col :span="8">
           <el-button type="success" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDFORRESPONSE" @click.native.prevent="sendConfirm(logisticsDetail.orderNo)">发货确认</el-button>
           <el-button type="success" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDED" @click.native.prevent="receiveConfirm(logisticsDetail.orderNo)">送达确认</el-button>

@@ -43,7 +43,7 @@
   float: left;
   margin-right: 0.3%;
 }
-/*.主页中的四个卡片上的名称*/
+/*主页中的四个卡片上的名称*/
 .showName{
   font-size: 10px!important;
   color: #666666;
@@ -363,7 +363,6 @@ body{
   min-width: 1230px!important;
   overflow: auto;
 }
-
 .el-menu{
   height: 100%;
 }

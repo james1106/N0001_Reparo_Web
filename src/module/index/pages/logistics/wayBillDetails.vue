@@ -9,7 +9,8 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow " :span="8"><i class="el-icon-information"></i> 物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
+        <el-col class="sellerColor stateShow " :span="8"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+          物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
         <el-col :span="8"><el-button type="primary" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.FORSEND" @click="sendGood(logisticsDetail.orderNo)">发货</el-button></el-col>
       </el-row>
       <el-row>
@@ -19,7 +20,7 @@
               <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>
               <span class="keynote">物流信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName | nullSituation}}</el-col>
@@ -48,7 +49,7 @@
               <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-qita"></use> </svg>
               <span class="keynote">其他信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent ">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
                 <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
