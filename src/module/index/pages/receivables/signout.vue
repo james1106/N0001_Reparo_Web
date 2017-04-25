@@ -232,7 +232,7 @@
       },
       getOrderDetail(){
           console.log("the state checkIdOrder is:" + Store.state.checkIdOrder);
-          this.$http.get("/v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
+          this.$http.get("../v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
             function (res) {
               console.log(res.body.data);
               this.orderDetail = res.body.data;

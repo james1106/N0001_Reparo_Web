@@ -192,7 +192,7 @@
       },
       acceptBill (checkId) {
         console.log("签收账款");
-        this.$http.get("/v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
+        this.$http.get("../v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
           console.log(res.body.data);
           store.commit("setCheckIdRece", res.body.data.receOver.receNo);
           this.$router.push("/allAccounts/accept/accept");

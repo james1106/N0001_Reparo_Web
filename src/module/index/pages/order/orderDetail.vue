@@ -70,7 +70,7 @@
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
               <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
-              <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton" @click="receDetailPage(orderDetail.receOver.receNo)">查看详情 ></el-button>
+              <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton" v-if="(orderDetail.receOver.receLatestStatus!==constantData.NOMESSAGE)&&(orderDetail.receOver.receLatestStatus!==constantData.FORISSUE)" @click="receDetailPage(orderDetail.receOver.receNo)">查看详情 ></el-button>
             </div>
             <div class="box-card mycard1 detailContent" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
               <span class="msgName">暂无应收账款信息!</span>
@@ -373,7 +373,7 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       console.log("the state checkIdOrder is:" + store.state.checkIdOrder);
-      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
+      this.$http.get("../v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
         function (res) {
           // 处理成功的结果
           console.log(res.body);
@@ -383,7 +383,7 @@
               var receTemp={};
               receTemp.receivableNo=this.orderDetail.receOver.receNo;
               receTemp.operatorAcctId=userInfo.fetchUserInfo().acctIds;//操作人账号，从localStorage中取得
-              this.$http.post("/v1/receivable/receivableInfoWithSerial",receTemp,{emulateJSON:true}).then(function(res){
+              this.$http.post("../v1/receivable/receivableInfoWithSerial",receTemp,{emulateJSON:true}).then(function(res){
                   console.log("根据应收款编号查询应收款详情："+res.body.data);
                   this.receHistory=res.body.data.serialVoList;//获取流水信息列表
               },function(err){
@@ -393,7 +393,7 @@
 //          根据仓储业务编号查询仓储详情
           if(store.state.isBuyer==='true'){
           if(this.orderDetail.repoOver.payerRepoBusinessNo!==''){
-              this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payerRepoBusinessNo).then(function(res){
+              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payerRepoBusinessNo).then(function(res){
                   console.log("根据买家仓储业务编号查询仓储详情："+res.body.data);
                   this.buyerRepoHistory=res.body.data.operationRecordVoList;
               },function (err) {
@@ -403,7 +403,7 @@
           }
           else {
               if(this.orderDetail.repoOver.payeeRepoBusinessNo!==''){
-                this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payeeRepoBusinessNo).then(function(res){
+                this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payeeRepoBusinessNo).then(function(res){
                   console.log("根据卖家仓储业务编号查询仓储详情："+res.body.data);
                   this.buyeeRepoHistory=res.body.data.operationRecordVoList;
                 },function (err) {
@@ -413,7 +413,7 @@
           }
 //          根据订单号查询运单详情
           if(this.orderDetail.wayBillOver.wayBillLatestStatus>0){
-              this.$http.get("/v1/waybill/wayBillDetail?orderNo="+this.orderDetail.txDetail.orderId).then(function(res){
+              this.$http.get("../v1/waybill/wayBillDetail?orderNo="+this.orderDetail.txDetail.orderId).then(function(res){
                   console.log("根据订单号查询运单详情："+res.body.data);
                   this.wayBillHistory=res.body.data.operationRecordVo;
               },function(err){

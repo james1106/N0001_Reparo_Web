@@ -51,7 +51,7 @@
     },
     methods: {
         getRepoList(){
-          this.$http.get("/v1/repository/getRepoBusiList?role=3").then(function(res){
+          this.$http.get("../v1/repository/getRepoBusiList?role=3").then(function(res){
             console.log(res.body.data);
             this.repoList=res.body.data;
           },function(err){

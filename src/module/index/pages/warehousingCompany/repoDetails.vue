@@ -106,7 +106,7 @@
     },
     methods:{
       getDetail(){
-        this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+Store.state.checkIdRepo).then(function(res){
+        this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+Store.state.checkIdRepo).then(function(res){
 //            请求仓储详情数据
           console.log(res.body);
           if(res.body.code != 0){
@@ -130,7 +130,6 @@
               break;
             }
           }
-          alert("ss");
           this.handleInfo.showHandleBtn = false;
           switch (this.repoDetails.curRepoBusiStatus){
             case constantData.INFORRESPONSE:

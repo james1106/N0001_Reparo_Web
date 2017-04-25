@@ -205,7 +205,7 @@
             temp.productTotalPrice=temp.productUnitPrice*temp.productQuantity;
             temp.payerBankClss=Store.fetchUserInfo().svcrClass;//应该都从localStorage里面取
             console.log(temp);
-            this.$http.post("/v1/order/creation", temp, {emulateJSON: true}).then(
+            this.$http.post("../v1/order/creation", temp, {emulateJSON: true}).then(
               function (res) {
                 console.log(res.body);
                 store.commit('setCheckIdOrder', res.body.data.orderNo);
@@ -239,7 +239,7 @@
           break;
       }
       //获取所有融资企业名（后台数据应该去掉自己的企业名）
-      this.$http.get("/v1/account/allEnterpriseName?roleCode=0").then(function(res){
+      this.$http.get("../v1/account/allEnterpriseName?roleCode=0").then(function(res){
         this.supplyList=res.body.data;
         this.launchOrder.payeeCompanyName=this.supplyList[0];
         console.log("the supply list: "+res.body.data);
@@ -247,7 +247,7 @@
         console.log(err)
       });
       //获取所有仓储公司名
-      this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
+      this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
         this.repoList=res.body.data;
         this.launchOrder.payerRepo=this.repoList[0];
         console.log("the repo list: "+res.body.data);

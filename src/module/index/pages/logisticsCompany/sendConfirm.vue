@@ -65,7 +65,7 @@
         console.log("发货确认");
         this.confirmSend.orderNo=store.state.checkIdOrder;
         console.log(this.confirmSend);
-        this.$http.post("/v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
+        this.$http.post("../v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
           function(res){console.log(res.body);},
           function(err){console.log(err)}
         );
@@ -77,7 +77,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
+      this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
         function(res){
           console.log(res.body);
           this.companyBillDetail=res.body.data;
@@ -145,13 +145,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .modal-confirm{
-    width: 600px;
-    height: 320px;
-    box-sizing: border-box;
-    background-color: #fff;
-    border-radius: 4px;
   }
   .confirm-header{margin-left: 4%}
   .confirm-content{padding: 10px 15px;}

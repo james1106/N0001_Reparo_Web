@@ -1,5 +1,5 @@
 <template>
-<div class="confirmOrder">
+<div>
   <div>
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
@@ -8,7 +8,7 @@
       <el-breadcrumb-item>确认订单</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
-  <el-card>
+  <el-card class="confirmOrder">
     <div>
       <span class="sellerStepTitle">1. 请填写订单详情</span>
     </div>
@@ -38,7 +38,7 @@
     <el-form :model="confirmOrder">
       <el-card style="width:100%;" class="confirmCard">
         <el-row>
-          <el-col :span="12">
+          <el-col :span="8">
             <el-form-item label="出库货品所在仓储">
               <el-select v-model="confirmOrder.payeeRepoName" placeholder="请选择仓储">
                 <template v-for="item in confirmOrder.repoList">
@@ -47,7 +47,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="8">
             <el-form-item label="货品的仓单编号">
               <el-input v-model="confirmOrder.payeeRepoCertNo"></el-input>
             </el-form-item>
@@ -186,7 +186,7 @@
         console.log("订单确认");
          this.confirmOrder.orderNo=store.state.checkIdOrder;
          console.log(this.confirmOrder);
-         this.$http.post("/v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
+         this.$http.post("../v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
          function(res){
              console.log(res.body);
            this.$router.push("/allAccounts/signout/signout");//跳转到签发应收账款
@@ -198,7 +198,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-        this.$http.get("/v1/order/detail?orderNo="+store.state.checkIdOrder).then(
+        this.$http.get("../v1/order/detail?orderNo="+store.state.checkIdOrder).then(
             function(res){
                 console.log(res.body);
                 this.orderDetail=res.body.data;
@@ -207,7 +207,7 @@
                 console.log(err);
           }
         );
-      this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
+      this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
         this.confirmOrder.repoList=res.body.data;
         console.log("the repo list: "+res.body.data);
       },function(err){
@@ -264,7 +264,7 @@
     justify-content: center;
   }
   .modal-confirm{
-    width: 600px;
+    width: 690px!important;
     height: 320px;
     box-sizing: border-box;
     background-color: #fff;
