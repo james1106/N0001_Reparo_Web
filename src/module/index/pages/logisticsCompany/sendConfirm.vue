@@ -1,5 +1,5 @@
 <template>
-  <div class="confirmSend">
+  <div class="sendConfirm">
     <div>
       <el-breadcrumb separator=">" class="bread">
         <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
@@ -31,8 +31,7 @@
       </el-row>
       <el-row >
         <el-col :span="12" style="text-align: left;margin-top: 10px">
-          <el-button class="confirmBtn" type="primary" @click="sendConfirm(companyBillDetail.orderNo)">确认</el-button>
-          <el-button class="confirmBtn" type="primary" @click="cancelConfirm">取消</el-button>
+          <el-button class="agreeBtn" type="primary" @click="sendConfirm(companyBillDetail.orderNo)">确认</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -44,7 +43,7 @@
   import '../../../../assets/css/style.css'
   import constantData from '../../../../common/const'
   export default {
-    name: 'index',
+    name: 'sendConfirm',
     data () {
       return {
         companyBillDetail: {

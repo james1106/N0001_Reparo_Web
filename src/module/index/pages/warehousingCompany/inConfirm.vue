@@ -1,5 +1,5 @@
 <template>
-  <div id="inConfirm" class="box-card">
+  <div id="inConfirm" class="inConfirm box-card">
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -35,7 +35,7 @@
               <el-row>
                 <el-col :span="12">
                   <el-form :model="param" :label-position="labelPosition" :rules="rules" ref="param">
-                    <el-form-item label="仓单编号" prop="receiptNo">
+                    <el-form-item label="仓单编号:" prop="receiptNo">
                       <el-input v-model="param.receiptNo"></el-input>
                     </el-form-item>
                   </el-form>
@@ -47,7 +47,7 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="inConfirm()">入库确认</el-button>
+          <el-button class="agreeBtn" type="primary" @click.native.prevent="inConfirm()">入库确认</el-button>
         </el-col>
       </el-row>
     </el-card>

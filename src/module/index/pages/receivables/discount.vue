@@ -9,13 +9,13 @@
     </el-breadcrumb>
     <el-card>
       <div>
-        <span class="sellerStepTtle">1. 请确认账款信息</span>
+        <span class="sellerStepTitle">1. 请确认账款信息</span>
       </div>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg><span class="keynote">应收账款信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg><span class="keynote">应收账款信息</span>
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
@@ -37,7 +37,7 @@
         </el-col>
       </el-row>
       <div>
-        <span class="sellerStepTtle">2. 请选择贴现银行</span>
+        <span class="sellerStepTitle">2. 请选择贴现银行</span>
       </div>
       <el-row>
         <el-form ref="discount" :model="bankOption" :label-position="labelPosition" :rules="discountRules">

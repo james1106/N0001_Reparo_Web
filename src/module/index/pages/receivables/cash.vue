@@ -3,7 +3,7 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="buyerColor stateShow"><svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>待兑付</el-col>
+          <el-col class="buyerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>待兑付</el-col>
           <el-col class="dotipRow"><span class="doTip">该应收账款已承兑，可兑付</span><el-button size="small" style="border-color: rgb(0,150,215);color: rgb(0,150,215)" @click="cash()">兑付确认</el-button></el-col>
         </el-row>
       </el-row>
@@ -11,7 +11,7 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
               <span class="keynote">应收账款信息</span>
             </div>
             <div class="box-card mycard1 detailContent">

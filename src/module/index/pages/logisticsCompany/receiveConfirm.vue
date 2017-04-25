@@ -1,5 +1,5 @@
 <template>
-  <div class="confirmSend">
+  <div class="receiveConfirm">
     <div>
       <el-breadcrumb separator=">" class="bread">
         <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
@@ -10,7 +10,7 @@
     </div>
     <el-card>
       <div>
-        <span class="sellerStepTitle">发货申请单详情</span>
+        <span class="sellerStepTitle">收货确认详情</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -29,10 +29,9 @@
           <el-col :span="6" class="msgName" style="margin-left: 19px">物流公司：{{companyBillDetail.logisticsEnterpriseName}}</el-col>
         </el-row>
       </el-row>
-      <el-row class="confirmBtn">
+      <el-row>
         <el-col :span="12" style="text-align: left;margin-top: 10px">
-          <el-button type="primary" @click="receiveConfirm(companyBillDetail.orderNo)">确认</el-button>
-          <el-button type="primary" @click="cancelConfirm">取消</el-button>
+          <el-button class="agreeBtn" type="primary" @click="receiveConfirm(companyBillDetail.orderNo)">确认</el-button>
         </el-col>
       </el-row>
     </el-card>

@@ -80,16 +80,22 @@
           </el-col>
         </el-tab-pane>
         <el-tab-pane label="自己联系" name="second">
-          <el-col :span="12">
-            <el-form-item label="填写物流企业"><el-input v-model="sendGoodForm1.logistics1"></el-input></el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="填写运单号"><el-input v-model="sendGoodForm1.No"></el-input></el-form-item>
-          </el-col>
+          <el-row>
+            <el-col :span="11">
+              <el-form-item label="填写物流企业"><el-input v-model="sendGoodForm1.logistics1"></el-input></el-form-item>
+            </el-col>
+            <el-col :span="11">
+              <el-form-item label="填写运单号"><el-input v-model="sendGoodForm1.No"></el-input></el-form-item>
+            </el-col>
+          </el-row>
         </el-tab-pane>
       </el-tabs>
       </el-form>
-      <el-button type="primary" @click="confirmSend">确认发货</el-button>
+      <el-row>
+        <el-col :span="12">
+          <el-button class="agreeBtn" type="primary" @click="confirmSend">确认发货</el-button>
+        </el-col>
+      </el-row>
     </el-card>
   </div>
 </template>

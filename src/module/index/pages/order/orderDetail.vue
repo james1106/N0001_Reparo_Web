@@ -557,6 +557,6 @@
   }
   .status-list .el-col span {
     position: absolute;
-    top:0px;
+    top:-5px;
   }
 </style>

@@ -54,7 +54,7 @@
           </el-col>
         </el-row>
       </el-card>
-      <el-row class="confirmBtn">
+      <el-row>
         <el-col :span="24" style="text-align: left;margin-top: 10px">
           <el-button type="primary" @click="onSubmit">确认订单</el-button>
         </el-col>
@@ -138,13 +138,11 @@
           </el-row>
           </el-form>
         </div>
-      <div class="confirmBtn">
         <el-row>
           <el-col :span="24">
             <el-button size="small" type="primary" @click="confirm">确定订单</el-button>
           </el-col>
         </el-row>
-      </div>
     </div>
     </div>
   </transition>

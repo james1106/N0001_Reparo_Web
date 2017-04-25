@@ -1,5 +1,5 @@
 <template>
-  <div id="outConfirm" class="box-card">
+  <div id="outConfirm" class="box-card outConfirm">
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+        <el-col class="sellerColor stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
           仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
       </el-row>
       <el-row>
@@ -21,7 +21,7 @@
                 <el-col :span="8">发起时间：{{repoDetails.operationRecordVoList[0].operateTime | timeTransfer}}</el-col>
               </el-row>
             </div>
-            <div class="box-card mycard1 detailContent">
+            <div class="box-card mycard1">
               <el-row>
                 <el-col :span="8" class="msgName">仓单号：{{repoDetails.repoCertNo | nullSituation}}</el-col>
                 <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
@@ -41,7 +41,7 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="outConfirm()">出库确认</el-button>
+          <el-button class="agreeBtn" type="primary" @click.native.prevent="outConfirm()">出库确认</el-button>
         </el-col>
       </el-row>
     </el-card>
