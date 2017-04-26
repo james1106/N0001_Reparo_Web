@@ -40,6 +40,7 @@
 
 <script>
   import  "../../../framework/particles.js"
+  import '../../../framework/iconfont.js'
   import Store from "../../../common/store.js"
   import dialogView from "../../../components/dialog.vue"
 
