@@ -8,15 +8,15 @@
     </el-breadcrumb>
     <el-card>
     <!--订单的状态显示，UI图上没有-->
-    <!--<el-row class="el-row-header statePosition">-->
-      <!--<el-col :class="{buyerColor:state.isBuyer==='true',buyeeColor:state.isBuyer==='false',stateShow:true,}" :span="8"><i class="el-icon-information"></i>&emsp;{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>-->
-      <!--<el-col :span="8">-->
-        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>-->
-        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>-->
-        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>-->
-        <!--<el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill(orderDetail.receOver.receNo)">签收账款</el-button>-->
-      <!--</el-col>-->
-    <!--</el-row>-->
+    <el-row class="el-row-header statePosition">
+      <el-col :class="{buyerColor:state.isBuyer==='true',buyeeColor:state.isBuyer==='false',stateShow:true,}" :span="8"><i class="el-icon-information"></i>&emsp;{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
+      <el-col :span="8">
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>
+        <el-button type="success" size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill(orderDetail.receOver.receNo)">签收账款</el-button>
+      </el-col>
+    </el-row>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
@@ -107,7 +107,6 @@
                 </template>
               </el-row>
             </div>
-
           </el-card>
         </el-col>
       </el-row>
@@ -116,7 +115,7 @@
         <el-card class="box-card mybox" style="width:100%">
           <div slot="header" class="clearfix el-row-header">
             <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>
-            <span class="keynote">物流信息</span><el-button size="mini" type="text" class="detailButton" @click="logisticsDetailPage(orderDetail.txDetail.orderId)" v-if="state.isBuyer==='false'">查看详情 ></el-button>
+            <span class="keynote">物流信息</span><el-button size="mini" type="text" class="detailButton" @click="logisticsDetailPage(orderDetail.txDetail.orderId)" v-if="(orderDetail.wayBillOver.wayBillLatestStatus!==constantData.NOMESSAGE)&&(orderDetail.wayBillOver.wayBillLatestStatus!==constantData.FORSEND)">查看详情 ></el-button>
           </div>
           <div class="box-card mycard1 detailContent" v-if="orderDetail.wayBillOver.wayBillLatestStatus===constantData.NOMESSAGE">
             <span class="msgName">暂无物流信息！</span>

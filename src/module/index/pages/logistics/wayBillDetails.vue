@@ -9,9 +9,9 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow " :span="8"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
-          物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
-        <el-col :span="8"><el-button type="primary" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.FORSEND" @click="sendGood(logisticsDetail.orderNo)">发货</el-button></el-col>
+        <el-col class="sellerColor stateShow ">
+          <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}
+          <el-button type="primary" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.FORSEND" @click="sendGood(logisticsDetail.orderNo)">发货</el-button></el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -33,7 +33,7 @@
               <el-row class="collapseTop">
                 <template v-for="(item,index) in logisticsDetail.operationRecordVo">
                   <el-row class="status-list" :class="{circleBlue:index==(logisticsDetail.operationRecordVo.length-1)}">
-                    <el-col :span="6" :class="{colorBlue:index==(logisticsDetail.operationRecordVo.length-1)}"><span>{{item.state | wayBillStatus}}:{{item.operateTime | timeTransfer}}</span></el-col>
+                    <el-col :span="6" :class="{colorBlue:index==(logisticsDetail.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>

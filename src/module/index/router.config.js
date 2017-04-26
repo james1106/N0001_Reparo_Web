@@ -97,7 +97,6 @@ export default [
       {path: 'myReceipts', component: myReceipts},
       {path: 'repoDetails', component: repoDetails},
       {path: 'receiptsDetails', component: receiptsDetails},
-
     ]
   },
 

@@ -5,7 +5,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>应收账款</el-breadcrumb-item>
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
-      <el-breadcrumb-item>贴现</el-breadcrumb-item>
+      <el-breadcrumb-item>贴现申请</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
       <div>
@@ -15,7 +15,7 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg><span class="keynote">应收账款信息</span>
+              <svg class="icon detailIcon" aria-hidden="true"> <use xlink:href="#icon-yszk_hui"></use> </svg><span class="keynote">应收账款信息</span>
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
@@ -55,7 +55,7 @@
 
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="discount()">贴现确认</el-button>
+          <el-button type="primary" @click.native.prevent="discount()">贴现申请</el-button>
         </el-col>
       </el-row>
     </el-card>

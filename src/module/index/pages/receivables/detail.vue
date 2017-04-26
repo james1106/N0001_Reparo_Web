@@ -40,21 +40,18 @@
               <el-row>
                 <el-col :span="6" class="msgName">应收账款状态明细:</el-col>
               </el-row>
-
-                <!--<template v-for="item in detailInfo.serialVoList">
+                <template v-for="item in detailInfo.serialVoList">
                 <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
                   <label> {{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</label>
                 </el-col>
-                </template>-->
-
+                </template>
                 <el-row class="collapseTop">
                   <template v-for="(item,index) in detailInfo.serialVoList">
                     <el-row class="status-list" :class="{circleBlue:index==(detailInfo.serialVoList.length-1)}">
-                      <el-col :span="24" :class="{colorBlue:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</span></el-col>
+                      <el-col :span="24" :class="{colorBlue:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receAction}}</span></el-col>
                     </el-row>
                   </template>
                 </el-row>
-
             </div>
           </el-card>
         </el-col>
@@ -75,7 +72,7 @@
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkMan | nullSituation}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeePhone | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeeLinePhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
@@ -85,7 +82,7 @@
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan | nullSituation}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerPhone | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">附加信息：</el-row>
               <el-row>
@@ -106,7 +103,6 @@
     <el-dialog title="提示" v-model="dialogVisible" size="tiny">
       <span>{{msg}}</span>
       <span slot="footer" class="dialog-footer">
-        <!--<dialog-view v-model="showDialogView" isShow={showDialogView}></dialog-view>-->
        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
     </el-dialog>
@@ -186,8 +182,10 @@
 
         if(isBuyer == 'true' && status == constantData.FORACCEPT){ //承兑
           this.accept();
+          this.getDetail();
         }else if(isBuyer == 'true' && status == constantData.ACCEPTED){//兑付
           this.cash();
+          this.getDetail();
         }else if(isBuyer == 'false' && status == constantData.ACCEPTED){//贴现
           //跳转
           this.$router.push("/allAccounts/detail/discount");
@@ -270,8 +268,8 @@
           this.currentStatusInfo.btnTitle = '兑付确认'
           this.currentStatusInfo.isShowHandleBtn = true
         }else if(isBuyer == 'false' && status == constantData.ACCEPTED){
-          this.currentStatusInfo.statusSubTitle = '买家已承兑,您可以进行贴现'
-          this.currentStatusInfo.btnTitle = '贴现确认'
+          this.currentStatusInfo.statusSubTitle = '买家已承兑,您可以进行贴现申请'
+          this.currentStatusInfo.btnTitle = '贴现申请'
           this.currentStatusInfo.isShowHandleBtn = true
         }
       }

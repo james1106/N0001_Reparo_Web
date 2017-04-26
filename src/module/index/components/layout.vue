@@ -63,7 +63,7 @@
     </aside>
     <div class="main-right">
     <transition name="fade" mode="out-in">
-      <router-view v-loading="loading" element-loading-text="加载中" class="view"></router-view>
+      <router-view v-loading="loading" element-loading-text="正玩命向区块链获取数据中..." class="view"></router-view>
     </transition>
     </div>
   </main>

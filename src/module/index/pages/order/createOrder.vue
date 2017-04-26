@@ -32,12 +32,12 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="货品单价(元)" prop="productUnitPrice">
-              <el-input v-model="launchOrder.productUnitPrice"></el-input>
+              <el-input v-model.number="launchOrder.productUnitPrice"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="货品数量" prop="productQuantity">
-              <el-input v-model="launchOrder.productQuantity"></el-input>
+              <el-input v-model.number="launchOrder.productQuantity"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -45,7 +45,7 @@
           <el-col :span="8">
             <el-form-item label="订单金额（元）">
               <!--<el-input v-model="launchOrder.totalPrice" :disabled="true" :value="launchOrder.productUnitPrice*launchOrder.productQuantity">{{launchOrder.productUnitPrice*launchOrder.productQuantity}}</el-input>-->
-              <div class="el-input">{{launchOrder.productUnitPrice*launchOrder.productQuantity}}</div>
+              <div class="el-input">{{launchOrder.productUnitPrice*launchOrder.productQuantity | numTransfer}}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -110,22 +110,16 @@
   export default {
     name: 'index',
     data () {
-        var validatePass= (rule,value,callback)=>{
-            if(value=='') {
-                callback(new Error("请输入货品单价"));
-            }
-            else if(!/^(\+)?\d+(\.\d{1,2})?$/.test(value)){
+        var validatePass = (rule,value,callback)=>{
+            var reg = /^\d+(?:\.\d{1,2})?$/
+            if(!reg.test(value)){
               callback(new Error("请输入正确货品单价，最高精确到小数点后两位"));
-            }
-            else {
-                callback();
+            }else{
+              callback();
             }
         };
-        var validatePass1= (rule,value,callback)=>{
-            if(value==''){
-                callback(new Error("请输入货品数量"));
-            }
-            else if(!/^(\+)?\d+$/.test(value)){
+        var validatePass1 = (rule,value,callback)=>{
+            if(!/^(\+)?\d+$/.test(value)){
                 callback(new Error("请输入正确货品数量"));
             }
             else {
@@ -153,10 +147,12 @@
           ],
           productUnitPrice:[
             {required:true, message:'请输入货品单价', },
+            { type: 'number', message: '货品单价必须为数字'},
             {validator:validatePass, trigger:'blur'}
           ],
           productQuantity:[
             {required:true, message:'请输入货品数量',},
+            { type: 'number', message: '货品数量必须为数字'},
             {validator:validatePass1,trigger:'blur'}
           ],
           payerBank:[
