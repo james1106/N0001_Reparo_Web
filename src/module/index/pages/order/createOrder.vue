@@ -4,7 +4,7 @@
       <el-breadcrumb separator=">" class="bread">
         <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
+        <el-breadcrumb-item>发起订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <el-form ref="launchOrder" :model="launchOrder" :label-position="top" :rules="creationRules">

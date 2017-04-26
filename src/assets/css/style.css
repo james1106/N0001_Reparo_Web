@@ -450,3 +450,6 @@ body{
 .inConfirm .el-input{
   width: 65%!important;
 }
+.el-input.is-disabled .el-input__inner{
+  color: black!important;
+}

@@ -1,5 +1,10 @@
 <template>
   <div id="signout" class="signout">
+    <el-breadcrumb separator=">" class="bread">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>签发</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
       <div>    <!--slot="header" class="clearfix"-->
         <span class="buyerStepTitle">1. 请填写订单详情</span>

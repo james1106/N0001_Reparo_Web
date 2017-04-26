@@ -1,45 +1,35 @@
 <template>
   <div>
     <el-row id="logisticsHp">
-      <div>我是物流首页</div>
-      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
         <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-yd_o"></use> </svg>
           <div class="showMesg">
-            <span class="showName">卖出的订单</span> <br>
+            <span class="showName">全部仓单</span> <br>
             <span class="showNum">1000</span>
           </div>
         </el-card>
       </el-col>
-      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
         <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-yszk_o"></use> </svg>
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-fh_o"></use> </svg>
           <div class="showMesg">
-            <span class="showName">应收账款</span> <br>
+            <span class="showName">仓单申请确认</span> <br>
             <span class="showNum">1000</span>
           </div>
         </el-card>
       </el-col>
-      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
+      <el-col :span="5" style="margin-right: 1.7%;width: 23%">
         <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-wl_o"></use> </svg>
+          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-sh_o"></use> </svg>
           <div class="showMesg">
-            <span class="showName">我的物流</span> <br>
+            <span class="showName">出库确认</span> <br>
             <span class="showNum">1000</span>
           </div>
         </el-card>
       </el-col>
-      <el-col :span="5" style="margin-right: 1.7%;width: 18%">
-        <el-card class="showCard">
-          <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-cc_o"></use> </svg>
-          <div class="showMesg">
-            <span class="showName">待确认订单</span> <br>
-            <span class="showNum">1000</span>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="4" style="float: right">
-        <img :src="imgUrl.maiG" style="height: 80px;float: right">
+      <el-col :span="6" style="float: right">
+        <img :src="imgUrl.wlG" style="height: 80px;float: right">
       </el-col>
     </el-row>
     <el-row>
@@ -106,8 +96,8 @@
   import '../../../../assets/css/style.css'
   import '../../../../framework/iconfont.js'
   import adImg from '../../assets/ad.png'
-  import maiB from '../../assets/mai_B.png'
-  import maiG from  '../../assets/mai_G.png'
+  import wlG from '../../assets/wl_G.png'
+  import ccG from '../../assets/cc_G.png'
 
 
   export default {
@@ -123,8 +113,8 @@
     return {
       imgUrl:{
         adImg:adImg,
-        maiB:maiB,
-        maiG:maiG
+        wlG:wlG,
+        ccG:ccG
       },
       showOrder:[
         {
