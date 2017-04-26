@@ -59,6 +59,7 @@
   height: 80px;
   background-image: url("../../module/index/assets/bg.png");
   background-repeat: no-repeat;
+  background-position: bottom right;
 }
 /*.主页中的四个卡片上的信息*/
 .showMesg{
