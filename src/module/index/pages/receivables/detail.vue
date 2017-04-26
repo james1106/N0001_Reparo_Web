@@ -74,7 +74,7 @@
                 <el-col :span="6" class="msgName">收款人开户行：{{detailInfo.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkman | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkMan | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeePhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
