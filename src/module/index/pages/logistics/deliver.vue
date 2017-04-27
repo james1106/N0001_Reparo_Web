@@ -10,7 +10,7 @@
     </div>
     <el-card>
       <div>
-        <span class="sellerStepTitle">1. 请确认订单详情</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">1</span>请确认订单详情</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -33,7 +33,7 @@
         </el-row>
       </el-row>
       <div>
-        <span class="sellerStepTitle">2. 请确认发货信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">2</span>请确认发货信息</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -64,7 +64,7 @@
         </el-row>
       </el-row>
       <div>
-        <span class="sellerStepTitle">3. 请填写物流信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">3</span>请填写物流信息</span>
       </div>
       <el-form :model="sendGoodForm1" ref="sendGoodForm1">
         <el-tabs v-model="activeName" type="card" @tab-click="">

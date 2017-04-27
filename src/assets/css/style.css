@@ -10,11 +10,11 @@
 }
 .el-row{
   margin-bottom: 10px!important;
-  padding: 0px!important;
+  padding: 0!important;
   border-radius: 4px!important;
 }
 .el-card{
-  border: 0px!important;
+  border: 0!important;
   box-shadow: none!important;
 }
 .el-card__header{
@@ -26,11 +26,11 @@
   padding-top: 12px!important;
 }
 .el-table th.is-leaf{
-  border-bottom: 0px!important;
+  border-bottom: 0!important;
   background-color: transparent;
 }
 .el-table td{
-  border-bottom: 0px!important;
+  border-bottom: 0!important;
   background-color: rgb(242,242,242);
   height: 55px!important;
 }
@@ -57,9 +57,7 @@
   /*width: 260px;*/
   width: 100%;
   height: 80px;
-  background-image: url("../../module/index/assets/bg.png");
-  background-repeat: no-repeat;
-  background-position: bottom right;
+  background: url("../../module/index/assets/bg.png") no-repeat bottom right;
 }
 /*.主页中的四个卡片上的信息*/
 .showMesg{
@@ -130,7 +128,7 @@
   border-radius: 4px!important;
 }
 .mybox .el-card__header {
-  padding: 0px!important;
+  padding: 0!important;
 }
 /*四个状态信息的查询详情按钮*/
 .detailButton{
@@ -199,11 +197,11 @@
 
 .deliver .el-select .el-input {
   width: 100% !important;
-  margin: 0px 0.2%!important;
+  margin: 0 0.2%!important;
 }
 .deliver .el-select, .el-input {
   width: 65% !important;
-  margin: 0px 2%!important;
+  margin: 0 2%!important;
 }
 .deliver .el-tabs__item.is-active{
   color:rgb(57,202,166)!important;
@@ -265,11 +263,11 @@
 /*贴现页面样式*/
 .discount .el-select .el-input {
   width: 100% !important;
-  margin: 0px 0.2%!important;
+  margin: 0 0.2%!important;
 }
 .discount .el-select, .el-input {
   width: 65% !important;
-  margin: 0px 2%!important;
+  margin: 0 2%!important;
 }
 .discount .el-form-item__label {
   /*width: 10% !important;*/
@@ -307,12 +305,12 @@
 
 .confirmOrder .el-select .el-input {
   width: 100% !important;
-  margin: 0px 0.2%!important;
+  margin: 0 0.2%!important;
 }
 
 .confirmOrder .el-select, .el-input {
   width: 90% !important;
-  margin: 0px 2%!important;
+  margin: 0 2%!important;
 }
 .confirmOrder .el-button {
   float: left;
@@ -322,10 +320,6 @@
   background-color: rgb(57,202,166);
   border-color: rgb(57,202,166);
 }
-/*.confirmOrder .el-button--primary:focus, .el-button--primary:hover{*/
-  /*background-color: rgb(57,202,166)!important;*/
-  /*border-color: rgb(57,202,166)!important;*/
-/*}*/
 .confirmOrder .el-button:hover{
 background-color: rgb(57,202,166)!important;
 border-color: rgb(57,202,166)!important;
@@ -347,7 +341,7 @@ border-color: rgb(57,202,166)!important;
   line-height: 11px!important;
 }
 .modal-confirm .el-row{
-  margin-bottom: 0px!important;
+  margin-bottom: 0!important;
 }
 .modal-confirm .el-col-12{
   height: 31px;
@@ -365,7 +359,7 @@ border-color: rgb(57,202,166)!important;
   border-color: rgb(57,202,166);
 }
 .modal-confirm .el-form-item__content{
-  top: 0px!important;
+  top: 0!important;
   border: 1px solid rgb(238,238,238);
   line-height: 30px;
   font-size: 12px;
@@ -376,9 +370,10 @@ border-color: rgb(57,202,166)!important;
 li .el-menu-item{
   padding-left: 28.4%!important;
 }
-/*.el-icon-arrow-down:before{
+/*删掉导航栏的下拉图标*/
+.el-menu .el-icon-arrow-down:before{
   content: ""!important;
-}*/
+}
 .el-submenu .el-menu-item:hover, .el-submenu__title:hover{
   background-color: #f4f4f4!important;
 }
@@ -452,6 +447,30 @@ body{
   width: 65%!important;
 }
 .el-input.is-disabled .el-input__inner{
-  color: black!important;
+  color: rgb(68,68,68)!important;
+  background-color: rgb(244,246,248)!important;
+  border-color: rgb(221,221,221)!important;
+}
+.buyerCircle {
+  width:16px;
+  height:16px;
+  background:#0096D7;
+  line-height:16px;
+  text-align:center;
+  color:#fff;
+  display:inline-block;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.sellerCircle {
+  width:16px;
+  height:16px;
+  background:rgb(57,202,166);
+  line-height:16px;
+  text-align:center;
+  color:#fff;
+  display:inline-block;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 

@@ -7,7 +7,7 @@
     </el-breadcrumb>
     <el-card>
       <div>    <!--slot="header" class="clearfix"-->
-        <span class="buyerStepTitle">1. 请填写订单详情</span>
+        <span class="buyerStepTitle"><span class="buyerCircle">1</span>请填写订单详情</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -33,10 +33,10 @@
         </el-row>
       </el-row>
       <div>
-        <span class="buyerStepTitle">2. 请填写应收账款信息</span>
+        <span class="buyerStepTitle"><span class="buyerCircle">2</span>请填写应收账款信息</span>
       </div>
       <el-card class="signoutMsg">
-        <el-form :label-position="labelPosition" :model="signoutInfo" :rules="signoutRules" ref="signoutInfo">
+        <el-form  :model="signoutInfo" :rules="signoutRules" ref="signoutInfo">
           <el-row>
             <el-col :span="8">
               <el-form-item label="账款金额" prop="isseAmt">

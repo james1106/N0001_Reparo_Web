@@ -10,7 +10,7 @@
   </div>
   <el-card class="confirmOrder">
     <div>
-      <span class="sellerStepTitle">1. 请填写订单详情</span>
+      <span class="sellerStepTitle"><span class="sellerCircle">1</span>请填写订单详情</span>
     </div>
     <el-row class="dataTable">
       <el-row class="el-row-header">
@@ -33,7 +33,7 @@
       </el-row>
     </el-row>
     <div>
-      <span class="sellerStepTitle">2. 请选择货品出库并确认订单</span>
+      <span class="sellerStepTitle"><span class="sellerCircle">2</span>请选择货品出库并确认订单</span>
     </div>
     <el-form :model="confirmOrder">
       <el-card style="width:100%;" class="confirmCard">
