@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <div>
-        <span class="sellerStepTitle">1. 请确认账款信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">1</span>请确认账款信息</span>
       </div>
       <el-row>
         <el-col :span="24">
@@ -37,7 +37,7 @@
         </el-col>
       </el-row>
       <div>
-        <span class="sellerStepTitle">2. 请选择贴现银行</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">2</span>请选择贴现银行</span>
       </div>
       <el-row>
         <el-form ref="discount" :model="bankOption" :label-position="labelPosition" :rules="discountRules">

@@ -449,3 +449,27 @@ body{
 .el-input.is-disabled .el-input__inner{
   color: black!important;
 }
+.buyerCircle {
+  width:16px;
+  height:16px;
+  background:#0096D7;
+  line-height:16px;
+  text-align:center;
+  color:#fff;
+  display:inline-block;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.sellerCircle {
+  width:16px;
+  height:16px;
+  background:rgb(57,202,166);
+  line-height:16px;
+  text-align:center;
+  color:#fff;
+  display:inline-block;
+  border-radius: 50%;
+  margin-right: 5px;
+}

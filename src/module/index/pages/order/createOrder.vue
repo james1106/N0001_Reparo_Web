@@ -10,7 +10,7 @@
     <el-form ref="launchOrder" :model="launchOrder" :label-position="top" :rules="creationRules">
       <el-card class="boxcard">
         <div>    <!--slot="header" class="clearfix"-->
-          <span class="buyerStepTitle">1. 请填写订单详情</span>
+          <span class="buyerStepTitle"><span class="buyerCircle">1</span>请填写订单详情</span>
         </div>
        <el-card>
         <el-row>
@@ -52,7 +52,7 @@
        </el-card>
 
         <div>
-          <span class="buyerStepTitle">2. 请填写付款信息</span>
+          <span class="buyerStepTitle"><span class="buyerCircle">2</span>请填写付款信息</span>
         </div>
        <el-card>
         <el-row>
@@ -80,7 +80,7 @@
         </el-row>
        </el-card>
         <div>
-          <span class="buyerStepTitle">3. 请选择货品入库仓储</span>
+          <span class="buyerStepTitle"><span class="buyerCircle">3</span>请选择货品入库仓储</span>
         </div>
        <el-card>
         <el-row>
