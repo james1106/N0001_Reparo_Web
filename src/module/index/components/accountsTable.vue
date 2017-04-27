@@ -1,5 +1,5 @@
 <template>
-  <div id="accountTable">
+  <div id="accountTable" :class="[{seller_accountsTable:state.isBuyer==='false'},{buyer_accountsTable:state.isBuyer==='true'}]">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="5" style="margin-left: 20px">货品信息</el-col>
       <el-col :span="5">账款信息</el-col>
@@ -58,11 +58,6 @@
 
   export default {
     name: 'accountTable',
-    computed: {
-      constantData () {
-        return constantData;
-      },
-    },
     props: ['accountInfo','status','pageSize','isBuyer'],
     data(){
         return{
@@ -70,6 +65,14 @@
           showData:[],
           accountsStatus:this.status,
         }
+    },
+    computed: {
+      state () {
+        return Store.state;
+      },
+      constantData () {
+        return constantData;
+      },
     },
     watch:{
       accountInfo(curVal){

@@ -31,7 +31,7 @@
                 <el-button size="mini" type="text" @click.native.prevent="deliver(item.orderNo)">申请发货</el-button>
               </el-row>
               <el-row style="text-align: center;">
-                <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+                <el-button size="small"c @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
               </el-row>
             </el-col>
           </el-row>

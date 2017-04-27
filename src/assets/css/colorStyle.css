@@ -28,8 +28,91 @@
 .seller_allRepo .el-tabs__active-bar{
   background-color: rgb(57,202,166);
 }
+.seller_orderTable .el-pager li.active{
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.seller_orderTable .el-button--text{
+  color: rgb(57,202,166);
+}
+.seller_orderTable .el-button--text:hover{
+  color: rgb(57,202,166);
+}
+.seller_orderTable .el-button:hover{
+  color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.seller_accountsTable .el-pager li.active{
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.seller_accountsTable .el-button--text{
+  color: rgb(57,202,166);
+}
+.seller_accountsTable .el-button--text:hover{
+  color: rgb(57,202,166);
+}
+.seller_accountsTable .el-button:hover{
+  color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.seller_accountsDetail .accountsDetail_color{
+  color: rgb(57,202,166);
+}
+.seller_accountsDetail .circleColor:before {
+  background-color: rgb(57,202,166) !important;
+}
+.seller_accountsDetail .status-list .el-col {
+  border-left: 2px solid rgb(57,202,166);
+}
+.seller_accountsDetail .circleColor1 {
+  color:rgb(57,202,166); border-left: none !important;
+}
+.seller_accountsDetail .status-list:before{
+  border: 2px solid rgb(57,202,166) ;
+}
+.seller_accountsDetail .el-button{
+  border-color: rgb(57,202,166);
+  color: rgb(57,202,166);
+}
+.seller_orderDetail .orderDetail_color{
+  color: rgb(57,202,166);
+}
+.seller_orderDetail .circleColor:before {
+  background-color: rgb(57,202,166) !important;
+}
+.seller_orderDetail .status-list .el-col {
+  border-left: 2px solid rgb(57,202,166);
+}
+.seller_orderDetail .circleColor1 {
+  color:rgb(57,202,166); border-left: none !important;
+}
+.seller_orderDetail .status-list:before{
+  border: 2px solid rgb(57,202,166) ;
+}
+.seller_orderDetail .el-button{
+  border-color: rgb(57,202,166);
+  color: rgb(57,202,166);
+}
 
-/*2.买家颜色*/
+/*企业仓储详情*/
+.seller_repoDetail .circleColor:before {
+  background-color: rgb(57,202,166) !important;
+}
+.seller_repoDetail .status-list .el-col {
+  border-left: 2px solid rgb(57,202,166);
+}
+.seller_repoDetail .circleColor1 {
+  color:rgb(57,202,166); border-left: none !important;
+}
+.seller_repoDetail .status-list:before{
+  border: 2px solid rgb(57,202,166) ;
+}
+.seller_repoDetail .repoDetail_color{
+  color:  rgb(57,202,166) ;
+}
+
+/*=====================2.买家颜色=======================*/
 .buyer_menu .el-menu-item.is-active{
   color:rgb(0,150,222)!important;
 }
@@ -56,6 +139,92 @@
 }
 .buyer_allRepo .el-tabs__active-bar{
   background-color: rgb(0,150,222);
+}
+.buyer_orderTable .el-pager li.active{
+  background-color: rgb(0,150,222);
+  border-color: rgb(0,150,222);
+}
+.buyer_orderTable .el-button--text{
+  color: rgb(0,150,222);
+}
+.buyer_orderTable .el-button--text:hover{
+  color: rgb(0,150,222);
+}
+.buyer_orderTable .el-button:hover{
+  color: rgb(0,150,222);
+  border-color: rgb(0,150,222);
+}
+.buyer_accountsTable .el-pager li.active{
+  background-color: rgb(0,150,222);
+  border-color: rgb(0,150,222);
+}
+.buyer_accountsTable .el-button--text{
+  color: rgb(0,150,222);
+}
+.buyer_accountsTable .el-button--text:hover{
+  color: rgb(0,150,222);
+}
+.buyer_accountsTable .el-button:hover{
+  color: rgb(0,150,222);
+  border-color: rgb(0,150,222);
+}
+.buyer_accountsDetail .accountsDetail_color{
+  color: rgb(0,150,222);
+}
+.buyer_accountsDetail .accountsDetail_color{
+  color: rgb(0,150,222);
+}
+.buyer_accountsDetail .circleColor:before {
+  background-color: rgb(0,150,222) !important;
+}
+.buyer_accountsDetail .status-list .el-col {
+  border-left: 2px solid rgb(0,150,222);
+}
+.buyer_accountsDetail .circleColor1 {
+  color:rgb(0,150,222); border-left: none !important;
+}
+.buyer_accountsDetail .status-list:before{
+  border: 2px solid rgb(0,150,222) ;
+}
+.buyer_orderDetail .orderDetail_color{
+  color: rgb(0,150,222);
+}
+.buyer_orderDetail .circleColor:before {
+  background-color: rgb(0,150,222) !important;
+}
+.buyer_orderDetail .status-list .el-col {
+  border-left: 2px solid rgb(0,150,222);
+}
+.buyer_orderDetail .circleColor1 {
+  color:rgb(0,150,222); border-left: none !important;
+}
+.buyer_orderDetail .status-list:before{
+  border: 2px solid rgb(0,150,222) ;
+}
+.buyer_orderDetail .el-button{
+  border-color: rgb(0,150,222);
+  color: rgb(0,150,222);
+}
+.buyer_accountsDetail .el-button{
+  border-color: rgb(0,150,222);
+  color: rgb(0,150,222);
+}
+
+/*企业仓储详情*/
+.buyer_repoDetail .circleColor:before {
+  background-color: rgb(0,150,222) !important;
+}
+.buyer_repoDetail .status-list .el-col {
+  border-left: 2px solid rgb(0,150,222);
+}
+.buyer_repoDetail .circleColor1 {
+  color:rgb(0,150,222); border-left: none !important;
+}
+.buyer_repoDetail .status-list:before{
+  border: 2px solid rgb(0,150,222) ;
+}
+.buyer_repoDetail .repoDetail_color{
+  color:  rgb(0,150,222) ;
 }
 
 /*3.物流颜色,仓储颜色*/

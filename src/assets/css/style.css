@@ -226,6 +226,12 @@
   width: 30%;
   border-radius: 4px;
   margin: 20px 0;
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.signout .el-button:hover {
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
 }
 .signout .el-form-item__label {
   width: 30% !important;
@@ -289,6 +295,21 @@
   color:rgb(57,202,166)!important;
 }
 .waybill .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+.waybill .el-button--text{
+  color: rgb(57,202,166);
+}
+.waybill .el-button:hover{
+  color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.waybill .el-pager li.active{
+  border-color: rgb(57,202,166);
+  background-color: rgb(57,202,166);
+}
+.waybill .el-pager li.hover{
+  border-color: rgb(57,202,166);
   background-color: rgb(57,202,166);
 }
 /*确认订单样式*/
@@ -392,7 +413,7 @@ body{
 }
 /*详情内容的位置*/
 .detailContent{
-  margin-left: 13px;
+  margin-left: 15px;
 }
 /*确认订单此类的操作按钮*/
 /*.operateBtn{*/

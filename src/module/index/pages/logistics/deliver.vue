@@ -219,4 +219,7 @@
     padding: 10px 0;
     background-color: #f9fafc;
   }
+  .el-select-dropdown__item.selected{
+    background-color: rgb(57,202,166)!important;
+  }
 </style>

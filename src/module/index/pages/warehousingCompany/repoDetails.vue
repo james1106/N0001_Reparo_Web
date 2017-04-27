@@ -10,7 +10,7 @@
     <el-card>
       <el-row class="el-row-header statePosition">
         <el-col class="sellerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
-          <el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">{{handleInfo.title}}</el-button>
+          &nbsp;<el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">{{handleInfo.title}}</el-button>
         </el-col>
       </el-row>
       <el-row>

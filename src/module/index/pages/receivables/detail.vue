@@ -1,5 +1,5 @@
 <template>
-  <div id="detail" class="receiveDetails">
+  <div id="detail" class="receiveDetails" :class="[{seller_accountsDetail:state.isBuyer==='false'},{buyer_accountsDetail:state.isBuyer==='true'}]">
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -10,9 +10,9 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="buyerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+          <el-col class="accountsDetail_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
             {{detailInfo.detailVoList[0].status | receStatus}}</el-col>
-          <el-col class="dotipRow"><span class="doTip">{{currentStatusInfo.statusSubTitle}}</span><el-button size="small" v-if="currentStatusInfo.isShowHandleBtn" @click="handle()" style="border-color: rgb(0,150,215);color: rgb(0,150,215)">{{currentStatusInfo.btnTitle}}</el-button></el-col>
+          <el-col class="dotipRow"><span class="doTip">{{currentStatusInfo.statusSubTitle}}</span>&nbsp;<el-button size="small" v-if="currentStatusInfo.isShowHandleBtn" @click="handle()">{{currentStatusInfo.btnTitle}}</el-button></el-col>
         </el-row>
       </el-row>
       <el-row>
@@ -40,15 +40,10 @@
               <el-row>
                 <el-col :span="6" class="msgName">应收账款状态明细:</el-col>
               </el-row>
-                <template v-for="item in detailInfo.serialVoList">
-                <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
-                  <label> {{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</label>
-                </el-col>
-                </template>
                 <el-row class="collapseTop">
                   <template v-for="(item,index) in detailInfo.serialVoList">
-                    <el-row class="status-list" :class="{circleBlue:index==(detailInfo.serialVoList.length-1)}">
-                      <el-col :span="24" :class="{colorBlue:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receAction}}</span></el-col>
+                    <el-row class="status-list" :class="{circleColor:index==(detailInfo.serialVoList.length-1)}">
+                      <el-col :span="24" :class="{circleColor1:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receAction}}</span></el-col>
                     </el-row>
                   </template>
                 </el-row>
@@ -119,6 +114,11 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       this.getDetail();
+    },
+    computed:{
+      state () {
+        return Store.state;
+      }
     },
     data () {
       return {
