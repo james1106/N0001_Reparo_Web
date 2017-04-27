@@ -447,7 +447,9 @@ body{
   width: 65%!important;
 }
 .el-input.is-disabled .el-input__inner{
-  color: black!important;
+  color: rgb(68,68,68)!important;
+  background-color: rgb(244,246,248)!important;
+  border-color: rgb(221,221,221)!important;
 }
 .buyerCircle {
   width:16px;
@@ -457,8 +459,6 @@ body{
   text-align:center;
   color:#fff;
   display:inline-block;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
   border-radius: 50%;
   margin-right: 5px;
 }

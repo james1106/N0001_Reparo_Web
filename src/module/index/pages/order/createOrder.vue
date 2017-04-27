@@ -7,7 +7,7 @@
         <el-breadcrumb-item>发起订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <el-form ref="launchOrder" :model="launchOrder" :label-position="top" :rules="creationRules">
+    <el-form ref="launchOrder" :model="launchOrder" :rules="creationRules">
       <el-card class="boxcard">
         <div>    <!--slot="header" class="clearfix"-->
           <span class="buyerStepTitle"><span class="buyerCircle">1</span>请填写订单详情</span>
