@@ -150,7 +150,6 @@
 </template>
 <script>
   import store from "../../vuex/store"
-  import '../../../../assets/css/style.css'
   export default {
     name: 'index',
     data () {

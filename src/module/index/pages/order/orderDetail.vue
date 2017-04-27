@@ -224,7 +224,6 @@
   import store from '../../vuex/store'
   import constantData from '../../../../common/const'
   import userInfo from '../../../../common/store'
-  import '../../../../assets/css/style.css'
   export default {
     name: 'index',
     data () {

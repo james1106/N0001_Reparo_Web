@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="allOrder" :class="[{seller_allOrder:state.isBuyer==='false'},{buyer_allOrder:state.isBuyer==='true'}]">
     <div>
       <el-breadcrumb separator=">" class="bread">
         <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
@@ -31,10 +31,9 @@
 <script>
   import store from '../../vuex/store.js'
   import constantData from '../../../../common/const'
-  import '../../../../assets/css/style.css'
   import OrderTable from '../../components/orderDataTable.vue'
   export default {
-    name: 'index',
+    name: 'allOrder',
     data () {
       return {
 //          activeName:'first',

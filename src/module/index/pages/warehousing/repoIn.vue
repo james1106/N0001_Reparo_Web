@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="allRepo" class="buyer_allRepo">
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -28,7 +28,7 @@
   import store from '../../vuex/store'
   import repoDataTable from '../../components/repoDataTable.vue'
   export default {
-    name:'index',
+    name:'allRepo',
     data () {
       return {
         activeName: 'first',

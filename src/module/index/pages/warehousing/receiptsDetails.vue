@@ -37,9 +37,9 @@
                 <el-col :span="8" class="msgName">仓单状态明细：</el-col>
               </el-row>
 
-              <!--<el-row v-for="item in receiptsDetails.recordVos">
-                <el-col :span="8" class="msgName">{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</el-col>
-              </el-row>-->
+              <!--<el-row v-for="item in receiptsDetails.recordVos">-->
+                <!--<el-col :span="8" class="msgName">{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</el-col>-->
+              <!--</el-row>-->
 
               <el-row class="collapseTop">
                 <template v-for="(item,index) in receiptsDetails.recordVos">

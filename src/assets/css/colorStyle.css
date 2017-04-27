@@ -1,0 +1,60 @@
+/*颜色样式细分*/
+
+
+/*1.卖家颜色*/
+.seller_menu .el-menu-item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.seller_allOrder .el-tabs__item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.seller_allOrder .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+.seller_allAccounts .el-tabs__item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.seller_allAccounts .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+.seller_allReceipts .el-tabs__item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.seller_allReceipts .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+.seller_allRepo .el-tabs__item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.seller_allRepo .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+
+/*2.买家颜色*/
+.buyer_menu .el-menu-item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.buyer_allOrder .el-tabs__item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.buyer_allOrder .el-tabs__active-bar{
+  background-color: rgb(0,150,222);
+}
+.buyer_allAccounts .el-tabs__item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.buyer_allAccounts .el-tabs__active-bar{
+  background-color: rgb(0,150,222);
+}
+.buyer_allReceipts .el-tabs__item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.buyer_allReceipts .el-tabs__active-bar{
+  background-color: rgb(0,150,222);
+}
+.buyer_allRepo .el-tabs__item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.buyer_allRepo .el-tabs__active-bar{
+  background-color: rgb(0,150,222);
+}

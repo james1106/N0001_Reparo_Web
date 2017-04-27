@@ -126,7 +126,6 @@
   </div>
 </template>
 <script>
-  import '../../../../assets/css/style.css'
   import Store from '../../vuex/store'
   import LocalStore from '../../../../common/store'
   import constantData from '../../../../common/const'

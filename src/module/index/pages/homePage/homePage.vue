@@ -5,7 +5,7 @@
       <el-breadcrumb-item>首页</el-breadcrumb-item>
     </el-breadcrumb>
     <template v-if="companyType == 0">
-    <el-row v-if="$route.params.isBuyer==='true'">  <!--买家-->
+    <el-row v-if="state.isBuyer==='true'">  <!--买家-->
       <el-col :span="5" style="margin-right: 1.7%;width: 23%">
         <el-card class="showCard">
           <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
@@ -83,7 +83,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span :class="[{buyerColor:$route.params.isBuyer==='true',sellerColor:$route.params.isBuyer==='false'}]">待办订单</span>
+        <span :class="[{buyerColor:state.isBuyer==='true',sellerColor:state.isBuyer==='false'}]">待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
@@ -146,7 +146,6 @@
 </template>
 
 <script>
-  import '../../../../assets/css/style.css'
   import '../../../../framework/iconfont.js'
   import adImg from '../../assets/ad.png'
   import maiB from '../../assets/mai_B.png'
@@ -154,6 +153,7 @@
   import LocalStore from "../../../../common/store.js"
   import logisticsHomepage from "./logisticsHomePage.vue"
   import repoHomepage from "./repoHomePage.vue"
+  import Store from "../../vuex/store"
 
   export default {
   name: 'homePage',
@@ -168,6 +168,11 @@
   },
   components:{
     logisticsHomepage,repoHomepage
+  },
+  computed: {
+    state () {
+      return Store.state;
+    }
   },
   data () {
     return {

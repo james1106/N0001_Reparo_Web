@@ -40,7 +40,6 @@
 </template>
 <script>
   import store from "../../vuex/store"
-  import '../../../../assets/css/style.css'
   import constantData from '../../../../common/const'
   export default {
     name: 'sendConfirm',

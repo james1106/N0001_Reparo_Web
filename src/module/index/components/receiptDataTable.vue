@@ -42,7 +42,6 @@
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
-  import '../../../assets/css/style.css'
   export default {
     name: 'receiptDataTable',
     props: ['receiptList','status','pageSize'],

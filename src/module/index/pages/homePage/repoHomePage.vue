@@ -93,7 +93,6 @@
 </template>
 
 <script>
-  import '../../../../assets/css/style.css'
   import '../../../../framework/iconfont.js'
   import adImg from '../../assets/ad.png'
   import wlG from '../../assets/wl_G.png'

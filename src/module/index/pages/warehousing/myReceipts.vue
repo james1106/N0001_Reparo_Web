@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="allReceipts" :class="[{seller_allReceipts:state.isBuyer==='false'},{buyer_allReceipts:state.isBuyer==='true'}]">
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -27,13 +27,19 @@
 <script>
   import store from '../../vuex/store'
   import receiptDataTable from '../../components/receiptDataTable.vue'
+
   export default {
-    name:'index',
+    name:'allReceipts',
     data () {
       return {
         activeName: 'first',
         allReceipts:[],
       };
+    },
+    computed: {
+      state () {
+        return store.state;
+      }
     },
     components:{
       receiptDataTable

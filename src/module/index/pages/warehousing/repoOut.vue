@@ -1,5 +1,5 @@
 <template>
-  <div class="repoOut">
+  <div class="seller_allRepo">
     <div>
       <el-breadcrumb separator=">" class="bread">
         <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
@@ -27,7 +27,7 @@
   import store from '../../vuex/store'
   import repoDataTable from '../../components/repoDataTable.vue'
   export default {
-    name:'index',
+    name:'repoOut',
     data () {
       return {
         activeName: 'first',

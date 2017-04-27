@@ -87,8 +87,11 @@
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
   import Common from "../../../common/common.js"
+  import '../../../assets/css/style.css'
+  import '../../../assets/css/colorStyle.css'
   import Vue from 'vue'
   import resource from 'vue-resource'
+
   Vue.use(resource)
 
   window.onload=function(){
@@ -107,7 +110,6 @@
 export default {
   name: 'wrapper',
   created: function () {
-
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     this.userName = userInfo.company_name;
@@ -157,16 +159,14 @@ export default {
           return;
         }
         Store.commit('setIsBuyer',"true");
-        this.$router.push('/true');
-//        Common.loadCss('../../assets/css/blueStyle');
+        this.$router.push('/');
       },
       toSeller() {
         if(Store.state.isBuyer==="false"){
           return;
         }
         Store.commit('setIsBuyer',"false");
-        this.$router.push('/false');
-//        Common.loadCss('../../assets/css/greenStyle');
+        this.$router.push('/');
       },
       logout(){
         function delete_cookie(name) {

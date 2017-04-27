@@ -1,5 +1,5 @@
 <template>
-  <div id="menu" style="height: 100%">
+  <div id="seller_menu" class="seller_menu" style="height: 100%">
       <el-menu is-opened default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/" style="background-color: rgb(244,250,249)">
           <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_G"></use> </svg>首页
@@ -35,7 +35,7 @@
   import Store from '../vuex/store.js'
 
   export default {
-    name: 'menu',
+    name: 'seller_menu',
     data () {
       return {
         msg: 'Welcome to Your Vue.js App'
