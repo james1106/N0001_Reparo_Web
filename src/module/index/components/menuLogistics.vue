@@ -1,6 +1,5 @@
 <template>
-  <div id="menu">
-
+  <div id="logistics_menu">
       <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
           <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_G"></use> </svg>首页

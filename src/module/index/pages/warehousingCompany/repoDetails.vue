@@ -37,8 +37,12 @@
                 <el-col :span="8" class="msgName">货品总额(元)：{{repoDetails.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
-                <el-col :span="8" class="msgName">物流运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">出库物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">出库物流运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8" class="msgName">入库物流公司：字段还没有</el-col>
+                <el-col :span="8" class="msgName">入库物流运单号：字段还没有</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">仓储状态明细：</el-col>

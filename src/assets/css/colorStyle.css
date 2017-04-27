@@ -1,6 +1,5 @@
 /*颜色样式细分*/
 
-
 /*1.卖家颜色*/
 .seller_menu .el-menu-item.is-active{
   color:rgb(57,202,166)!important;
@@ -57,4 +56,9 @@
 }
 .buyer_allRepo .el-tabs__active-bar{
   background-color: rgb(0,150,222);
+}
+
+/*3.物流颜色,仓储颜色*/
+ .el-menu-item.is-active{
+  color:rgb(57,202,166)!important;
 }
