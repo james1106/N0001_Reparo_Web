@@ -50,7 +50,7 @@
   </el-row>
   </header>
   <!--<div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>-->
-  <main>
+  <main :class="[{green_style:state.isBuyer==='false'},{blue_style:state.isBuyer==='true'}]">
     <aside class="main-left" id="main-left" v-if="companyType === 0">
       <menu-by v-if="state.isBuyer==='true'"></menu-by>
       <menu-sl v-else></menu-sl>
@@ -113,6 +113,9 @@ export default {
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     this.userName = userInfo.company_name;
+    if(this.companyType != '0'){
+      Store.commit('setIsBuyer',"false");
+    }
 
     /*****  设置http拦截器 start  ******/
     let _this = this;
@@ -135,9 +138,6 @@ export default {
     return {
       loading:false,
       dialogVisible:false,
-      msg:'',
-      Buyer:'true',
-      Seller:'false',
       msg: '',
       headerFixed : true,
       active:true,

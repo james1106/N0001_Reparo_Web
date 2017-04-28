@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow "><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg> 仓单当前状态：{{receiptsDetails.repoCertStatus | repoCertStatus}}</el-col>
+        <el-col class="detail_title_color stateShow "><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg> 仓单当前状态：{{receiptsDetails.repoCertStatus | repoCertStatus}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -43,8 +43,8 @@
 
               <el-row class="collapseTop">
                 <template v-for="(item,index) in receiptsDetails.recordVos">
-                  <el-row class="status-list" :class="{circleBlue:index==(receiptsDetails.recordVos.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(receiptsDetails.recordVos.length-1)}"><span>{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(receiptsDetails.recordVos.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(receiptsDetails.recordVos.length-1)}"><span>{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>

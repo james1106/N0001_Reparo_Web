@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+        <el-col class="detail_title_color stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
           仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
       </el-row>
       <el-row>

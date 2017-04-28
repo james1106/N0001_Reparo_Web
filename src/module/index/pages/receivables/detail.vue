@@ -1,5 +1,5 @@
 <template>
-  <div id="detail" class="receiveDetails" :class="[{seller_accountsDetail:state.isBuyer==='false'},{buyer_accountsDetail:state.isBuyer==='true'}]">
+  <div id="detail" class="receiveDetails"  >
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -10,7 +10,7 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="accountsDetail_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+          <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
             {{detailInfo.detailVoList[0].status | receStatus}}</el-col>
           <el-col class="dotipRow"><span class="doTip">{{currentStatusInfo.statusSubTitle}}</span>&nbsp;<el-button size="small" v-if="currentStatusInfo.isShowHandleBtn" @click="handle()">{{currentStatusInfo.btnTitle}}</el-button></el-col>
         </el-row>
@@ -182,10 +182,8 @@
 
         if(isBuyer == 'true' && status == constantData.FORACCEPT){ //承兑
           this.accept();
-          this.getDetail();
         }else if(isBuyer == 'true' && status == constantData.ACCEPTED){//兑付
           this.cash();
-          this.getDetail();
         }else if(isBuyer == 'false' && status == constantData.ACCEPTED){//贴现
           //跳转
           this.$router.push("/allAccounts/detail/discount");
@@ -207,9 +205,7 @@
           this.dialogVisible = true
           this.msg = "承兑成功"
 
-          this.detailInfo.detailVoList[0].status = constantData.ACCEPTED
-          this.currentStatusInfo.isShowHandleBtn = false
-          this.currentStatusInfo.statusSubTitle = '该应收帐款已承兑,您可以进行兑付'
+          this.getDetail();
         },(err) => {
           console.log(err);
         })
@@ -231,9 +227,7 @@
           this.msg = "兑付成功"
           this.currentStatusInfo.isShowHandleBtn = false
 
-          this.detailInfo.detailVoList[0].status = constantData.FINISH
-          this.currentStatusInfo.isShowHandleBtn = false
-          this.currentStatusInfo.statusSubTitle = '该笔应收帐款已兑付'
+          this.getDetail();
         },(err) => {
           console.log(err);
         })

@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{seller_repoDetail:state.isBuyer==='false'},{buyer_repoDetail:state.isBuyer==='true'}]">
+  <div  >
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -8,7 +8,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="repoDetail_color stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+        <el-col class="detail_title_color stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
           仓储当前状态:{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
       </el-row>
       <el-row>

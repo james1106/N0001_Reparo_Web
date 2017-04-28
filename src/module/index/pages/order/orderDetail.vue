@@ -1,5 +1,5 @@
 <template>
-  <div class="receiveDetails" :class="[{seller_orderDetail:state.isBuyer==='false'},{buyer_orderDetail:state.isBuyer==='true'}]">
+  <div class="receiveDetails"  >
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -7,16 +7,9 @@
       <el-breadcrumb-item>订单详情</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-    <!--订单的状态显示，UI图上没有-->
-
-      <!--<el-col class="sellerColor stateShow">-->
-        <!--<svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}-->
-        <!--<el-button  size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDFORRESPONSE" @click.native.prevent="sendConfirm(logisticsDetail.orderNo)">发货确认</el-button>-->
-        <!--<el-button  size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDED" @click.native.prevent="receiveConfirm(logisticsDetail.orderNo)">送达确认</el-button>-->
-      <!--</el-col>-->
 
     <el-row class="el-row-header statePosition">
-      <el-col class="orderDetail_color sellerColor stateShow">
+      <el-col class="detail_title_color sellerColor stateShow">
             <svg class="icon detailIcon" aria-hidden="true"><use xlink:href="#icon-zhuangtai"></use> </svg>订单当前状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}
             &nbsp;<el-button class="button_color" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
             <el-button size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>

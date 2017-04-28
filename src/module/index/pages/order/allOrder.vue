@@ -1,5 +1,5 @@
 <template>
-  <div id="allOrder" :class="[{seller_allOrder:state.isBuyer==='false'},{buyer_allOrder:state.isBuyer==='true'}]">
+  <div id="allOrder"  >
     <div>
       <el-breadcrumb separator=">" class="bread">
         <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>

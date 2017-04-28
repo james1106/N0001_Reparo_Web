@@ -1,5 +1,5 @@
 <template>
-  <div id="allReceipts" :class="[{seller_allReceipts:state.isBuyer==='false'},{buyer_allReceipts:state.isBuyer==='true'}]">
+  <div id="allReceipts"  >
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
