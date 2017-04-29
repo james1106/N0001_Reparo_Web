@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div id="allOrder"  >
     <div>
       <el-breadcrumb separator=">" class="bread">
-        <img src="../../assets/combinedShape.png" class="combinedShape">
+        <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>买入的订单</el-breadcrumb-item>
+        <el-breadcrumb-item>卖出的订单</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <el-card>
@@ -31,10 +31,9 @@
 <script>
   import store from '../../vuex/store.js'
   import constantData from '../../../../common/const'
-  import '../../../../assets/css/style.css'
   import OrderTable from '../../components/orderDataTable.vue'
   export default {
-    name: 'index',
+    name: 'allOrder',
     data () {
       return {
 //          activeName:'first',
@@ -109,7 +108,7 @@
         default:
           break;
       }
-      this.$http.get("/v1/order/order_list/" + tempRole).then(function (res) {
+      this.$http.get("../v1/order/order_list/" + tempRole).then(function (res) {
 //        this.$http.get("http://localhost/server_test/getData1.php").then(function(res){
           console.log("获取到的所有订单: " + res.body.data.length);
           this.allOrder = res.body.data;

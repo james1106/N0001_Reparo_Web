@@ -1,5 +1,5 @@
 <template>
-  <div id="orderDataTable">
+  <div id="orderDataTable"  >
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
       <el-col :span="6">付款信息</el-col>
@@ -44,20 +44,28 @@
               <el-row>{{item.wayBillStatus | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="2">
-              <el-button type="text" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-              <el-button type="text"
-                         v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
-                         @click.native.prevent="confirmOrder(item.orderNo)">确认订单
-              </el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)"
-                         @click.native.prevent="signBill(item.orderNo)">签发账款
-              </el-button>
-              <el-button type="text" v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"
-                         @click.native.prevent="sendGood(item.orderNo)">发货
-              </el-button>
-              <el-button type="text" v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
-                         @click.native.prevent="acceptBill(item.orderNo)">签收账款
-              </el-button>
+              <el-row>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
+                           @click.native.prevent="confirmOrder(item.orderNo)">确认订单
+                </el-button>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)"
+                           @click.native.prevent="signBill(item.orderNo)">签发账款
+                </el-button>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"
+                           @click.native.prevent="sendGood(item.orderNo)">发货
+                </el-button>
+                <el-button size="mini" type="text"
+                           v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
+                           @click.native.prevent="acceptBill(item.orderNo)">签收账款
+                </el-button>
+              </el-row>
+              <el-row>
+                <el-button size="mini"
+                           @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+              </el-row>
             </el-col>
           </el-row>
         </el-row>
@@ -75,7 +83,6 @@
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
-  import '../../../assets/css/style.css'
   export default {
     name: 'orderDataTable',
     props: ['orderList', 'status', 'pageSize'],
@@ -184,7 +191,7 @@
       },
       acceptBill (checkId) {
         console.log("签收账款");
-        this.$http.get("/v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
+        this.$http.get("../v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
           console.log(res.body.data);
           store.commit("setCheckIdRece", res.body.data.receOver.receNo);
           this.$router.push("/allAccounts/accept/accept");

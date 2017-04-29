@@ -1,23 +1,23 @@
 <template>
   <div id="discount" class="discount">
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>应收账款</el-breadcrumb-item>
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
-      <el-breadcrumb-item>贴现</el-breadcrumb-item>
+      <el-breadcrumb-item>贴现申请</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
       <div>
-        <span class="sellerStepTtle">1. 请确认账款信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">1</span>请确认账款信息</span>
       </div>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">应收账款信息</span>
+              <svg class="icon detailIcon" aria-hidden="true"> <use xlink:href="#icon-yszk_hui"></use> </svg><span class="keynote">应收账款信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">应收账款编号：{{detailInfo.detailVoList[0].receivableNo}}</el-col>
                 <el-col :span="6" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
@@ -37,7 +37,7 @@
         </el-col>
       </el-row>
       <div>
-        <span class="sellerStepTtle">2. 请选择贴现银行</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">2</span>请选择贴现银行</span>
       </div>
       <el-row>
         <el-form ref="discount" :model="bankOption" :label-position="labelPosition" :rules="discountRules">
@@ -55,7 +55,7 @@
 
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="discount()">贴现确认</el-button>
+          <el-button type="primary" @click.native.prevent="discount()">贴现申请</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -103,7 +103,7 @@
             replyerAcctId:this.bankOption.bankSvcr,      //回复人账号
             discountApplyAmount:this.detailInfo.detailVoList[0].isseAmt //申请贴现金额
         }
-        this.$http.post('/v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -119,7 +119,7 @@
           receivableNo:Store.state.checkIdRece,
           operatorAcctId:''
         }
-        this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
@@ -134,7 +134,7 @@
         })
       },
       getBankList(){
-        this.$http.post('/v1/receivable/discountApplyBankList').then((res) => {
+        this.$http.post('../v1/receivable/discountApplyBankList').then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;

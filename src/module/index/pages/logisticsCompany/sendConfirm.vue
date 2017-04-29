@@ -1,8 +1,8 @@
 <template>
-  <div class="confirmSend">
+  <div class="sendConfirm">
     <div>
       <el-breadcrumb separator=">" class="bread">
-        <img src="../../assets/combinedShape.png" class="combinedShape">
+        <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>运单管理</el-breadcrumb-item>
         <el-breadcrumb-item>发货确认</el-breadcrumb-item>
@@ -29,10 +29,9 @@
           <el-col :span="6" class="msgName" style="margin-left: 19px">物流公司：{{companyBillDetail.logisticsEnterpriseName}}</el-col>
         </el-row>
       </el-row>
-      <el-row class="confirmBtn">
+      <el-row >
         <el-col :span="12" style="text-align: left;margin-top: 10px">
-          <el-button type="primary" @click="sendConfirm(companyBillDetail.orderNo)">确认</el-button>
-          <el-button type="primary" @click="cancelConfirm">取消</el-button>
+          <el-button class="agreeBtn" type="primary" @click="sendConfirm(companyBillDetail.orderNo)">确认</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -41,10 +40,9 @@
 </template>
 <script>
   import store from "../../vuex/store"
-  import '../../../../assets/css/style.css'
   import constantData from '../../../../common/const'
   export default {
-    name: 'index',
+    name: 'sendConfirm',
     data () {
       return {
         companyBillDetail: {
@@ -65,7 +63,7 @@
         console.log("发货确认");
         this.confirmSend.orderNo=store.state.checkIdOrder;
         console.log(this.confirmSend);
-        this.$http.post("/v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
+        this.$http.post("../v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
           function(res){console.log(res.body);},
           function(err){console.log(err)}
         );
@@ -77,7 +75,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
+      this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
         function(res){
           console.log(res.body);
           this.companyBillDetail=res.body.data;
@@ -145,13 +143,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .modal-confirm{
-    width: 600px;
-    height: 320px;
-    box-sizing: border-box;
-    background-color: #fff;
-    border-radius: 4px;
   }
   .confirm-header{margin-left: 4%}
   .confirm-content{padding: 10px 15px;}

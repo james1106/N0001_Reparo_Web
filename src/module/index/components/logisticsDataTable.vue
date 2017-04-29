@@ -31,7 +31,7 @@
                 <el-button size="mini" type="text" @click.native.prevent="deliver(item.orderNo)">申请发货</el-button>
               </el-row>
               <el-row style="text-align: center;">
-                <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+                <el-button size="small"c @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
               </el-row>
             </el-col>
           </el-row>
@@ -50,7 +50,6 @@
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
-  import '../../../assets/css/style.css'
   export default {
     name: 'logisticsDataTable',
     props: ['logisticsList','status','pageSize'],
@@ -62,15 +61,8 @@
         detailPath:''
       }
     },
-    mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
-      console.log(this.logisticsList);
-
-     /* this.getDataByStatus();
-      this.getDataByPageNum(0);*/
-    },
     watch:{
       logisticsList(curVal){
-        console.log(curVal);
         this.tableData=curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
@@ -112,8 +104,6 @@
       },
 
       checkDetail (orderNo) {
-//        alert(this.tableData);
-
         store.commit('setCheckIdOrder',orderNo);
         console.log(store.state.checkIdOrder);
         this.$router.push("/logistics/wayBillDetails");

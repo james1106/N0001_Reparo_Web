@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>运单管理</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/logisticsCompany/companyAllBill'}">我的运单</el-breadcrumb-item>
@@ -9,10 +9,10 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow " :span="8"><i class="el-icon-information"></i> 物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}</el-col>
-        <el-col :span="8">
-          <el-button type="success" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDFORRESPONSE" @click.native.prevent="sendConfirm(logisticsDetail.orderNo)">发货确认</el-button>
-          <el-button type="success" size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDED" @click.native.prevent="receiveConfirm(logisticsDetail.orderNo)">送达确认</el-button>
+        <el-col class="sellerColor stateShow">
+          <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>物流当前状态：{{logisticsDetail.waybillStatusCode | wayBillStatus}}
+          &nbsp;<el-button  size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDFORRESPONSE" @click.native.prevent="sendConfirm(logisticsDetail.orderNo)">发货确认</el-button>
+          &nbsp;<el-button  size="small" v-if="logisticsDetail.waybillStatusCode===constantData.SENDED" @click.native.prevent="receiveConfirm(logisticsDetail.orderNo)">送达确认</el-button>
         </el-col>
       </el-row>
 
@@ -20,9 +20,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">物流信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>
+              <span class="keynote">物流信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | wayBillStatus}}</el-col>
                 <!--<el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName}}</el-col>-->
@@ -34,8 +35,8 @@
 
               <el-row class="collapseTop">
                 <template v-for="(item,index) in logisticsDetail.operationRecordVo">
-                  <el-row class="status-list" :class="{circleBlue:index==(logisticsDetail.operationRecordVo.length-1)}">
-                    <el-col :span="6" :class="{colorBlue:index==(logisticsDetail.operationRecordVo.length-1)}"><span>{{item.state | wayBillStatus}}:{{item.operateTime | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(logisticsDetail.operationRecordVo.length-1)}">
+                    <el-col :span="6" :class="{circleColor1:index==(logisticsDetail.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -48,9 +49,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">其他信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-qita"></use> </svg>
+              <span class="keynote">其他信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
                 <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | wayBillStatus}}</el-col>
@@ -108,7 +110,7 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
 //        请求物流详情接口　
-      this.$http.get("/v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(function(res){
+      this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(function(res){
         console.log(res.body);
         this.logisticsDetail=res.body.data;
         this.logisticsDetail.productPrice=(this.logisticsDetail.productQuantity===''||this.logisticsDetail.productQuantity===0) ? '暂无':this.logisticsDetail.productValue/this.logisticsDetail.productQuantity;

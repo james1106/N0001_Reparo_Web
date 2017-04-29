@@ -41,6 +41,20 @@ Vue.filter('receStatus',function(value){
   return readableStatus;
 })
 
+/*应收账款行为*/
+Vue.filter('receAction',function(value){
+  var readableStatus;
+  switch(value){
+    case constantData.CONFIRMED:readableStatus="待签发";break;
+    case constantData.FORACCEPT:readableStatus="已签发";break;
+    case constantData.ACCEPTED:readableStatus="已承兑";break;
+    case constantData.DISCOUNTED:readableStatus="已贴现";break;
+    case constantData.FINISH:readableStatus="已结清";break;
+    default:readableStatus="暂无";break;
+  }
+  return readableStatus;
+})
+
 /*运单状态*/
 Vue.filter('wayBillStatus',function(value){
   var readableStatus;
@@ -103,6 +117,22 @@ Vue.filter('nullSituation',function(value){
     return "暂无";
   }
   return value;
+})
+
+/*保留两位小数*/
+Vue.filter('numTransfer',function(value){
+  var value=Math.round(parseFloat(value)*100)/100;
+  var xsd=value.toString().split(".");
+  if(xsd.length==1){
+    value=value.toString()+".00";
+    return value;
+  }
+  if(xsd.length>1){
+    if(xsd[1].length<2){
+      value=value.toString()+"0";
+    }
+    return value;
+  }
 })
 
 /* eslint-disable no-new */

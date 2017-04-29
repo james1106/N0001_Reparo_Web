@@ -1,7 +1,7 @@
 <template>
-  <div id="detail" class="receiveDetails">
+  <div id="detail" class="receiveDetails"  >
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>应收账款</el-breadcrumb-item>
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
@@ -10,17 +10,19 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> {{detailInfo.detailVoList[0].status | receStatus}}</el-col>
-          <el-col class="dotipRow"><span class="doTip">{{currentStatusInfo.statusSubTitle}}</span><el-button size="small" v-if="currentStatusInfo.isShowHandleBtn" @click="handle()" style="border-color: rgb(0,150,215);color: rgb(0,150,215)">{{currentStatusInfo.btnTitle}}</el-button></el-col>
+          <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+            {{detailInfo.detailVoList[0].status | receStatus}}</el-col>
+          <el-col class="dotipRow"><span class="doTip">{{currentStatusInfo.statusSubTitle}}</span>&nbsp;<el-button size="small" v-if="currentStatusInfo.isShowHandleBtn" @click="handle()">{{currentStatusInfo.btnTitle}}</el-button></el-col>
         </el-row>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">应收账款信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
+              <span class="keynote">应收账款信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">应收账款编号：{{detailInfo.detailVoList[0].receivableNo}}</el-col>
                 <el-col :span="6" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
@@ -38,21 +40,13 @@
               <el-row>
                 <el-col :span="6" class="msgName">应收账款状态明细:</el-col>
               </el-row>
-
-                <!--<template v-for="item in detailInfo.serialVoList">
-                <el-col :span="24" class="stateShow" style="font-size: 12px;color: rgb(102,102,102)">
-                  <label> {{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</label>
-                </el-col>
-                </template>-->
-
                 <el-row class="collapseTop">
                   <template v-for="(item,index) in detailInfo.serialVoList">
-                    <el-row class="status-list" :class="{circleBlue:index==(detailInfo.serialVoList.length-1)}">
-                      <el-col :span="24" :class="{colorBlue:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</span></el-col>
+                    <el-row class="status-list" :class="{circleColor:index==(detailInfo.serialVoList.length-1)}">
+                      <el-col :span="24" :class="{circleColor1:index==(detailInfo.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receAction}}</span></el-col>
                     </el-row>
                   </template>
                 </el-row>
-
             </div>
           </el-card>
         </el-col>
@@ -61,9 +55,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">其他信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-qita"></use> </svg>
+              <span class="keynote">其他信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row class="msgName keynote">收款人信息：</el-row>
               <el-row>
                 <el-col :span="6" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
@@ -71,8 +66,8 @@
                 <el-col :span="6" class="msgName">收款人开户行：{{detailInfo.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkman}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeePhone}}</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkMan | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeeLinePhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
@@ -81,13 +76,13 @@
                 <el-col :span="6" class="msgName">付款人开户行：{{detailInfo.detailVoList[0].pyerAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerPhone}}</el-col>
+                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">附加信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">合同编号：{{detailInfo.detailVoList[0].contractNo}}</el-col>
-                <el-col :span="6" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo}}</el-col>
+                <el-col :span="6" class="msgName">合同编号：{{detailInfo.detailVoList[0].contractNo | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">物流企业：暂无</el-col>
               </el-row>
               <el-row>
@@ -103,7 +98,6 @@
     <el-dialog title="提示" v-model="dialogVisible" size="tiny">
       <span>{{msg}}</span>
       <span slot="footer" class="dialog-footer">
-        <!--<dialog-view v-model="showDialogView" isShow={showDialogView}></dialog-view>-->
        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
     </el-dialog>
@@ -120,6 +114,11 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       this.getDetail();
+    },
+    computed:{
+      state () {
+        return Store.state;
+      }
     },
     data () {
       return {
@@ -138,12 +137,10 @@
             pyerEnterpriseName:'',
             isseAmt:'',
             rate:'',
-            pyeeEnterpriseName:'',
             pyee:'',
             pyeeAcctSvcrName:'',
             pyeeLinkman:'',
             pyeePhone:'',
-            pyerEnterpriseName:'',
             pyer:'',
             pyerAcctSvcrName:'',
             pyerLinkMan:'',
@@ -165,7 +162,7 @@
             receivableNo:Store.state.checkIdRece,
             operatorAcctId:LocalStore.fetchUserInfo().acctIds
           }
-          this.$http.post('/v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
+          this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
             console.log(res.body);
             var code =  res.body.code;
             var data =  res.body.data;
@@ -199,7 +196,7 @@
           replyerAcctId:LocalStore.fetchUserInfo().acctIds,//回复人账号
           response:0       //回复意见 0.同意 1.拒绝
         }
-        this.$http.post('/v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
           console.log('承兑操作'+res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -208,9 +205,7 @@
           this.dialogVisible = true
           this.msg = "承兑成功"
 
-          this.detailInfo.detailVoList[0].status = constantData.ACCEPTED
-          this.currentStatusInfo.isShowHandleBtn = false
-          this.currentStatusInfo.statusSubTitle = '该应收帐款已承兑,您可以进行兑付'
+          this.getDetail();
         },(err) => {
           console.log(err);
         })
@@ -222,7 +217,7 @@
           cashedAmount:detailInfo.isseAmt,      //兑付金额
           response:0                            //回复意见 0.同意 1.拒绝
         }
-        this.$http.post('/v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
@@ -232,9 +227,7 @@
           this.msg = "兑付成功"
           this.currentStatusInfo.isShowHandleBtn = false
 
-          this.detailInfo.detailVoList[0].status = constantData.FINISH
-          this.currentStatusInfo.isShowHandleBtn = false
-          this.currentStatusInfo.statusSubTitle = '该笔应收帐款已兑付'
+          this.getDetail();
         },(err) => {
           console.log(err);
         })
@@ -269,8 +262,8 @@
           this.currentStatusInfo.btnTitle = '兑付确认'
           this.currentStatusInfo.isShowHandleBtn = true
         }else if(isBuyer == 'false' && status == constantData.ACCEPTED){
-          this.currentStatusInfo.statusSubTitle = '买家已承兑,您可以进行贴现'
-          this.currentStatusInfo.btnTitle = '贴现确认'
+          this.currentStatusInfo.statusSubTitle = '买家已承兑,您可以进行贴现申请'
+          this.currentStatusInfo.btnTitle = '贴现申请'
           this.currentStatusInfo.isShowHandleBtn = true
         }
       }

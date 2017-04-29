@@ -1,5 +1,5 @@
 <template>
-  <div id="accountTable">
+  <div id="accountTable"  >
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="5" style="margin-left: 20px">货品信息</el-col>
       <el-col :span="5">账款信息</el-col>
@@ -21,10 +21,10 @@
           <el-col :span="5">
             <el-col :span="24">账款金额：{{item.isseAmt}}</el-col>
             <el-col :span="24">付款方式：应收账款支付</el-col>
-            <el-col :span="24">到期日：{{item.dueDt}}</el-col>
+            <el-col :span="24">到期日：{{item.dueDt | timeTransfer}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">{{item.enterpriseName}}</el-col>
+            <el-col :span="24">{{item.enterpriseName | nullSituation}}</el-col>
           </el-col>
           <el-col :span="5">
             <el-col :span="24">{{item.status | receStatus}}</el-col>
@@ -37,7 +37,7 @@
               <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='false')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmDiscount(item.receivableNo)">贴现账款</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
-              <el-button size="small" @click.native.prevent="showDetail(item.receivableNo,item.orderNo,item.status)">查看详情</el-button>
+              <el-button size="small" type="default" @click.native.prevent="showDetail(item.receivableNo,item.orderNo,item.status)">查看详情</el-button>
             </el-col>
           </el-col>
         </el-row>
@@ -58,11 +58,6 @@
 
   export default {
     name: 'accountTable',
-    computed: {
-      constantData () {
-        return constantData;
-      },
-    },
     props: ['accountInfo','status','pageSize','isBuyer'],
     data(){
         return{
@@ -70,6 +65,14 @@
           showData:[],
           accountsStatus:this.status,
         }
+    },
+    computed: {
+      state () {
+        return Store.state;
+      },
+      constantData () {
+        return constantData;
+      },
     },
     watch:{
       accountInfo(curVal){

@@ -5,8 +5,8 @@
       <h3 style="color: #666666">注册成功</h3>
     </el-row>
     <el-form label-position="left" label-width="100px" class="login-container">
-      <el-row style="margin: 50px auto">
-        <img src="../assets/group.png">
+      <el-row style="margin: 40px auto;">
+        <svg class="icon" aria-hidden="true" style="width: 90px;height: 90px">   <use xlink:href="#icon-success"></use> </svg>
       </el-row>
       <el-row style="margin: 20px auto">
         <el-button type="primary" class="successButton" @click="toHomePage()">进入后台</el-button>
@@ -28,7 +28,7 @@
     },
     methods:{
       toHomePage(){
-        window.location.href='index.html';
+        window.location.href='main.html';
       }
     }
   }

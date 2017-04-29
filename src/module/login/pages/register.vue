@@ -21,7 +21,7 @@
         </el-row>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="nextButton" @click="nextStep('ruleForm')">下一步</el-button>
+        <el-button type="primary" class="nextButton" id="nextBtn" @click="nextStep('ruleForm')">下一步</el-button>
       </el-form-item>
     </el-form>
     <el-row style="text-align: center">
@@ -31,7 +31,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'register',
     data(){

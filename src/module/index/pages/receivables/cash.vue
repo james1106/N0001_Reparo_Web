@@ -3,7 +3,7 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="buyerColor stateShow"><i class="el-icon-information"></i> 待兑付</el-col>
+          <el-col class="buyerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>待兑付</el-col>
           <el-col class="dotipRow"><span class="doTip">该应收账款已承兑，可兑付</span><el-button size="small" style="border-color: rgb(0,150,215);color: rgb(0,150,215)" @click="cash()">兑付确认</el-button></el-col>
         </el-row>
       </el-row>
@@ -11,9 +11,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">应收账款信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
+              <span class="keynote">应收账款信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="6" class="msgName keynote">应收账款编号：{{detailInfo.detailVoList[0].receivableNo}}</el-col>
                 <el-col :span="6" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
@@ -75,7 +76,7 @@
     methods:{
       getDetail(){
         var receivableNo = Store.state.checkIdRece;
-        this.$http.post('/v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
@@ -94,7 +95,7 @@
           cashedAmount:detailInfo.isseAmt,//兑付金额
           response:0       //回复意见 0.同意 1.拒绝
         }
-        this.$http.post('/v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){

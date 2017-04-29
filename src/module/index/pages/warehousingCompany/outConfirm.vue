@@ -1,7 +1,7 @@
 <template>
-  <div id="outConfirm" class="box-card">
+  <div id="outConfirm" class="box-card outConfirm">
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
       <el-breadcrumb-item>我的仓储</el-breadcrumb-item>
@@ -9,7 +9,8 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><i class="el-icon-information"></i>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
+        <el-col class="sellerColor stateShow"><svg class="icon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+          仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -22,8 +23,8 @@
             </div>
             <div class="box-card mycard1">
               <el-row>
-                <el-col :span="8" class="msgName">仓单号：{{repoDetails.repoCertNo}}</el-col>
-                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo}}</el-col>
+                <el-col :span="8" class="msgName">仓单号：{{repoDetails.repoCertNo | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
                 <el-col :span="8" class="msgName">持有人：{{repoDetails.repoEnterpriceName}}</el-col>
               </el-row>
               <el-row>
@@ -40,7 +41,7 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-button type="primary" @click.native.prevent="outConfirm()">出库确认</el-button>
+          <el-button class="agreeBtn" type="primary" @click.native.prevent="outConfirm()">出库确认</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -77,7 +78,7 @@
     },
     methods:{
       getDetails(){
-        this.$http.get('/v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+        this.$http.get('../v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
           console.log(res.body);
         var code =  res.body.code;
         if(code != 0){
@@ -89,7 +90,7 @@
         })
       },
       outConfirm(){
-        this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+        this.$http.put('../v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){

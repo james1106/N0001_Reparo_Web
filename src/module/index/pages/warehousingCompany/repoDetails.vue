@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
       <el-breadcrumb-item>我的仓储</el-breadcrumb-item>
@@ -9,17 +9,18 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><i class="el-icon-information"></i>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
-          <el-button v-if="handleInfo.showHandleBtn" size="small" @click="handle()" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">相关操作</el-button>
+        <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
+          &nbsp;&nbsp;<el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" >{{handleInfo.title}}</el-button>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <i class="el-icon-menu" style="margin-right: 10px"></i><span class="keynote">仓储信息</span>
+              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
+              <span class="keynote">仓储信息</span>
             </div>
-            <div class="box-card mycard1">
+            <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓储业务编号：{{repoDetails.repoBusiNo}}</el-col>
                 <el-col :span="8" class="msgName">仓储状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col><!--卖家和买家会显示混合-->
@@ -36,26 +37,26 @@
                 <el-col :span="8" class="msgName">货品总额(元)：{{repoDetails.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
-                <el-col :span="8" class="msgName">物流运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">出库物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">出库物流运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8" class="msgName">入库物流公司：字段还没有</el-col>
+                <el-col :span="8" class="msgName">入库物流运单号：字段还没有</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">仓储状态明细：</el-col>
               </el-row>
-
-
-              <!--<el-row v-for="item in repoDetails.operationRecordVoList">
-                <el-col :span="8" class="msgName">{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</el-col>
-              </el-row>-->
-
+              <el-row v-for="item in repoDetails.operationRecordVoList">
+                <el-col :span="8" class="msgName">{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</el-col>
+              </el-row>
               <el-row class="collapseTop">
                 <template v-for="(item,index) in repoDetails.operationRecordVoList">
-                  <el-row class="status-list" :class="{circleBlue:index==(repoDetails.operationRecordVoList.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(repoDetails.operationRecordVoList.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
-
             </div>
           </el-card>
         </el-col>
@@ -70,7 +71,7 @@
   </div>
 </template>
 <script>
-  import store from '../../vuex/store'
+  import Store from '../../vuex/store'
   import constantData from '../../../../common/const'
   export default {
     name:'index',
@@ -95,56 +96,61 @@
     },
     computed:{
       state () {
-        return store.state
+        return Store.state
       }
     },
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkIdRepo).then(function(res){
-//            请求仓储详情数据
-        console.log(res.body);
-        if(res.body.code != 0){
-            return;
-        }
-
-        this.repoDetails=res.body.data;
-        this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
-        this.repoDetails.outRepoTime='';
-        for(var item in this.repoDetails.operationRecordVoList){
-          if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
-            console.log("筛选入库时间");
-            this.repoDetails.inRepoTime=item.operateTime;
-            break;
-          }
-        }
-        for(var item in this.repoDetails.operationRecordVoList){
-          if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
-            console.log("筛选出库时间");
-            this.repoDetails.outRepoTime=item.operateTime;
-            break;
-          }
-        }
-        switch (this.repoDetails.curRepoBusiStatus){
-          case constantData.INFORRESPONSE:
-            this.handleInfo.showHandleBtn = true;
-            this.handleInfo.title = '入库响应';
-            break;
-          case constantData.FORIN:
-            this.handleInfo.showHandleBtn = true;
-            this.handleInfo.title = '入库确认';
-            break;
-          case constantData.FOROUT:
-            this.handleInfo.showHandleBtn = true;
-            this.handleInfo.title = '出库确认';
-            break;
-        }
-
-      },function(err){
-        console.log(err)
-      });
+      this.getDetail();
     },
-    handle(){
+    methods:{
+      getDetail(){
+        this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+Store.state.checkIdRepo).then(function(res){
+//            请求仓储详情数据
+          console.log(res.body);
+          if(res.body.code != 0){
+            return;
+          }
+
+          this.repoDetails=res.body.data;
+          this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
+          this.repoDetails.outRepoTime='';
+          for(var item in this.repoDetails.operationRecordVoList){
+            if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
+              console.log("筛选入库时间");
+              this.repoDetails.inRepoTime=item.operateTime;
+              break;
+            }
+          }
+          for(var item in this.repoDetails.operationRecordVoList){
+            if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
+              console.log("筛选出库时间");
+              this.repoDetails.outRepoTime=item.operateTime;
+              break;
+            }
+          }
+          this.handleInfo.showHandleBtn = false;
+          switch (this.repoDetails.curRepoBusiStatus){
+            case constantData.INFORRESPONSE:
+              this.handleInfo.showHandleBtn = true;
+              this.handleInfo.title = '入库响应';
+              break;
+            case constantData.FORIN:
+              this.handleInfo.showHandleBtn = true;
+              this.handleInfo.title = '入库确认';
+              break;
+            case constantData.FOROUT:
+              this.handleInfo.showHandleBtn = true;
+              this.handleInfo.title = '出库确认';
+              break;
+          }
+
+        },function(err){
+          console.log(err)
+        });
+      },
+      handle(){
       switch (this.repoDetails.curRepoBusiStatus){
         case constantData.INFORRESPONSE:
             this.inResponse();
@@ -155,47 +161,51 @@
         case constantData.FOROUT:
             this.outConfirm();
           break;
+        }
+      },
+      inResponse(){
+        var param = {repoBusinessNo:Store.state.checkIdRepo}
+        this.$http.post('../v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.dialogVisible = true;
+          this.msg = '已入库响应';
+          this.getDetail();
+        },(err) => {
+          console.log(err);
+        })
+      },
+      inConfirm(){
+        this.$http.put('../v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.dialogVisible = true;
+          this.msg = '已入库确认';
+          this.getDetail();
+        },(err) => {
+          console.log(err);
+        })
+      },
+      outConfirm(){
+        this.$http.put('../v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
+          console.log(res.body);
+          var code =  res.body.code;
+          if(code != 0){
+            return;
+          }
+          this.dialogVisible = true;
+          this.msg = '已出库确认';
+          this.getDetail();
+        },(err) => {
+          console.log(err);
+        })
       }
-    },
-    inResponse(){
-      var param = {repoBusinessNo:Store.state.checkIdRepo}
-      this.$http.post('/v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
-        console.log(res.body);
-        var code =  res.body.code;
-        if(code != 0){
-          return;
-        }
-        this.dialogVisible = true;
-        this.msg = '已入库响应';
-      },(err) => {
-        console.log(err);
-      })
-    },
-    inConfirm(){
-      this.$http.put('/v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
-        console.log(res.body);
-        var code =  res.body.code;
-        if(code != 0){
-          return;
-        }
-        this.dialogVisible = true;
-        this.msg = '已入库确认';
-      },(err) => {
-        console.log(err);
-      })
-    },
-    outConfirm(){
-      this.$http.put('/v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
-        console.log(res.body);
-        var code =  res.body.code;
-        if(code != 0){
-          return;
-        }
-        this.dialogVisible = true;
-        this.msg = '已出库确认';
-      },(err) => {
-        console.log(err);
-      })
     }
   }
 </script>

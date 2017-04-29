@@ -2,7 +2,7 @@
   <div id="deliver" class="deliver">
     <div>
       <el-breadcrumb separator=">" class="bread">
-        <img src="../../assets/combinedShape.png" class="combinedShape">
+        <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>物流管理</el-breadcrumb-item>
         <el-breadcrumb-item>发货</el-breadcrumb-item>
@@ -10,7 +10,7 @@
     </div>
     <el-card>
       <div>
-        <span class="sellerStepTitle">1. 请确认订单详情</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">1</span>请确认订单详情</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -33,7 +33,7 @@
         </el-row>
       </el-row>
       <div>
-        <span class="sellerStepTitle">2. 请确认发货信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">2</span>请确认发货信息</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -64,7 +64,7 @@
         </el-row>
       </el-row>
       <div>
-        <span class="sellerStepTitle">3. 请填写物流信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">3</span>请填写物流信息</span>
       </div>
       <el-form :model="sendGoodForm1" ref="sendGoodForm1">
         <el-tabs v-model="activeName" type="card" @tab-click="">
@@ -80,17 +80,23 @@
           </el-col>
         </el-tab-pane>
         <el-tab-pane label="自己联系" name="second">
-          <el-col :span="12">
-            <el-form-item label="填写物流企业"><el-input v-model="sendGoodForm1.logistics1"></el-input></el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="填写运单号"><el-input v-model="sendGoodForm1.No"></el-input></el-form-item>
-          </el-col>
+          <el-row>
+            <el-col :span="11">
+              <el-form-item label="填写物流企业"><el-input v-model="sendGoodForm1.logistics1"></el-input></el-form-item>
+            </el-col>
+            <el-col :span="11">
+              <el-form-item label="填写运单号"><el-input v-model="sendGoodForm1.No"></el-input></el-form-item>
+            </el-col>
+          </el-row>
         </el-tab-pane>
       </el-tabs>
       </el-form>
+      <el-row>
+        <el-col :span="12">
+          <el-button class="agreeBtn" type="primary" @click="confirmSend">确认发货</el-button>
+        </el-col>
+      </el-row>
     </el-card>
-    <el-button type="success" @click="confirmSend">确认发货</el-button>
   </div>
 </template>
 <script>
@@ -129,7 +135,7 @@
           this.sendGoodForm.logisticsEnterpriseName = this.sendGoodForm1.logisticsEnterpriseName;
           this.sendGoodForm.logisticsList = this.sendGoodForm1.logisticsList;
           console.log(this.sendGoodForm)
-            this.$http.post("/v1/waybill/unConfirmedWaybill",this.sendGoodForm,{emulateJSON:true}).then(function(res){
+            this.$http.post("../v1/waybill/unConfirmedWaybill",this.sendGoodForm,{emulateJSON:true}).then(function(res){
                 console.log(res.body);
               store.commit('setCheckIdOrder',this.sendGoodForm.orderNo);
               console.log(store.state.checkIdOrder);
@@ -143,14 +149,14 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
         /*请求物流企业列表*/
-        this.$http.get("/v1/account/allEnterpriseName?roleCode=1").then(function(res){
+        this.$http.get("../v1/account/allEnterpriseName?roleCode=1").then(function(res){
             this.sendGoodForm1.logisticsList=res.body.data;
         },function(err){
             console.log(err);
         });
         /*根据订单号请求订单详情并填写*/
 
-      this.$http.get("/v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
+      this.$http.get("../v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
         function (res) {
           // 处理成功的结果
           console.log(res.body);

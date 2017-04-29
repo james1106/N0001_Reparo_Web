@@ -1,16 +1,16 @@
 <template>
-<div class="confirmOrder">
+<div>
   <div>
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>我卖出的订单</el-breadcrumb-item>
       <el-breadcrumb-item>确认订单</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
-  <el-card>
+  <el-card class="confirmOrder">
     <div>
-      <span class="sellerStepTitle">1. 请填写订单详情</span>
+      <span class="sellerStepTitle"><span class="sellerCircle">1</span>请填写订单详情</span>
     </div>
     <el-row class="dataTable">
       <el-row class="el-row-header">
@@ -33,12 +33,12 @@
       </el-row>
     </el-row>
     <div>
-      <span class="sellerStepTitle">2. 请选择货品出库并确认订单</span>
+      <span class="sellerStepTitle"><span class="sellerCircle">2</span>请选择货品出库并确认订单</span>
     </div>
     <el-form :model="confirmOrder">
       <el-card style="width:100%;" class="confirmCard">
         <el-row>
-          <el-col :span="12">
+          <el-col :span="8">
             <el-form-item label="出库货品所在仓储">
               <el-select v-model="confirmOrder.payeeRepoName" placeholder="请选择仓储">
                 <template v-for="item in confirmOrder.repoList">
@@ -47,14 +47,14 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="8">
             <el-form-item label="货品的仓单编号">
               <el-input v-model="confirmOrder.payeeRepoCertNo"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
       </el-card>
-      <el-row class="confirmBtn">
+      <el-row>
         <el-col :span="24" style="text-align: left;margin-top: 10px">
           <el-button type="primary" @click="onSubmit">确认订单</el-button>
         </el-col>
@@ -67,7 +67,7 @@
     <div class="modal-mask" v-show="showModal">
       <div class="modal-confirm">
         <el-row class="el-row-header">
-          <span class="confirm-header sellerColor">确认订单</span>
+          <span class="confirm-header sellerColor">确认订单</span><i class="el-icon-close closeBtn" @click="close" style="cursor: pointer"></i>
         </el-row>
         <div class="confirm-content">
           <el-form :label-position="labelPosition">
@@ -138,13 +138,11 @@
           </el-row>
           </el-form>
         </div>
-      <div class="confirmBtn">
         <el-row>
           <el-col :span="24">
             <el-button size="small" type="primary" @click="confirm">确定订单</el-button>
           </el-col>
         </el-row>
-      </div>
     </div>
     </div>
   </transition>
@@ -152,7 +150,6 @@
 </template>
 <script>
   import store from "../../vuex/store"
-  import '../../../../assets/css/style.css'
   export default {
     name: 'index',
     data () {
@@ -181,12 +178,15 @@
         });*/
         this.showModal=true;
       },
+      close(){
+        this.showModal=false;
+      },
       confirm () {
-          this.showModal=false;
+        this.showModal=false;
         console.log("订单确认");
          this.confirmOrder.orderNo=store.state.checkIdOrder;
          console.log(this.confirmOrder);
-         this.$http.post("/v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
+         this.$http.post("../v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
          function(res){
              console.log(res.body);
            this.$router.push("/allAccounts/signout/signout");//跳转到签发应收账款
@@ -198,7 +198,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-        this.$http.get("/v1/order/detail?orderNo="+store.state.checkIdOrder).then(
+        this.$http.get("../v1/order/detail?orderNo="+store.state.checkIdOrder).then(
             function(res){
                 console.log(res.body);
                 this.orderDetail=res.body.data;
@@ -207,7 +207,7 @@
                 console.log(err);
           }
         );
-      this.$http.get("/v1/account/allEnterpriseName?roleCode=2").then(function(res){
+      this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
         this.confirmOrder.repoList=res.body.data;
         console.log("the repo list: "+res.body.data);
       },function(err){
@@ -264,7 +264,7 @@
     justify-content: center;
   }
   .modal-confirm{
-    width: 600px;
+    width: 690px!important;
     height: 320px;
     box-sizing: border-box;
     background-color: #fff;
@@ -286,4 +286,7 @@
   .modal-enter-active, .modal-leave-active {
     transition: all .3s ease;
   }
+  /*.el-select-dropdown__item.selected{*/
+    /*background-color: rgb(57,202,166)!important;*/
+  /*}*/
 </style>

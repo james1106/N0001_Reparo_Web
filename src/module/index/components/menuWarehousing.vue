@@ -1,5 +1,5 @@
 <template>
-  <div id="menu">
+  <div id="warehousing_menu">
     <el-menu default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
       <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
         <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_G"></use> </svg>首页
@@ -13,7 +13,7 @@
           <el-menu-item index="/warehousingCompany/myRepo/outConfirm" @click="setTab('outConfirm')">出库确认</el-menu-item>
         </el-submenu>
         <el-submenu index="/cangdan">
-        <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>仓单管理</template>
+        <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>仓单管理</template>
           <el-menu-item index="/warehousingCompany/myReceipt">我的仓单</el-menu-item>
         </el-submenu>
       </div>

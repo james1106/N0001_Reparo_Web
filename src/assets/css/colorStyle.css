@@ -1,0 +1,125 @@
+/*颜色样式细分*/
+
+/*绿色样式*/
+.green_style .el-menu-item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.green_style .el-tabs__item.is-active{
+  color:rgb(57,202,166)!important;
+}
+.green_style .el-tabs__active-bar{
+  background-color: rgb(57,202,166);
+}
+.green_style .el-pager li.active{
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.green_style .el-button--text{
+  color: rgb(57,202,166);
+}
+.green_style .el-button--text:hover{
+  color: rgb(57,202,166);
+}
+.green_style .el-button:hover{
+  color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
+.green_style .detail_title_color{
+  color: rgb(57,202,166);
+}
+.green_style .circleColor:before {
+  background-color: rgb(57,202,166) !important;
+}
+.green_style .status-list .el-col {
+  border-left: 2px solid rgb(57,202,166);
+}
+.green_style .circleColor1 {
+  color:rgb(57,202,166); border-left: none !important;
+}
+.green_style .status-list:before{
+  border: 2px solid rgb(57,202,166) ;
+}
+.green_style .el-button{
+  border-color: rgb(57,202,166);
+  color: rgb(57,202,166);
+}
+.green_style .el-button--primary{
+  background-color: rgb(57,202,166);
+}
+.green_style .el-button--primary:hover{
+  background-color: rgb(57,202,166);
+}
+
+/*蓝色样式*/
+.blue_style .el-menu-item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.blue_style .el-tabs__item.is-active{
+  color:rgb(0,150,222)!important;
+}
+.blue_style .el-tabs__active-bar{
+  background-color: rgb(0,150,222);
+}
+.blue_style .el-pager li.active{
+  background-color: rgb(0,150,222);
+  border-color: rgb(0,150,222);
+}
+.blue_style .el-button--text{
+  color: rgb(0,150,222);
+}
+.blue_style .el-button--text:hover{
+  color: rgb(0,150,222);
+}
+.blue_style .el-button:hover{
+  color: rgb(0,150,222);
+  border-color: rgb(0,150,222);
+}
+
+.blue_style .detail_title_color{
+  color: rgb(0,150,222);
+}
+.blue_style .circleColor:before {
+  background-color: rgb(0,150,222) !important;
+}
+.blue_style .status-list .el-col {
+  border-left: 2px solid rgb(0,150,222);
+}
+.blue_style .circleColor1 {
+  color:rgb(0,150,222); border-left: none !important;
+}
+.blue_style .status-list:before{
+  border: 2px solid rgb(0,150,222) ;
+}
+.blue_style .el-button{
+  border-color: rgb(0,150,222);
+  color: rgb(0,150,222);
+}
+.blue_style .el-button--primary{
+  background-color: rgb(0,150,222);
+}
+.blue_style .el-button--primary:hover{
+  background-color: rgb(0,150,222);
+}
+
+/*实心按钮的样式*/
+.green_style .el-button--primary{
+  color: rgb(255,255,255);
+}
+.blue_style .el-button--primary{
+  color: rgb(255,255,255);
+}
+.green_style .el-button--primary:hover{
+  color: rgb(255,255,255);
+}
+.blue_style .el-button--primary:hover{
+  color: rgb(255,255,255);
+}
+
+/*.blue_style .el-button--default{*/
+  /*border-color: #bfcbd9;*/
+  /*color: #1f2d3d;*/
+/*}*/
+/*.green_style .el-button--default{*/
+  /*border-color: #bfcbd9;*/
+  /*color: #1f2d3d;*/
+/*}*/

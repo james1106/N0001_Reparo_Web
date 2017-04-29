@@ -50,10 +50,6 @@ export default [
   {
     path: '/', component: HomePage,
   },
-  {
-    path: '/:isBuyer', component: HomePage,
-  },
-
   /*订单路由*/
   {
     path: '/order', component: order,
@@ -97,7 +93,6 @@ export default [
       {path: 'myReceipts', component: myReceipts},
       {path: 'repoDetails', component: repoDetails},
       {path: 'receiptsDetails', component: receiptsDetails},
-
     ]
   },
 

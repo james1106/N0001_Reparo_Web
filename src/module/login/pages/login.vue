@@ -20,7 +20,7 @@
           </el-col>
         </el-row>
         <el-form-item style="width:100%;">
-          <el-button type="primary" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
+          <el-button type="primary" id="loginBtn" style="margin-top: 15px" class="nextButton" @click="login('loginInfo')">登录</el-button>
         </el-form-item>
       </el-form>
       <el-row>
@@ -40,6 +40,7 @@
 
 <script>
   import  "../../../framework/particles.js"
+  import '../../../framework/iconfont.js'
   import Store from "../../../common/store.js"
   import dialogView from "../../../components/dialog.vue"
 
@@ -119,7 +120,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true;
-            this.$http.post('/v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
+            this.$http.post('../v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
               console.log(res.body);
               this.loading = false;
               var code =  res.body.code;
@@ -130,7 +131,7 @@
                 return;
               }
               Store.saveUserInfo(data);
-              window.location.href='index.html';
+              window.location.href='main.html';
             },(err) => {
               this.loading = false;
               console.log(err);
@@ -157,11 +158,25 @@
     created () {
       if(this.getCookie('token')!==''){
           console.log("hello");
-        window.location.href='index.html';
+        window.location.href='main.html';
       }
     }
   }
-
+//  enter键操作
+  document.onkeydown=function(event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    var x = document.getElementById('loginBtn');
+    var y = document.getElementById('nextBtn');
+    var z = document.getElementById('registerBtn');
+    if (e && e.keyCode == 13) { // 按 enter
+      if(x)
+      x.click();
+      else if(y)
+      y.click();
+      else
+      z.click();
+    }
+  }
 
 
 </script>
@@ -182,6 +197,7 @@
   }
   body{
     margin: 0px!important;
+    border-top:4px solid #38CAA6;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

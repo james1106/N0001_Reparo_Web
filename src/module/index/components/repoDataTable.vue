@@ -1,5 +1,5 @@
 <template>
-  <div id="repoDataTable">
+  <div id="repoDataTable"   >
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
       <el-col :span="4">所在仓储</el-col>
@@ -34,7 +34,7 @@
               <el-row>{{item.repoCertStatus | repoCertStatus | nullSituation}}</el-row><!--仓单状态-->
             </el-col>
             <el-col :span="3">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
+              <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
             </el-col>
           </el-row>
         </el-row>
@@ -52,7 +52,6 @@
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
-  import '../../../assets/css/style.css'
   export default {
     name: 'repoDataTable',
     props: ['repoList','status','pageSize'],

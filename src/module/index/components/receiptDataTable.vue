@@ -1,5 +1,5 @@
 <template>
-  <div id="receiptDataTable">
+  <div id="receiptDataTable"  >
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="6" style="margin-left: 19px">货品信息</el-col>
       <el-col :span="6">所在仓储</el-col>
@@ -24,7 +24,7 @@
               <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-button type="primary" size="small" @click.native.prevent="checkDetail(item.repoCertNo)">查看详情</el-button>
+              <el-button size="small" @click.native.prevent="checkDetail(item.repoCertNo)">查看详情</el-button>
             </el-col>
           </el-row>
         </el-row>
@@ -42,7 +42,6 @@
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
-  import '../../../assets/css/style.css'
   export default {
     name: 'receiptDataTable',
     props: ['receiptList','status','pageSize'],

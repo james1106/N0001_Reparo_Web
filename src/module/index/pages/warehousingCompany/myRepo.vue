@@ -1,25 +1,32 @@
 <template>
   <div id="repoCompany">
-  <el-tabs :value="state.repoCompanyTab">
-    <el-tab-pane label="所有仓储" name="all">
-      <repo-data-table :repoList="repoList" status="0" pageSize="10"></repo-data-table>
-    </el-tab-pane>
-    <el-tab-pane label="入库待响应" name="inResponse">
-     <repo-data-table :repoList="repoList" status="1" pageSize="10"></repo-data-table>
-    </el-tab-pane>
-    <el-tab-pane label="待入库" name="inConfirm">
-     <repo-data-table :repoList="repoList" status="2" pageSize="10"></repo-data-table>
-    </el-tab-pane>
-    <el-tab-pane label="已入库" name="3">
-      <repo-data-table :repoList="repoList" status="3" pageSize="10"></repo-data-table>
-    </el-tab-pane>
-    <el-tab-pane label="待出库" name="outConfirm">
-     <repo-data-table :repoList="repoList" status="5" pageSize="10"></repo-data-table>
-    </el-tab-pane>
-    <el-tab-pane label="已出库" name="6">
-     <repo-data-table :repoList="repoList" status="6" pageSize="10"></repo-data-table>
-    </el-tab-pane>
-  </el-tabs>
+    <el-breadcrumb separator=">" class="bread">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>我的仓储</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-card>
+      <el-tabs :value="state.repoCompanyTab">
+        <el-tab-pane label="所有仓储" name="all">
+          <repo-data-table :repoList="repoList" status="0" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="入库待响应" name="inResponse">
+          <repo-data-table :repoList="repoList" status="1" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="待入库" name="inConfirm">
+          <repo-data-table :repoList="repoList" status="2" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已入库" name="3">
+          <repo-data-table :repoList="repoList" status="3" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="待出库" name="outConfirm">
+          <repo-data-table :repoList="repoList" status="5" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+        <el-tab-pane label="已出库" name="6">
+          <repo-data-table :repoList="repoList" status="6" pageSize="10"></repo-data-table>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
   </div>
 </template>
 <script>
@@ -51,7 +58,7 @@
     },
     methods: {
         getRepoList(){
-          this.$http.get("/v1/repository/getRepoBusiList?role=3").then(function(res){
+          this.$http.get("../v1/repository/getRepoBusiList?role=3").then(function(res){
             console.log(res.body.data);
             this.repoList=res.body.data;
           },function(err){

@@ -1,8 +1,13 @@
 <template>
   <div id="signout" class="signout">
+    <el-breadcrumb separator=">" class="bread">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>签发</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
       <div>    <!--slot="header" class="clearfix"-->
-        <span class="buyerStepTitle">1. 请填写订单详情</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">1</span>请填写订单详情</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -19,7 +24,7 @@
             <el-col :span="6"  style="margin-left: 19px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
             <el-col :span="6" >货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
             <el-col :span="6">仓储机构：{{orderDetail.txDetail.payerRepo}}</el-col>
-            <el-col :span="4">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
+            <el-col :span="5">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
@@ -28,10 +33,10 @@
         </el-row>
       </el-row>
       <div>
-        <span class="buyerStepTitle">2. 请填写应收账款信息</span>
+        <span class="sellerStepTitle"><span class="sellerCircle">2</span>请填写应收账款信息</span>
       </div>
       <el-card class="signoutMsg">
-        <el-form :label-position="labelPosition" :model="signoutInfo" :rules="signoutRules" ref="signoutInfo">
+        <el-form  :model="signoutInfo" :rules="signoutRules" ref="signoutInfo">
           <el-row>
             <el-col :span="8">
               <el-form-item label="账款金额" prop="isseAmt">
@@ -44,7 +49,7 @@
                   v-model="signoutInfo.dueDt"
                   type="date"
                   placeholder=""
-                  :picker-options="pickerOptions0">
+                  :picker-options="pickerOptions">
                 </el-date-picker>
               </el-form-item>
             </el-col>
@@ -121,7 +126,6 @@
   </div>
 </template>
 <script>
-  import '../../../../assets/css/style.css'
   import Store from '../../vuex/store'
   import LocalStore from '../../../../common/store'
   import constantData from '../../../../common/const'
@@ -138,6 +142,11 @@
     },
     data () {
       return {
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() < Date.now() - 8.64e7;
+          }
+        },
         orderDetail:{
           txDetail:{
             orderId:'',
@@ -206,7 +215,7 @@
               contractNo:this.signoutInfo.contractNo,
               invoiceNo:this.signoutInfo.invoiceNo
             };
-            this.$http.post('/v1/receivable/sign',signParam,{emulateJSON:true}).then((res) => {
+            this.$http.post('../v1/receivable/sign',signParam,{emulateJSON:true}).then((res) => {
               console.log(res.body.data);
               var code =  res.body.code;
               if(code != 0){
@@ -227,7 +236,7 @@
       },
       getOrderDetail(){
           console.log("the state checkIdOrder is:" + Store.state.checkIdOrder);
-          this.$http.get("/v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
+          this.$http.get("../v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
             function (res) {
               console.log(res.body.data);
               this.orderDetail = res.body.data;

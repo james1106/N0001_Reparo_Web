@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="allReceipts"  >
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>仓储管理</el-breadcrumb-item>
       <el-breadcrumb-item>我的仓单</el-breadcrumb-item>
@@ -27,13 +27,19 @@
 <script>
   import store from '../../vuex/store'
   import receiptDataTable from '../../components/receiptDataTable.vue'
+
   export default {
-    name:'index',
+    name:'allReceipts',
     data () {
       return {
         activeName: 'first',
         allReceipts:[],
       };
+    },
+    computed: {
+      state () {
+        return store.state;
+      }
     },
     components:{
       receiptDataTable
@@ -46,7 +52,7 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.$http.get("/v1/repository/getRepoCertInfoList").then(function(res){
+      this.$http.get("../v1/repository/getRepoCertInfoList").then(function(res){
         /*获取所有仓单列表*/
         console.log(res.body);
         this.allReceipts=res.body.data;

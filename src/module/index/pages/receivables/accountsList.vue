@@ -1,7 +1,7 @@
 <template>
-  <div id="list">
+  <div id="list"  >
     <el-breadcrumb separator=">" class="bread">
-      <img src="../../assets/combinedShape.png" class="combinedShape">
+      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>应收账款</el-breadcrumb-item>
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
@@ -72,7 +72,7 @@
     methods:{
       //获取订单列表（主要是获取待签收列表）
       getSignoutOrderList(){
-        this.$http.get('/v1/order/order_list/1',{emulateJSON:true}).then((res) => {
+        this.$http.get('../v1/order/order_list/1',{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;
@@ -92,7 +92,7 @@
       //获取账单列表
       getAccountsList(){
         var role = this.getRole();
-        this.$http.post('/v1/receivable/receivableSimpleDetailList',{roleCode:role},{emulateJSON:true}).then((res) => {
+        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:role},{emulateJSON:true}).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           var data =  res.body.data;

@@ -26,19 +26,20 @@
       <el-col :span="2" v-if="companyType === 0">
         <el-button  class="changeButton" size="large" type="primary" v-bind:class="{borderBottom:state.isBuyer==='true'}" v-on:click="toBuyer()">我是买家</el-button>
       </el-col>
-      <el-col :span="14" class="userinfo" v-if="companyType === '0'">
+      <el-col :span="14" class="userinfo" v-if="companyType === 0">
         <el-dropdown trigger="hover">
-          <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOG OUT</span>
+          <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
+          <span class="el-dropdown-link" style="cursor:pointer">{{userName}}</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
-      <el-col :span="14" class="userinfo" v-else="">
+      <el-col :span="18" class="userinfo" v-else>
         <el-dropdown trigger="hover">
           <svg class="icon" aria-hidden="true">   <use xlink:href="#icon-user"></use> </svg>
-          <span class="el-dropdown-link" style="cursor:pointer">user</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
+          <span class="el-dropdown-link" style="cursor:pointer">{{userName}}</span><span> | </span><span style="font-size: 12px;cursor:pointer" @click="logout">LOGIN OUT</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
@@ -49,7 +50,7 @@
   </el-row>
   </header>
   <!--<div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>-->
-  <main>
+  <main :class="[{green_style:state.isBuyer==='false'},{blue_style:state.isBuyer==='true'}]">
     <aside class="main-left" id="main-left" v-if="companyType === 0">
       <menu-by v-if="state.isBuyer==='true'"></menu-by>
       <menu-sl v-else></menu-sl>
@@ -62,7 +63,7 @@
     </aside>
     <div class="main-right">
     <transition name="fade" mode="out-in">
-      <router-view v-loading="loading" element-loading-text="加载中" class="view"></router-view>
+      <router-view v-loading="loading" element-loading-text="正玩命向区块链获取数据中..." class="view"></router-view>
     </transition>
     </div>
   </main>
@@ -85,9 +86,12 @@
   import MenuWh from './menuWarehousing.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
-
+  import Common from "../../../common/common.js"
+  import '../../../assets/css/style.css'
+  import '../../../assets/css/colorStyle.css'
   import Vue from 'vue'
   import resource from 'vue-resource'
+
   Vue.use(resource)
 
   window.onload=function(){
@@ -108,6 +112,10 @@ export default {
   created: function () {
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
+    this.userName = userInfo.company_name;
+    if(this.companyType != '0'){
+      Store.commit('setIsBuyer',"false");
+    }
 
     /*****  设置http拦截器 start  ******/
     let _this = this;
@@ -118,8 +126,8 @@ export default {
         //请求响应完成后
         _this.loading = false;
         if(!response.ok){
-            _this.dialogVisible = true;
-            _this.msg = '服务异常，请稍后再试';
+          _this.dialogVisible = true;
+          _this.msg = '服务异常，请稍后再试';
         }
         return response
       });
@@ -130,13 +138,11 @@ export default {
     return {
       loading:false,
       dialogVisible:false,
-      msg:'',
-      Buyer:'true',
-      Seller:'false',
       msg: '',
       headerFixed : true,
       active:true,
-      companyType:'1'  //1.融资企业 2.仓储公司 3.物流公司
+      companyType:0,  //0.融资企业 1.仓储公司 2.物流公司
+      userName:''
     }
   },
     computed: {
@@ -153,16 +159,14 @@ export default {
           return;
         }
         Store.commit('setIsBuyer',"true");
-        this.$router.push('/true');
-
+        this.$router.push('/');
       },
       toSeller() {
         if(Store.state.isBuyer==="false"){
           return;
         }
         Store.commit('setIsBuyer',"false");
-        this.$router.push('/false');
-
+        this.$router.push('/');
       },
       logout(){
         function delete_cookie(name) {
