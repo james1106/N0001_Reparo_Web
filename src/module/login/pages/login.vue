@@ -131,7 +131,7 @@
                 return;
               }
               Store.saveUserInfo(data);
-              window.location.href='main.html';
+//              window.location.href='main.html';
             },(err) => {
               this.loading = false;
               console.log(err);
