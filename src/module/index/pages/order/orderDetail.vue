@@ -153,10 +153,11 @@
         <el-card class="box-card mybox" style="width:100%">
           <div slot="header" class="clearfix el-row-header" v-if="state.isBuyer==='true'">
             <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
-            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
+            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payerRepoBusiState>=constantData.INFORRESPONSE"  @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
           </div>
           <div slot="header" class="clearfix el-row-header" v-else>
-            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情 ></el-button>
+            <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
+            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payeeRepoBusiState>=constantData.OUTFORRESPONSE" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情  ></el-button>
           </div>
           <div class="box-card mycard1 detailContent" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
             <div v-if="orderDetail.repoOver.payerRepoBusiState<constantData.INFORRESPONSE"><!--买家和卖家状态字段不同-->
