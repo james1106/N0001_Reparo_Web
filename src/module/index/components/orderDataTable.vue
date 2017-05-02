@@ -31,7 +31,7 @@
             </el-col>
             <el-col :span="2">
               <el-row>账款状态</el-row>
-              <el-row v-if="item.transactionStatus===constantData.CONFIRMED">{{constantData.CONFIRMED | receStatus}}
+              <el-row v-if="(item.transactionStatus>=constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)">{{constantData.CONFIRMED | receStatus}}
               </el-row>
               <el-row v-else>{{item.receStatus | receStatus}}</el-row>
             </el-col>
@@ -41,7 +41,9 @@
             </el-col>
             <el-col :span="2">
               <el-row>物流状态</el-row>
-              <el-row>{{item.wayBillStatus | wayBillStatus}}</el-row>
+              <el-row v-if="(item.receStatus>=constantData.ACCEPTED)&&(item.wayBillStatus===constantData.NOMESSAGE)">{{constantData.FORSEND | wayBillStatus}}
+              </el-row>
+              <el-row v-else>{{item.wayBillStatus | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="2">
               <el-row>
@@ -50,8 +52,7 @@
                            @click.native.prevent="confirmOrder(item.orderNo)">确认订单
                 </el-button>
                 <el-button size="mini" type="text"
-                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)"
-                           @click.native.prevent="signBill(item.orderNo)">签发账款
+                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)" @click.native.prevent="signBill(item.orderNo)">签发账款
                 </el-button>
                 <el-button size="mini" type="text"
                            v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"

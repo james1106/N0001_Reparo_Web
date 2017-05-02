@@ -37,6 +37,7 @@
               <el-button size="mini" type="text" class="buyerColor" v-if="(isBuyer==='false')&&(item.status===constantData.ACCEPTED)" @click.native.prevent="confirmDiscount(item.receivableNo)">贴现账款</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
+              <!--.native是子组件绑定原生事件而不是父控件响应子组件的方法 -->
               <el-button size="small" type="default" @click.native.prevent="showDetail(item.receivableNo,item.orderNo,item.status)">查看详情</el-button>
             </el-col>
           </el-col>
