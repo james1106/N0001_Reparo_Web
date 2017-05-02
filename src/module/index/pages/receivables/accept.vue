@@ -19,8 +19,8 @@
               <el-row>
                 <el-col :span="6" class="msgName keynote">应收账款编号：{{detailInfo.detailVoList[0].receivableNo}}</el-col>
                 <el-col :span="6" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
-                <el-col :span="6" class="msgName">发起时间：{{detailInfo.detailVoList[0].isseDt}}</el-col>
-                <el-col :span="6" class="msgName">到期日：{{detailInfo.detailVoList[0].dueDt}}</el-col>
+                <el-col :span="6" class="msgName">发起时间：{{detailInfo.detailVoList[0].isseDt | timeTransfer}}</el-col>
+                <el-col :span="6" class="msgName">到期日：{{detailInfo.detailVoList[0].dueDt | timeTransfer}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
