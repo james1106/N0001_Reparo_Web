@@ -12,8 +12,8 @@
       <el-col class="detail_title_color sellerColor stateShow">
             <svg class="icon detailIcon" aria-hidden="true"><use xlink:href="#icon-zhuangtai"></use> </svg>订单当前状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}
             &nbsp;<el-button class="button_color" size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.UNCONFIRMED)" @click.native.prevent="confirmOrder(orderDetail.txDetail.orderId)">确认订单</el-button>
-            <el-button size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>
-            <el-button size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>
+            <el-button size="small" v-if="(state.isBuyer==='false')&&(orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state===constantData.CONFIRMED)&&(orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE)" @click.native.prevent="signBill(orderDetail.txDetail.orderId)">签发应收账款</el-button>
+            <el-button size="small" v-if="(state.isBuyer==='false')&&(orderDetail.receOver.receLatestStatus===constantData.ACCEPTED)&&(orderDetail.wayBillOver.wayBillLatestStatus===constantData.NOMESSAGE)" @click.native.prevent="sendGood(orderDetail.txDetail.orderId)">发货</el-button>
             <el-button size="small" v-if="(state.isBuyer==='true')&&(orderDetail.receOver.receLatestStatus===constantData.FORACCEPT)" @click.native.prevent="acceptBill(orderDetail.receOver.receNo)">签收账款</el-button>
       </el-col>
     </el-row>
@@ -70,7 +70,7 @@
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
               <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
-              <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton" v-if="(orderDetail.receOver.receLatestStatus!==constantData.NOMESSAGE)&&(orderDetail.receOver.receLatestStatus!==constantData.FORISSUE)" @click="receDetailPage(orderDetail.receOver.receNo)">查看详情 ></el-button>
+              <span class="keynote">应收账款详情</span><el-button size="mini" type="text" class="detailButton" v-if="(orderDetail.receOver.receLatestStatus!==constantData.NOMESSAGE)" @click="receDetailPage(orderDetail.receOver.receNo)">查看详情 ></el-button>
             </div>
             <div class="box-card mycard1 detailContent" v-if="orderDetail.receOver.receLatestStatus===constantData.NOMESSAGE">
               <span class="msgName">暂无应收账款信息!</span>
@@ -153,11 +153,11 @@
         <el-card class="box-card mybox" style="width:100%">
           <div slot="header" class="clearfix el-row-header" v-if="state.isBuyer==='true'">
             <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
-            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payerRepoBusiState>=constantData.INFORRESPONSE"  @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
+            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payerRepoBusiState!==constantData.INFORRESPONSE"  @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
           </div>
           <div slot="header" class="clearfix el-row-header" v-else>
             <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
-            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payeeRepoBusiState>=constantData.OUTFORRESPONSE" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情  ></el-button>
+            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payeeRepoBusiState!==constantData.OUTFORRESPONSE" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情  ></el-button>
           </div>
           <div class="box-card mycard1 detailContent" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
             <div v-if="orderDetail.repoOver.payerRepoBusiState<constantData.INFORRESPONSE"><!--买家和卖家状态字段不同-->
