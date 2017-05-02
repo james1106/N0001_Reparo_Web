@@ -57,7 +57,7 @@
                 <el-row v-show="isOrderCollapse" class="collapseTop">
                   <template v-for="(item,index) in orderDetail.txDetail.operationRecordVoList">
                     <el-row class="status-list" :class="{circleColor:index==(orderDetail.txDetail.operationRecordVoList.length-1)}">
-                      <el-col :span="8" :class="{circleColor1:index==(orderDetail.txDetail.operationRecordVoList.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | transactionStatus}</span></el-col>
+                      <el-col :span="8" :class="{circleColor1:index==(orderDetail.txDetail.operationRecordVoList.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | transactionStatus}}</span></el-col>
                     </el-row>
                   </template>
                 </el-row>
@@ -101,8 +101,8 @@
 
               <el-row v-show="isReceCollapse" class="collapseTop">
                 <template v-for="(item,index) in receHistory">
-                  <el-row class="status-list" :class="{circleBlue:index==(receHistory.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(receHistory.length-1)}"><span>{{item.receivableStatus | receStatus}}：{{item.time | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(receHistory.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(receHistory.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -139,8 +139,8 @@
             </el-row>
             <el-row v-show="isWayBillCollapse" class="collapseTop">
               <template v-for="(item,index) in wayBillHistory">
-                <el-row class="status-list" :class="{circleBlue:index==(wayBillHistory.length-1)}">
-                  <el-col :span="8" :class="{colorBlue:index==(wayBillHistory.length-1)}"><span>{{item.state | wayBillStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                <el-row class="status-list" :class="{circleColor:index==(wayBillHistory.length-1)}">
+                  <el-col :span="8" :class="{circleColor1:index==(wayBillHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
                 </el-row>
               </template>
             </el-row>
@@ -177,8 +177,8 @@
             </el-row>
               <el-row v-show="isBuyerRepoCollapse" class="collapseTop">
                 <template v-for="(item,index) in buyerRepoHistory">
-                  <el-row class="status-list" :class="{circleBlue:index==(buyerRepoHistory.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(buyerRepoHistory.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(buyerRepoHistory.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(buyerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -207,8 +207,8 @@
             </el-row>
               <el-row v-show="isBuyeeRepoCollapse" class="collapseTop">
                 <template v-for="(item,index) in buyeeRepoHistory">
-                  <el-row class="status-list" :class="{circleBlue:index==(buyeeRepoHistory.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(buyeeRepoHistory.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(buyeeRepoHistory.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(buyeeRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>

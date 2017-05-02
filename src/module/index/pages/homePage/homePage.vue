@@ -127,7 +127,7 @@
                   <el-row>{{item.wayBillState}}</el-row>
                 </el-col>
                 <el-col :span="2" style="line-height: 10px">
-                  <el-row style="text-align: center;"><el-button size="mini" type="text"  style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
+                  <el-row style="text-align: center;"><el-button size="mini" type="text">确认订单</el-button></el-row>
                   <el-row style="text-align: center;"><el-button size="mini" style="height: 25px">查看详情</el-button></el-row>
                 </el-col>
             </el-row>
