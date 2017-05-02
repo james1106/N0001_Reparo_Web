@@ -12,7 +12,7 @@
         <el-button type="primary" class="successButton" @click="toHomePage()">进入后台</el-button>
       </el-row>
       <el-row style="margin: 20px auto">
-        <span><router-link to="/" class="back">返回登录</router-link></span>
+        <span><a href="" class="back" @click="deleteCookie()">返回登录</a></span>
       </el-row>
     </el-form>
   </div>
@@ -29,6 +29,13 @@
     methods:{
       toHomePage(){
         window.location.href='main.html';
+      },
+      deleteCookie(){
+        function delete_cookie(name) {
+          document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; //删除cookie，必须显示声明path
+        }
+        delete_cookie("token");
+        this.$router.push("/");
       }
     }
   }
