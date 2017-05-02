@@ -9,8 +9,8 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="sellerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
-          &nbsp;<el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" style="border-color: rgb(0,150,215);color: rgb(0,150,215);margin-left: 10px">{{handleInfo.title}}</el-button>
+        <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}
+          &nbsp;&nbsp;<el-button size="small" v-if="handleInfo.showHandleBtn"  @click.native.prevent="handle" >{{handleInfo.title}}</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -52,8 +52,8 @@
               </el-row>
               <el-row class="collapseTop">
                 <template v-for="(item,index) in repoDetails.operationRecordVoList">
-                  <el-row class="status-list" :class="{circleBlue:index==(repoDetails.operationRecordVoList.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(repoDetails.operationRecordVoList.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>

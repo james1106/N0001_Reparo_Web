@@ -50,7 +50,6 @@ import userInfo from '../../../../common/store'
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       this.getDetail();
-
     },
     data () {
       return {

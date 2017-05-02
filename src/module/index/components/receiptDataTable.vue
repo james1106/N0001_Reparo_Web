@@ -1,5 +1,5 @@
 <template>
-  <div id="receiptDataTable" :class="[{seller_orderTable:state.isBuyer==='false'},{buyer_orderTable:state.isBuyer==='true'}]">
+  <div id="receiptDataTable"  >
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="6" style="margin-left: 19px">货品信息</el-col>
       <el-col :span="6">所在仓储</el-col>

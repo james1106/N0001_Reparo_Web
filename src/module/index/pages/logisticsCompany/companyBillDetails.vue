@@ -35,8 +35,8 @@
 
               <el-row class="collapseTop">
                 <template v-for="(item,index) in logisticsDetail.operationRecordVo">
-                  <el-row class="status-list" :class="{circleBlue:index==(logisticsDetail.operationRecordVo.length-1)}">
-                    <el-col :span="6" :class="{colorBlue:index==(logisticsDetail.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
+                  <el-row class="status-list" :class="{circleColor:index==(logisticsDetail.operationRecordVo.length-1)}">
+                    <el-col :span="6" :class="{circleColor1:index==(logisticsDetail.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
