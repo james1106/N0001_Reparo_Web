@@ -83,7 +83,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span :class="[{buyerColor:state.isBuyer==='true',sellerColor:state.isBuyer==='false'}]">待办订单</span>
+        <span :class="[{'green_span': state.isBuyer==='false', 'blue_span': state.isBuyer==='true'}]">待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="6" style="margin-left: 20px">货品信息</el-col>

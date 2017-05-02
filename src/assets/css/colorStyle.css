@@ -49,6 +49,9 @@
 .green_style .el-button--primary:hover{
   background-color: rgb(57,202,166);
 }
+.green_style .green_span{
+  color: rgb(57,202,166);
+}
 
 /*蓝色样式*/
 .blue_style .el-menu-item.is-active{
@@ -99,6 +102,9 @@
 }
 .blue_style .el-button--primary:hover{
   background-color: rgb(0,150,222);
+}
+.blue_style .blue_span{
+  color: rgb(0,150,222);
 }
 
 /*实心按钮的样式*/

@@ -157,7 +157,7 @@
       }
     },
     methods:{
-        getDetail(){
+      getDetail(){
           var detailParam = {
             receivableNo:Store.state.checkIdRece,
             operatorAcctId:LocalStore.fetchUserInfo().acctIds
