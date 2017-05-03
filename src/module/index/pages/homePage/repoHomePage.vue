@@ -37,7 +37,7 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span>待办订单</span>
+        <span>待办仓储</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="4" style="margin-left: 19px">业务编号</el-col>
@@ -47,7 +47,7 @@
         <el-col :span="4">仓单状态</el-col>
         <el-col :span="2">操作</el-col>
       </el-row>
-      <span v-if="repoList.length == 0" class="msgName">暂无列表</span>
+      <span v-if="repoList.length == 0" class="msgName">暂无待办仓储！</span>
       <template v-for="item in repoList">
         <div>
           <el-row class="dataTable">
