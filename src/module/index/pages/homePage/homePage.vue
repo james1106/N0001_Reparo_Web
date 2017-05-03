@@ -214,10 +214,10 @@
   import adImg from '../../assets/ad.png'
   import maiB from '../../assets/mai_B.png'
   import maiG from  '../../assets/mai_G.png'
-  import LocalStore from "../../../../common/store.js"
+  import Localstore from "../../../../common/store.js"
   import logisticsHomepage from "./logisticsHomePage.vue"
   import repoHomepage from "./repoHomePage.vue"
-  import Store from "../../vuex/store"
+  import store from "../../vuex/store"
   import constantData from "../../../../common/const"
 
   export default {
@@ -227,7 +227,7 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       var tempRole;
-      switch (Store.state.isBuyer) {
+      switch (store.state.isBuyer) {
         case "true":
           tempRole = 0;
           break;/*0表示买方*/
@@ -241,7 +241,7 @@
           console.log("获取到的所有订单: " + res.body.data.length);
           this.showOrder = res.body.data;
           //买家筛选待办订单,只有承兑操作
-        if(Store.state.isBuyer==="true") {
+        if(store.state.isBuyer==="true") {
           var temp = [];
           for (var i = 0; i < this.showOrder.length; i++) {
             var item = this.showOrder[i];
@@ -272,7 +272,7 @@
       );
     },
     created: function () {
-      var userInfo = LocalStore.fetchUserInfo();
+      var userInfo = Localstore.fetchUserInfo();
       this.companyType = userInfo.roleCode;
     },
     components: {
@@ -280,7 +280,7 @@
     },
     computed: {
       state () {
-        return Store.state;
+        return store.state;
       },
       constantData () {
         return constantData;
@@ -304,6 +304,38 @@
           payingMethod: '应收账款支付',
         }
         ]
+      }
+    },
+    methods:{
+      checkDetail (orderNo) {
+        store.commit('setCheckIdOrder', orderNo);
+        console.log(store.state.checkIdOrder);
+        this.$router.push("/order/orderDetail");
+      },
+      confirmOrder (orderNo) {
+        console.log("确认订单！");
+        store.commit('setCheckIdOrder', orderNo);
+        this.$router.push("/order/confirmOrder");
+      },
+      signBill (checkId) {
+        console.log("签发应收账款");//签发用的是orderId
+        store.commit('setCheckIdOrder', checkId);
+        this.$router.push("/allAccounts/signout/signout");
+      },
+      sendGood (checkId) {
+        console.log("发货");
+        store.commit('setCheckIdOrder', checkId);
+        this.$router.push("/logistics/deliver");
+      },
+      acceptBill (checkId) {
+        console.log("签收账款");
+        this.$http.get("../v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
+          console.log(res.body.data);
+          store.commit("setCheckIdRece", res.body.data.receOver.receNo);
+          this.$router.push("/allAccounts/accept/accept");
+        }, function (err) {
+          console.log(err);
+        });
       }
     }
   }
