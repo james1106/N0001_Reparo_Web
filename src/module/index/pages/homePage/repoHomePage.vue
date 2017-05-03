@@ -40,49 +40,47 @@
         <span>待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-        <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
-        <el-col :span="6">付款信息</el-col>
-        <el-col :span="8">订单状态</el-col>
+        <el-col :span="4" style="margin-left: 19px">业务编号</el-col>
+        <el-col :span="4">持有人</el-col>
+        <el-col :span="4">仓储状态</el-col>
+        <el-col :span="4">仓单编号</el-col>
+        <el-col :span="4">仓单状态</el-col>
         <el-col :span="2">操作</el-col>
       </el-row>
-      <template v-for="(item,index) in showOrder">
+      <span v-if="repoList.length == 0" class="msgName">暂无列表</span>
+      <template v-for="item in repoList">
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
-              <el-col :span="6" style="margin-left: 19px;" >订单编号:{{item.orderNo}}</el-col>
-              <el-col :span="6">创建时间:{{item.orderGenerateTime}}</el-col>
-              <el-col :span="8">卖家:{{item.payeeAccount}}</el-col>
-              <el-col :span="2"></el-col>
+              <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo}}</el-col>
+              <el-col :span="8">订单编号：{{item.orderNo}}</el-col>
             </el-row>
             <el-row class="el-row-content">
-              <el-col :span="6" style="margin-left: 19px;">
-                <el-row>货品名称:{{item.productName}}</el-row>
-                <el-row>货品数量:{{item.productNum}}</el-row>
+              <el-col :span="4" style="margin-left: 19px;">
+                <el-row>货品名称：{{item.productName}}</el-row>
+                <el-row>货品数量：{{item.productQuantity}}</el-row>
               </el-col>
-              <el-col :span="6">
-                <!--:class="content-row"-->
-                <el-row>订单金额(元):{{item.totalPrice}}</el-row>
-                <el-row>付款方式:{{item.payingMethod}}</el-row>
+              <el-col :span="4">
+                <el-row>{{item.holderEnterpriseName}}</el-row>
               </el-col>
-              <el-col :span="2">
-                <el-row>交易状态</el-row>
-                <el-row>{{item.txState}}</el-row>
+              <el-col :span="4">
+                <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->
               </el-col>
-              <el-col :span="2">
-                <el-row>账款状态</el-row>
-                <el-row>{{item.receState}}</el-row>
+              <el-col :span="4">
+                <el-row>{{item.repoCertNo | nullSituation}}</el-row><!--仓单编号-->
               </el-col>
-              <el-col :span="2">
-                <el-row>仓储状态</el-row>
-                <el-row>{{item.repoCertState}}</el-row>
+              <el-col :span="4">
+                <el-row>{{item.repoCertStatus | repoCertStatus | nullSituation}}</el-row><!--仓单状态-->
               </el-col>
-              <el-col :span="2">
-                <el-row>物流状态</el-row>
-                <el-row>{{item.wayBillState}}</el-row>
-              </el-col>
-              <el-col :span="2" style="line-height: 10px">
-                <el-row style="text-align: center;"><el-button size="mini" type="text"  style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
-                <el-row style="text-align: center;"><el-button size="mini" style="height: 25px">查看详情</el-button></el-row>
+              <el-col :span="3">
+                <el-col :span="24">
+                  <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.INFORRESPONSE" @click.native.prevent="inResponse(item.repoBusiNo)">入库响应</el-button>
+                  <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FORIN" @click.native.prevent="inConfirm(item.repoBusiNo)">入库确认</el-button>
+                  <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FOROUT" @click.native.prevent="outConfirm(item.repoBusiNo)">出库确认</el-button>
+                </el-col>
+                <el-col :span="24" style="margin-left: -9px">
+                  <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
+                </el-col>
               </el-col>
             </el-row>
           </el-row>
@@ -97,15 +95,23 @@
   import adImg from '../../assets/ad.png'
   import wlG from '../../assets/wl_G.png'
   import ccG from '../../assets/cc_G.png'
+  import constantData from '../../../../common/const.js'
+  import Store from "../../vuex/store"
 
   export default {
     name: 'repoHp',
     mounted: function (){
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
+      this.getTopList();
     },
-    created:function () {
-
+    computed: {
+      state () {
+        return Store.state;
+      },
+      constantData () {
+        return constantData;
+      }
     },
     data () {
       return {
@@ -114,64 +120,49 @@
           wlG:wlG,
           ccG:ccG
         },
-        showOrder:[
-          {
-            "orderNo":"1111111122",
-            "payeeAccount":"杭州趣链科技有限公司",
-            "productName":"卡片",
-            "productNum":"1000",
-            "productPrice":"10000",
-            "totalPrice":"100000",
-            "payingMethod":"应收账款",
-            "orderGenerateTime":"2017-05-02 9:30",
-            "txState":"已确认",
-            "repoCertState":"暂无",
-            "wayBillState":"暂无",
-            "receState":"暂无"
-          },
-          {
-            "orderNo":"1111111122",
-            "payeeAccount":"杭州趣链科技有限公司",
-            "productName":"卡片",
-            "productNum":"1000",
-            "productPrice":"10000",
-            "totalPrice":"100000",
-            "payingMethod":"应收账款",
-            "orderGenerateTime":"2017-05-02 9:40",
-            "txState":"已确认",
-            "repoCertState":"暂无",
-            "wayBillState":"暂无",
-            "receState":"暂无"
-          },
-          {
-            "orderNo":"1111111122",
-            "payeeAccount":"杭州趣链科技有限公司",
-            "productName":"卡片",
-            "productNum":"1000",
-            "productPrice":"10000",
-            "totalPrice":"100000",
-            "payingMethod":"应收账款",
-            "orderGenerateTime":"2017-05-02 9:50",
-            "txState":"已确认",
-            "repoCertState":"暂无",
-            "wayBillState":"暂无",
-            "receState":"暂无"
-          },
-          {
-            "orderNo":"1111111122",
-            "payeeAccount":"杭州趣链科技有限公司",
-            "productName":"卡片",
-            "productNum":"1000",
-            "productPrice":"10000",
-            "totalPrice":"100000",
-            "payingMethod":"应收账款",
-            "orderGenerateTime":"2017-05-02 10:00",
-            "txState":"已确认",
-            "repoCertState":"暂无",
-            "wayBillState":"暂无",
-            "receState":"暂无"
-          }
-        ]
+        repoList:[]
+      }
+    },
+    methods:{
+        getTopList(){
+          this.$http.get("../v1/repository/getRepoBusiList?role=3").then(function(res){
+            var code = res.body.code;
+            if(code != 0){
+                return;
+            }
+            var list = res.body.data;
+            var temp = [];
+            for(var i = 0;i < list.length;i++){
+                var item = list[i];
+                if(item.curRepoBusiStatus === constantData.INFORRESPONSE ||
+                  item.curRepoBusiStatus === constantData.FORIN ||
+                  item.curRepoBusiStatus === constantData.FOROUT){
+                    temp.push(item);
+                    if(temp.length >= 4) {
+                        break;
+                    }
+                }
+            }
+            this.repoList = temp;
+          },function(err){
+            console.log(err);
+          });
+        },
+      checkDetail(repoBusinessNo){
+        Store.commit('setCheckIdRepo',repoBusinessNo);
+        this.$router.push('/warehousingCompany/repoDetails')
+      },
+      inResponse(repoBusinessNo){
+        Store.commit('setCheckIdRepo',repoBusinessNo);
+        this.$router.push('/warehousingCompany/inResponse')
+      },
+      inConfirm(repoBusinessNo){
+        Store.commit('setCheckIdRepo',repoBusinessNo);
+        this.$router.push('/warehousingCompany/inConfirm')
+      },
+      outConfirm(repoBusinessNo){
+        Store.commit('setCheckIdRepo',repoBusinessNo);
+        this.$router.push('/warehousingCompany/outConfirm')
       }
     }
   }

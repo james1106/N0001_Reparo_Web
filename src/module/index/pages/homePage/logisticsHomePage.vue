@@ -40,50 +40,43 @@
         <span>待办订单</span>
       </div>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-        <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
-        <el-col :span="6">付款信息</el-col>
-        <el-col :span="8">订单状态</el-col>
-        <el-col :span="2">操作</el-col>
+        <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
+        <el-col :span="6">货品信息</el-col>
+        <el-col :span="6">物流状态</el-col>
+        <el-col :span="4" style="text-align: center">操作</el-col>
       </el-row>
-      <template v-for="(item,index) in showOrder">
+      <span v-if="wayBillList.length == 0" class="msgName">暂无列表</span>
+      <template v-for="item in wayBillList">
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
-              <el-col :span="6" style="margin-left: 19px;" >订单编号:{{item.orderNo}}</el-col>
-              <el-col :span="6">创建时间:{{item.orderGenerateTime}}</el-col>
-              <el-col :span="8">卖家:{{item.payeeAccount}}</el-col>
-              <el-col :span="2"></el-col>
+              <el-col :span="6" style="margin-left: 19px;">运单编号：{{item.wayBillNo}}</el-col>
+              <el-col :span="6">发货人：{{item.senderEnterpriseName}}</el-col>
+              <el-col :span="8">收货人：{{item.receiverEnterpriseName}}</el-col>
             </el-row>
             <el-row class="el-row-content">
-                <el-col :span="6" style="margin-left: 19px;">
-                  <el-row>货品名称:{{item.productName}}</el-row>
-                  <el-row>货品数量:{{item.productNum}}</el-row>
-                </el-col>
-                <el-col :span="6">
-                  <!--:class="content-row"-->
-                  <el-row>订单金额(元):{{item.totalPrice}}</el-row>
-                  <el-row>付款方式:{{item.payingMethod}}</el-row>
-                </el-col>
-                <el-col :span="2">
-                  <el-row>交易状态</el-row>
-                  <el-row>{{item.txState}}</el-row>
-                </el-col>
-                <el-col :span="2">
-                  <el-row>账款状态</el-row>
-                  <el-row>{{item.receState}}</el-row>
-                </el-col>
-                <el-col :span="2">
-                  <el-row>仓储状态</el-row>
-                  <el-row>{{item.repoCertState}}</el-row>
-                </el-col>
-                <el-col :span="2">
-                  <el-row>物流状态</el-row>
-                  <el-row>{{item.wayBillState}}</el-row>
-                </el-col>
-                <el-col :span="2" style="line-height: 10px">
-                  <el-row style="text-align: center;"><el-button size="mini" type="text"  style="color: rgb(57,202,166);height: 22px">确认订单</el-button></el-row>
-                  <el-row style="text-align: center;"><el-button size="mini" style="height: 25px">查看详情</el-button></el-row>
-                </el-col>
+              <el-col :span="6" style="margin-left: 19px;">
+                <el-row>收货仓储：{{item.receiverRepoEnterpriseName}}</el-row>
+                <el-row>发货仓储：{{item.senderRepoEnterpriseName}}</el-row>
+              </el-col>
+              <el-col :span="6">
+                <el-row>货品名称：{{item.productName}}</el-row>
+                <el-row>货品数量：{{item.productQuantity}}</el-row>
+              </el-col>
+              <el-col :span="6">
+                <el-row>{{item.waybillStatusCode | wayBillStatus}}</el-row>
+              </el-col>
+              <el-col :span="4">
+                <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.SENDFORRESPONSE"><!--发货待响应-->
+                  <el-button size="mini" type="text" @click.native.prevent="sendConfirm(item.orderNo)">确认发货</el-button>
+                </el-row>
+                <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.SENDED"><!--已发货-->
+                  <el-button size="mini" type="text" @click.native.prevent="receiveConfirm(item.orderNo)">确认收货</el-button>
+                </el-row>
+                <el-row style="text-align: center;">
+                  <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+                </el-row>
+              </el-col>
             </el-row>
           </el-row>
         </div>
@@ -97,16 +90,23 @@
   import adImg from '../../assets/ad.png'
   import wlG from '../../assets/wl_G.png'
   import ccG from '../../assets/cc_G.png'
-
+  import constantData from '../../../../common/const.js'
+  import Store from "../../vuex/store"
 
   export default {
   name: 'logisticsHp',
   mounted: function (){
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
+      this.getTopList();
   },
-  created:function () {
-
+  computed: {
+    state () {
+      return Store.state;
+    },
+    constantData () {
+      return constantData;
+    }
   },
   data () {
     return {
@@ -115,66 +115,44 @@
         wlG:wlG,
         ccG:ccG
       },
-      showOrder:[
-        {
-          "orderNo":"1111111122",
-          "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"卡片",
-          "productNum":"1000",
-          "productPrice":"10000",
-          "totalPrice":"100000",
-          "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-05-02 9:00",
-          "txState":"已确认",
-          "repoCertState":"暂无",
-          "wayBillState":"暂无",
-          "receState":"暂无"
-        },
-        {
-          "orderNo":"1111111122",
-          "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"卡片",
-          "productNum":"1000",
-          "productPrice":"10000",
-          "totalPrice":"100000",
-          "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-05-02 9:30",
-          "txState":"已确认",
-          "repoCertState":"暂无",
-          "wayBillState":"暂无",
-          "receState":"暂无"
-        },
-        {
-          "orderNo":"1111111122",
-          "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"卡片",
-          "productNum":"1000",
-          "productPrice":"10000",
-          "totalPrice":"100000",
-          "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-05-02 9:40",
-          "txState":"已确认",
-          "repoCertState":"暂无",
-          "wayBillState":"暂无",
-          "receState":"暂无"
-        },
-        {
-          "orderNo":"1111111122",
-          "payeeAccount":"杭州趣链科技有限公司",
-          "productName":"卡片",
-          "productNum":"1000",
-          "productPrice":"10000",
-          "totalPrice":"100000",
-          "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-05-02 10:00",
-          "txState":"已确认",
-          "repoCertState":"暂无",
-          "wayBillState":"暂无",
-          "receState":"暂无"
-        }
-      ]
+      wayBillList:[]
     }
-  }
+  },
+    methods:{
+      getTopList(){
+        this.$http.get("../v1/waybill/allWayBillDetail").then(function(res){
+          var code = res.body.code;
+          if(code != 0){
+            return;
+          }
+          var list = res.body.data.wayBillDetailVoList;
+          var temp = [];
+          for(var i = 0;i < list.length;i++){
+            var item = list[i];
+            if(item.waybillStatusCode === constantData.SENDFORRESPONSE ||
+              item.waybillStatusCode === constantData.SENDED ){
+              temp.push(item);
+              if(temp.length >= 4) break;
+            }
+          }
+          this.wayBillList = temp;
+        },function(err){
+          console.log(err);
+        });
+      },
+      checkDetail (orderNo) {
+        Store.commit('setCheckIdOrder',orderNo);
+        this.$router.push("/logisticsCompany/companyBillDetails");
+      },
+      sendConfirm(orderNo){
+        Store.commit('setCheckIdOrder',orderNo);
+        this.$router.push('/logisticsCompany/sendConfirm');
+      },
+      receiveConfirm(orderNo){
+        Store.commit('setCheckIdOrder',orderNo);
+        this.$router.push('/logisticsCompany/receiveConfirm');
+      },
+    }
 }
 </script>
 
