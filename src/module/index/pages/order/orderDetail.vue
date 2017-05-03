@@ -125,11 +125,11 @@
           </div>
           <div class="box-card mycard1 detailContent" v-else>
             <el-row>
-              <el-col :span="6" class="msgName keynote">运单号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
-              <el-col :span="6" class="msgName">下单时间：{{orderDetail.wayBillOver.wayBillGenerateTime | timeTransfer}}</el-col>
+              <el-col :span="6" class="msgName keynote">运单号：{{wayBillHistory.wayBillNo}}</el-col>
+              <el-col :span="6" class="msgName">下单时间：{{wayBillHistory.sendReqTime | timeTransfer}}</el-col>
             </el-row>
             <el-row class="">
-              <el-col :span="6" class="msgName">物流公司：{{orderDetail.wayBillOver.logisticCompany}}</el-col>
+              <el-col :span="6" class="msgName">物流公司：{{wayBillHistory.logisticsEnterpriseName}}</el-col>
             </el-row>
             <el-row>
               <el-col :span="8" class="msgName">
@@ -138,9 +138,9 @@
               <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="wayBillCollapse" :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i></el-col>
             </el-row>
             <el-row v-show="isWayBillCollapse" class="collapseTop">
-              <template v-for="(item,index) in wayBillHistory">
-                <el-row class="status-list" :class="{circleColor:index==(wayBillHistory.length-1)}">
-                  <el-col :span="8" :class="{circleColor1:index==(wayBillHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
+              <template v-for="(item,index) in wayBillHistory.operationRecordVo">
+                <el-row class="status-list" :class="{circleColor:index==(wayBillHistory.operationRecordVo.length-1)}">
+                  <el-col :span="8" :class="{circleColor1:index==(wayBillHistory.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
                 </el-row>
               </template>
             </el-row>
@@ -241,8 +241,10 @@
         },
         receHistory:[
         ],
-        wayBillHistory:[
-        ],
+        wayBillHistory:{
+          operationRecordVo:[],
+          sendReqTime:''
+        },
         buyerRepoHistory:[
         ],
         buyeeRepoHistory:[
@@ -414,7 +416,15 @@
           if(this.orderDetail.wayBillOver.wayBillLatestStatus>0){
               this.$http.get("../v1/waybill/wayBillDetail?orderNo="+this.orderDetail.txDetail.orderId).then(function(res){
                   console.log("根据订单号查询运单详情："+res.body.data);
-                  this.wayBillHistory=res.body.data.operationRecordVo;
+                  this.wayBillHistory=res.body.data;
+                this.wayBillHistory.sendReqTime='';
+                for(var item in this.wayBillHistory.operationRecordVo){
+                  var temp=this.wayBillHistory.operationRecordVo[item];
+                  if(temp.state===constantData.SENDFORRESPONSE){/*筛选申请发货时间，即发货待响应时间*/
+                    this.wayBillHistory.sendReqTime=temp.operateTime;
+                    break;
+                  }
+                }
               },function(err){
                   console.log(err);
               });
