@@ -140,7 +140,13 @@
         </div>
         <el-row>
           <el-col :span="24">
-            <el-button size="small" type="primary" @click="confirm">确定订单</el-button>
+            <div style="text-align: right;font-size: 12px;margin-right: 15px;margin-bottom: 10px">
+              <svg class="icon" aria-hidden="true" style="color: #B4C3BF;margin-top: 5px">   <use xlink:href="#icon-jinggao"></use> </svg>
+              <span style="color: #779B92">确认订单并进入签发账款页面</span>
+            </div>
+            <el-row>
+              <el-button size="small" type="primary" @click="confirm">确定并签发账款</el-button>
+            </el-row>
           </el-col>
         </el-row>
     </div>

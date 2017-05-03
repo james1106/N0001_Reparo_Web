@@ -40,7 +40,18 @@
         <span class="green_span">待办物流</span>
       </div>
       <el-row v-if="wayBillList.length == 0">
-        <span  class="msgName">暂无待办物流!</span>
+        <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+          <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
+          <el-col :span="6">货品信息</el-col>
+          <el-col :span="6">物流状态</el-col>
+          <el-col :span="4" style="text-align: center">操作</el-col>
+        </el-row>
+        <el-row style="text-align: center">
+          <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+        </el-row>
+        <el-row style="text-align: center;font-size: 18px;color: #959697">
+          <span>暂无订单</span>
+        </el-row>
       </el-row>
       <el-row v-else>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
@@ -96,6 +107,8 @@
   import ccG from '../../assets/cc_G.png'
   import constantData from '../../../../common/const.js'
   import Store from "../../vuex/store"
+  import default_0 from  '../../assets/default_0.png'
+
 
   export default {
   name: 'logisticsHp',
@@ -117,8 +130,9 @@
       imgUrl:{
         adImg:adImg,
         wlG:wlG,
-        ccG:ccG
-      },
+        ccG:ccG,
+        default_0:default_0
+  },
       wayBillList:[]
     }
   },
