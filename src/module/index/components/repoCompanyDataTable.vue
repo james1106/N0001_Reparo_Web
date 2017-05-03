@@ -39,7 +39,7 @@
                 <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FOROUT" @click.native.prevent="outConfirm(item.repoBusiNo)">出库确认</el-button>
               </el-col>
               <el-col :span="24" style="margin-left: -9px">
-                <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
+                <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo,item.orderNo)">查看详情</el-button>
               </el-col>
             </el-col>
           </el-row>
@@ -108,8 +108,9 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
-      checkDetail(repoBusinessNo){
+      checkDetail(repoBusinessNo,orderNo){
         store.commit('setCheckIdRepo',repoBusinessNo);
+        store.commit('setCheckIdOrder',orderNo);
         this.$router.push('/warehousingCompany/repoDetails')
       },
       inResponse(repoBusinessNo){
@@ -118,6 +119,7 @@
       },
       //点击入库确认时需要订单号，后台改变订单相关状态
       inConfirm(repoBusinessNo,orderNo){
+          console.log("repoBusinessNo:"+repoBusinessNo+",orderNo:"+orderNo);
         store.commit('setCheckIdRepo',repoBusinessNo);
         store.commit('setCheckIdOrder',orderNo);
         this.$router.push('/warehousingCompany/inConfirm')

@@ -193,7 +193,7 @@
             <div v-else>
             <el-row>
               <el-col :span="6" class="msgName keynote">仓储流水号：{{orderDetail.repoOver.payeeRepoBusinessNo}}</el-col>
-              <el-col :span="6" class="msgName">仓单编号：{{orderDetail.repoOver.payerRepoCertNo}}</el-col>
+              <el-col :span="6" class="msgName">仓单编号：{{orderDetail.repoOver.payeeRepoCertNo}}</el-col>
               <el-col :span="6" class="msgName" v-if="orderDetail.repoOver.payeeRepoBusiState>=constantData.CONFIRMED">出库申请时间：{{orderDetail.repoOver.outApplyTime | timeTransfer}}</el-col>
             </el-row>
             <el-row>

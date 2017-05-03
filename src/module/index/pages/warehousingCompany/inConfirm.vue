@@ -106,7 +106,7 @@
         })
       },
       inConfirm(){
-        this.$http.put('../v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo+'&orderNo='+Store.state.orderNo).then((res) => {
+        this.$http.put('../v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo+'&orderNo='+Store.state.checkIdOrder).then((res) => {
           console.log(res.body);
           var code =  res.body.code;
           if(code != 0){
