@@ -29,7 +29,7 @@
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">货品名称：{{repoDetails.productName}}</el-col>
-                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}（{{repoDetails.measureUnit}}）</el-col>
+                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}</el-col>
                 <el-col :span="8" class="msgName">货物总额（元）：{{repoDetails.productTotalPrice}}</el-col>
               </el-row>
               <el-row>

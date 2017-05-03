@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <el-card>
       <el-row class="el-row-header statePosition">
-        <el-col class="buyerColor stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
+        <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
           仓储当前状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col>
       </el-row>
       <el-row>
@@ -29,7 +29,7 @@
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">货品名称：{{repoDetails.productName}}</el-col>
-                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}（{{repoDetails.measureUnit}}）</el-col>
+                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}</el-col>
                 <el-col :span="8" class="msgName">货物总额（元）：{{repoDetails.productTotalPrice}}</el-col>
               </el-row>
               <el-row>
