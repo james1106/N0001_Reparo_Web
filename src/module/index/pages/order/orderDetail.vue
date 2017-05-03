@@ -85,8 +85,8 @@
                 <el-col :span="6" class="msgName">到期日：{{orderDetail.receOver.dueDate | timeTransfer}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">收款人：{{orderDetail.receOver.receivingSide}}</el-col>
-                <el-col :span="6" class="msgName">付款人：{{orderDetail.receOver.payingSide}}</el-col>
+                <el-col :span="6" class="msgName">收款账户：{{orderDetail.receOver.receivingSide}}</el-col>
+                <el-col :span="6" class="msgName">付款账户：{{orderDetail.receOver.payingSide}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">账款金额(元)：{{orderDetail.receOver.receAmount | numTransfer}}</el-col>
@@ -536,8 +536,8 @@
     margin-left: -4px;
     margin-right: 10px;
     position: absolute;
-    /*top:-5px;*/
-    top:0px;
+    top:-5px;
+    /*top:0px;*/
     z-index: 9999;
   }
   .status-list .el-col {

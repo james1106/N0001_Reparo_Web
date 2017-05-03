@@ -15,6 +15,9 @@
         <span><a href="" class="back" @click="deleteCookie()">返回登录</a></span>
       </el-row>
     </el-form>
+    <el-row style="text-align: center">
+      <span class="registerStep highlight">1 设置用户名 </span><span class="registerStep highlight">2 完善个人信息 </span><span class="registerStep highlight">3 注册成功</span>
+    </el-row>
   </div>
 </template>
 <script>

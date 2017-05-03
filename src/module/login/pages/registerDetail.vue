@@ -27,7 +27,7 @@
       </el-form-item>
     </el-form>
     <el-row style="text-align: center">
-      <span><router-link to="/register" class="back">返回上级</router-link></span>
+      <span class="registerStep highlight">1 设置用户名 </span><span class="registerStep highlight">2 完善个人信息 </span><span class="registerStep">3 注册成功</span>
     </el-row>
     <el-dialog title="提示" v-model="dialogVisible" size="tiny">
       <span>{{msg}}</span>

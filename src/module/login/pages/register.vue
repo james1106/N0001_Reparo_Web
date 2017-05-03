@@ -25,7 +25,7 @@
       </el-form-item>
     </el-form>
     <el-row style="text-align: center">
-      <span class="registerStep">1 设置用户名 </span><span class="registerStep">2 完善个人信息 </span><span class="registerStep">3 注册成功</span>
+      <span class="registerStep highlight">1 设置用户名 </span><span class="registerStep">2 完善个人信息 </span><span class="registerStep">3 注册成功</span>
     </el-row>
   </div>
 </template>
@@ -55,8 +55,7 @@
         }
       };
       var validatePhone = (rule, value, callback) => {
-
-        if (value.length  > 11){
+        if (!(/^1[34578]\d{9}$/.test(value))){
           callback(new Error('请输入正确的手机号'));
         }else {
           callback();
@@ -121,6 +120,12 @@
   .registerStep{
     margin: 0 20px;
     color: #CCCCCC;
+    font-size: 13px;
+    text-decoration: none;
+  }
+  .highlight{
+    margin: 0 20px;
+    color: rgb(57,202,166);
     font-size: 13px;
   }
   </style>

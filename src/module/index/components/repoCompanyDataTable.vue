@@ -21,7 +21,7 @@
               <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-row>{{item.repoEnterpriceName}}</el-row><!--所在仓储-->
+              <el-row>{{item.holderEnterpriseName}}</el-row><!--所在仓储-->
             </el-col>
             <el-col :span="4">
               <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->

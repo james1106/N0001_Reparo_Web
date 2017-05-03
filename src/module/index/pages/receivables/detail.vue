@@ -66,8 +66,9 @@
                 <el-col :span="6" class="msgName">收款人开户行：{{detailInfo.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkMan | nullSituation}}</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeeLinePhone | nullSituation}}</el-col>
+                <!--<el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkMan | nullSituation}}</el-col>-->
+                <el-col :span="6" class="msgName">联系人：暂无</el-col>
+                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
@@ -76,7 +77,8 @@
                 <el-col :span="6" class="msgName">付款人开户行：{{detailInfo.detailVoList[0].pyerAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan | nullSituation}}</el-col>
+                <!--<el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan | nullSituation}}</el-col>-->
+                <el-col :span="6" class="msgName">联系人：暂无</el-col>
                 <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">附加信息：</el-row>

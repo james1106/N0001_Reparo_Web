@@ -19,7 +19,7 @@
       </el-row>
       <el-row>
         <el-col :span="6" class="msgName" style="margin-left: 19px">购买人：{{orderDetail.txDetail.payerCompanyName}}</el-col>
-        <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice | numTransfer}}</el-col>
+        <el-col :span="6" class="msgName">货品单价(元)：{{orderDetail.txDetail.productUnitPrice}}</el-col>
         <el-col :span="6" class="msgName">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
       </el-row>
       <el-row>
@@ -127,7 +127,7 @@
           <el-row>
             <el-col :span="12">
               <el-form-item label="货品单价(元)">
-                <el-label>{{orderDetail.txDetail.productQuantity | numTransfer}}</el-label>
+                <el-label>{{orderDetail.txDetail.productUnitPrice}}</el-label>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -155,7 +155,22 @@
     data () {
       return {
         orderDetail: {
-          txDetail: {},
+          txDetail: {
+            orderId:'',
+            operationRecordVoList:[
+              {
+                operateTime:''
+              }
+            ],
+            payerCompanyName:'',
+            productUnitPrice:'',
+            payingMethod:'',
+            productName:'',
+            productQuantity:'',
+            productTotalPrice:'',
+            payerBank:'',
+            payerAccount:''
+          },
           receDetail: {},
           repoDetail: {},
           wayBillDetail: {}
@@ -167,15 +182,10 @@
           repoList:''
         },
         showModal:false,
-
       }
     },
     methods: {
       onSubmit () {
-        /*this.$alert('这是一段内容', '标题名称', {
-          confirmButtonText: '确定',
-          callback: function(){}
-        });*/
         this.showModal=true;
       },
       close(){
@@ -208,21 +218,17 @@
             function(res){
                 console.log(res.body);
                 this.orderDetail=res.body.data;
-
               this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
                 this.confirmOrder.repoList=res.body.data;
                 console.log("the repo list: "+res.body.data);
               },function(err){
                 console.log(err)
               });
-
             },
           function(err){
-                console.log(err);
+            console.log(err);
           }
         );
-
-
     }
   }
 </script>

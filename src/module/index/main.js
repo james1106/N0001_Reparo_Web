@@ -106,7 +106,7 @@ Vue.filter('payingMethod',function(value){
 /*时间转化*/
 Vue.filter('timeTransfer',function(value){
   console.log(value);
-  if(value===''||value===0){
+  if(value===''||value===0||value==='暂无'){
     return "暂无"
   }
   return new Date(value).toLocaleString().replace(/\//g, "-");

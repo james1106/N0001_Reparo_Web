@@ -29,7 +29,7 @@
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓单编号：{{repoDetails.repoCertNo | nullSituation}}</el-col>
-                <el-col :span="8" class="msgName">仓储机构：{{repoDetails.repoEnterpriceName}}</el-col>
+                <el-col :span="8" class="msgName">持有人：{{repoDetails.storeEnterpriseName}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">货品名称：{{repoDetails.productName}}</el-col>
@@ -47,13 +47,10 @@
               <el-row>
                 <el-col :span="8" class="msgName">仓储状态明细：</el-col>
               </el-row>
-              <el-row v-for="item in repoDetails.operationRecordVoList">
-                <el-col :span="8" class="msgName">{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</el-col>
-              </el-row>
               <el-row class="collapseTop">
                 <template v-for="(item,index) in repoDetails.operationRecordVoList">
                   <el-row class="status-list" :class="{circleColor:index==(repoDetails.operationRecordVoList.length-1)}">
-                    <el-col :span="8" :class="{circleColor1:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.state | repoStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+                    <el-col :span="8" :class="{circleColor1:index==(repoDetails.operationRecordVoList.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
                   </el-row>
                 </template>
               </el-row>
