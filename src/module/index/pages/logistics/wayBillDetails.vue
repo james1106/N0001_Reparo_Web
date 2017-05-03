@@ -24,7 +24,7 @@
               <el-row>
                 <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName | nullSituation}}</el-col>
-                <el-col :span="6" class="msgName">入库时间：{{logisticsDetail.inRepoTime | timeTransfer | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">发货申请时间：{{logisticsDetail.sendReqTime | timeTransfer | nullSituation}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">物流跟踪：</el-col>
@@ -65,7 +65,7 @@
               <el-row>
                 <el-col :span="6" class="msgName">货品名称：{{logisticsDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{logisticsDetail.productQuantity}}</el-col>
-                <el-col :span="6" class="msgName">货品单价(元)：{{(logisticsDetail.productQuantity===''||logisticsDetail.productQuantity===0)?0:logisticsDetail.productValue/logisticsDetail.productQuantity}}</el-col>
+                <el-col :span="6" class="msgName">货品单价(元)：{{(logisticsDetail.productQuantity===''||logisticsDetail.productQuantity===0)?0.00:(logisticsDetail.productValue/logisticsDetail.productQuantity | numTransfer)}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -86,6 +86,7 @@
               inRepoTime:'',
             productQuantity:'',
             operationRecordVo:[],
+            sendReqTime:''//卖家申请发货时间，待筛选
           }
       }
     },
@@ -107,11 +108,11 @@
         this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(function(res){
             console.log(res.body);
             this.logisticsDetail=res.body.data;
-            this.logisticsDetail.inRepoTime='';
+            this.logisticsDetail.sendReqTime='';
           for(var item in this.logisticsDetail.operationRecordVo){
               var temp=this.logisticsDetail.operationRecordVo[item];
-            if(temp.state===constantData.ARRIVED){/*筛选入库时间*/
-              this.logisticsDetail.inRepoTime=temp.operateTime;
+            if(temp.state===constantData.SENDFORRESPONSE){/*筛选申请发货时间，即发货待响应时间*/
+              this.logisticsDetail.sendReqTime=temp.operateTime;
               break;
             }
           }

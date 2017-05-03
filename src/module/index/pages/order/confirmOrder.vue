@@ -19,13 +19,13 @@
       </el-row>
       <el-row>
         <el-col :span="6" class="msgName" style="margin-left: 19px">购买人：{{orderDetail.txDetail.payerCompanyName}}</el-col>
-        <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+        <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice | numTransfer}}</el-col>
         <el-col :span="6" class="msgName">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="6" class="msgName" style="margin-left: 19px">货品名称：{{orderDetail.txDetail.productName}}</el-col>
         <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
-        <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+        <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice | numTransfer}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="6" class="msgName" style="margin-left: 19px">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
@@ -90,8 +90,8 @@
           </el-row>
           <el-row>
             <el-col :span="12">
-              <el-form-item label="订单金额">
-                <el-label>{{orderDetail.txDetail.productTotalPrice}}</el-label>
+              <el-form-item label="订单金额(元)">
+                <el-label>{{orderDetail.txDetail.productTotalPrice | numTransfer}}</el-label>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -126,8 +126,8 @@
           </el-row>
           <el-row>
             <el-col :span="12">
-              <el-form-item label="货品单价">
-                <el-label>{{orderDetail.txDetail.productQuantity}}</el-label>
+              <el-form-item label="货品单价(元)">
+                <el-label>{{orderDetail.txDetail.productQuantity | numTransfer}}</el-label>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -189,6 +189,12 @@
          this.$http.post("../v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
          function(res){
              console.log(res.body);
+             if(res.body.code!=0){
+               this.$alert('区块链报错：'+res.body.message, '确认订单失败', {
+                 confirmButtonText: '确定',
+               });
+                 return;
+             }
            this.$router.push("/allAccounts/signout/signout");//跳转到签发应收账款
          },
          function(err){console.log(err)}
@@ -202,17 +208,21 @@
             function(res){
                 console.log(res.body);
                 this.orderDetail=res.body.data;
+
+              this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
+                this.confirmOrder.repoList=res.body.data;
+                console.log("the repo list: "+res.body.data);
+              },function(err){
+                console.log(err)
+              });
+
             },
           function(err){
                 console.log(err);
           }
         );
-      this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
-        this.confirmOrder.repoList=res.body.data;
-        console.log("the repo list: "+res.body.data);
-      },function(err){
-        console.log(err)
-      });
+
+
     }
   }
 </script>

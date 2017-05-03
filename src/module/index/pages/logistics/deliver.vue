@@ -19,13 +19,13 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">购买人：{{sendGoodForm.receiverEnterpriseName}}</el-col>
-          <el-col :span="6" class="msgName">订单金额（元）：{{sendGoodForm.productValue}}</el-col>
+          <el-col :span="6" class="msgName">订单金额（元）：{{sendGoodForm.productValue | numTransfer}}</el-col>
           <el-col :span="6" class="msgName">付款方式：{{sendGoodForm.payingMethod | payingMethod}}</el-col>
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">货品名称：{{sendGoodForm.productName}}</el-col>
           <el-col :span="6" class="msgName">货品数量：{{sendGoodForm.productQuantity}}</el-col>
-          <el-col :span="6" class="msgName">货品单价（元）：{{sendGoodForm.productUnitPrice}}</el-col>
+          <el-col :span="6" class="msgName">货品单价（元）：{{sendGoodForm.productUnitPrice | numTransfer}}</el-col>
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">支付银行：{{sendGoodForm.payerBank}}</el-col>
@@ -41,13 +41,13 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">发货人：{{sendGoodForm.senderEnterpriseName}}</el-col>
-          <el-col :span="6" class="msgName">订单金额(元)：{{sendGoodForm.productValue}}</el-col>
+          <el-col :span="6" class="msgName">订单金额(元)：{{sendGoodForm.productValue | numTransfer}}</el-col>
           <el-col :span="6" class="msgName">付款方式：{{sendGoodForm.payingMethod | payingMethod}}</el-col>
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">货品名称：{{sendGoodForm.productName}}</el-col>
           <el-col :span="6" class="msgName">货品数量：{{sendGoodForm.productQuantity}}</el-col>
-          <el-col :span="6" class="msgName">货品总价(元)：{{sendGoodForm.productValue}}</el-col>
+          <el-col :span="6" class="msgName">货品总价(元)：{{sendGoodForm.productValue | numTransfer}}</el-col>
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">货品所在仓储：{{sendGoodForm.senderRepoEnterpriseName}}</el-col>
@@ -118,7 +118,7 @@
           receiverRepoBusinessNo:'',
 
           logisticsEnterpriseName:'',
-          logisticsList:''
+          logisticsList:'',
         },
         sendGoodForm1:{
           logisticsEnterpriseName:'',
@@ -148,12 +148,9 @@
     mounted () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-        /*请求物流企业列表*/
-        this.$http.get("../v1/account/allEnterpriseName?roleCode=1").then(function(res){
-            this.sendGoodForm1.logisticsList=res.body.data;
-        },function(err){
-            console.log(err);
-        });
+
+      this.sendGoodForm.productValue=0;
+      this.sendGoodForm.productUnitPrice=0;
         /*根据订单号请求订单详情并填写*/
 
       this.$http.get("../v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
@@ -177,6 +174,14 @@
           this.sendGoodForm.senderRepoCertNo=this.orderDetail.txDetail.payeeRepoCertNo;/*发货货品仓单编号	*/
           this.sendGoodForm.receiverRepoEnterpriseName=this.orderDetail.txDetail.payerRepo;/*收货仓储公司名称	*/
           this.sendGoodForm.receiverRepoBusinessNo=this.orderDetail.payeeRepoBusinessNo;/*收货仓储业务编号	*/
+
+          /*请求物流企业列表*/
+          this.$http.get("../v1/account/allEnterpriseName?roleCode=1").then(function(res){
+            this.sendGoodForm1.logisticsList=res.body.data;
+          },function(err){
+            console.log(err);
+          });
+
         }, function (err) {
           // 处理失败的结果
           console.log(err);

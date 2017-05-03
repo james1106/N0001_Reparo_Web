@@ -25,9 +25,9 @@
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
-                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | wayBillStatus}}</el-col>
+                <el-col :span="6" class="msgName keynote">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
                 <!--<el-col :span="6" class="msgName">物流公司：{{logisticsDetail.logisticsEnterpriseName}}</el-col>-->
-                <el-col :span="6" class="msgName">入库时间：{{logisticsDetail.inRepoTime | timeTransfer | nullSituation}}</el-col>
+                <el-col :span="6" class="msgName">发货申请时间：{{logisticsDetail.sendReqTime | timeTransfer | nullSituation}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">物流跟踪：</el-col>
@@ -55,7 +55,7 @@
             <div class="box-card mycard1 detailContent">
               <el-row class="msgName keynote">发货信息：</el-row>
               <el-row class="cutoff">
-                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | wayBillStatus}}</el-col>
+                <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
                 <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>
@@ -68,7 +68,7 @@
               <el-row>
                 <el-col :span="6" class="msgName">货品名称：{{logisticsDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{logisticsDetail.productQuantity}}</el-col>
-                <el-col :span="6" class="msgName">货品单价(元)：{{logisticsDetail.productPrice}}</el-col>
+                <el-col :span="6" class="msgName">货品单价(元)：{{logisticsDetail.productPrice | numTransfer}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -87,7 +87,8 @@
       return {
         logisticsDetail:{
             productPrice:'',
-          inRepoTime:''
+          inRepoTime:'',
+          sendReqTime:''
         },
       }
     },
@@ -114,11 +115,11 @@
         console.log(res.body);
         this.logisticsDetail=res.body.data;
         this.logisticsDetail.productPrice=(this.logisticsDetail.productQuantity===''||this.logisticsDetail.productQuantity===0) ? '暂无':this.logisticsDetail.productValue/this.logisticsDetail.productQuantity;
-        this.logisticsDetail.inRepoTime='';
+        this.logisticsDetail.sendReqTime='';
         for(var item in this.logisticsDetail.operationRecordVo){
             var temp=this.logisticsDetail.operationRecordVo[item];
-          if(temp.state===constantData.ARRIVED){/*筛选入库时间*/
-            this.logisticsDetail.inRepoTime=temp.operateTime;
+          if(temp.state===constantData.SENDFORRESPONSE){/*筛选发货申请时间*/
+            this.logisticsDetail.sendReqTime=temp.operateTime;
             break;
           }
         }

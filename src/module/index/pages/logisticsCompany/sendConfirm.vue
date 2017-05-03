@@ -23,7 +23,7 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">货品名称：{{companyBillDetail.productName}}</el-col>
-          <el-col :span="6" class="msgName">货品价值：{{companyBillDetail.productValue}}</el-col>
+          <el-col :span="6" class="msgName">货品价值(元)：{{companyBillDetail.productValue | numTransfer}}</el-col>
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">物流公司：{{companyBillDetail.logisticsEnterpriseName}}</el-col>

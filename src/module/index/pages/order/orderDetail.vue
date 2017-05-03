@@ -45,7 +45,7 @@
               <el-row>
                 <el-col :span="6" class="msgName">货品名称：{{orderDetail.txDetail.productName}}</el-col>
                 <el-col :span="6" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
-                <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice}}</el-col>
+                <el-col :span="6" class="msgName">订单金额(元)：{{orderDetail.txDetail.productTotalPrice | numTransfer}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
@@ -82,14 +82,14 @@
               <el-row>
                 <el-col :span="6" class="msgName keynote">业务编号：{{orderDetail.receOver.receNo}}</el-col>
                 <el-col :span="6" class="msgName">签发时间：{{orderDetail.receOver.receGenerateTime | timeTransfer}}</el-col>
-                <el-col :span="6" class="msgName">到期日：{{orderDetail.receOver.dueDate}}</el-col>
+                <el-col :span="6" class="msgName">到期日：{{orderDetail.receOver.dueDate | timeTransfer}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="6" class="msgName">收款人：{{orderDetail.receOver.receivingSide}}</el-col>
                 <el-col :span="6" class="msgName">付款人：{{orderDetail.receOver.payingSide}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">账款金额(元)：{{orderDetail.receOver.receAmount}}</el-col>
+                <el-col :span="6" class="msgName">账款金额(元)：{{orderDetail.receOver.receAmount | numTransfer}}</el-col>
                 <el-col :span="6" class="msgName">票面利息：{{orderDetail.receOver.coupon}}</el-col>
               </el-row>
               <el-row>
@@ -153,11 +153,11 @@
         <el-card class="box-card mybox" style="width:100%">
           <div slot="header" class="clearfix el-row-header" v-if="state.isBuyer==='true'">
             <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
-            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payerRepoBusiState!==constantData.INFORRESPONSE"  @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
+            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payerRepoBusiState>=constantData.INFORRESPONSE"  @click="repoDetailPage(orderDetail.repoOver.payerRepoBusinessNo)">查看详情 ></el-button>
           </div>
           <div slot="header" class="clearfix el-row-header" v-else>
             <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
-            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payeeRepoBusiState!==constantData.OUTFORRESPONSE" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情  ></el-button>
+            <span class="keynote">仓储信息</span><el-button size="mini" type="text" class="detailButton" v-if="orderDetail.repoOver.payeeRepoBusiState>=constantData.FOROUT" @click="repoDetailPage(orderDetail.repoOver.payeeRepoBusinessNo)">查看详情  ></el-button>
           </div>
           <div class="box-card mycard1 detailContent" v-if="state.isBuyer==='true'"><!--区分买家和买家-->
             <div v-if="orderDetail.repoOver.payerRepoBusiState<constantData.INFORRESPONSE"><!--买家和卖家状态字段不同-->
@@ -186,9 +186,9 @@
             </div>
           </div>
           <div class="box-card mycard1 detailContent" v-if="state.isBuyer==='false'">
-            <div v-if="orderDetail.repoOver.payeeRepoBusiState<constantData.OUTFORRESPONSE">
+            <div v-if="orderDetail.repoOver.payeeRepoBusiState<constantData.FOROUT">
               <span class="msgName">暂无仓储信息！</span>
-              <!--卖家在出库待响应时开始有显示-->
+              <!--卖家在待出库时开始有显示-->
             </div>
             <div v-else>
             <el-row>
@@ -200,7 +200,7 @@
               <el-col :span="6" class="msgName" v-if="orderDetail.txDetail.payeeRepo===''">暂无仓储信息</el-col>
               <el-col :span="6" class="msgName" v-else>仓储公司：{{orderDetail.txDetail.payeeRepo}}</el-col>
               <!--注意这里多了一个字段-->
-              <el-col :span="6" class="msgName">持有人：{{orderDetail.repoOver.payerRepoCompany}}</el-col>
+              <el-col :span="6" class="msgName">持有人：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
             </el-row>
             <el-row>
               <el-col :span="8" class="msgName">最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}</el-col>

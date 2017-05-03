@@ -22,7 +22,7 @@
               <el-row>货品数量：{{item.productQuantity}}</el-row>
             </el-col>
             <el-col :span="6">
-              <el-row>订单金额：{{item.productTotalPrice}}</el-row>
+              <el-row>订单金额(元)：{{item.productTotalPrice | numTransfer}}</el-row>
               <el-row>付款方式：{{item.payingMethod | payingMethod}}</el-row>
             </el-col>
             <el-col :span="2">
