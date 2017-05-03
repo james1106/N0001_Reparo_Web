@@ -21,6 +21,7 @@
   padding-top: 10px!important;
   padding-bottom: 10px!important;
   height: 40px!important;
+  border-bottom: 1px solid #eeeeee!important;
 }
 .el-card__body{
   padding-top: 12px!important;
@@ -66,7 +67,7 @@
 }
 /*面包屑*/
 .bread{
-  margin-bottom: 23px
+  margin-bottom: 14px;
 }
 .buyerColor{
   color: #0096D7;
@@ -494,4 +495,7 @@ body{
   border-radius: 50%;
   margin-right: 5px;
 }
-
+.el-menu-item, .el-submenu__title
+{
+  height: 48px!important;
+}

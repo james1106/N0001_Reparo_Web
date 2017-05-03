@@ -29,7 +29,7 @@
                 <el-col :span="6" class="msgName keynote">买家信息：</el-col>
               </el-row>
               <el-row class="">
-                <el-col :span="6" class="msgName" v-if="state.isBuyer==='true'">商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
+                <el-col :span="6" class="msgName" v-if="state.isBuyer==='true'">购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
                 <el-col :span="6" class="msgName" v-else>购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
                 <el-col :span="6" class="msgName">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
                 <el-col :span="6" class="msgName">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
@@ -546,9 +546,9 @@
     margin-left: -4px;
     margin-right: 10px;
     position: absolute;
-    /*top:-5px;*/
-    top:0px;
-    z-index: 9999;
+    top:-5px;
+    /*top:0px;*/
+    z-index: 1000;
   }
   .status-list .el-col {
     height:30px;

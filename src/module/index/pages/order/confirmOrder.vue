@@ -70,7 +70,7 @@
           <span class="confirm-header sellerColor">确认订单</span><i class="el-icon-close closeBtn" @click="close" style="cursor: pointer"></i>
         </el-row>
         <div class="confirm-content">
-          <el-form :label-position="labelPosition">
+          <el-form>
           <el-row>
             <el-col :span="12">
               <span style="font-size: 12px;margin-left: 4%;">订单编号：{{orderDetail.txDetail.orderId}}</span>
