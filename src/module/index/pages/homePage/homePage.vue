@@ -17,7 +17,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">买入的订单</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">10</span>
             </div>
           </el-card>
         </el-col>
@@ -29,7 +29,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">应付账款</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">5</span>
             </div>
           </el-card>
         </el-col>
@@ -41,7 +41,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">我的仓储</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">8</span>
             </div>
           </el-card>
         </el-col>
@@ -58,7 +58,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">卖出的订单</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">13</span>
             </div>
           </el-card>
         </el-col>
@@ -70,7 +70,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">应收账款</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">2</span>
             </div>
           </el-card>
         </el-col>
@@ -82,7 +82,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">我的物流</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">8</span>
             </div>
           </el-card>
         </el-col>
@@ -94,7 +94,7 @@
             </svg>
             <div class="showMesg">
               <span class="showName">待确认订单</span> <br>
-              <span class="showNum">1000</span>
+              <span class="showNum">2</span>
             </div>
           </el-card>
         </el-col>
@@ -110,7 +110,18 @@
           <span :class="[{'green_span': state.isBuyer==='false', 'blue_span': state.isBuyer==='true'}]">待办订单</span>
         </div>
         <el-row v-if="showOrder.length===0">
-          <span class="showName">暂无待办订单!</span>
+          <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+            <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
+            <el-col :span="6">付款信息</el-col>
+            <el-col :span="8">订单状态</el-col>
+            <el-col :span="2">操作</el-col>
+          </el-row>
+          <el-row style="text-align: center">
+            <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+          </el-row>
+          <el-row style="text-align: center;font-size: 18px;color: #959697">
+            <span>暂无订单</span>
+          </el-row>
         </el-row>
         <el-row v-else>
         <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
@@ -215,6 +226,7 @@
   import maiB from '../../assets/mai_B.png'
   import maiG from  '../../assets/mai_G.png'
   import Localstore from "../../../../common/store.js"
+  import default_0 from  '../../assets/default_0.png'
   import logisticsHomepage from "./logisticsHomePage.vue"
   import repoHomepage from "./repoHomePage.vue"
   import store from "../../vuex/store"
@@ -292,6 +304,7 @@
           adImg: adImg,
           maiB: maiB,
           maiG: maiG,
+          default_0:default_0,
           companyType: 0  //0.融资企业 1.仓储公司 2.物流公司
         },
         showOrder:  [{

@@ -16,7 +16,7 @@
         </el-row>
         <el-row class="el-row-content" >
           <el-row class="el-row-content">
-            <el-col :span="6" style="margin-left: 19px;">购买人：{{orderDetail.txDetail.payerAccount}}</el-col>
+            <el-col :span="6" style="margin-left: 19px;">购买人：{{orderDetail.txDetail.payerCompanyName}}</el-col>
             <el-col :span="6">订单金额：{{orderDetail.txDetail.productTotalPrice}}</el-col>
             <el-col :span="6">付款方式：应收账款支付</el-col>
           </el-row>
@@ -24,10 +24,10 @@
             <el-col :span="6"  style="margin-left: 19px;">货品名称：{{orderDetail.txDetail.productName}}</el-col>
             <el-col :span="6" >货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
             <el-col :span="6">仓储机构：{{orderDetail.txDetail.payerRepo}}</el-col>
-            <el-col :span="5">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
           </el-row>
           <el-row class="el-row-content">
-            <el-col :span="6" style="margin-left: 19px;">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
+            <el-col :span="6" style="margin-left: 19px;">仓单编号：{{orderDetail.txDetail.payeeRepoCertNo}}</el-col>
+            <el-col :span="6">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
             <el-col :span="6">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
           </el-row>
         </el-row>

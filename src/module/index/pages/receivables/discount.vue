@@ -19,18 +19,18 @@
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
-                <el-col :span="6" class="msgName keynote">应收账款编号：{{detailInfo.detailVoList[0].receivableNo}}</el-col>
-                <el-col :span="6" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
-                <el-col :span="6" class="msgName">发起时间：{{detailInfo.detailVoList[0].isseDt | timeTransfer}}</el-col>
-                <el-col :span="6" class="msgName">到期日：{{detailInfo.detailVoList[0].dueDt | timeTransfer}}</el-col>
+                <el-col :span="8" class="msgName keynote">应收账款编号：{{detailInfo.detailVoList[0].receivableNo}}</el-col>
+                <el-col :span="8" class="msgName">发起时间：{{detailInfo.detailVoList[0].isseDt | timeTransfer}}</el-col>
+                <el-col :span="8" class="msgName">到期日：{{detailInfo.detailVoList[0].dueDt | timeTransfer}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">付款人：{{detailInfo.detailVoList[0].pyerEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
+                <el-col :span="8" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">付款人：{{detailInfo.detailVoList[0].pyerEnterpriseName}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">账款金额（元）:{{detailInfo.detailVoList[0].isseAmt}}</el-col>
-                <el-col :span="6" class="msgName">票面利息(%)：{{detailInfo.detailVoList[0].rate}}</el-col>
+                <el-col :span="8" class="msgName">账款金额（元）:{{detailInfo.detailVoList[0].isseAmt}}</el-col>
+                <el-col :span="8" class="msgName">票面利息(%)：{{detailInfo.detailVoList[0].rate}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -40,7 +40,7 @@
         <span class="sellerStepTitle"><span class="sellerCircle">2</span>请选择贴现银行</span>
       </div>
       <el-row>
-        <el-form ref="discount" :model="bankOption" :label-position="labelPosition" :rules="discountRules">
+        <el-form ref="discount" :model="bankOption" :rules="discountRules">
           <el-col :span="12">
             <el-form-item label="请选择贴现银行" prop="bankOption">
               <el-select v-model="bankOption.bankSvcr" placeholder="请选择开户行">
