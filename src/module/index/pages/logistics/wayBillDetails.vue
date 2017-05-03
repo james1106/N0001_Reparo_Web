@@ -57,7 +57,7 @@
               <el-row class="cutoff">
                 <el-col :span="6" class="msgName">运单号：{{logisticsDetail.wayBillNo | nullSituation}}</el-col>
                 <el-col :span="6" class="msgName">发货仓储：{{logisticsDetail.senderRepoEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
+                <el-col :span="8" class="msgName">货品仓单编号：{{logisticsDetail.senderRepoCertNo}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">收货信息：</el-row>
               <el-row class="cutoff">

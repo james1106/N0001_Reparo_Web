@@ -35,10 +35,6 @@
               <el-row>
                 <el-col :span="8" class="msgName">仓单状态明细：</el-col>
               </el-row>
-              <!--<el-row v-for="item in receiptsDetails.repoCertHisList">
-                <el-col :span="8" class="msgName">{{item.operateTime | timeTransfer}} {{item.state | repoCertStatus}}</el-col>
-              </el-row>-->
-
               <el-row class="collapseTop" v-if="receiptsDetails.recordVos.length!=0">
                 <template v-for="(item,index) in receiptsDetails.recordVos">
                   <el-row class="status-list" :class="{circleColor:index==(receiptsDetails.recordVos.length-1)}">

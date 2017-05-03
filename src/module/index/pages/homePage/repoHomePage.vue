@@ -40,7 +40,20 @@
         <span class="green_span">待办仓储</span>
       </div>
       <el-row v-if="repoList.length == 0">
-        <span class="msgName">暂无待办仓储！</span>
+        <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+          <el-col :span="4" style="margin-left: 19px">业务编号</el-col>
+          <el-col :span="4">持有人</el-col>
+          <el-col :span="4">仓储状态</el-col>
+          <el-col :span="4">仓单编号</el-col>
+          <el-col :span="4">仓单状态</el-col>
+          <el-col :span="2">操作</el-col>
+        </el-row>
+        <el-row style="text-align: center">
+          <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+        </el-row>
+        <el-row style="text-align: center;font-size: 18px;color: #959697">
+          <span>暂无订单</span>
+        </el-row>
       </el-row>
       <el-row v-else>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
@@ -89,7 +102,7 @@
           </el-row>
         </div>
       </template>
-      </el-row>>
+      </el-row>
     </el-card>
   </div>
 </template>
@@ -101,6 +114,7 @@
   import ccG from '../../assets/cc_G.png'
   import constantData from '../../../../common/const.js'
   import Store from "../../vuex/store"
+  import default_0 from  '../../assets/default_0.png'
 
   export default {
     name: 'repoHp',
@@ -122,7 +136,8 @@
         imgUrl:{
           adImg:adImg,
           wlG:wlG,
-          ccG:ccG
+          ccG:ccG,
+          default_0:default_0
         },
         repoList:[]
       }
