@@ -4,6 +4,7 @@ const constantData={
   /*订单交易状态*/
   UNCONFIRMED : 1,/*交易待卖方确认*/
   CONFIRMED : 2,/*交易卖方已确认*/
+  FINISHED : 3,/*交易已完成*/
 
   /*应收款状态*/
   FORACCEPT : 21,/*应收账款承兑待签收*/

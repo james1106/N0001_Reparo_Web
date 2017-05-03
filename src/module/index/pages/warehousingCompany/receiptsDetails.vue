@@ -35,16 +35,20 @@
               <el-row>
                 <el-col :span="8" class="msgName">仓单状态明细：</el-col>
               </el-row>
-              <el-row v-for="item in receiptsDetails.repoCertHisList">
+              <!--<el-row v-for="item in receiptsDetails.repoCertHisList">
                 <el-col :span="8" class="msgName">{{item.operateTime | timeTransfer}} {{item.state | repoCertStatus}}</el-col>
-              </el-row>
+              </el-row>-->
 
-              <el-row class="collapseTop">
-                <template v-for="(item,index) in receiptsDetails.repoCertHisList">
-                  <el-row class="status-list" :class="{circleBlue:index==(receiptsDetails.repoCertHisList.length-1)}">
-                    <el-col :span="8" :class="{colorBlue:index==(receiptsDetails.repoCertHisList.length-1)}"><span>{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
+              <el-row class="collapseTop" v-if="receiptsDetails.recordVos.length!=0">
+                <template v-for="(item,index) in receiptsDetails.recordVos">
+                  <el-row class="status-list" :class="{circleColor:index==(receiptsDetails.recordVos.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(receiptsDetails.recordVos.length-1)}"><span>{{item.state | repoCertStatus}}：{{item.operateTime | timeTransfer}}</span></el-col>
                   </el-row>
                 </template>
+              </el-row>
+
+              <el-row class="msgName" v-else>
+                暂无
               </el-row>
 
             </div>
@@ -61,7 +65,9 @@
     name:'index',
     data () {
       return {
-        receiptsDetails:''
+        receiptsDetails:{
+          recordVos:[],
+        }
       }
     },
     computed:{
