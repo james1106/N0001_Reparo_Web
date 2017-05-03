@@ -35,10 +35,14 @@
     <el-row>
       <img :src="imgUrl.adImg" style="width: 100%">
     </el-row>
-    <el-card>
+  <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span>待办仓储</span>
+        <span class="green_span">待办仓储</span>
       </div>
+      <el-row v-if="repoList.length == 0">
+        <span class="msgName">暂无待办仓储！</span>
+      </el-row>
+      <el-row v-else>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="4" style="margin-left: 19px">业务编号</el-col>
         <el-col :span="4">持有人</el-col>
@@ -47,7 +51,6 @@
         <el-col :span="4">仓单状态</el-col>
         <el-col :span="2">操作</el-col>
       </el-row>
-      <span v-if="repoList.length == 0" class="msgName">暂无待办仓储！</span>
       <template v-for="item in repoList">
         <div>
           <el-row class="dataTable">
@@ -86,6 +89,7 @@
           </el-row>
         </div>
       </template>
+      </el-row>>
     </el-card>
   </div>
 </template>

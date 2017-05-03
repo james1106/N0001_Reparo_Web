@@ -37,15 +37,18 @@
     </el-row>
     <el-card>
       <div slot="header" class="clearfix" style="height: 8px">
-        <span>待办物流</span>
+        <span class="green_span">待办物流</span>
       </div>
+      <el-row v-if="wayBillList.length == 0">
+        <span  class="msgName">暂无待办物流!</span>
+      </el-row>
+      <el-row v-else>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
         <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
         <el-col :span="6">货品信息</el-col>
         <el-col :span="6">物流状态</el-col>
         <el-col :span="4" style="text-align: center">操作</el-col>
       </el-row>
-      <span v-if="wayBillList.length == 0" class="msgName">暂无待办物流!</span>
       <template v-for="item in wayBillList">
         <div>
           <el-row class="dataTable">
@@ -81,6 +84,7 @@
           </el-row>
         </div>
       </template>
+      </el-row>
     </el-card>
   </div>
 </template>
