@@ -35,7 +35,7 @@
             <el-col :span="3">
               <el-col :span="24">
                 <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.INFORRESPONSE" @click.native.prevent="inResponse(item.repoBusiNo)">入库响应</el-button>
-                <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FORIN" @click.native.prevent="inConfirm(item.repoBusiNo)">入库确认</el-button>
+                <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FORIN" @click.native.prevent="inConfirm(item.repoBusiNo,item.orderNo)">入库确认</el-button>
                 <el-button size="mini" type="text" class="buyerColor" v-if="item.curRepoBusiStatus===constantData.FOROUT" @click.native.prevent="outConfirm(item.repoBusiNo)">出库确认</el-button>
               </el-col>
               <el-col :span="24" style="margin-left: -9px">
@@ -116,8 +116,10 @@
         store.commit('setCheckIdRepo',repoBusinessNo);
         this.$router.push('/warehousingCompany/inResponse')
       },
-      inConfirm(repoBusinessNo){
+      //点击入库确认时需要订单号，后台改变订单相关状态
+      inConfirm(repoBusinessNo,orderNo){
         store.commit('setCheckIdRepo',repoBusinessNo);
+        store.commit('setCheckIdOrder',orderNo);
         this.$router.push('/warehousingCompany/inConfirm')
       },
       outConfirm(repoBusinessNo){
