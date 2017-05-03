@@ -55,7 +55,7 @@
                            v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)" @click.native.prevent="signBill(item.orderNo)">签发账款
                 </el-button>
                 <el-button size="mini" type="text"
-                           v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)"
+                           v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)&&(item.wayBillStatus===constantData.FORSEND)"
                            @click.native.prevent="sendGood(item.orderNo)">发货
                 </el-button>
                 <el-button size="mini" type="text"

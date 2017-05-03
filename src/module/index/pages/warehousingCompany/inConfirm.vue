@@ -24,15 +24,15 @@
             <div class="box-card mycard1 detailContent">
               <el-row>
                 <el-col :span="8" class="msgName">申请人：{{repoDetails.storeEnterpriseName}}</el-col>
-                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo}}</el-col>
+                <el-col :span="8" class="msgName">运单号：{{repoDetails.waybillNo | nullSituation}}</el-col>
                 <el-col :span="8" class="msgName">物流公司：{{repoDetails.logisticsEntepsName | nullSituation}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">货品名称：{{repoDetails.productName}}</el-col>
-                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}}（{{repoDetails.measureUnit}}）</el-col>
+                <el-col :span="8" class="msgName">货品数量：{{repoDetails.productQuantity}} {{repoDetails.measureUnit}}</el-col>
                 <el-col :span="8" class="msgName">货物总额（元）：{{repoDetails.productTotalPrice}}</el-col>
               </el-row>
-              <el-row>
+              <!--<el-row>
                 <el-col :span="12">
                   <el-form :model="param" :label-position="labelPosition" :rules="rules" ref="param">
                     <el-form-item label="仓单编号:" prop="receiptNo">
@@ -40,7 +40,7 @@
                     </el-form-item>
                   </el-form>
                 </el-col>
-              </el-row>
+              </el-row>-->
             </div>
           </el-card>
         </el-col>

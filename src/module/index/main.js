@@ -23,6 +23,7 @@ Vue.filter('transactionStatus',function(value){
   switch(value){
     case constantData.UNCONFIRMED:readableStatus="订单待确认";break;
     case constantData.CONFIRMED:readableStatus="订单已确认";break;
+    case constantData.FINISHED:readableStatus="订单已完成";break;
     default:readableStatus="暂无";break;
   }
   return readableStatus;
