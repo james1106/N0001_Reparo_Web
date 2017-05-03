@@ -546,8 +546,8 @@
     margin-left: -4px;
     margin-right: 10px;
     position: absolute;
-    top:-5px;
-    /*top:0px;*/
+    /*top:-5px;*/
+    top:0px;
     z-index: 9999;
   }
   .status-list .el-col {

@@ -24,7 +24,8 @@
               <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-button size="small" @click.native.prevent="checkDetail(item.repoCertNo)">查看详情</el-button>
+              <el-button v-if="item.repoCertNo !== ''" size="small" @click.native.prevent="checkDetail(item.repoCertNo)">查看详情</el-button>
+              <span v-else>暂无操作</span>
             </el-col>
           </el-row>
         </el-row>

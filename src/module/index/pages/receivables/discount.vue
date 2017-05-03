@@ -71,8 +71,8 @@
     mounted:function () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      this.getDetail()
-      this.getBankList();
+      this.getDetail();
+//      this.getBankList();
     },
     data () {
       return {
@@ -127,6 +127,7 @@
             return;
           }
           //详情数据
+          this.getBankList();
           this.detailInfo = data;
           this.setStatusInfo(data);
         },(err) => {
