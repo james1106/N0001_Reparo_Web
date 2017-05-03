@@ -43,7 +43,7 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-form-item label="订单金额（元）">
+            <el-form-item label="订单金额(元)">
               <!--<el-input v-model="launchOrder.totalPrice" :disabled="true" :value="launchOrder.productUnitPrice*launchOrder.productQuantity">{{launchOrder.productUnitPrice*launchOrder.productQuantity}}</el-input>-->
               <div class="el-input">{{launchOrder.productUnitPrice*launchOrder.productQuantity | numTransfer}}</div>
             </el-form-item>

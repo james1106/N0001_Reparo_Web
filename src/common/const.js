@@ -23,7 +23,7 @@ const constantData={
   INFORRESPONSE:1,/*入库待响应*/
   FORIN:2,/*待入库*/
   ALREADYIN:3,/*已入库*/
-  OUTFORRESPONSE:4,/*出库待响应*/
+  OUTFORRESPONSE:4,/*出库待响应 后台已删除*/
   FOROUT:5,/*待出库*/
   ALREADYOUT:6,/*已出库*/
 
