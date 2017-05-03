@@ -28,6 +28,12 @@
       </el-tab-pane>
     </el-tabs>
     </el-card>
+    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+      <span>{{msg}}</span>
+      <span slot="footer" class="dialog-footer">
+       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -66,7 +72,9 @@
     data () {
       return {
         accountsList:[],
-        orderList:[]
+        orderList:[],
+        msg:'',
+        dialogVisible:false
       }
     },
     methods:{
@@ -77,6 +85,8 @@
           var code =  res.body.code;
           var data =  res.body.data;
           if(code != 0){
+            this.dialogVisible = true;
+            this.msg = res.body.message;
             return;
           }
           for(var i=0;i<data.length;i++){
@@ -97,6 +107,8 @@
           var code =  res.body.code;
           var data =  res.body.data;
           if(code != 0){
+            this.dialogVisible = true;
+            this.msg = res.body.message;
             return;
           }
           this.accountsList = data;
