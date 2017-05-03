@@ -10,7 +10,7 @@
       <div>
         <el-row class="dataTable">
           <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoCertNo}}</el-col>
+            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoCertNo | nullSituation}}</el-col>
           </el-row>
           <el-row class="el-row-content">
             <el-col :span="6" style="margin-left: 19px;">
