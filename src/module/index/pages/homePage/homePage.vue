@@ -191,11 +191,11 @@
           "productPrice":"10000",
           "totalPrice":"100000",
           "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-04-01 17:00",
-          "txState":"xxx",
-          "repoCertState":"xxx",
-          "wayBillState":"xx",
-          "receState":"xxx"
+          "orderGenerateTime":"2017-05-02 9:00",
+          "txState":"已确认",
+          "repoCertState":"暂无",
+          "wayBillState":"暂无",
+          "receState":"暂无"
         },
         {
           "orderNo":"1111111122",
@@ -205,11 +205,11 @@
           "productPrice":"10000",
           "totalPrice":"100000",
           "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-04-01 17:00",
-          "txState":"xxx",
-          "repoCertState":"xxx",
-          "wayBillState":"xx",
-          "receState":"xxx"
+          "orderGenerateTime":"2017-05-02 9:30",
+          "txState":"已确认",
+          "repoCertState":"暂无",
+          "wayBillState":"暂无",
+          "receState":"暂无"
         },
         {
           "orderNo":"1111111122",
@@ -219,11 +219,11 @@
           "productPrice":"10000",
           "totalPrice":"100000",
           "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-04-01 17:00",
-          "txState":"xxx",
-          "repoCertState":"xxx",
-          "wayBillState":"xx",
-          "receState":"xxx"
+          "orderGenerateTime":"2017-05-02 9:50",
+          "txState":"已确认",
+          "repoCertState":"暂无",
+          "wayBillState":"暂无",
+          "receState":"暂无"
         },
         {
           "orderNo":"1111111122",
@@ -233,11 +233,11 @@
           "productPrice":"10000",
           "totalPrice":"100000",
           "payingMethod":"应收账款",
-          "orderGenerateTime":"2017-04-01 17:00",
-          "txState":"xxx",
-          "repoCertState":"xxx",
-          "wayBillState":"xx",
-          "receState":"xxx"
+          "orderGenerateTime":"2017-05-02 10:00",
+          "txState":"已确认",
+          "repoCertState":"暂无",
+          "wayBillState":"暂无",
+          "receState":"暂无"
         }
       ]
     }

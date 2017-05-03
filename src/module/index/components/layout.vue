@@ -98,7 +98,8 @@
     var oDiv = document.getElementById("main-left");
     window.onscroll = function()
     {
-      var s = document.body.scrollTop || document.documentElement.scrollTop;
+      var s = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      console.log(s);
       if(s > 60) {
         oDiv.style = "position:fixed;top:0";
       } else {
