@@ -29,8 +29,8 @@
                 <el-col :span="6" class="msgName keynote">买家信息：</el-col>
               </el-row>
               <el-row class="">
-                <el-col :span="6" class="msgName" v-if="state.isBuyer==='true'">购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
-                <el-col :span="6" class="msgName" v-else>购买者：{{orderDetail.txDetail.payerCompanyName}}</el-col>
+                <el-col :span="6" class="msgName" v-if="state.isBuyer==='true'"> 商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
+                <el-col :span="6" class="msgName" v-else>商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>
                 <el-col :span="6" class="msgName">支付银行：{{orderDetail.txDetail.payerBank}}</el-col>
                 <el-col :span="6" class="msgName">付款账户：{{orderDetail.txDetail.payerAccount}}</el-col>
                 <el-col :span="6" class="msgName">付款方式：{{orderDetail.txDetail.payingMethod | payingMethod}}</el-col>

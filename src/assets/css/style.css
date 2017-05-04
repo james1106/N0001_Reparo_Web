@@ -501,3 +501,6 @@ body{
   width: 100%!important;
   min-width: 160px;
 }
+.el-menu-item[data-v-e569b42a], .el-submenu__title[data-v-e569b42a]{
+  width: 100%!important;
+}

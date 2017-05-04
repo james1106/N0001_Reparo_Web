@@ -37,7 +37,6 @@
           <el-card class="showCard">
             <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left"> 
               <use xlink:href="#icon-cc_o"></use>
-               
             </svg>
             <div class="showMesg">
               <span class="showName">我的仓储</span> <br>
@@ -46,7 +45,7 @@
           </el-card>
         </el-col>
         <el-col :span="6" style="float: right">
-          <img :src="imgUrl.maiB" style="height: 80px;float: right">
+          <img :src="imgUrl.maiB" style="height: 80px;width:100%;float: right">
         </el-col>
       </el-row>
       <el-row v-else>  <!--卖家-->
@@ -98,8 +97,8 @@
             </div>
           </el-card>
         </el-col>
-        <el-col :span="4" style="float: right">
-          <img :src="imgUrl.maiG" style="height: 80px;float: right">
+        <el-col :span="5" style="float: right">
+          <img :src="imgUrl.maiG" style="height: 80px;width:100%;float: right">
         </el-col>
       </el-row>
       <el-row>

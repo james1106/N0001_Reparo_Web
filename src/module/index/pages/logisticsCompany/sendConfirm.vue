@@ -15,7 +15,7 @@
       <el-row class="dataTable">
         <el-row class="el-row-header">
           <el-col :span="6" style="margin-left: 19px">运单编号：{{companyBillDetail.wayBillNo | nullSituation}}</el-col>
-          <el-col :span="6">发起时间：{{companyBillDetail.wayBillCreateTime | timeTransfer | nullSituation}}</el-col><!--发货待响应的时间-->
+          <el-col :span="8">发起时间：{{companyBillDetail.wayBillCreateTime | timeTransfer | nullSituation}}</el-col><!--发货待响应的时间-->
         </el-row>
         <el-row>
           <el-col :span="6" class="msgName" style="margin-left: 19px">发货人：{{companyBillDetail.senderEnterpriseName}}</el-col>

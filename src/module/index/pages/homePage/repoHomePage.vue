@@ -29,7 +29,7 @@
         </el-card>
       </el-col>
       <el-col :span="6" style="float: right">
-        <img :src="imgUrl.ccG" style="height: 80px;float: right">
+        <img :src="imgUrl.ccG" style="height: 80px;width:100%;float: right">
       </el-col>
     </el-row>
     <el-row>
