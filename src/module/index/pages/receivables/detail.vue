@@ -29,7 +29,6 @@
                 <el-col :span="8" class="msgName">到期日：{{detailInfo.detailVoList[0].dueDt | timeTransfer}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName keynote">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
                 <el-col :span="8" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
                 <el-col :span="8" class="msgName">付款人：{{detailInfo.detailVoList[0].pyerEnterpriseName}}</el-col>
               </el-row>
@@ -61,40 +60,39 @@
             <div class="box-card mycard1 detailContent">
               <el-row class="msgName keynote">收款人信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">收款人账号：{{detailInfo.detailVoList[0].pyee}}</el-col>
-                <el-col :span="6" class="msgName">收款人开户行：{{detailInfo.detailVoList[0].pyeeAcctSvcrName}}</el-col>
+                <el-col :span="8" class="msgName">收款人：{{detailInfo.detailVoList[0].pyeeEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">收款人开户行：{{detailInfo.detailVoList[0].pyeeAcctSvcrName}}</el-col>
+                <el-col :span="8" class="msgName">收款人账号：{{detailInfo.detailVoList[0].pyee}}</el-col>
               </el-row>
               <el-row class="cutoff">
                 <!--<el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyeeLinkMan | nullSituation}}</el-col>-->
-                <el-col :span="6" class="msgName">联系人：暂无</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">联系人：暂无</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">付款人：{{detailInfo.detailVoList[0].pyerEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">付款人账号：{{detailInfo.detailVoList[0].pyer}}</el-col>
-                <el-col :span="6" class="msgName">付款人开户行：{{detailInfo.detailVoList[0].pyerAcctSvcrName}}</el-col>
+                <el-col :span="8" class="msgName">付款人：{{detailInfo.detailVoList[0].pyerEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">付款人开户行：{{detailInfo.detailVoList[0].pyerAcctSvcrName}}</el-col>
+                <el-col :span="8" class="msgName">付款人账号：{{detailInfo.detailVoList[0].pyer}}</el-col>
               </el-row>
               <el-row class="cutoff">
                 <!--<el-col :span="6" class="msgName">联系人：{{detailInfo.detailVoList[0].pyerLinkMan | nullSituation}}</el-col>-->
-                <el-col :span="6" class="msgName">联系人：暂无</el-col>
-                <el-col :span="6" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">联系人：暂无</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{detailInfo.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">附加信息：</el-row>
               <el-row>
-                <el-col :span="6" class="msgName">合同编号：{{detailInfo.detailVoList[0].contractNo | nullSituation}}</el-col>
-                <el-col :span="6" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo | nullSituation}}</el-col>
-                <el-col :span="6" class="msgName">物流企业：{{detailInfo.detailVoList[0].logisticsEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">订单编号：{{detailInfo.detailVoList[0].orderNo}}</el-col>
+                <el-col :span="8" class="msgName">合同编号：{{detailInfo.detailVoList[0].contractNo | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo | nullSituation}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">运单编号：{{detailInfo.detailVoList[0].waybillNo}}</el-col>
-                <el-col :span="6" class="msgName">出库仓储机构：{{detailInfo.detailVoList[0].payeeRepoEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">出库仓单编号：{{detailInfo.detailVoList[0].payeeRepoCertNo}}</el-col>
+                <el-col :span="8" class="msgName">物流企业：暂无</el-col>
+                <el-col :span="8" class="msgName">运单编号：暂无</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">入库仓储机构：{{detailInfo.detailVoList[0].payerRepoEnterpriseName}}</el-col>
-                <el-col :span="6" class="msgName">入库仓单编号：{{detailInfo.detailVoList[0].payerRepoCertNo}}</el-col>
+                <el-col :span="8" class="msgName">仓储机构：暂无</el-col>
+                <el-col :span="8" class="msgName">仓单编号：暂无</el-col>
               </el-row>
             </div>
           </el-card>

@@ -41,7 +41,7 @@
       </div>
       <el-row v-if="wayBillList.length == 0">
         <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-          <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
+          <el-col :span="7" style="margin-left: 19px">物流信息</el-col>
           <el-col :span="6">货品信息</el-col>
           <el-col :span="6">物流状态</el-col>
           <el-col :span="4" style="text-align: center">操作</el-col>
@@ -55,7 +55,7 @@
       </el-row>
       <el-row v-else>
       <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-        <el-col :span="6" style="margin-left: 19px">物流信息</el-col>
+        <el-col :span="7" style="margin-left: 19px">物流信息</el-col>
         <el-col :span="6">货品信息</el-col>
         <el-col :span="6">物流状态</el-col>
         <el-col :span="4" style="text-align: center">操作</el-col>
@@ -64,12 +64,12 @@
         <div>
           <el-row class="dataTable">
             <el-row class="el-row-header">
-              <el-col :span="6" style="margin-left: 19px;">运单编号：{{item.wayBillNo}}</el-col>
+              <el-col :span="7" style="margin-left: 19px;">运单编号：{{item.wayBillNo}}</el-col>
               <el-col :span="6">发货人：{{item.senderEnterpriseName}}</el-col>
               <el-col :span="8">收货人：{{item.receiverEnterpriseName}}</el-col>
             </el-row>
             <el-row class="el-row-content">
-              <el-col :span="6" style="margin-left: 19px;">
+              <el-col :span="7" style="margin-left: 19px;">
                 <el-row>收货仓储：{{item.receiverRepoEnterpriseName}}</el-row>
                 <el-row>发货仓储：{{item.senderRepoEnterpriseName}}</el-row>
               </el-col>
