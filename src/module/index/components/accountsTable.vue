@@ -1,13 +1,21 @@
 <template>
-  <div id="accountTable"  >
+  <div id="accountTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-      <el-col :span="5" style="margin-left: 20px">货品信息</el-col>
-      <el-col :span="5">账款信息</el-col>
-      <el-col :span="5" v-if="isBuyer==='true'">收款人</el-col>
-      <el-col :span="5" v-else>付款人</el-col>
-      <el-col :span="5">账款状态</el-col>
+      <el-col :span="7" style="margin-left: 20px">货品信息</el-col>
+      <el-col :span="6">付款信息</el-col>
+      <el-col :span="8">订单状态</el-col>
       <el-col :span="2">操作</el-col>
     </el-row>
+    <template v-if="tableData.length===0">
+      <el-row style="text-align: center">
+        <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+      </el-row>
+      <el-row style="text-align: center;font-size: 18px;color: #959697">
+        <span>暂无该状态的应收账款</span>
+      </el-row>
+    </template>
+
+    <template v-else>
     <template v-for="item in showData">
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -49,13 +57,14 @@
       @current-change="currentChange"
       :total="tableData.length">
     </el-pagination>
-
+    </template>
   </div>
 </template>
 
 <script>
   import constantData from '../../../common/const'
   import Store from '../vuex/store.js'
+  import default_0 from  '../assets/default_0.png'
 
   export default {
     name: 'accountTable',
@@ -65,6 +74,9 @@
           tableData:this.accountInfo,
           showData:[],
           accountsStatus:this.status,
+          imgUrl: {
+            default_0:default_0
+          }
         }
     },
     computed: {

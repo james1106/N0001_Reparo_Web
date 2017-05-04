@@ -26,7 +26,8 @@
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
-                <el-col :span="6" class="msgName keynote">买家信息：</el-col>
+                <el-col :span="6" class="msgName keynote" v-if="state.isBuyer==='false'">买家信息：</el-col>
+                <el-col :span="6" class="msgName keynote" v-else>卖家信息：</el-col>
               </el-row>
               <el-row class="">
                 <el-col :span="6" class="msgName" v-if="state.isBuyer==='true'"> 商家：{{orderDetail.txDetail.payeeCompanyName}}</el-col>

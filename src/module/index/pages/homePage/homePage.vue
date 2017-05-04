@@ -248,6 +248,9 @@
         default:
           break;
       }
+      if (this.companyType != 0){
+          return;
+      }
       this.$http.get("../v1/order/order_list/" + tempRole).then(function (res) {
           console.log("获取到的所有订单: " + res.body.data.length);
           this.showOrder = res.body.data;

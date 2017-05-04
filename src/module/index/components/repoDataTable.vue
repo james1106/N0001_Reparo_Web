@@ -8,50 +8,61 @@
       <el-col :span="4">仓单状态</el-col>
       <el-col :span="2">操作</el-col>
     </el-row>
-    <template v-for="(item,index) in showData">
-      <div>
-        <el-row class="dataTable">
-          <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo | nullSituation}}</el-col>
-            <el-col :span="8">订单编号：{{item.orderNo | nullSituation}}</el-col>
-          </el-row>
-          <el-row class="el-row-content">
-            <el-col :span="4" style="margin-left: 19px;">
-              <el-row>货品名称：{{item.productName}}</el-row>
-              <el-row>货品数量：{{item.productQuantity}}</el-row>
-            </el-col>
-            <el-col :span="4">
-              <el-row>{{item.repoEnterpriceName}}</el-row><!--所在仓储-->
-            </el-col>
-            <el-col :span="4">
-              <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->
-            </el-col>
-            <el-col :span="4">
-              <el-row v-if="item.repoCertNo===''">暂无</el-row><!--仓单编号-->
-              <el-row v-else>{{item.repoCertNo}}</el-row><!--仓单编号-->
-            </el-col>
-            <el-col :span="4">
-              <el-row>{{item.repoCertStatus | repoCertStatus | nullSituation}}</el-row><!--仓单状态-->
-            </el-col>
-            <el-col :span="3">
-              <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
-            </el-col>
-          </el-row>
-        </el-row>
-      </div>
+    <template v-if="tableData.length===0">
+      <el-row style="text-align: center">
+        <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+      </el-row>
+      <el-row style="text-align: center;font-size: 18px;color: #959697">
+        <span>暂无该状态的仓储信息</span>
+      </el-row>
     </template>
-    <el-pagination
-      layout="total,prev, pager, next,jumper"
-      @current-change="currentChange"
-      :total="tableData.length">
-    </el-pagination>
-
+    <template v-else>
+      <template v-for="(item,index) in showData">
+        <div>
+          <el-row class="dataTable">
+            <el-row class="el-row-header">
+              <el-col :span="8" style="margin-left: 19px;">仓储业务编号：{{item.repoBusiNo | nullSituation}}</el-col>
+              <el-col :span="8">订单编号：{{item.orderNo | nullSituation}}</el-col>
+            </el-row>
+            <el-row class="el-row-content">
+              <el-col :span="4" style="margin-left: 19px;">
+                <el-row>货品名称：{{item.productName}}</el-row>
+                <el-row>货品数量：{{item.productQuantity}}</el-row>
+              </el-col>
+              <el-col :span="4">
+                <el-row>{{item.repoEnterpriceName}}</el-row><!--所在仓储-->
+              </el-col>
+              <el-col :span="4">
+                <el-row>{{item.curRepoBusiStatus | repoStatus}}</el-row><!--仓储状态-->
+              </el-col>
+              <el-col :span="4">
+                <el-row v-if="item.repoCertNo===''">暂无</el-row><!--仓单编号-->
+                <el-row v-else>{{item.repoCertNo}}</el-row><!--仓单编号-->
+              </el-col>
+              <el-col :span="4">
+                <el-row>{{item.repoCertStatus | repoCertStatus | nullSituation}}</el-row><!--仓单状态-->
+              </el-col>
+              <el-col :span="3">
+                <el-button size="small" @click.native.prevent="checkDetail(item.repoBusiNo)">查看详情</el-button>
+              </el-col>
+            </el-row>
+          </el-row>
+        </div>
+      </template>
+      <el-pagination
+        layout="total,prev, pager, next,jumper"
+        @current-change="currentChange"
+        :total="tableData.length">
+      </el-pagination>
+    </template>
   </div>
 </template>
 
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
+  import default_0 from  '../assets/default_0.png'
+
   export default {
     name: 'repoDataTable',
     props: ['repoList','status','pageSize'],
@@ -60,7 +71,10 @@
         tableData:this.repoList,
         showData:[],
         accountsStatus:this.status,
-        detailPath:''
+        detailPath:'',
+        imgUrl: {
+          default_0:default_0
+        }
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/

@@ -6,6 +6,15 @@
       <el-col :span="6">物流状态</el-col>
       <el-col :span="4" style="text-align: center">操作</el-col>
     </el-row>
+    <template v-if="tableData.length===0">
+      <el-row style="text-align: center">
+        <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+      </el-row>
+      <el-row style="text-align: center;font-size: 18px;color: #959697">
+        <span>暂无该状态的物流信息</span>
+      </el-row>
+    </template>
+    <template v-else>
     <template v-for="(item,index) in showData">
       <div>
         <el-row class="dataTable">
@@ -46,13 +55,14 @@
       @current-change="currentChange"
       :total="tableData.length">
     </el-pagination>
-
+    </template>
   </div>
 </template>
 
 <script>
   import store from '../vuex/store'
   import constantData from '../../../common/const'
+  import default_0 from  '../assets/default_0.png'
   export default {
     name: 'logisticsCompanyDataTable',
     props: ['logisticsCompanyList','status','pageSize'],
@@ -61,7 +71,10 @@
         tableData:this.logisticsCompanyList,
         showData:[],
         accountsStatus:this.status,
-        detailPath:''
+        detailPath:'',
+        imgUrl: {
+          default_0:default_0
+        }
       }
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
