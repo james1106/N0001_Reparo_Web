@@ -95,7 +95,6 @@
     window.onscroll = function()
     {
       var s = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      console.log(s);
       if(s > 60) {
         oDiv.style = "position:fixed;top:0";
       } else {

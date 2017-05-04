@@ -110,7 +110,7 @@
         </div>
         <el-row v-if="showOrder.length===0">
           <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-            <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
+            <el-col :span="7" style="margin-left: 20px">货品信息</el-col>
             <el-col :span="6">付款信息</el-col>
             <el-col :span="8">订单状态</el-col>
             <el-col :span="2">操作</el-col>
@@ -124,7 +124,7 @@
         </el-row>
         <el-row v-else>
         <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-          <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
+          <el-col :span="7" style="margin-left: 20px">货品信息</el-col>
           <el-col :span="6">付款信息</el-col>
           <el-col :span="8">订单状态</el-col>
           <el-col :span="2">操作</el-col>
@@ -133,14 +133,14 @@
           <div>
             <el-row class="dataTable">
               <el-row class="el-row-header">
-                <el-col :span="6" style="margin-left: 19px;">订单编号：{{item.orderNo}}</el-col>
+                <el-col :span="7" style="margin-left: 19px;">订单编号：{{item.orderNo}}</el-col>
                 <el-col :span="6">创建时间：{{item.orderGenerateTime | timeTransfer}}</el-col>
                 <el-col :span="8" v-if="state.isBuyer==='true'">卖家：{{item.payeeCompanyName}}</el-col>
                 <el-col :span="8" v-else>买家：{{item.payerCompanyName}}</el-col>
                 <el-col :span="2">操作</el-col>
               </el-row>
               <el-row class="el-row-content">
-                <el-col :span="6" style="margin-left: 19px;">
+                <el-col :span="7" style="margin-left: 19px;">
                   <el-row>货品名称：{{item.productName}}</el-row>
                   <el-row>货品数量：{{item.productQuantity}}</el-row>
                 </el-col>
