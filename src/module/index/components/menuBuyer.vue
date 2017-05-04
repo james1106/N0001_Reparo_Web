@@ -5,7 +5,7 @@
           <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_B"></use> </svg>首页
         </el-menu-item>
         <div style="height:80%;overflow-y: scroll;overflow-x: hidden">
-          <el-submenu index="/order">
+          <el-submenu index="/order" class="openMenu">
             <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>订单管理</template>
             <el-menu-item index="/order/createOrder">发起订单</el-menu-item>
             <el-menu-item index="/order/allOrder/b">我买入的订单</el-menu-item>
@@ -46,7 +46,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .el-menu{background-color: transparent!important;}
   .el-menu-item, .el-submenu__title{width: 170px!important;}
 </style>

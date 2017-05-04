@@ -112,7 +112,7 @@ Vue.filter('timeTransfer',function(value){
   if(value===''||value===0||value==='暂无'){
     return "暂无"
   }
-  return new Date(value).toLocaleString().replace(/\//g, "-");
+  return new Date(value).toLocaleString('chinese',{hour12:false}).replace(/\//g, "-");
 })
 /*数据为空的情况统一处理*/
 Vue.filter('nullSituation',function(value){

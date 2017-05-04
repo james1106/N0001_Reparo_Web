@@ -108,6 +108,7 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
+      //查看详情页也有确认入库按钮
       checkDetail(repoBusinessNo,orderNo){
         store.commit('setCheckIdRepo',repoBusinessNo);
         store.commit('setCheckIdOrder',orderNo);
