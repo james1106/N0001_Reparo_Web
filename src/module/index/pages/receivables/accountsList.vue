@@ -91,7 +91,7 @@
           }
           for(var i=0;i<data.length;i++){
               var item = data[i]
-;             if(item.transactionStatus == constantData.CONFIRMED){
+;             if(item.receStatus == constantData.FORSIGNOUT){
                 this.orderList.push(item);
             }
           }

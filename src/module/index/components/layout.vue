@@ -63,7 +63,7 @@
     </aside>
     <div class="main-right">
     <transition name="fade" mode="out-in">
-      <router-view v-loading="loading" element-loading-text="正玩命向区块链获取数据中..." class="view"></router-view>
+      <router-view class="view"></router-view>
     </transition>
     </div>
   </main>
@@ -89,10 +89,6 @@
   import Common from "../../../common/common.js"
   import '../../../assets/css/style.css'
   import '../../../assets/css/colorStyle.css'
-  import Vue from 'vue'
-  import resource from 'vue-resource'
-
-  Vue.use(resource)
 
   window.onload=function(){
     var oDiv = document.getElementById("main-left");
@@ -117,23 +113,6 @@ export default {
     if(this.companyType != '0'){
       Store.commit('setIsBuyer',"false");
     }
-
-    /*****  设置http拦截器 start  ******/
-    let _this = this;
-    Vue.http.interceptors.push(function(request, next) {
-      //请求开始的时候
-      _this.loading = true;
-      next(function(response) {
-        //请求响应完成后
-        _this.loading = false;
-        if(!response.ok){
-          _this.dialogVisible = true;
-          _this.msg = '服务异常，请稍后再试';
-        }
-        return response
-      });
-    });
-    /*****  设置http拦截器 end  ******/
   },
   data () {
     return {
