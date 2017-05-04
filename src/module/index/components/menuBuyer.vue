@@ -1,11 +1,11 @@
 <template>
   <div id="buyer_menu" class="buyer_menu" style="height: 100%">
-      <el-menu unique-opened=true default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
+      <el-menu :unique-opened=true default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
           <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_B"></use> </svg>首页
         </el-menu-item>
         <div style="height:80%;overflow-y: scroll;overflow-x: hidden">
-          <el-submenu index="/order" class="openMenu">
+          <el-submenu index="/order" ref="openMenu">
             <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>订单管理</template>
             <el-menu-item index="/order/createOrder">发起订单</el-menu-item>
             <el-menu-item index="/order/allOrder/b">我买入的订单</el-menu-item>
@@ -33,7 +33,8 @@
     name: 'buyer_menu',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        elements:{}
       }
     },
     methods:{
@@ -42,6 +43,11 @@
         document.documentElement.scrollTop = 0;
         Store.commit('setAccountsStatus',status);
       }
+    },
+    mounted () {
+      var evt = document.createEvent("MouseEvents");
+      evt.initEvent("click", false, true);
+      this.$refs.openMenu.$el.getElementsByClassName("el-submenu__title")[0].dispatchEvent(evt);
     }
   }
 </script>
