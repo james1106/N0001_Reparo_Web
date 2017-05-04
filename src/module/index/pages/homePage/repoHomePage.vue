@@ -145,9 +145,9 @@
     methods:{
         getTopList(){
           this.$http.get("../v1/repository/getRepoBusiList?role=3").then(function(res){
-            var code = res.body.code;
-            if(code != 0){
-                return;
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
             }
             var list = res.body.data;
             var temp = [];

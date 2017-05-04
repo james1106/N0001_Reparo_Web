@@ -54,7 +54,10 @@
     methods: {
       getReceiptList(){
           this.$http.get("../v1/repository/getRepoCertInfoList").then(function(res){
-            console.log(res.body);
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
             this.receiptList=res.body.data;
           },function(err){
             console.log(err);

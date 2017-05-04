@@ -139,8 +139,8 @@
     methods:{
       getTopList(){
         this.$http.get("../v1/waybill/allWayBillDetail").then(function(res){
-          var code = res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           var list = res.body.data.wayBillDetailVoList;

@@ -59,7 +59,10 @@
     methods: {
         getRepoList(){
           this.$http.get("../v1/repository/getRepoBusiList?role=3").then(function(res){
-            console.log(res.body.data);
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
             this.repoList=res.body.data;
           },function(err){
             console.log(err);

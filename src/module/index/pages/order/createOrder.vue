@@ -203,7 +203,10 @@
             console.log(temp);
             this.$http.post("../v1/order/creation", temp, {emulateJSON: true}).then(
               function (res) {
-                console.log(res.body);
+                if(res.body.code != 0){
+                  this.$message.error(res.body.message);
+                  return;
+                }
                 store.commit('setCheckIdOrder', res.body.data.orderNo);
                 console.log("now the state checkIdOrder is:" + store.state.checkIdOrder);
                 this.$router.push('/order/orderDetail');
@@ -236,6 +239,10 @@
       }
       //获取所有融资企业名（后台数据应该去掉自己的企业名）
       this.$http.get("../v1/account/allEnterpriseName?roleCode=0").then(function(res){
+        if(res.body.code != 0){
+          this.$message.error(res.body.message);
+          return;
+        }
         this.supplyList=res.body.data;
         this.launchOrder.payeeCompanyName=this.supplyList[0];
         console.log("the supply list: "+res.body.data);
@@ -244,6 +251,10 @@
       });
       //获取所有仓储公司名
       this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
+        if(res.body.code != 0){
+          this.$message.error(res.body.message);
+          return;
+        }
         this.repoList=res.body.data;
         this.launchOrder.payerRepo=this.repoList[0];
         console.log("the repo list: "+res.body.data);

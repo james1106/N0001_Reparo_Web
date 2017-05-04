@@ -59,12 +59,6 @@
         </el-col>
       </el-row>
     </el-card>
-    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-      <span>{{msg}}</span>
-      <span slot="footer" class="dialog-footer">
-       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
-    </el-dialog>
   </div>
 </template>
 <script>
@@ -78,8 +72,6 @@
           showHandleBtn:false,
           title:''
         },
-        dialogVisible:false,
-        msg:'',
         repoDetails:{
           curRepoBusiStatus:'仓储当前状态',
           serialNumber:'20170403123456',
@@ -105,8 +97,8 @@
       getDetail(){
         this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+Store.state.checkIdRepo).then(function(res){
 //            请求仓储详情数据
-          console.log(res.body);
           if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
 
@@ -163,13 +155,11 @@
       inResponse(){
         var param = {repoBusinessNo:Store.state.checkIdRepo}
         this.$http.post('../v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
-          this.dialogVisible = true;
-          this.msg = '已入库响应';
+          this.$message.success("已入库响应");
           this.getDetail();
         },(err) => {
           console.log(err);
@@ -177,13 +167,11 @@
       },
       inConfirm(){
         this.$http.put('../v1/repository/incomeConfirm?repoBusinessNo='+Store.state.checkIdRepo+'&orderNo='+Store.state.checkIdOrder).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
-          this.dialogVisible = true;
-          this.msg = '已入库确认';
+          this.$message.success("已入库确认");
           this.getDetail();
         },(err) => {
           console.log(err);
@@ -191,13 +179,11 @@
       },
       outConfirm(){
         this.$http.put('../v1/repository/outcomeConfirm?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
-          this.dialogVisible = true;
-          this.msg = '已出库确认';
+          this.$message.success("已出库确认");
           this.getDetail();
         },(err) => {
           console.log(err);

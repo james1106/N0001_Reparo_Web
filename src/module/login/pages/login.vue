@@ -29,12 +29,6 @@
     <el-row>
       <span><router-link to="/register" class="register">注册账号</router-link></span>
     </el-row>
-    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-      <span>{{msg}}</span>
-      <span slot="footer" class="dialog-footer">
-       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
-      </el-dialog>
   </div>
 </template>
 
@@ -121,13 +115,10 @@
           if (valid) {
             this.loading = true;
             this.$http.post('../v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
-              console.log(res.body);
               this.loading = false;
-              var code =  res.body.code;
               var data =  res.body.data;
-              if(code != 0){
-                this.dialogVisible = true;
-                this.msg = res.body.message;
+              if(res.body.code != 0){
+                this.$message.error(res.body.message);
                 return;
               }
               Store.saveUserInfo(data);

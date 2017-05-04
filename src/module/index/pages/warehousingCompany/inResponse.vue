@@ -77,9 +77,8 @@
     methods:{
         getDetails(){
           this.$http.get('../v1/repository/getRepoBusiHistoryList?repoBusinessNo='+Store.state.checkIdRepo).then((res) => {
-            console.log(res.body);
-            var code =  res.body.code;
-            if(code != 0){
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
               return;
             }
             this.repoDetails = res.body.data
@@ -90,9 +89,8 @@
         inResponse(){
           var param = {repoBusinessNo:Store.state.checkIdRepo}
           this.$http.post('../v1/repository/incomeApplyResponse',param,{emulateJSON:true}).then((res) => {
-            console.log(res.body);
-            var code =  res.body.code;
-            if(code != 0){
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
               return;
             }
             this.$router.push('/warehousingCompany/repoDetails');

@@ -253,6 +253,10 @@
       }
       this.$http.get("../v1/order/order_list/" + tempRole).then(function (res) {
           console.log("获取到的所有订单: " + res.body.data.length);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           this.showOrder = res.body.data;
           //买家筛选待办订单,只有承兑操作
         if(store.state.isBuyer==="true") {
@@ -346,6 +350,10 @@
         console.log("签收账款");
         this.$http.get("../v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
           console.log(res.body.data);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           store.commit("setCheckIdRece", res.body.data.receOver.receNo);
           this.$router.push("/allAccounts/accept/accept");
         }, function (err) {

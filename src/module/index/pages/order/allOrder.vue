@@ -109,7 +109,10 @@
           break;
       }
       this.$http.get("../v1/order/order_list/" + tempRole).then(function (res) {
-//        this.$http.get("http://localhost/server_test/getData1.php").then(function(res){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           console.log("获取到的所有订单: " + res.body.data.length);
           this.allOrder = res.body.data;
         },

@@ -99,12 +99,6 @@
         </el-col>
       </el-row>
     </el-card>
-    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-      <span>{{msg}}</span>
-      <span slot="footer" class="dialog-footer">
-       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
-    </el-dialog>
   </div>
 </template>
 <script>
@@ -155,9 +149,7 @@
           ],
           serialVoList: [{
           }]
-        },
-        dialogVisible:false,
-        msg:''
+        }
       }
     },
     methods:{
@@ -167,10 +159,9 @@
             operatorAcctId:LocalStore.fetchUserInfo().acctIds
           }
           this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
-            console.log(res.body);
-            var code =  res.body.code;
             var data =  res.body.data;
-            if(code != 0){
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
               return;
             }
             //详情数据
@@ -201,14 +192,11 @@
           response:0       //回复意见 0.同意 1.拒绝
         }
         this.$http.post('../v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
-          console.log('承兑操作'+res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
-          this.dialogVisible = true
-          this.msg = "承兑成功"
-
+          this.$message.success("承兑成功");
           this.getDetail();
         },(err) => {
           console.log(err);
@@ -222,13 +210,11 @@
           response:0                            //回复意见 0.同意 1.拒绝
         }
         this.$http.post('../v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
-          this.dialogVisible = true
-          this.msg = "兑付成功"
+          this.$message.success("兑付成功");
           this.currentStatusInfo.isShowHandleBtn = false
 
           this.getDetail();

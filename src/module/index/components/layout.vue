@@ -69,12 +69,6 @@
   </main>
   <!--尾部信息-->
   <footer-a></footer-a>
-  <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-    <span>{{msg}}</span>
-    <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
-  </el-dialog>
 </div>
 </template>
 
@@ -141,6 +135,7 @@ export default {
         this.$router.push('/');
       },
       toSeller() {
+        this.$message.error('错了哦，这是一条错误消息');
         if(Store.state.isBuyer==="false"){
           return;
         }

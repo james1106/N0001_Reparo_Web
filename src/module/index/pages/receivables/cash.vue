@@ -77,10 +77,9 @@
       getDetail(){
         var receivableNo = Store.state.checkIdRece;
         this.$http.post('../v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
           var data =  res.body.data;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           this.detailInfo = data;
@@ -96,9 +95,8 @@
           response:0       //回复意见 0.同意 1.拒绝
         }
         this.$http.post('../v1/receivable/cash',cashParam,{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           this.$router.push('/allAccounts/cash/cash')

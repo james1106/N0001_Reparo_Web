@@ -53,7 +53,10 @@
       document.documentElement.scrollTop = 0;
       this.$http.get("../v1/waybill/allWayBillDetail").then(function(res){
         /*获取企业物流列表*/
-        console.log(res.body.data);
+        if(res.body.code != 0){
+          this.$message.error(res.body.message);
+          return;
+        }
         this.allWaybill=res.body.data.wayBillDetailVoList;
       },function(err){
         console.log(err);

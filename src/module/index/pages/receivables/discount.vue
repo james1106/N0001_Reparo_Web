@@ -104,9 +104,8 @@
             discountApplyAmount:this.detailInfo.detailVoList[0].isseAmt //申请贴现金额
         }
         this.$http.post('../v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           this.$router.push('/allAccounts/discount/detail')
@@ -121,9 +120,9 @@
         }
         this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
           console.log(res.body);
-          var code =  res.body.code;
           var data =  res.body.data;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           //详情数据
@@ -137,9 +136,9 @@
       getBankList(){
         this.$http.post('../v1/receivable/discountApplyBankList').then((res) => {
           console.log(res.body);
-          var code =  res.body.code;
           var data =  res.body.data;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           this.bankOption.bankList = data;

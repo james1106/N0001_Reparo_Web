@@ -52,7 +52,10 @@
       document.documentElement.scrollTop = 0;
         this.$http.get("../v1/repository/getRepoBusiList?role=1").then(function(res){
             /*获取入库管理列表*/
-            console.log(res.body);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
             this.allRepoIn=res.body.data;
         },function(err){
             console.log(err);

@@ -216,9 +216,8 @@
               invoiceNo:this.signoutInfo.invoiceNo
             };
             this.$http.post('../v1/receivable/sign',signParam,{emulateJSON:true}).then((res) => {
-              console.log(res.body.data);
-              var code =  res.body.code;
-              if(code != 0){
+             if(res.body.code != 0){
+                this.$message.error(res.body.message);
                 return;
               }
               //跳到详情
@@ -238,7 +237,10 @@
           console.log("the state checkIdOrder is:" + Store.state.checkIdOrder);
           this.$http.get("../v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
             function (res) {
-              console.log(res.body.data);
+              if(res.body.code != 0){
+                this.$message.error(res.body.message);
+                return;
+              }
               this.orderDetail = res.body.data;
               //将订单详情的值赋予签发表单
               this.signoutInfo.isseAmt = this.orderDetail.txDetail.productTotalPrice;

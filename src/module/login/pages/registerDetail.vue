@@ -29,12 +29,6 @@
     <el-row style="text-align: center">
       <span class="registerStep highlight">1 设置用户名 </span><span class="registerStep highlight">2 完善个人信息 </span><span class="registerStep">3 注册成功</span>
     </el-row>
-    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-      <span>{{msg}}</span>
-      <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -87,12 +81,9 @@
             this.loading = true;
             this.$http.post('../v1/account/user',this.ruleForm,{emulateJSON:true}).then((res) => {
               this.loading = false;
-              console.log(res.body);
-              var code =  res.body.code;
               var data =  res.body.data;
-              if(code != 0){
-                this.dialogVisible = true;
-                this.msg = res.body.message;
+              if(res.body.code != 0){
+                this.$message.error(res.body.message);
                 return;
               }
               Store.saveUserInfo(data);

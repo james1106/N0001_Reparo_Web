@@ -64,7 +64,12 @@
         this.confirmSend.orderNo=store.state.checkIdOrder;
         console.log(this.confirmSend);
         this.$http.post("../v1/waybill/confirmedWaybill",this.confirmSend,{emulateJSON:true}).then(
-          function(res){console.log(res.body);},
+          function(res){
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
+          },
           function(err){console.log(err)}
         );
         store.commit('setCheckIdOrder',checkId);
@@ -77,7 +82,10 @@
       document.documentElement.scrollTop = 0;
       this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
         function(res){
-          console.log(res.body);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           this.companyBillDetail=res.body.data;
           this.companyBillDetail.wayBillCreateTime='';
           for(var item in this.companyBillDetail.operationRecordVo){

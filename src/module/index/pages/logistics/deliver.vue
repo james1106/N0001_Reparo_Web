@@ -136,7 +136,10 @@
           this.sendGoodForm.logisticsList = this.sendGoodForm1.logisticsList;
           console.log(this.sendGoodForm)
             this.$http.post("../v1/waybill/unConfirmedWaybill",this.sendGoodForm,{emulateJSON:true}).then(function(res){
-                console.log(res.body);
+              if(res.body.code != 0){
+                this.$message.error(res.body.message);
+                return;
+              }
               store.commit('setCheckIdOrder',this.sendGoodForm.orderNo);
               console.log(store.state.checkIdOrder);
               this.$router.push("/logistics/wayBillDetails");
@@ -155,6 +158,10 @@
 
       this.$http.get("../v1/order/detail?orderNo=" + store.state.checkIdOrder).then(
         function (res) {
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           // 处理成功的结果
           console.log(res.body);
           this.orderDetail = res.body.data;
@@ -177,6 +184,10 @@
 
           /*请求物流企业列表*/
           this.$http.get("../v1/account/allEnterpriseName?roleCode=1").then(function(res){
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
             this.sendGoodForm1.logisticsList=res.body.data;
           },function(err){
             console.log(err);

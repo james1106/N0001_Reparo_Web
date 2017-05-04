@@ -70,7 +70,10 @@
       document.documentElement.scrollTop = 0;
         this.$http.get("../v1/repository/getRepoCert?repoCertNo="+store.state.checkIdRepoCert).then(function(res){
 //            请求仓单详情列表
-          console.log(res.body);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           this.receiptsDetails=res.body.data;
         },function(err){
             console.log(err);

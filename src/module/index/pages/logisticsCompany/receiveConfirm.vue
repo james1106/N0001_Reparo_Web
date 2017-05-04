@@ -65,7 +65,10 @@
         console.log(this.confirmSend);
         this.$http.put("../v1/waybill/receivedStatus?orderNo="+store.state.checkIdOrder).then(
           function(res){
-            console.log(res.body);
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
           },
           function(err){
             console.log(err);
@@ -81,7 +84,10 @@
       document.documentElement.scrollTop = 0;
       this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(
         function(res){
-          console.log(res.body);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           this.companyBillDetail=res.body.data;
           this.companyBillDetail.wayBillCreateTime='';
           for(var item in this.companyBillDetail.operationRecordVo){

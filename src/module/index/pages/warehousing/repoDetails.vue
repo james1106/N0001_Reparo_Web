@@ -86,7 +86,10 @@
       document.documentElement.scrollTop = 0;
         this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+store.state.checkIdRepo).then(function(res){
 //            请求仓储详情数据
-          console.log(res.body);
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
           this.repoDetails=res.body.data;
           this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
           this.repoDetails.outRepoTime='';

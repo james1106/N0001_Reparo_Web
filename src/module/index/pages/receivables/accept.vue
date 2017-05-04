@@ -87,10 +87,9 @@ import userInfo from '../../../../common/store'
         }
 
         this.$http.post('../v1/receivable/accept',acceptParam,{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code = res.body.code
-          if(code != 0){
-            return;
+          if(res.body.code != 0){
+           this.$message.error(res.body.message);
+           return;
           }
           this.$router.push('/allAccounts/accept/detail')
         },(err) => {
@@ -100,10 +99,9 @@ import userInfo from '../../../../common/store'
       getDetail(){
         var receivableNo = Store.state.checkIdRece;
         this.$http.post('../v1/receivable/receivableInfoWithSerial',{receivableNo:receivableNo,operatorAcctId:''},{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
           var data =  res.body.data;
-          if(code != 0){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           this.detailInfo = data;

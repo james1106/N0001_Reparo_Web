@@ -28,12 +28,6 @@
       </el-tab-pane>
     </el-tabs>
     </el-card>
-    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-      <span>{{msg}}</span>
-      <span slot="footer" class="dialog-footer">
-       <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
-    </el-dialog>
   </div>
 </template>
 <script>
@@ -72,21 +66,16 @@
     data () {
       return {
         accountsList:[],
-        orderList:[],
-        msg:'',
-        dialogVisible:false
+        orderList:[]
       }
     },
     methods:{
       //获取订单列表（主要是获取待签收列表）
       getSignoutOrderList(){
         this.$http.get('../v1/order/order_list/1',{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
           var data =  res.body.data;
-          if(code != 0){
-            this.dialogVisible = true;
-            this.msg = res.body.message;
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           for(var i=0;i<data.length;i++){
@@ -103,12 +92,9 @@
       getAccountsList(){
         var role = this.getRole();
         this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:role},{emulateJSON:true}).then((res) => {
-          console.log(res.body);
-          var code =  res.body.code;
           var data =  res.body.data;
-          if(code != 0){
-            this.dialogVisible = true;
-            this.msg = res.body.message;
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
             return;
           }
           this.accountsList = data;

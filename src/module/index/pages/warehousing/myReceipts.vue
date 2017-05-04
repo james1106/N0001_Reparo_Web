@@ -54,7 +54,10 @@
       document.documentElement.scrollTop = 0;
       this.$http.get("../v1/repository/getRepoCertInfoList").then(function(res){
         /*获取所有仓单列表*/
-        console.log(res.body);
+        if(res.body.code != 0){
+          this.$message.error(res.body.message);
+          return;
+        }
         this.allReceipts=res.body.data;
       },function(err){
         console.log(err);

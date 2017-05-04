@@ -204,13 +204,10 @@
          console.log(this.confirmOrder);
          this.$http.post("../v1/order/confirmation",this.confirmOrder,{emulateJSON:true}).then(
          function(res){
-             console.log(res.body);
-             if(res.body.code!=0){
-               this.$alert('区块链报错：'+res.body.message, '确认订单失败', {
-                 confirmButtonText: '确定',
-               });
-                 return;
-             }
+           if(res.body.code != 0){
+             this.$message.error(res.body.message);
+             return;
+           }
            this.$router.push("/allAccounts/signout/signout");//跳转到签发应收账款
          },
          function(err){console.log(err)}
@@ -222,11 +219,17 @@
       document.documentElement.scrollTop = 0;
         this.$http.get("../v1/order/detail?orderNo="+store.state.checkIdOrder).then(
             function(res){
-                console.log(res.body);
-                this.orderDetail=res.body.data;
+              if(res.body.code != 0){
+                this.$message.error(res.body.message);
+                return;
+              }
+              this.orderDetail=res.body.data;
               this.$http.get("../v1/account/allEnterpriseName?roleCode=2").then(function(res){
+                if(res.body.code != 0){
+                  this.$message.error(res.body.message);
+                  return;
+                }
                 this.confirmOrder.repoList=res.body.data;
-                console.log("the repo list: "+res.body.data);
               },function(err){
                 console.log(err)
               });

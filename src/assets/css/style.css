@@ -504,3 +504,8 @@ body{
 .el-menu-item[data-v-e569b42a], .el-submenu__title[data-v-e569b42a]{
   width: 100%!important;
 }
+
+.el-message {
+  background-color:rgb(57,202,166);
+  border-radius:5px;
+}

@@ -112,7 +112,10 @@
       document.documentElement.scrollTop = 0;
 //        请求物流详情接口　
       this.$http.get("../v1/waybill/wayBillDetail?orderNo="+store.state.checkIdOrder).then(function(res){
-        console.log(res.body);
+        if(res.body.code != 0){
+          this.$message.error(res.body.message);
+          return;
+        }
         this.logisticsDetail=res.body.data;
         this.logisticsDetail.productPrice=(this.logisticsDetail.productQuantity===''||this.logisticsDetail.productQuantity===0) ? '暂无':this.logisticsDetail.productValue/this.logisticsDetail.productQuantity;
         this.logisticsDetail.sendReqTime='';
