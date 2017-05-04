@@ -509,3 +509,11 @@ body{
   background-color:rgb(57,202,166);
   border-radius:5px;
 }
+/*尾部信息*/
+.footMsg{
+  margin-right: 30px;
+  float: right;
+  margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
