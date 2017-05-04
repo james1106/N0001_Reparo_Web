@@ -218,7 +218,8 @@ export default {
   main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 0px #E9ECF1;  background-color: #FCFCFC;  }
   .main-left{
       position:absolute;top:60px;left:0;
-      width: 170px;
+      width: 13%;
+      min-width: 159.891px;
       text-align: left;
       -webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;
       height: 100%;
@@ -226,7 +227,7 @@ export default {
       z-index: 999;
   }
   .main-right{
-    margin-left: 170px;
+    margin-left: 13%;
     -webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 20px 30px; overflow: scroll;background-color: rgb(246,246,246);}
   .el-menu{background-color: transparent!important;}
   /* 路由切换动效 */

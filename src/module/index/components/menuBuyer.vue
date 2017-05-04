@@ -4,7 +4,7 @@
         <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
           <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_B"></use> </svg>首页
         </el-menu-item>
-        <div style="height:80%;overflow-y: scroll">
+        <div style="height:80%;overflow-y: scroll;overflow-x: hidden">
           <el-submenu index="/order">
             <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>订单管理</template>
             <el-menu-item index="/order/createOrder">发起订单</el-menu-item>

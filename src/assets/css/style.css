@@ -390,7 +390,7 @@ border-color: rgb(57,202,166)!important;
   margin-left: 3%!important;
 }
 li .el-menu-item{
-  padding-left: 28.4%!important;
+  padding-left: 50px!important;
 }
 /*删掉导航栏的下拉图标*/
 .el-menu .el-icon-arrow-down:before{
@@ -498,4 +498,6 @@ body{
 .el-menu-item, .el-submenu__title
 {
   height: 48px!important;
+  width: 100%!important;
+  min-width: 160px;
 }

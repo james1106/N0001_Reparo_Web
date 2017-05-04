@@ -52,7 +52,7 @@
           <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
         </el-row>
         <el-row style="text-align: center;font-size: 18px;color: #959697">
-          <span>暂无订单</span>
+          <span>暂无仓储</span>
         </el-row>
       </el-row>
       <el-row v-else>
