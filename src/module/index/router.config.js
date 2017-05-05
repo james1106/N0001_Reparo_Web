@@ -46,6 +46,13 @@ import companyBillDetails from './pages/logisticsCompany/companyBillDetails.vue'
 import sendConfirm from './pages/logisticsCompany/sendConfirm.vue'
 import receiveConfirm from './pages/logisticsCompany/receiveConfirm.vue'
 
+/*金融机构*/
+import bankIndex from './pages/bank/index.vue'
+import bankAccountsList from './pages/bank/accountsList.vue'
+import bankDetail from './pages/bank/detail.vue'
+import modifyRate from './pages/bank/modifyRate.vue'
+
+
 export default [
   {
     path: '/', component: HomePage,
@@ -118,6 +125,16 @@ export default [
       {path:'companyBillDetails',component:companyBillDetails},
       {path:'sendConfirm',component:sendConfirm},
       {path:'receiveConfirm',component:receiveConfirm},
+    ]
+  },
+
+  //金融机构
+  {
+    path:'/bank',component:bankIndex,
+    children:[
+      {path:'bankAccountsList',component:bankAccountsList},
+      {path:'detail',component:bankDetail},
+      {path:'modifyRate',component:modifyRate}
     ]
   }
 ]

@@ -13,11 +13,14 @@
           <span style="font-size: 14px" v-if="state.isBuyer === 'true'">买家中心</span>
           <span style="font-size: 14px" v-else >卖家中心</span>
         </template>
-        <template v-else-if="companyType === 2">
+        <template v-else-if="companyType === 1">
           <span style="font-size: 14px" >仓储中心</span>
         </template>
-        <template v-else>
+        <template v-else-if="companyType === 2">
           <span style="font-size: 14px" >物流中心</span>
+        </template>
+        <template v-else>
+          <span style="font-size: 14px" >金融机构</span>
         </template>
       </el-col>
       <el-col :span="2" v-if="companyType === 0">
@@ -55,11 +58,14 @@
       <menu-by v-if="state.isBuyer==='true'"></menu-by>
       <menu-sl v-else></menu-sl>
     </aside>
-    <aside class="main-left" id="main-left" v-else-if="companyType === 2">
+    <aside class="main-left" id="main-left" v-else-if="companyType === 1">
       <menu-wh></menu-wh>
     </aside>
-    <aside class="main-left" id="main-left" v-else>
+    <aside class="main-left" id="main-left" v-else-if="companyType === 2">
       <menu-lg></menu-lg>
+    </aside>
+    <aside class="main-left" id="main-left" v-else>
+      <menu-bank></menu-bank>
     </aside>
     <div class="main-right">
     <transition name="fade" mode="out-in">
@@ -78,6 +84,7 @@
   import MenuSl from './menuSeller.vue'
   import MenuLg from './menuLogistics.vue'
   import MenuWh from './menuWarehousing.vue'
+  import MenuBank from './menuBank.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
   import Common from "../../../common/common.js"
@@ -103,6 +110,10 @@ export default {
     var userInfo = LocalStore.fetchUserInfo();
     this.companyType = userInfo.roleCode;
     this.userName = userInfo.company_name;
+
+    this.companyType = 3; //临时测试金融机构角色
+
+
     if(this.companyType != '0'){
       Store.commit('setIsBuyer',"false");
     }
@@ -124,7 +135,7 @@ export default {
       }
     },
     components: {
-      FooterA,MenuBy,MenuSl,MenuLg,MenuWh
+      FooterA,MenuBy,MenuSl,MenuLg,MenuWh,MenuBank
     },
     methods:{
       toBuyer() {

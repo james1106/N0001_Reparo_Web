@@ -210,14 +210,11 @@
         </el-row>
       </el-card>
     </template>
-    <template v-else-if="companyType == 2">
+    <template v-else-if="companyType == 1">
       <logistics-homepage></logistics-homepage>
     </template>
-    <template v-else-if="companyType == 1">
-      <repo-homepage></repo-homepage>
-    </template>
     <template v-else>
-      <bank-homepage></bank-homepage>
+      <repo-homepage></repo-homepage>
     </template>
   </div>
 </template>
@@ -231,7 +228,6 @@
   import default_0 from  '../../assets/default_0.png'
   import logisticsHomepage from "./logisticsHomePage.vue"
   import repoHomepage from "./repoHomePage.vue"
-  import bankHomePage from "./bankHomePage.vue"
   import store from "../../vuex/store"
   import constantData from "../../../../common/const"
 
@@ -298,7 +294,7 @@
       this.companyType = userInfo.roleCode;
     },
     components: {
-      logisticsHomepage, repoHomepage,bankHomePage
+      logisticsHomepage, repoHomepage
     },
     computed: {
       state () {
