@@ -231,7 +231,7 @@
   import default_0 from  '../../assets/default_0.png'
   import logisticsHomepage from "./logisticsHomePage.vue"
   import repoHomepage from "./repoHomePage.vue"
-  import bankHomePage from "./bankHomePage.vue"
+  import bankHomepage from "./bankHomePage.vue"
   import store from "../../vuex/store"
   import constantData from "../../../../common/const"
 
@@ -298,7 +298,7 @@
       this.companyType = userInfo.roleCode;
     },
     components: {
-      logisticsHomepage, repoHomepage,bankHomePage
+      logisticsHomepage, repoHomepage,bankHomepage
     },
     computed: {
       state () {
