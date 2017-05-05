@@ -20,6 +20,9 @@
 .green_style .el-button--text:hover{
   color: rgb(57,202,166);
 }
+.green_style .el-button--text:focus{
+  color: rgb(57,202,166);
+}
 .green_style .el-button:hover{
   color: rgb(57,202,166);
   border-color: rgb(57,202,166);
@@ -49,6 +52,10 @@
 .green_style .el-button--primary:hover{
   background-color: rgb(57,202,166);
 }
+.green_style .el-button--primary:focus{
+  background-color: rgb(57,202,166);
+  border-color: rgb(57,202,166);
+}
 .green_style .green_span{
   color: rgb(57,202,166);
 }
@@ -77,7 +84,6 @@
   color: rgb(0,150,222);
   border-color: rgb(0,150,222);
 }
-
 .blue_style .detail_title_color{
   color: rgb(0,150,222);
 }

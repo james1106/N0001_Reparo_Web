@@ -6,7 +6,7 @@
         </el-menu-item>
         <div style="height:80%;overflow-y: scroll;overflow-x: hidden">
           <el-submenu index="/bank" ref="openMenu">
-            <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>订单管理</template>
+            <template slot="title"><svg class="icon menuImag" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>应收帐款</template>
             <el-menu-item index="/bank/bankAccountsList">我的应收账款</el-menu-item>
             <el-menu-item index="/bank/detail">贴现确认</el-menu-item>
             <el-menu-item index="/bank/modifyRate">利率修改</el-menu-item>
