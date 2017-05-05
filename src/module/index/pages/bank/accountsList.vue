@@ -1,5 +1,5 @@
 <template>
-  <div id="list"  >
+  <div id="list">
     <el-breadcrumb separator=">" class="bread">
       <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -14,13 +14,17 @@
       <el-tab-pane label="贴现待确认" name="accept" >
         <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
       </el-tab-pane>
+      <el-tab-pane label="贴现待兑付" name="accept" >
+        <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
+      </el-tab-pane>
     </el-tabs>
     </el-card>
   </div>
 </template>
 <script>
-  import AccountsTable from '../../components/accountsTable.vue'
+  import AccountsTable from '../../components/bankAccountsTable.vue'
   import constantData from '../../../../common/const'
+  import Store from '../../vuex/store'
 
   export default {
     name:'list',
@@ -35,30 +39,26 @@
     computed: {
       state () {
         return Store.state;
-      },
-      constantData () {
-        return constantData;
       }
     },
     data () {
       return {
-        accountsList:[],
-        orderList:[]
+        accountsList:[]
       }
     },
     methods:{
       //获取账单列表
       getAccountsList(){
-        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:'3'},{emulateJSON:true}).then((res) => {
-          var data =  res.body.data;
-          if(res.body.code != 0){
-            this.$message.error(res.body.message);
-            return;
-          }
-          this.accountsList = data;
-        },(err) => {
-          console.log(err);
-        })
+//        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:'3'},{emulateJSON:true}).then((res) => {
+//          var data =  res.body.data;
+//          if(res.body.code != 0){
+//            this.$message.error(res.body.message);
+//            return;
+//          }
+//          this.accountsList = data;
+//        },(err) => {
+//          console.log(err);
+//        })
       }
     }
   }
