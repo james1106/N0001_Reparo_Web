@@ -197,7 +197,11 @@
             return;
           }
           this.$message.success("承兑成功");
-          this.getDetail();
+//          this.getDetail();
+          var _this=this;
+          setTimeout(function () {
+            _this.getDetail();
+          }, 2000);
         },(err) => {
           console.log(err);
         })
@@ -217,7 +221,11 @@
           this.$message.success("兑付成功");
           this.currentStatusInfo.isShowHandleBtn = false
 
-          this.getDetail();
+//          this.getDetail();
+          var _this=this;
+          setTimeout(function () {
+            _this.getDetail();
+          }, 2000);
         },(err) => {
           console.log(err);
         })

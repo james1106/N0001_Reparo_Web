@@ -160,7 +160,11 @@
             return;
           }
           this.$message.success("已入库响应");
-          this.getDetail();
+          //过2s后再刷新detail
+          var _this=this;
+          setTimeout(function () {
+            _this.getDetail();
+          }, 2000);
         },(err) => {
           console.log(err);
         })
@@ -172,7 +176,11 @@
             return;
           }
           this.$message.success("已入库确认");
-          this.getDetail();
+          //过2s后再刷新detail
+          var _this=this;
+          setTimeout(function () {
+            _this.getDetail();
+          }, 2000);
         },(err) => {
           console.log(err);
         })
@@ -184,7 +192,11 @@
             return;
           }
           this.$message.success("已出库确认");
-          this.getDetail();
+          //过2s后再刷新detail
+          var _this=this;
+          setTimeout(function () {
+            _this.getDetail();
+          }, 2000);
         },(err) => {
           console.log(err);
         })

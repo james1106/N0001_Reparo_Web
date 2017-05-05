@@ -10,7 +10,7 @@
     </div>
     <el-card>
       <div>
-        <span class="sellerStepTitle">收货确认详情</span>
+        <span class="sellerStepTitle">送达确认详情</span>
       </div>
       <el-row class="dataTable">
         <el-row class="el-row-header">
@@ -31,7 +31,7 @@
       </el-row>
       <el-row>
         <el-col :span="12" style="text-align: left;margin-top: 10px">
-          <el-button class="agreeBtn" type="primary" @click="receiveConfirm(companyBillDetail.orderNo)">确认</el-button>
+          <el-button class="agreeBtn" type="primary" @click="receiveConfirm(companyBillDetail.orderNo)">确认送达</el-button>
         </el-col>
       </el-row>
     </el-card>
@@ -60,7 +60,7 @@
     },
     methods: {
       receiveConfirm (checkId) {
-        console.log("发货确认");
+        console.log("送达确认");
         this.confirmSend.orderNo=store.state.checkIdOrder;
         console.log(this.confirmSend);
         this.$http.put("../v1/waybill/receivedStatus?orderNo="+store.state.checkIdOrder).then(
