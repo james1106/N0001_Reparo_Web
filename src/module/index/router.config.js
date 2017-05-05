@@ -132,7 +132,7 @@ export default [
   {
     path:'/bank',component:bankIndex,
     children:[
-      {path:'bankAccountsList',component:bankAccountsList},
+      {path:'bankAccountsList/:status',component:bankAccountsList},
       {path:'detail',component:bankDetail},
       {path:'modifyRate',component:modifyRate}
     ]

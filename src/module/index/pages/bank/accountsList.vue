@@ -7,11 +7,11 @@
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-    <el-tabs  v-bind:value="state.accountsStatus">
+    <el-tabs  v-bind:value="$route.params.status">
       <el-tab-pane label="所有应收账款" name="all">
         <accounts-table :accountInfo="accountsList" status="0" pageSize="10"> </accounts-table>
       </el-tab-pane>
-      <el-tab-pane label="贴现待确认" name="accept" >
+      <el-tab-pane label="贴现待确认" name="discount" >
         <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="待兑付" name="cash" >
