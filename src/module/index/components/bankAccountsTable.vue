@@ -1,9 +1,10 @@
 <template>
   <div id="accountTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-      <el-col :span="7" style="margin-left: 20px">账款金额</el-col>
-      <el-col :span="6">账款信息</el-col>
-      <el-col :span="8">当前状态</el-col>
+      <el-col :span="5" style="margin-left: 20px">账款金额</el-col>
+      <el-col :span="5">账款信息</el-col>
+      <el-col :span="5">账款到期日</el-col>
+      <el-col :span="5">当前状态</el-col>
       <el-col :span="2">操作</el-col>
     </el-row>
     <template v-if="tableData.length===0">
@@ -19,26 +20,26 @@
     <template v-for="item in showData">
       <el-row class="dataTable">
         <el-row class="el-row-header">
-          <el-col :span="12" style="margin-left: 19px;">应收帐款编号：</el-col>
-          <el-col :span="12" style="margin-left: 19px;">融资申请时间：</el-col>
+          <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receNo}}</el-col>
+          <el-col :span="10">融资申请时间：{{item.date}}</el-col>
         </el-row>
         <el-row class="el-row-content">
           <el-col :span="5" style="margin-left: 19px;">
-            <el-col :span="24">10000元</el-col>
+            <el-col :span="24">{{item.amount}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">持有人：</el-col>
-            <el-col :span="24">承兑人：</el-col>
+            <el-col :span="24">持有人：{{item.holder}}</el-col>
+            <el-col :span="24">承兑人：{{item.accepter}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24"></el-col>
+            <el-col :span="24">{{item.date1}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24"></el-col>
+            <el-col :span="24">{{item.status}}</el-col>
           </el-col>
           <el-col :span="2">
             <el-col :span="24">
-              <el-button size="mini" type="text" class="buyerColor" @click.native.prevent="discount(item.orderNo)">签发订单</el-button>
+              <el-button size="mini" type="text" class="buyerColor" @click.native.prevent="discount(item.orderNo)">确认融资</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
               <!--.native是子组件绑定原生事件而不是父控件响应子组件的方法 -->
@@ -83,6 +84,10 @@
         return constantData;
       },
     },
+    mounted(){
+      this.getDataByStatus()
+      this.getDataByPageNum(0)
+    },
     watch:{
       accountInfo(curVal){
         this.tableData = curVal
@@ -115,10 +120,10 @@
           }
       },
       showDetail(receivableNo,orderNo,status){
-
+        this.$router.push("/bank/detail");
       },
       discount(){
-
+        this.$router.push("/bank/detail");
       }
     }
   }
