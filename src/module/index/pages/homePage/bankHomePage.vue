@@ -39,22 +39,22 @@
       <div slot="header" class="clearfix" style="height: 8px">
         <span class="green_span">待办操作</span>
       </div>
-      <!--<el-row v-if="discountList.length == 0">-->
-        <!--<el-row class="el-row-header" style="background-color: rgb(229,241,245)">-->
-          <!--<el-col :span="5" style="margin-left: 19px">账款金额</el-col>-->
-          <!--<el-col :span="5">账款信息</el-col>-->
-          <!--<el-col :span="5">账款到期日</el-col>-->
-          <!--<el-col :span="5">当前状态</el-col>-->
-          <!--<el-col :span="2" style="text-align: center">操作</el-col>-->
-        <!--</el-row>-->
-        <!--<el-row style="text-align: center">-->
-          <!--<img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">-->
-        <!--</el-row>-->
-        <!--<el-row style="text-align: center;font-size: 18px;color: #959697">-->
-          <!--<span>暂无操作列表</span>-->
-        <!--</el-row>-->
-      <!--</el-row>-->
-      <el-row >    <!--v-else-->
+      <el-row v-if="discountList.length == 0">
+        <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
+          <el-col :span="5" style="margin-left: 19px">账款金额</el-col>
+          <el-col :span="5">账款信息</el-col>
+          <el-col :span="5">账款到期日</el-col>
+          <el-col :span="5">当前状态</el-col>
+          <el-col :span="2" style="text-align: center">操作</el-col>
+        </el-row>
+        <el-row style="text-align: center">
+          <img :src="imgUrl.default_0" style="width: 200px;margin-top: 15px">
+        </el-row>
+        <el-row style="text-align: center;font-size: 18px;color: #959697">
+          <span>暂无操作列表</span>
+        </el-row>
+      </el-row>
+      <el-row v-else>
         <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
           <el-col :span="5" style="margin-left: 19px">账款金额</el-col>
           <el-col :span="5">账款信息</el-col>
@@ -85,7 +85,7 @@
                 </el-col>
                 <el-col :span="2">
                   <el-row style="text-align: center;">
-                    <el-button size="mini" type="text" @click.native.prevent="sendConfirm(item.orderNo)">确认融资</el-button>
+                    <el-button size="mini" type="text" @click.native.prevent="discount(item.orderNo)">确认融资</el-button>
                   </el-row>
                   <el-row style="text-align: center;">
                     <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
@@ -154,13 +154,12 @@
           console.log(err);
         });
       },
+      discount(){
+        this.$router.push("/bank/detail");
+      },
       checkDetail (orderNo) {
         Store.commit('setCheckIdOrder',orderNo);
         this.$router.push("/logisticsCompany/companyBillDetails");
-      },
-      sendConfirm(orderNo){
-        Store.commit('setCheckIdOrder',orderNo);
-        this.$router.push('/logisticsCompany/sendConfirm');
       },
     }
   }

@@ -36,10 +36,10 @@
   export default {
     name:'modifyRate',
 //    获取当前利率
-//    created: function () {
-//      var userInfo = LocalStore.fetchUserInfo();
-//      this.modifyInfo.discountRate = userInfo.roleCode;
-//    },
+    created: function () {
+      var userInfo = LocalStore.fetchUserInfo();
+      this.modifyInfo.discountRate = userInfo.rate;
+    },
     mounted:function () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
@@ -59,7 +59,7 @@
       return {
         modifyState:true,    //表单不可编辑状态
         modifyInfo:{
-          discountRate:"1"
+          discountRate:""
         },
         modifyRules:{
           discountRate:[
@@ -79,20 +79,21 @@
       modify(formName){
         this.$refs[formName].validate((valid) => {
           if (valid && !this.modifyState) {
-            var modifyParam = this.modifyInfo;
+            var modifyParam = this.modifyInfo.discountRate;
             console.log(modifyParam);
-            this.modifyState=true;
-            this.$message.success("修改成功");
-//            this.$http.post('../v1/receivable/sign',modifyParam,{emulateJSON:true}).then((res) => {
-//              if(res.body.code != 0){
-//                this.$message.error(res.body.message);
-//                return;
-//              }
-//              this.modifyState=true;
-//              this.$message.success("修改成功");
-//            },(err) => {
-//              console.log(err);
-//            })
+            this.$http.put('../v1/account/rate?rate='+modifyParam).then((res) => {
+              if(res.body.code != 0){
+                this.$message.error(res.body.message);
+                return;
+              }
+              this.modifyState=true;
+              this.$message.success("修改成功");
+              var userInfo = LocalStore.fetchUserInfo();
+              userInfo.rate = modifyParam;
+              LocalStore.saveUserInfo(userInfo);
+            },(err) => {
+              console.log(err);
+            })
           } else {
             return false;
           }

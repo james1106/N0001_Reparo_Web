@@ -2,7 +2,9 @@
 <div id="wrapper">
   <!--头部导航-->
   <header class="header" :class="[{'seller': state.isBuyer==='false', 'buyer': state.isBuyer==='true' ,'header-fixed':headerFixed}] ">
-  <el-row>
+  <el-row style="width: 81%;
+    margin: 0 auto;
+    min-width: 1230px;">
     <el-col :span="24">
       <el-col :span="1" class="logo">
         <img src="../assets/logoWhiteCopy.png" style="margin-top: 8px">
@@ -162,12 +164,15 @@ export default {
 </script>
 
 <style>
+  #wrapper{
+    background: rgb(246,246,246);
+  }
   /* 头部导航 */
   .seller{
     z-index: 1000;height:60px;min-width: 1200px;
     background:-webkit-gradient(linear, 50 bottom, right bottom, from(rgb(57,202,166)), to(rgb(133,211,44))); /*兼容Safari／Chrome*/
     background:-moz-linear-gradient(left, rgb(57,202,166), rgb(133,211,44)); /*兼容Firefox*/
-    transition: all 0.5s ease;box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);}
+    transition: all 0.5s ease;}
   .buyer{
     z-index: 1000;height:60px;min-width: 1200px;
     background:-webkit-gradient(linear, 0 bottom, right bottom, from(rgb(0,148,218)), to(rgb(0,176,182))); /*兼容Safari／Chrome*/
@@ -196,10 +201,15 @@ export default {
     border-bottom: 6px solid white!important;
   }
   /* 主内容区 */
-  main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 0px #E9ECF1;  background-color: #FCFCFC;  }
+  main{
+    display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 0px #E9ECF1;  background-color: #FCFCFC;
+    width: 80%;
+    margin: 0 auto;
+    min-width: 1230px;
+  }
   .main-left{
-      position:absolute;top:60px;left:0;
-      width: 13%;
+      position:absolute;top:60px;
+      width: 10.5%;
       min-width: 159.891px;
       text-align: left;
       -webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 170px;
