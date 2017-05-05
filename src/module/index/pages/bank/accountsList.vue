@@ -14,7 +14,7 @@
       <el-tab-pane label="贴现待确认" name="accept" >
         <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
       </el-tab-pane>
-      <el-tab-pane label="贴现待兑付" name="accept" >
+      <el-tab-pane label="待兑付" name="cash" >
         <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
       </el-tab-pane>
     </el-tabs>
@@ -43,7 +43,16 @@
     },
     data () {
       return {
-        accountsList:[]
+        accountsList:[{
+          receNo:'123213123',
+          date:'2017-04-03 10:29:11',
+          amount:'10000',
+          holder:'欧欧欧',
+          accepter:'铭铭铭',
+          date1:'2017-04-03',
+          status:'贴现待确认'
+        }
+        ]
       }
     },
     methods:{
