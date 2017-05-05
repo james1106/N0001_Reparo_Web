@@ -2,7 +2,7 @@
   <div id="bank_menu" class="bank_menu" style="height: 100%">
       <el-menu :unique-opened=true default-active="/shouye" class="el-menu-demo" mode="vertical" @select="" :router="true">
         <el-menu-item index="/" style="background-color: rgb( 242,246,248)">
-          <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_B"></use> </svg>首页
+          <svg class="icon menuImag" aria-hidden="true" style="font-size: 16px">   <use xlink:href="#icon-home_G"></use> </svg>首页
         </el-menu-item>
         <div style="height:80%;overflow-y: scroll;overflow-x: hidden">
           <el-submenu index="/bank" ref="openMenu">

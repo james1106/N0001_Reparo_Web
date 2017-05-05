@@ -210,10 +210,10 @@
         </el-row>
       </el-card>
     </template>
-    <template v-else-if="companyType == 2">
+    <template v-else-if="companyType == 1">
       <logistics-homepage></logistics-homepage>
     </template>
-    <template v-else-if="companyType == 1">
+    <template v-else-if="companyType == 2">
       <repo-homepage></repo-homepage>
     </template>
     <template v-else>
