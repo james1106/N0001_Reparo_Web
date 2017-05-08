@@ -80,7 +80,3 @@
     }
   }
 </script>
-
-<style>
-  .menuImag{padding-right: 15px}
-</style>

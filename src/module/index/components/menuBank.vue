@@ -36,8 +36,3 @@
     }
   }
 </script>
-
-<style>
-  .el-menu{background-color: transparent!important;}
-  .el-menu-item, .el-submenu__title{width: 170px!important;}
-</style>

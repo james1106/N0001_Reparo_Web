@@ -265,59 +265,5 @@
   }
 </script>
 <style>
-  .launchOrder .mybox {
-    margin-bottom: 20px !important;
-  }
 
-  .launchOrder .el-form-item__label {
-    width: 30% !important;
-    float: none;
-  }
-
-  .launchOrder .el-select .el-input {
-    width: 100% !important;
-    margin: 0px 0.2%!important;
-  }
-
-  .launchOrder .el-select, .el-input {
-    width: 90% !important;
-    margin: 0px 2%!important;
-  }
-
-  .launchOrder .el-button {
-    float: left;
-    width: 30%;
-    border-radius: 4px;
-    margin: 20px 0;
-  }
-  .el-form-item__error {left:33% !important;top: 20%!important;}
-
-  .el-input__inner{
-    width: 100% !important;
-    height: 30px!important;
-    border-color: #CCCCCC!important;
-    border-radius: 2px!important;
-  }
-  .el-form-item__label{
-    /*line-height: normal!important;*/
-    /*background-color: #F7F7F7;*/
-    /*border-right: 1px solid #EEEEEE;*/
-    font-size: 12px!important;
-  }
-  .el-col-12{
-    height:40px;
-  }
-  .el-checkbox__input{
-    margin-left: 10px;
-  }
-  .launchOrder .el-row{
-    height: 70px!important;
-  }
-  .launchOrder .el-card{
-    border: 1px solid rgb(238,238,238)!important;
-    padding-bottom: 10px!important;
-  }
-  .launchOrder .el-card__body{
-    padding-bottom: 0px!important;
-  }
 </style>
