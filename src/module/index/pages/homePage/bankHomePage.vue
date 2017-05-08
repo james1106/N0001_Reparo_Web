@@ -62,33 +62,33 @@
           <el-col :span="5">当前状态</el-col>
           <el-col :span="2" style="text-align: center">操作</el-col>
         </el-row>
-        <template >  <!--v-for="item in discountList"-->
+        <template v-for="item in discountList">
           <div>
             <el-row class="dataTable">
               <el-row class="el-row-header">
-                <el-col :span="10" style="margin-left: 19px;">账款编号：201705012444</el-col>   <!--{{item.wayBillNo}}-->
-                <el-col :span="10">融资申请时间：2017-5-5</el-col>
+                <el-col :span="10" style="margin-left: 19px;">账款编号：{{item.receivableNo}}</el-col>   <!--{{item.wayBillNo}}-->
+                <el-col :span="10">融资申请时间：</el-col>
               </el-row>
               <el-row class="el-row-content">
                 <el-col :span="5" style="margin-left: 19px;">
-                  <el-row>10,000</el-row>  <!--账款金额-->
+                  <el-row>{{item.isseAmt}}元</el-row>  <!--账款金额-->
                 </el-col>
                 <el-col :span="5">
                   <el-row>持有人：A公司</el-row>
                   <el-row>承兑人：中国银行</el-row>
                 </el-col>
                 <el-col :span="5">
-                <el-row>2017-09-10</el-row>  <!--账款到期日-->
+                <el-row>{{item.dueDt | timeTransfer}}</el-row>  <!--账款到期日-->
               </el-col>
                 <el-col :span="5">
-                  <el-row>贴现待确认</el-row>  <!--当前状态-->
+                  <el-row>{{item.status | receStatus}}</el-row>  <!--当前状态-->
                 </el-col>
                 <el-col :span="2">
                   <el-row style="text-align: center;">
-                    <el-button size="mini" type="text" @click.native.prevent="discount(item.orderNo)">确认融资</el-button>
+                    <el-button size="mini" type="text" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
                   </el-row>
                   <el-row style="text-align: center;">
-                    <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+                    <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.receivableNo)">查看详情</el-button>
                   </el-row>
                 </el-col>
               </el-row>
@@ -135,16 +135,16 @@
     },
     methods:{
       getTopList(){
-        this.$http.get("../v1/waybill/allWayBillDetail").then(function(res){
+        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:'3'},{emulateJSON:true}).then(function(res){
           if(res.body.code != 0){
             this.$message.error(res.body.message);
             return;
           }
-          var list = res.body.data.wayBillDetailVoList;
+          var list = res.body.data;
           var temp = [];
           for(var i = 0;i < list.length;i++){
             var item = list[i];
-            if(item.waybillStatusCode === constantData.SENDFORRESPONSE){
+            if(item.status === constantData.DISCOUNTED){
               temp.push(item);
               if(temp.length >= 4) break;
             }
@@ -153,14 +153,7 @@
         },function(err){
           console.log(err);
         });
-      },
-      discount(){
-        this.$router.push("/bank/detail");
-      },
-      checkDetail (orderNo) {
-        Store.commit('setCheckIdOrder',orderNo);
-        this.$router.push("/logisticsCompany/companyBillDetails");
-      },
+      }
     }
   }
 </script>

@@ -86,7 +86,7 @@
     data () {
       return {
           logisticsDetail:{
-              inRepoTime:'',
+            inRepoTime:'',
             productQuantity:'',
             operationRecordVo:[],
             sendReqTime:''//卖家申请发货时间，待筛选
@@ -128,17 +128,4 @@
     }
   }
 </script>
-<style>
- .circleColor:before {
-    background-color: rgb(57,202,166) !important;
-  }
- .status-list .el-col {
-    border-left: 2px solid rgb(57,202,166);
-  }
- .circleColor1 {
-    color:rgb(57,202,166); border-left: none !important;
-  }
- .status-list:before{
-   border: 2px solid rgb(57,202,166) ;
- }
-</style>>
+

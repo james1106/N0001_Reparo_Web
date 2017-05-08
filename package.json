@@ -11,6 +11,7 @@
   "dependencies": {
     "echarts": "^3.5.2",
     "element-ui": "^1.2.7",
+    "js-md5": "^0.4.2",
     "json-server": "^0.9.6",
     "node-glob": "^1.2.0",
     "vue": "^2.2.2",

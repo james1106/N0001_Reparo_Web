@@ -1,9 +1,10 @@
 <template>
   <div id="accountTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
-      <el-col :span="7" style="margin-left: 20px">货品信息</el-col>
-      <el-col :span="6">付款信息</el-col>
-      <el-col :span="8">订单状态</el-col>
+      <el-col :span="5" style="margin-left: 20px">货品信息</el-col>
+      <el-col :span="5">账款信息</el-col>
+      <el-col :span="5">收款人</el-col>
+      <el-col :span="5">账款状态</el-col>
       <el-col :span="2">操作</el-col>
     </el-row>
     <template v-if="tableData.length===0">
@@ -161,6 +162,3 @@
     }
   }
 </script>
-
-<style>
-</style>

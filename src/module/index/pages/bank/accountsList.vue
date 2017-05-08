@@ -11,11 +11,11 @@
       <el-tab-pane label="所有应收账款" name="all">
         <accounts-table :accountInfo="accountsList" status="0" pageSize="10"> </accounts-table>
       </el-tab-pane>
-      <el-tab-pane label="贴现待确认" name="discount" >
-        <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
+      <el-tab-pane label="贴现待响应" name="discount" >
+        <accounts-table :accountInfo="accountsList" status="41" pageSize="10"> </accounts-table>
       </el-tab-pane>
       <el-tab-pane label="待兑付" name="cash" >
-        <accounts-table :accountInfo="accountsList" status="21" pageSize="10"> </accounts-table>
+        <accounts-table :accountInfo="accountsList" status="46" pageSize="10"> </accounts-table>
       </el-tab-pane>
     </el-tabs>
     </el-card>
@@ -43,31 +43,23 @@
     },
     data () {
       return {
-        accountsList:[{
-          receNo:'123213123',
-          date:'2017-04-03 10:29:11',
-          amount:'10000',
-          holder:'欧欧欧',
-          accepter:'铭铭铭',
-          date1:'2017-04-03',
-          status:'贴现待确认'
-        }
+        accountsList:[
         ]
       }
     },
     methods:{
       //获取账单列表
       getAccountsList(){
-//        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:'3'},{emulateJSON:true}).then((res) => {
-//          var data =  res.body.data;
-//          if(res.body.code != 0){
-//            this.$message.error(res.body.message);
-//            return;
-//          }
-//          this.accountsList = data;
-//        },(err) => {
-//          console.log(err);
-//        })
+        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:'3'},{emulateJSON:true}).then((res) => {
+          var data =  res.body.data;
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
+          this.accountsList = data;
+        },(err) => {
+          console.log(err);
+        })
       }
     }
   }

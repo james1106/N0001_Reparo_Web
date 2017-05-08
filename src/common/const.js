@@ -10,7 +10,8 @@ const constantData={
   FORSIGNOUT : 10,/*待签发*/
   FORACCEPT : 21,/*应收账款承兑待签收*/
   ACCEPTED : 26,/*应收账款承兑已签收*/
-  DISCOUNTED:41,/*应收账款贴现待签收*/
+  DISCOUNTED:41,/*应收账款贴现待响应*/
+  DISCOUNTRESPONSED:46,/*应收账款贴现已响应*/
   CASHED:31,/*应收账款已兑付*/
   FINISH:1,/*应收账款已结清*/
 

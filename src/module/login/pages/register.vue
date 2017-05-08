@@ -31,6 +31,8 @@
 </template>
 
 <script>
+  import md5 from 'js-md5';
+
   export default {
     name: 'register',
     data(){
@@ -87,45 +89,12 @@
       nextStep(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-          this.$router.push('/registerDetail/'+ this.ruleForm.userName +'/pwd/'+ this.ruleForm.password+'/phone/' +  this.ruleForm.phone);
+          this.$router.push('/registerDetail/'+ this.ruleForm.userName +'/pwd/'+ md5(this.ruleForm.password)+'/phone/' +  this.ruleForm.phone);
           } else {
             return false;
           }
         });
       }
-//      (){
-//      }
-    },
+    }
   }
 </script>
-
-<style>
-  /*.register-container {*/
-    /*-webkit-border-radius: 5px;*/
-    /*border-radius: 5px;*/
-    /*-moz-border-radius: 5px;*/
-    /*background-clip: padding-box;*/
-    /*margin: 0 auto;*/
-    /*width: 600px;*/
-    /*padding: 35px 35px 15px 35px;*/
-    /*background: #fff;*/
-  /*}*/
-  .codeButton{
-    margin-left: 20px!important;
-    margin-top: 0px!important;
-    font-size: 13px!important;
-    padding-left: 10px!important;
-  }
-  .el-form-item{margin-bottom: 18px!important;}
-  .registerStep{
-    margin: 0 20px;
-    color: #CCCCCC;
-    font-size: 13px;
-    text-decoration: none;
-  }
-  .highlight{
-    margin: 0 20px;
-    color: rgb(57,202,166);
-    font-size: 13px;
-  }
-  </style>

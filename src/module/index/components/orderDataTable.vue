@@ -56,7 +56,7 @@
               <el-row v-else>{{item.wayBillStatus | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="2">
-              <el-row >
+              <el-col :span="24" >
                 <el-button size="mini" type="text"
                            v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
                            @click.native.prevent="confirmOrder(item.orderNo)">确认订单
@@ -72,11 +72,11 @@
                            v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
                            @click.native.prevent="acceptBill(item.orderNo)">签收账款
                 </el-button>
-              </el-row>
-              <el-row>
-                <el-button size="mini" style="text-align: center;"
+              </el-col>
+              <el-col :span="24">
+                <el-button size="small" style="text-align: center; margin-left: -9px"
                            @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-              </el-row>
+              </el-col>
             </el-col>
           </el-row>
         </el-row>
@@ -224,6 +224,3 @@
     }
   }
 </script>
-
-<style>
-</style>

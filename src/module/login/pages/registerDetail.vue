@@ -14,12 +14,12 @@
       <el-form-item prop="acctIds">
         <el-input v-model.number="ruleForm.acctIds" placeholder="账号"></el-input>    <!--v-model传值-->
       </el-form-item>
-      <el-form-item prop="roleCode" style="height: 20px;text-align: left">
-        <el-radio-group v-model="ruleForm.roleCode">
-          <el-radio name="roleCode" label="0">融资企业</el-radio>
-          <el-radio name="roleCode" label="2">仓储公司</el-radio>
-          <el-radio name="roleCode" label="1">物流公司</el-radio>
-          <el-radio name="roleCode" label="3">金融机构</el-radio>
+      <el-form-item prop="roleCode" style="text-align: left">
+        <el-radio-group v-model="ruleForm.roleCode" size="small">
+          <el-radio-button name="roleCode" label="0">融资企业</el-radio-button>
+          <el-radio-button name="roleCode" label="2">仓储公司</el-radio-button>
+          <el-radio-button name="roleCode" label="1">物流公司</el-radio-button>
+          <el-radio-button name="roleCode" label="3">金融机构</el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-row class="agreeMsg"><span class="tip">点击注册表示你已阅读并同意<span style="color:rgb(57,202,166);">《xxx条款》</span></span></el-row>
@@ -102,41 +102,3 @@
     }
   }
 </script>
-
-<style>
-  .el-radio__label{
-    font-size: 10px!important;
-    padding-left: 5px!important;
-  }
-  .back{
-    color: #666666;
-    font-size: 13px;
-    text-decoration: none;
-  }
-  .tip{
-    font-size: 12px;
-    color: #999999;
-  }
-  .agreeMsg{
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  .companyType{
-    color: #999999!important;
-  }
-  .el-radio__inner{
-    width: 15px!important;
-    height: 15px!important;
-  }
-  .el-radio__inner:hover{
-    border-color:rgb(56,202,166)!important;
-  }
-  .el-radio__input.is-checked .el-radio__inner{
-    border-color:rgb(56,202,166)!important;
-    background:rgb(56,202,166)!important;
-  }
-  /*.el-radio__label{*/
-    /*font-size: 12px!important;*/
-    /*padding-left: 8px!important;*/
-  /*}*/
-  </style>

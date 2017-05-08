@@ -120,43 +120,8 @@
           console.log(err);
         }
       );
-    },
+    }
   }
 </script>
 <style>
-  .mycard {
-    width: 90% !important;
-    float: inherit !important;
-    margin: 10px auto !important;
-    background-color: rgba(242, 242, 242, 1)
-  }
-
-  .mycard .el-row {
-    margin-bottom: 0 !important;
-    display: -webkit-flex;
-    flex-flow: row wrap;
-    -webkit-flex-flow: row wrap;
-    justify-content: flex-start;
-    -webkit-justify-content: flex-start;
-  }
-
-  .mycard .el-col {
-    text-align: center;
-    box-sizing: border-box;
-    padding: 5px 0;
-  }
-
-  .row-black {
-    background-color: rgba(215, 215, 215, 1);
-  }
-
-  .row-padding {
-    box-sizing: border-box;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .btn-vertical {
-    margin-top: 10px;
-  }
 </style>
