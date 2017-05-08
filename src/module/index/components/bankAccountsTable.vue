@@ -20,30 +20,30 @@
     <template v-for="item in showData">
       <el-row class="dataTable">
         <el-row class="el-row-header">
-          <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receNo}}</el-col>
-          <el-col :span="10">融资申请时间：{{item.date}}</el-col>
+          <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receivableNo}}</el-col>
+          <el-col :span="10">融资申请时间：</el-col>
         </el-row>
         <el-row class="el-row-content">
           <el-col :span="5" style="margin-left: 19px;">
-            <el-col :span="24">{{item.amount}}</el-col>
+            <el-col :span="24">{{item.isseAmt}}元</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">持有人：{{item.holder}}</el-col>
-            <el-col :span="24">承兑人：{{item.accepter}}</el-col>
+            <el-col :span="24">持有人：</el-col>
+            <el-col :span="24">承兑人：</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">{{item.date1}}</el-col>
+            <el-col :span="24">{{item.dueDt | timeTransfer}}</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">{{item.status}}</el-col>
+            <el-col :span="24">{{item.status | receStatus}}</el-col>
           </el-col>
           <el-col :span="2">
             <el-col :span="24">
-              <el-button size="mini" type="text" class="buyerColor" @click.native.prevent="discount(item.orderNo)">确认融资</el-button>
+              <el-button size="mini" type="text" class="buyerColor" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
               <!--.native是子组件绑定原生事件而不是父控件响应子组件的方法 -->
-              <el-button size="small" type="default" @click.native.prevent="showDetail(item.receivableNo,item.orderNo,item.status)">查看详情</el-button>
+              <el-button size="small" type="default" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
             </el-col>
           </el-col>
         </el-row>
@@ -83,10 +83,6 @@
       constantData () {
         return constantData;
       },
-    },
-    mounted(){
-      this.getDataByStatus()
-      this.getDataByPageNum(0)
     },
     watch:{
       accountInfo(curVal){

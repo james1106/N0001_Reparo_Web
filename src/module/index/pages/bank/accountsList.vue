@@ -43,15 +43,7 @@
     },
     data () {
       return {
-        accountsList:[{
-          receNo:'123213123',
-          date:'2017-04-03 10:29:11',
-          amount:'10000',
-          holder:'欧欧欧',
-          accepter:'铭铭铭',
-          date1:'2017-04-03',
-          status:'贴现待确认'
-        }
+        accountsList:[
         ]
       }
     },
