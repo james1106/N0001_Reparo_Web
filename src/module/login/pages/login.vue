@@ -147,6 +147,7 @@
       }
     },
     created () {
+
       if(this.getCookie('token')!==''){
           console.log("hello");
         window.location.href='main.html';
