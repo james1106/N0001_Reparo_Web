@@ -135,16 +135,16 @@
     },
     methods:{
       getTopList(){
-        this.$http.get("../v1/waybill/allWayBillDetail").then(function(res){
+        this.$http.post('../v1/receivable/receivableSimpleDetailList',{roleCode:'3'},{emulateJSON:true}).then(function(res){
           if(res.body.code != 0){
             this.$message.error(res.body.message);
             return;
           }
-          var list = res.body.data.wayBillDetailVoList;
+          var list = res.body.data;
           var temp = [];
           for(var i = 0;i < list.length;i++){
             var item = list[i];
-            if(item.waybillStatusCode === constantData.SENDFORRESPONSE){
+            if(item.transactionStatus === constantData.DISCOUNTED){
               temp.push(item);
               if(temp.length >= 4) break;
             }
@@ -153,14 +153,7 @@
         },function(err){
           console.log(err);
         });
-      },
-      discount(){
-        this.$router.push("/bank/detail");
-      },
-      checkDetail (orderNo) {
-        Store.commit('setCheckIdOrder',orderNo);
-        this.$router.push("/logisticsCompany/companyBillDetails");
-      },
+      }
     }
   }
 </script>
