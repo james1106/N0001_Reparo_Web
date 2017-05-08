@@ -513,6 +513,12 @@ body{
   font-size: 10px;
   font-weight: bold;
 }
+.discountMsg{
+  font-size: 14px;
+  line-height: 40px;
+  margin-left: -39px;
+  color: #666666;
+}
 
 /*layout页面*/
 #wrapper{
