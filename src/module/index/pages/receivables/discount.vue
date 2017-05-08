@@ -43,9 +43,9 @@
         <el-form ref="discount" :model="bankOption" :rules="discountRules">
           <el-col :span="12">
             <el-form-item label="请选择贴现银行" prop="bankOption">
-              <el-select v-model="bankOption.bankSvcr" placeholder="请选择开户行">
-                <template v-for="item in bankOption.bankList">
-                  <el-option :label="item.bankName" :value="item.bankSvcr"></el-option>
+              <el-select v-model="bankOption.index" placeholder="请选择开户行">
+                <template v-for="(item,index) in bankOption">
+                  <el-option :label="item.enterpriseNameList" :value="index"></el-option>
                 </template>
               </el-select>
             </el-form-item>
@@ -77,8 +77,10 @@
     data () {
       return {
         bankOption:{
-          bankSvcr:'',
-          bankList:[]
+          index:'',
+          enterpriseNameList:[],
+          rateList:[],
+          acctIdList:[]
         },
         detailInfo:{
           detailVoList:[{
@@ -100,7 +102,7 @@
         var discountParam = {
             receivableNo:this.detailInfo.detailVoList[0].receivableNo,       //应收款编号
             applicantAcctId:LocalStore.fetchUserInfo().acctIds,   //申请人(本人)账号
-            replyerAcctId:this.bankOption.bankSvcr,      //回复人账号
+            replyerAcctId:this.bankOption.acctIdList[this.bankOption.index],      //回复人账号
             discountApplyAmount:this.detailInfo.detailVoList[0].isseAmt //申请贴现金额
         }
         this.$http.post('../v1/receivable/discountApply',discountParam,{emulateJSON:true}).then((res) => {
@@ -134,8 +136,7 @@
         })
       },
       getBankList(){
-        this.$http.post('../v1/receivable/discountApplyBankList').then((res) => {
-          console.log(res.body);
+        this.$http.get('../v1/account/allFinancialEnterpriseNameAndRate').then((res) => {
           var data =  res.body.data;
           if(res.body.code != 0){
             this.$message.error(res.body.message);

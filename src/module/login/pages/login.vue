@@ -37,7 +37,7 @@
   import '../../../framework/iconfont.js'
   import Store from "../../../common/store.js"
   import dialogView from "../../../components/dialog.vue"
-//  import '../../../assets/css/style.css'
+  import md5 from 'js-md5';
 
   window.onload = function () {
     particlesJS('app', {
@@ -97,7 +97,7 @@
         loading:false,
         checked:true,
         loginInfo: {
-          account_name: '',
+          accountName: '',
           password: ''
         },
         rules: {
@@ -115,7 +115,11 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true;
-            this.$http.post('../v1/account/login',this.loginInfo,{emulateJSON:true}).then((res) => {
+            var params = {
+              accountName: this.loginInfo.accountName,
+              password:md5(this.loginInfo.password)
+            }
+            this.$http.post('../v1/account/login',params,{emulateJSON:true}).then((res) => {
               this.loading = false;
               var data =  res.body.data;
               if(res.body.code != 0){
@@ -148,6 +152,7 @@
       }
     },
     created () {
+
       if(this.getCookie('token')!==''){
           console.log("hello");
         window.location.href='main.html';

@@ -12,7 +12,7 @@
         <el-row class="el-row-header statePosition">
           <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
             账款状态:贴现待响应</el-col>
-          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率</span>&nbsp;<el-button size="small" @click="discountConfirm()">贴现确认</el-button></el-col>
+          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}</span>&nbsp;<el-button size="small" @click="discountConfirm()">贴现确认</el-button></el-col>
         </el-row>
       </el-row>
       <el-row>
@@ -24,17 +24,17 @@
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
-                <el-col :span="8" class="msgName keynote">应收账款编号：</el-col>
-                <el-col :span="8" class="msgName">发起时间：</el-col>
-                <el-col :span="8" class="msgName">到期日：</el-col>
+                <el-col :span="8" class="msgName keynote">应收账款编号：{{receDetail.detailVoList[0].receivableNo}}</el-col>
+                <el-col :span="8" class="msgName">发起时间：{{receDetail.detailVoList[0].isseDt | timeTransfer}}</el-col>
+                <el-col :span="8" class="msgName">到期日：{{receDetail.detailVoList[0].dueDt | timeTransfer}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">收款人：</el-col>
-                <el-col :span="8" class="msgName">付款人：</el-col>
+                <el-col :span="8" class="msgName">收款人：{{receDetail.detailVoList[0].pyeeEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">付款人：{{receDetail.detailVoList[0].pyerEnterpriseName}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">账款金额（元）：</el-col>
-                <el-col :span="8" class="msgName">票面利息(%)：</el-col>
+                <el-col :span="8" class="msgName">账款金额（元）：{{receDetail.detailVoList[0].isseAmt}}</el-col>
+                <el-col :span="8" class="msgName">票面利息(%)：{{receDetail.detailVoList[0].rate}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">应收账款状态明细:</el-col>
@@ -60,33 +60,33 @@
             <div class="box-card mycard1 detailContent">
               <el-row class="msgName keynote">收款人信息：</el-row>
               <el-row>
-                <el-col :span="8" class="msgName">收款方：</el-col>
-                <el-col :span="8" class="msgName">收款人账号：</el-col>
-                <el-col :span="8" class="msgName">收款人开户行：</el-col>
+                <el-col :span="8" class="msgName">收款方：{{receDetail.detailVoList[0].pyeeEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">收款人账号：{{receDetail.detailVoList[0].pyee}}</el-col>
+                <el-col :span="8" class="msgName">收款人开户行：{{receDetail.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
-                <el-col :span="8" class="msgName">联系方式：</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
-                <el-col :span="8" class="msgName">付款方：</el-col>
-                <el-col :span="8" class="msgName">付款人账号：</el-col>
-                <el-col :span="8" class="msgName">付款人开户行：</el-col>
+                <el-col :span="8" class="msgName">付款方：{{receDetail.detailVoList[0].pyerEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">付款人账号：{{receDetail.detailVoList[0].pyer}}</el-col>
+                <el-col :span="8" class="msgName">付款人开户行：{{receDetail.detailVoList[0].pyerAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
-                <el-col :span="8" class="msgName">联系方式：</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">签发人信息：</el-row>
               <el-row>
-                <el-col :span="8" class="msgName">签发人：</el-col>
-                <el-col :span="8" class="msgName">签发人账号：</el-col>
-                <el-col :span="8" class="msgName">签发人开户行：</el-col>
+                <el-col :span="8" class="msgName">签发人：{{receDetail.detailVoList[0].pyeeEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">签发人账号：{{receDetail.detailVoList[0].pyee}}</el-col>
+                <el-col :span="8" class="msgName">签发人开户行：{{receDetail.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
-                <el-col :span="8" class="msgName">联系方式：</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
               </el-row>
             </div>
           </el-card>
@@ -213,28 +213,130 @@
     },
     data () {
       return {
-        detailInfo:{
+        rate:'',
+        orderDetail: {
+          txDetail: {
+            operationRecordVoList:[
+              {state:'',operateTime:''}
+            ],
+          },
+          receOver: {},
+          repoOver: {},
+          wayBillOver: {}
+        },
+        receDetail:{
+          detailVoList:[{
+            receivableNo:'',
+            orderNo:'',
+            isseDt:'',
+            dueDt:'',
+            pyeeEnterpriseName:'',
+            pyerEnterpriseName:'',
+            isseAmt:'',
+            rate:'',
+            pyee:'',
+            pyeeAcctSvcrName:'',
+            pyeeLinkman:'',
+            pyeePhone:'',
+            pyer:'',
+            pyerAcctSvcrName:'',
+            pyerLinkMan:'',
+            pyerPhone:'',
+            contractNo:'',
+            invoiceNo:''
+          }
+          ],
+          serialVoList: [{
+          }]
+        },
+        innerRepoHistory:[],//入库仓储历史
+        outerRepoHistory:[],//出库仓储历史
+        wayBillHistory:{
+          operationRecordVo:[],
+          sendReqTime:''
         }
       }
     },
     methods:{
       getDetail(){
-//          var detailParam = {
-//            receivableNo:Store.state.checkIdRece,
-//            operatorAcctId:LocalStore.fetchUserInfo().acctIds
-//          }
-//          this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
-//            var data =  res.body.data;
-//            if(res.body.code != 0){
-//              this.$message.error(res.body.message);
-//              return;
-//            }
-//            //详情数据
-//            this.detailInfo = data;
-//            this.setStatusInfo(data);
-//          },(err) => {
-//            console.log(err);
-//          })
+          this.rate = LocalStore.fetchUserInfo().rate;
+          var detailParam = {
+            receivableNo:Store.state.checkIdRece,
+            operatorAcctId:LocalStore.fetchUserInfo().acctIds
+          }
+          //获取应收账款详情
+          this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
+            var data =  res.body.data;
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
+            //详情数据
+            this.detailInfo = data;
+            this.setStatusInfo(data);
+          },(err) => {
+            console.log(err);
+          })
+
+        //获取订单详情
+        this.$http.get("../v1/order/detail?orderNo=" + Store.state.checkIdOrder).then(
+          function (res) {
+            // 处理成功的结果
+            if(res.body.code != 0){
+              this.$message.error(res.body.message);
+              return;
+            }
+            this.receDetail = res.body.data;
+
+//          根据仓储业务编号查询仓储详情
+            if(this.orderDetail.repoOver.payerRepoBusinessNo!==''){
+              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payerRepoBusinessNo).then(function(res){
+                if(res.body.code != 0){
+                  this.$message.error(res.body.message);
+                  return;
+                }
+                this.innerRepoHistory=res.body.data.operationRecordVoList;
+              },function (err) {
+                console.log(err);
+              });
+            }
+            if(this.orderDetail.repoOver.payeeRepoBusinessNo!==''){
+              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payeeRepoBusinessNo).then(function(res){
+                if(res.body.code != 0){
+                  this.$message.error(res.body.message);
+                  return;
+                }
+                this.outerRepoHistory=res.body.data.operationRecordVoList;
+              },function (err) {
+                console.log(err);
+              });
+            }
+
+//          根据订单号查询运单详情
+            if(this.orderDetail.wayBillOver.wayBillLatestStatus>0){
+              this.$http.get("../v1/waybill/wayBillDetail?orderNo="+this.orderDetail.txDetail.orderId).then(function(res){
+                if(res.body.code != 0){
+                  this.$message.error(res.body.message);
+                  return;
+                }
+                this.wayBillHistory=res.body.data;
+                this.wayBillHistory.sendReqTime='';
+                for(var item in this.wayBillHistory.operationRecordVo){
+                  var temp=this.wayBillHistory.operationRecordVo[item];
+                  if(temp.state===constantData.SENDFORRESPONSE){/*筛选申请发货时间，即发货待响应时间*/
+                    this.wayBillHistory.sendReqTime=temp.operateTime;
+                    break;
+                  }
+                }
+              },function(err){
+                console.log(err);
+              });
+            }
+          }, function (res) {
+            // 处理失败的结果
+            console.log(res);
+          }
+        );
         },
       discountConfirm(){
 

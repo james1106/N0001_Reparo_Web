@@ -31,6 +31,8 @@
 </template>
 
 <script>
+  import md5 from 'js-md5';
+
   export default {
     name: 'register',
     data(){
@@ -87,7 +89,7 @@
       nextStep(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-          this.$router.push('/registerDetail/'+ this.ruleForm.userName +'/pwd/'+ this.ruleForm.password+'/phone/' +  this.ruleForm.phone);
+          this.$router.push('/registerDetail/'+ this.ruleForm.userName +'/pwd/'+ md5(this.ruleForm.password)+'/phone/' +  this.ruleForm.phone);
           } else {
             return false;
           }
