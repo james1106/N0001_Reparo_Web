@@ -115,12 +115,13 @@
             this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
           }
       },
-      showDetail(receivableNo,orderNo,status){
+      showDetail(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/bank/detail");
       },
-      discount(){
-        this.$router.push("/bank/detail");
-      }
+//      discount(){
+//        this.$router.push("/bank/detail");
+//      }
     }
   }
 </script>
