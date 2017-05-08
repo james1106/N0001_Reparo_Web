@@ -52,7 +52,7 @@
     <el-pagination
       layout="total,prev, pager, next,jumper"
       @current-change="currentChange"
-      :total="tableData.length">
+      :total="tableData.length" :page-size="pageSize">
     </el-pagination>
     </template>
   </div>
@@ -83,6 +83,9 @@
       constantData () {
         return constantData;
       },
+      pageSize () {
+        return this.pageSize;
+      }
     },
     watch:{
       accountInfo(curVal){
@@ -115,12 +118,13 @@
             this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
           }
       },
-      showDetail(receivableNo,orderNo,status){
+      showDetail(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/bank/detail");
       },
-      discount(){
-        this.$router.push("/bank/detail");
-      }
+//      discount(){
+//        this.$router.push("/bank/detail");
+//      }
     }
   }
 </script>

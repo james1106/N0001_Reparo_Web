@@ -51,7 +51,7 @@
     <el-pagination
       layout="total,prev, pager, next,jumper"
       @current-change="currentChange"
-      :total="tableData.length">
+      :total="tableData.length" :page-size="pageSize">
     </el-pagination>
     </template>
   </div>
@@ -89,6 +89,9 @@
       constantData () {
         return constantData;
       },
+      pageSize () {
+        return this.pageSize;
+      }
     },
     methods:{
       currentChange(val){
