@@ -37,6 +37,7 @@
   import '../../../framework/iconfont.js'
   import Store from "../../../common/store.js"
   import dialogView from "../../../components/dialog.vue"
+//  import '../../../assets/css/style.css'
 
   window.onload = function () {
     particlesJS('app', {
@@ -286,5 +287,12 @@
     text-decoration: none;
     color: #39CAA6;
     font-size: 16px;
+  }
+  /*注册详情的单选框*/
+  .el-radio-group{
+  width: 300px!important;
+  }
+  .el-radio-button__inner{
+  padding: 7px 8px!important;
   }
 </style>

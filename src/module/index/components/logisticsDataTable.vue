@@ -37,12 +37,12 @@
               <el-row>{{item.waybillStatusCode | wayBillStatus}}</el-row>
             </el-col>
             <el-col :span="4">
-              <el-row style="text-align: center;" v-if="item.waybillStatusCode===constantData.FORSEND"><!--待发货-->
+              <el-col :span="24" style="text-align: center;" v-if="item.waybillStatusCode===constantData.FORSEND"><!--待发货-->
                 <el-button size="mini" type="text" @click.native.prevent="deliver(item.orderNo)">申请发货</el-button>
-              </el-row>
-              <el-row style="text-align: center;">
-                <el-button size="small"c @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
-              </el-row>
+              </el-col>
+              <el-col :span="24" style="text-align: center">
+                <el-button size="small" @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+              </el-col>
             </el-col>
           </el-row>
         </el-row>
