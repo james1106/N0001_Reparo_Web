@@ -21,15 +21,15 @@
       <el-row class="dataTable">
         <el-row class="el-row-header">
           <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receivableNo}}</el-col>
-          <el-col :span="10">融资申请时间：</el-col>
+          <el-col :span="10">融资申请时间：{{item.discountApplyTime | timeTransfer}}</el-col>
         </el-row>
         <el-row class="el-row-content">
           <el-col :span="5" style="margin-left: 19px;">
             <el-col :span="24">{{item.isseAmt}}元</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">持有人：</el-col>
-            <el-col :span="24">承兑人：</el-col>
+            <el-col :span="24">持有人：{{item.firstOwnerName}}</el-col>
+            <el-col :span="24">承兑人：{{item.accptrName}}</el-col>
           </el-col>
           <el-col :span="5">
             <el-col :span="24">{{item.dueDt | timeTransfer}}</el-col>
@@ -52,7 +52,7 @@
     <el-pagination
       layout="total,prev, pager, next,jumper"
       @current-change="currentChange"
-      :total="tableData.length" :page-size="pageSize">
+      :total="tableData.length">
     </el-pagination>
     </template>
   </div>
@@ -82,9 +82,6 @@
       },
       constantData () {
         return constantData;
-      },
-      pageSize () {
-        return this.pageSize;
       }
     },
     watch:{

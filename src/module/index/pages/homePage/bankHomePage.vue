@@ -67,15 +67,15 @@
             <el-row class="dataTable">
               <el-row class="el-row-header">
                 <el-col :span="10" style="margin-left: 19px;">账款编号：{{item.receivableNo}}</el-col>   <!--{{item.wayBillNo}}-->
-                <el-col :span="10">融资申请时间：</el-col>
+                <el-col :span="10">融资申请时间：{{item.discountApplyTime | timeTransfer}}</el-col>
               </el-row>
               <el-row class="el-row-content">
                 <el-col :span="5" style="margin-left: 19px;">
                   <el-row>{{item.isseAmt}}元</el-row>  <!--账款金额-->
                 </el-col>
                 <el-col :span="5">
-                  <el-row>持有人：A公司</el-row>
-                  <el-row>承兑人：中国银行</el-row>
+                  <el-row>持有人：{{item.firstOwnerName}}</el-row>
+                  <el-row>承兑人：{{item.accptrName}}</el-row>
                 </el-col>
                 <el-col :span="5">
                 <el-row>{{item.dueDt | timeTransfer}}</el-row>  <!--账款到期日-->

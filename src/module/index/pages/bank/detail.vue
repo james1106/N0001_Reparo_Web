@@ -12,7 +12,7 @@
         <el-row class="el-row-header statePosition">
           <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
             账款状态:{{receDetail.detailVoList[0].status | receStatus}}</el-col>
-          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}%</span>&nbsp;<el-button size="small" @click="showModal()">贴现确认</el-button></el-col>
+          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}%</span>&nbsp;<el-button size="small" v-if="receDetail.detailVoList[0].status === 41" @click="showReceDetail()">贴现确认</el-button></el-col>
         </el-row>
       </el-row>
       <el-row>
@@ -209,7 +209,7 @@
     <!--自定义弹框-->
     <transition name="modal">
       <div class="modal-mask" v-show="showModal">
-        <div class="modal-confirm">
+        <div class="modal-confirm rece_modal">
           <el-row class="el-row-header">
             <span class="confirm-header sellerColor">确认贴现</span><i class="el-icon-close closeBtn" @click="close" style="cursor: pointer"></i>
           </el-row>
@@ -217,11 +217,13 @@
             <el-form>
               <el-row>
                 <el-col :span="12">
-                  <span style="font-size: 12px;margin-left: 4%;">应收账款编号：{{receDetail.detailVoList[0].receivableNo}}</span>
+                  <el-form-item label="应收账款编号">
+                    <el-label>{{receDetail.detailVoList[0].receivableNo}}</el-label>
+                  </el-form-item>
                 </el-col>
                 <el-col :span="12">
                   <el-form-item label="实际贴现金额">
-                    <el-label>{{amount}}%</el-label>
+                    <el-label>{{amount}}元</el-label>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -239,8 +241,8 @@
               </el-row>
               <el-row>
                 <el-col :span="12">
-                  <el-form-item label="账款金额(元)">
-                    <el-label>{{receDetail.detailVoList[0].isseAmt}}</el-label>
+                  <el-form-item label="账款金额">
+                    <el-label>{{receDetail.detailVoList[0].isseAmt}}元</el-label>
                   </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -252,7 +254,7 @@
               <el-row>
                 <el-col :span="12">
                   <el-form-item label="票面利息">
-                    <el-label>{{orderDetail.txDetail.productName}}%</el-label>
+                    <el-label>{{receDetail.detailVoList[0].rate}}%</el-label>
                   </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -285,15 +287,15 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       var userInfo = LocalStore.fetchUserInfo();
-      this.rate.discountRate = userInfo.rate;
-      this.getDetail();
+      this.rate = userInfo.rate;
+      this.getDetail(false);
     },
     computed:{
       state () {
         return Store.state;
       },
       amount(){
-        var amount = receDetail.detailVoList[0].isseAmt * (1 - this.rate/100);
+        var amount = this.receDetail.detailVoList[0].isseAmt * (1 - this.rate/100);
         return amount;
       }
     },
@@ -349,7 +351,7 @@
       }
     },
     methods:{
-      getDetail(){
+      getDetail(isRefresh){
         this.rate = LocalStore.fetchUserInfo().rate;
         var detailParam = {
           receivableNo:Store.state.checkIdRece,
@@ -364,8 +366,11 @@
           }
           //详情数据
           this.receDetail = data;
+
           //获取订单详情
-          this.getOrderInfo(this.receDetail.detailVoList[0].orderNo);
+          if(!isRefresh){
+            this.getOrderInfo(this.receDetail.detailVoList[0].orderNo);
+          }
         },(err) => {
           console.log(err);
         })
@@ -458,17 +463,38 @@
             break;
         }
       },
-      showModal(){
+      showReceDetail(){
         this.showModal = true;
       },
       close(){
         this.showModal = false;
       },
       discountConfirm(){
-
+        var params = {
+          receivableNo:this.receDetail.detailVoList[0].receivableNo,
+          replyerAcctId:LocalStore.fetchUserInfo().acctIds,
+          response:0,
+          discountInHandAmount:this.amount
+        }
+        this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){
+          if(res.body.code != 0){
+            this.$message.error(res.body.message);
+            return;
+          }
+          this.showModal = false;
+          this.$message.success('已贴现确认！');
+          this.getDetail(true);
+        },
+        function (res) {
+          // 处理失败的结果
+          console.log(res);
+        });
       }
     }
   }
 </script>
 <style>
+  .rece_modal{
+    height: 235px!important;
+  }
 </style>
