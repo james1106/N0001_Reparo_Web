@@ -88,7 +88,7 @@
                     <el-button size="mini" type="text" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
                   </el-row>
                   <el-row style="text-align: center;">
-                    <el-button size="small" style="height: 25px" @click.native.prevent="checkDetail(item.receivableNo)">查看详情</el-button>
+                    <el-button size="small" style="height: 25px" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
                   </el-row>
                 </el-col>
               </el-row>
@@ -153,6 +153,14 @@
         },function(err){
           console.log(err);
         });
+      },
+      showDetail(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
+        this.$router.push("/bank/detail");
+      },
+      discount(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
+        this.$router.push("/bank/discount");
       }
     }
   }

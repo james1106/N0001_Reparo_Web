@@ -51,7 +51,7 @@ import bankIndex from './pages/bank/index.vue'
 import bankAccountsList from './pages/bank/accountsList.vue'
 import bankDetail from './pages/bank/detail.vue'
 import modifyRate from './pages/bank/modifyRate.vue'
-
+import bankDiscount from './pages/bank/discount.vue'
 
 export default [
   {
@@ -134,7 +134,8 @@ export default [
     children:[
       {path:'bankAccountsList/:status',component:bankAccountsList},
       {path:'detail',component:bankDetail},
-      {path:'modifyRate',component:modifyRate}
+      {path:'modifyRate',component:modifyRate},
+      {path:'discount',component:bankDiscount}
     ]
   }
 ]

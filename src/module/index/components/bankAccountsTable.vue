@@ -119,9 +119,10 @@
         Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/bank/detail");
       },
-//      discount(){
-//        this.$router.push("/bank/detail");
-//      }
+      discount(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
+        this.$router.push("/bank/discount");
+      }
     }
   }
 </script>
