@@ -12,7 +12,7 @@
         <el-row class="el-row-header statePosition">
           <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
             账款状态:{{receDetail.detailVoList[0].status | receStatus}}</el-col>
-          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}%</span>&nbsp;<el-button size="small" @click="discountConfirm()">贴现确认</el-button></el-col>
+          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}%</span>&nbsp;<el-button size="small" @click="showModal()">贴现确认</el-button></el-col>
         </el-row>
       </el-row>
       <el-row>
@@ -206,6 +206,73 @@
         </el-col>
       </el-row>
     </el-card>
+    <!--自定义弹框-->
+    <transition name="modal">
+      <div class="modal-mask" v-show="showModal">
+        <div class="modal-confirm">
+          <el-row class="el-row-header">
+            <span class="confirm-header sellerColor">确认贴现</span><i class="el-icon-close closeBtn" @click="close" style="cursor: pointer"></i>
+          </el-row>
+          <div class="confirm-content">
+            <el-form>
+              <el-row>
+                <el-col :span="12">
+                  <span style="font-size: 12px;margin-left: 4%;">应收账款编号：{{receDetail.detailVoList[0].receivableNo}}</span>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="实际贴现金额">
+                    <el-label>{{amount}}%</el-label>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label="签发人">
+                    <el-label>{{receDetail.detailVoList[0].pyeeEnterpriseName}}</el-label>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="承兑人">
+                    <el-label>{{receDetail.detailVoList[0].pyerEnterpriseName}}</el-label>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label="账款金额(元)">
+                    <el-label>{{receDetail.detailVoList[0].isseAmt}}</el-label>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="到期日">
+                    <el-label>{{receDetail.detailVoList[0].dueDt | timeTransfer}}</el-label>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label="票面利息">
+                    <el-label>{{orderDetail.txDetail.productName}}%</el-label>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="贴现利息">
+                    <el-label>{{rate}}%</el-label>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </div>
+          <el-row>
+            <el-col :span="24">
+              <el-row>
+                <el-button size="small" type="primary" @click="discountConfirm">确认贴现并打款</el-button>
+              </el-row>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -217,11 +284,17 @@
     mounted:function () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
+      var userInfo = LocalStore.fetchUserInfo();
+      this.rate.discountRate = userInfo.rate;
       this.getDetail();
     },
     computed:{
       state () {
         return Store.state;
+      },
+      amount(){
+        var amount = receDetail.detailVoList[0].isseAmt * (1 - this.rate/100);
+        return amount;
       }
     },
     data () {
@@ -271,7 +344,8 @@
         isOrderCollapse:false,
         isReceCollapse:false,
         isWayBillCollapse:false,
-        isRepoCollapse:false
+        isRepoCollapse:false,
+        showModal:false
       }
     },
     methods:{
@@ -383,6 +457,12 @@
             this.isRepoCollapse = false;
             break;
         }
+      },
+      showModal(){
+        this.showModal = true;
+      },
+      close(){
+        this.showModal = false;
       },
       discountConfirm(){
 
