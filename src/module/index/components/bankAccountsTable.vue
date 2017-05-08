@@ -128,6 +128,3 @@
     }
   }
 </script>
-
-<style>
-</style>

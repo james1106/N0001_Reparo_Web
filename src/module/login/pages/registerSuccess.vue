@@ -43,12 +43,3 @@
     }
   }
 </script>
-
-<style>
-.successButton{
-  width: 70%;
-  height: 40px;;
-  border-color:#38CAA6!important;
-  background-color: #38CAA6!important;
-}
-</style>

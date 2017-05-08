@@ -104,13 +104,3 @@
     }
   }
 </script>
-<style>
-  .modifyRate .el-form-item__error{
-    top:100%!important;
-    left:2%!important;
-  }
-  /*.modifyRate .el-button--primary:focus{*/
-    /*background-color:rgb(57,202,166)!important ;*/
-    /*border-color: rgb(57,202,166)!important;*/
-  /*}*/
-</style>

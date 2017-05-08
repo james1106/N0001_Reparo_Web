@@ -221,6 +221,3 @@
     }
   }
 </script>
-
-<style>
-</style>
