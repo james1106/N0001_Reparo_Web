@@ -50,7 +50,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="12" class="discountMsg">
             <span>该银行贴现利息:{{bankOption.rateList[bankIndex] | nullSituation}} %</span>
             &nbsp;<span>实际贴现金额:{{amount}}元</span>
           </el-col>

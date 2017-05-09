@@ -21,15 +21,15 @@
       <el-row class="dataTable">
         <el-row class="el-row-header">
           <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receivableNo}}</el-col>
-          <el-col :span="10">融资申请时间：</el-col>
+          <el-col :span="10">融资申请时间：{{item.discountApplyTime | timeTransfer}}</el-col>
         </el-row>
         <el-row class="el-row-content">
           <el-col :span="5" style="margin-left: 19px;">
             <el-col :span="24">{{item.isseAmt}}元</el-col>
           </el-col>
           <el-col :span="5">
-            <el-col :span="24">持有人：</el-col>
-            <el-col :span="24">承兑人：</el-col>
+            <el-col :span="24">持有人：{{item.firstOwnerName}}</el-col>
+            <el-col :span="24">承兑人：{{item.accptrName}}</el-col>
           </el-col>
           <el-col :span="5">
             <el-col :span="24">{{item.dueDt | timeTransfer}}</el-col>
@@ -118,11 +118,13 @@
             this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
           }
       },
-      showDetail(receivableNo,orderNo,status){
+      showDetail(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
         this.$router.push("/bank/detail");
       },
-      discount(){
-        this.$router.push("/bank/detail");
+      discount(receivableNo){
+        Store.commit('setCheckIdRece',receivableNo);
+        this.$router.push("/bank/discount");
       }
     }
   }

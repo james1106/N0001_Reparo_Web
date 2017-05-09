@@ -7,7 +7,6 @@
       <el-breadcrumb-item>订单详情</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-
     <el-row class="el-row-header statePosition">
       <el-col class="detail_title_color sellerColor stateShow">
             <svg class="icon detailIcon" aria-hidden="true"><use xlink:href="#icon-zhuangtai"></use> </svg>订单当前状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}
