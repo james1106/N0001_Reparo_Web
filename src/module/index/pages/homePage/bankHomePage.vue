@@ -84,12 +84,12 @@
                   <el-row>{{item.status | receStatus}}</el-row>  <!--当前状态-->
                 </el-col>
                 <el-col :span="2">
-                  <el-row style="text-align: center;">
+                  <el-col :span="24" style="text-align: center;">
                     <el-button size="mini" type="text" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
-                  </el-row>
-                  <el-row style="text-align: center;">
-                    <el-button size="small" style="height: 25px" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
-                  </el-row>
+                  </el-col>
+                  <el-col :span="24" style="text-align: center;">
+                    <el-button size="small"  @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
+                  </el-col>
                 </el-col>
               </el-row>
             </el-row>
