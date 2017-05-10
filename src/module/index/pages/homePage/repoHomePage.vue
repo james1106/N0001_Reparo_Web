@@ -5,8 +5,8 @@
         <el-card class="showCard">
           <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-order_o"></use> </svg>
           <div class="showMesg">
-            <span class="showName">卖出的订单</span> <br>
-            <span class="showNum">1000</span>
+            <span class="showName">全部仓单</span> <br>
+            <span class="showNum">22</span>
           </div>
         </el-card>
       </el-col>
@@ -14,8 +14,8 @@
         <el-card class="showCard">
           <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-yszk_o"></use> </svg>
           <div class="showMesg">
-            <span class="showName">应收账款</span> <br>
-            <span class="showNum">1000</span>
+            <span class="showName">待入库确认</span> <br>
+            <span class="showNum">24</span>
           </div>
         </el-card>
       </el-col>
@@ -23,8 +23,8 @@
         <el-card class="showCard">
           <svg class="icon" aria-hidden="true" style="font-size: 55px;float: left">   <use xlink:href="#icon-wl_o"></use> </svg>
           <div class="showMesg">
-            <span class="showName">我的物流</span> <br>
-            <span class="showNum">1000</span>
+            <span class="showName">待出库确认</span> <br>
+            <span class="showNum">13</span>
           </div>
         </el-card>
       </el-col>
