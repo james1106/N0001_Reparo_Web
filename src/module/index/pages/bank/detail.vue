@@ -468,12 +468,12 @@
           discountRate:this.rate,
           isseAmt:this.receDetail.detailVoList[0].isseAmt
         }
+        this.showModal = false;
         this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){
           if(res.body.code != 0){
             this.$message.error(res.body.message);
             return;
           }
-          this.showModal = false;
           this.$message.success('已贴现确认！');
           this.getDetail(true);
         },
