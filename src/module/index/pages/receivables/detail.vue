@@ -197,7 +197,7 @@
             return;
           }
           this.$message.success("承兑成功");
-//          this.getDetail();
+
           var _this=this;
           setTimeout(function () {
             _this.getDetail();
@@ -221,7 +221,6 @@
           this.$message.success("兑付成功");
           this.currentStatusInfo.isShowHandleBtn = false
 
-//          this.getDetail();
           var _this=this;
           setTimeout(function () {
             _this.getDetail();

@@ -5,7 +5,6 @@ import routerConfig from './router.config'
 import resource from 'vue-resource'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-import constantData from "../../common/const"
 import { Loading } from 'element-ui';
 import { MessageBox } from 'element-ui';
 import filters from '../../filters/filters'

@@ -33,8 +33,7 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/v1': '/v1'
-        }//ldy172.16.100.8  8088
-        //zgj 172.16.100.30 8088
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

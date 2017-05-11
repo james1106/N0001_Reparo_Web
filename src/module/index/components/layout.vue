@@ -82,11 +82,11 @@
 
 <script>
   import FooterA from './footer.vue'
-  import MenuBy from './menuBuyer.vue'
-  import MenuSl from './menuSeller.vue'
-  import MenuLg from './menuLogistics.vue'
-  import MenuWh from './menuWarehousing.vue'
-  import MenuBank from './menuBank.vue'
+  import MenuBy from './menu/menuBuyer.vue'
+  import MenuSl from './menu/menuSeller.vue'
+  import MenuLg from './menu/menuLogistics.vue'
+  import MenuWh from './menu/menuWarehousing.vue'
+  import MenuBank from './menu/menuBank.vue'
   import LocalStore from "../../../common/store.js"
   import Store from '../vuex/store.js'
   import Common from "../../../common/common.js"

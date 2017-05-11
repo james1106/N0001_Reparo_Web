@@ -65,9 +65,9 @@
 </template>
 
 <script>
-  import store from '../vuex/store'
-  import constantData from '../../../common/const'
-  import default_0 from  '../assets/default_0.png'
+  import store from '../../vuex/store'
+  import constantData from '../../../../common/const'
+  import default_0 from  '../../assets/default_0.png'
 
   export default {
     name: 'repoDataTable',

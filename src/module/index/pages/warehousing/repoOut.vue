@@ -25,7 +25,7 @@
 </template>
 <script>
   import store from '../../vuex/store'
-  import repoDataTable from '../../components/repoDataTable.vue'
+  import repoDataTable from '../../components/table/repoDataTable.vue'
   export default {
     name:'repoOut',
     data () {

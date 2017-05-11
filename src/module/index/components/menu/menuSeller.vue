@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import Store from '../vuex/store.js'
+  import Store from '../../vuex/store.js'
 
   export default {
     name: 'seller_menu',

@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-  import repoDataTable from '../../components/repoCompanyDataTable.vue'
+  import repoDataTable from '../../components/table/repoCompanyDataTable.vue'
   import Store from '../../vuex/store.js'
 
   export default {

@@ -32,7 +32,7 @@
 </template>
 <script>
   import Store from '../../vuex/store.js'
-  import AccountsTable from '../../components/accountsTable.vue'
+  import AccountsTable from '../../components/table/accountsTable.vue'
   import constantData from '../../../../common/const'
 
   export default {

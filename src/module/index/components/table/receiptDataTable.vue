@@ -1,5 +1,5 @@
 <template>
-  <div id="receiptDataTable">
+  <div id="receiptDataTable"  >
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="6" style="margin-left: 19px">货品信息</el-col>
       <el-col :span="6">所在仓储</el-col>
@@ -50,10 +50,9 @@
 </template>
 
 <script>
-  import store from '../vuex/store'
-  import constantData from '../../../common/const'
-  import default_0 from  '../assets/default_0.png'
-
+  import store from '../../vuex/store'
+  import constantData from '../../../../common/const'
+  import default_0 from  '../../assets/default_0.png'
   export default {
     name: 'receiptDataTable',
     props: ['receiptList','status','pageSize'],
@@ -61,7 +60,7 @@
       return{
         tableData:this.receiptList,
         showData:[],
-        receiptStatus:this.status,
+        accountsStatus:this.status,
         imgUrl: {
           default_0:default_0
         }
@@ -69,11 +68,13 @@
     },
     mounted(){/*初始值，后面请求数据就删掉，以免显示空列表*/
       console.log(this.receiptList);
+
       this.getDataByStatus();
       this.getDataByPageNum(0);
     },
     watch:{
       receiptList(curVal){
+        console.log(curVal);
         this.tableData=curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
@@ -95,17 +96,37 @@
         this.getDataByPageNum(val - 1)
       },
       getDataByStatus(){/*筛选出各个Tab状态*/
-        if(this.repoStatus == 0){
-          return
+        switch(this.status){
+          case 'all':break;
+          case 'canFlow':/*可流转*/
+            var res=[];
+            for(var i=0;i<this.tableData.length;i++ ){
+              var item = this.tableData[i];
+              if(item.repoCertStatus===constantData.CANFLOW){
+                res.push(item)
+              }
+            }
+            this.tableData = res;break;
+          case 'frozen':/*冻结中*/
+            var res=[];
+            for(var i=0;i<this.tableData.length;i++ ){
+              var item = this.tableData[i];
+              if(item.repoCertStatus===constantData.FROZEN){
+                res.push(item)
+              }
+            }
+            this.tableData = res;break;
+          case 'disabled':/*已失效*/
+            var res=[];
+            for(var i=0;i<this.tableData.length;i++ ){
+              var item = this.tableData[i];
+              if(item.repoCertStatus===constantData.DISABLED){
+                res.push(item)
+              }
+            }
+            this.tableData = res;break;
+          default:break;
         }
-        var res=[];
-        for(var i=0;i<this.tableData.length;i++ ){
-          var item = this.tableData[i];
-          if(item.status == this.repoStatus){
-            res.push(item)
-          }
-        }
-        this.tableData = res;
       },
       getDataByPageNum(pageNum){
         if((pageNum + 1) * this.pageSize > this.tableData.length){
@@ -114,9 +135,13 @@
           this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
         }
       },
+
       checkDetail (checkId) {
+//        alert(this.tableData);
+
         store.commit('setCheckIdRepoCert',checkId);
-        this.$router.push('/warehousingCompany/receiptDetails');
+        console.log(store.state.checkIdRepoCert);
+        this.$router.push("/warehousing/receiptsDetails");
       },
     }
   }

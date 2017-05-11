@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-  import AccountsTable from '../../components/bankAccountsTable.vue'
+  import AccountsTable from '../../components/table/bankAccountsTable.vue'
   import constantData from '../../../../common/const'
   import Store from '../../vuex/store'
 

@@ -15,8 +15,8 @@
 </template>
 
 <script>
-  import store from '../vuex/store'
-  import constantData from '../../../common/const'
+  import store from '../../vuex/store'
+  import constantData from '../../../../common/const'
 export default {
   name: 'menu',
   data () {

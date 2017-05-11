@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import constantData from "../common/const"
+
 /*订单交易状态*/
 Vue.filter('transactionStatus',function(value){
   var readableStatus;

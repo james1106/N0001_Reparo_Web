@@ -31,7 +31,7 @@
 <script>
   import store from '../../vuex/store.js'
   import constantData from '../../../../common/const'
-  import OrderTable from '../../components/orderDataTable.vue'
+  import OrderTable from '../../components/table/orderDataTable.vue'
   export default {
     name: 'allOrder',
     data () {

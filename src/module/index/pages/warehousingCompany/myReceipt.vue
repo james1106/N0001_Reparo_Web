@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-  import receiptDataTable from '../../components/receiptCompanyDataTable.vue'
+  import receiptDataTable from '../../components/table/receiptCompanyDataTable.vue'
   import Store from '../../vuex/store.js'
 
   export default {

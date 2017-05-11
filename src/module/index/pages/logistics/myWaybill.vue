@@ -20,7 +20,7 @@
 </template>
 <script>
   import store from '../../vuex/store'
-  import logisticsDataTable from '../../components/logisticsDataTable.vue'
+  import logisticsDataTable from '../../components/table/logisticsDataTable.vue'
   export default {
     name:'index',
     data () {

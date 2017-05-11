@@ -26,7 +26,7 @@
 </template>
 <script>
   import store from '../../vuex/store'
-  import receiptDataTable from '../../components/receiptDataTable.vue'
+  import receiptDataTable from '../../components/table/receiptDataTable.vue'
 
   export default {
     name:'allReceipts',

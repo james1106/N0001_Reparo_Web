@@ -26,7 +26,7 @@
 </template>
 <script>
   import store from '../../vuex/store'
-  import logisticsCompanyDataTable from '../../components/logisticsCompanyDataTable.vue'
+  import logisticsCompanyDataTable from '../../components/table/logisticsCompanyDataTable.vue'
   export default {
     name:'index',
     data () {
