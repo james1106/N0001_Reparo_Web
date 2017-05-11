@@ -102,7 +102,7 @@
 <script>
   import '../../../../framework/iconfont.js'
   import adImg from '../../assets/ad.png'
-  import ccG from  '../../assets/cc_G.png'
+  import ccG from  '../../assets/jr_G.png'
   import default_0 from  '../../assets/default_0.png'
   import Localstore from "../../../../common/store.js"
   import Store from "../../vuex/store"
