@@ -104,7 +104,7 @@
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
-                <el-col :span="8" class="msgName keynote">物流公司：{{wayBill.logisticsEnterpriseName}}</el-col>
+                <el-col :span="8" class="msgName">物流公司：{{wayBill.logisticsEnterpriseName}}</el-col>
                 <el-col :span="8" class="msgName">运单编号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
               </el-row>
               <el-row>
@@ -134,12 +134,12 @@
             <div class="box-card mycard1 detailContent">
               <div>
                 <el-row>
-                  <el-col :span="8" class="msgName keynote">出库仓储公司：{{orderDetail.txDetail.payeeRepo}}</el-col>
+                  <el-col :span="8" class="msgName">出库仓储公司：{{orderDetail.txDetail.payeeRepo}}</el-col>
                   <el-col :span="8" class="msgName">出库仓单编号：{{orderDetail.repoOver.payeeRepoCertNo}}</el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="8" class="msgName keynote">入库仓储公司：{{orderDetail.txDetail.payerRepo}}</el-col>
-                  <el-col :span="8" class="msgName">入库仓单编号：{{orderDetail.repoOver.payerRepoCertNo}}</el-col>
+                  <el-col :span="8" class="msgName">入库仓储公司：{{orderDetail.txDetail.payerRepo | nullSituation}}</el-col>
+                  <el-col :span="8" class="msgName">入库仓单编号：{{orderDetail.repoOver.payerRepoCertNo | nullSituation}}</el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8" class="msgName">出库最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}</el-col>
@@ -466,7 +466,7 @@
           response:0,
           discountInHandAmount:this.amount,
           discountRate:this.rate,
-          isseAmt:this.receDetail.detailVoList[0].isseAmt
+          discountApplyAmount:this.receDetail.detailVoList[0].isseAmt
         }
         this.showModal = false;
         this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){

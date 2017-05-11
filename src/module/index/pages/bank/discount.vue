@@ -198,7 +198,7 @@
           response:0,
           discountInHandAmount:this.amount,
           discountRate:this.rate,
-          isseAmt:this.receDetail.detailVoList[0].isseAmt
+          discountApplyAmount:this.receDetail.detailVoList[0].isseAmt
         }
         this.showModal = false;
         this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){

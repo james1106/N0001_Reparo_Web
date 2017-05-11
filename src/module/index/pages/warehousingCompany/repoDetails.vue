@@ -24,7 +24,7 @@
               <el-row>
                 <el-col :span="8" class="msgName keynote">仓储业务编号：{{repoDetails.repoBusiNo}}</el-col>
                 <el-col :span="8" class="msgName">仓储状态：{{repoDetails.curRepoBusiStatus | repoStatus}}</el-col><!--卖家和买家会显示混合-->
-                <el-col :span="8" class="msgName" v-if="state.isBuyer==='true'">入库时间：{{repoDetails.inRepoTime | timeTransfer}}</el-col>
+                <el-col :span="8" class="msgName" v-if="repoDetails.curRepoBusiStatus < constantData.OUTFORRESPONSE">入库时间：{{repoDetails.inRepoTime | timeTransfer}}</el-col>
                 <el-col :span="8" class="msgName" v-else>出库时间：{{repoDetails.outRepoTime | timeTransfer}}</el-col>
               </el-row>
               <el-row>
@@ -86,6 +86,9 @@
     computed:{
       state () {
         return Store.state
+      },
+      constantData () {
+        return constantData
       }
     },
     mounted () {
@@ -106,19 +109,15 @@
           this.repoDetails.inRepoTime='';//返回数据里面没有这两个字段
           this.repoDetails.outRepoTime='';
           for(var item in this.repoDetails.operationRecordVoList){
-            if(item.state===constantData.ALREADYIN){/*筛选入库时间*/
-              console.log("筛选入库时间");
-              this.repoDetails.inRepoTime=item.operateTime;
-              break;
+            var temp = this.repoDetails.operationRecordVoList[item];
+            if(temp.state===constantData.ALREADYIN){/*筛选入库时间*/
+              this.repoDetails.inRepoTime=temp.operateTime;
+            }
+            if(temp.state===constantData.ALREADYOUT){/*筛选出库时间*/
+              this.repoDetails.outRepoTime=temp.operateTime;
             }
           }
-          for(var item in this.repoDetails.operationRecordVoList){
-            if(item.state===constantData.ALREADYOUT){/*筛选出库时间*/
-              console.log("筛选出库时间");
-              this.repoDetails.outRepoTime=item.operateTime;
-              break;
-            }
-          }
+
           this.handleInfo.showHandleBtn = false;
           switch (this.repoDetails.curRepoBusiStatus){
             case constantData.INFORRESPONSE:
