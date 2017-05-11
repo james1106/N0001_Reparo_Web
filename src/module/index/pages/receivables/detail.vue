@@ -87,12 +87,16 @@
                 <el-col :span="8" class="msgName">发票号：{{detailInfo.detailVoList[0].invoiceNo | nullSituation}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">物流企业：暂无</el-col>
-                <el-col :span="8" class="msgName">运单编号：暂无</el-col>
+                <el-col :span="8" class="msgName">物流企业：{{detailInfo.detailVoList[0].logisticsEnterpriseName | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">运单编号：{{detailInfo.detailVoList[0].waybillNo | nullSituation}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="8" class="msgName">仓储机构：暂无</el-col>
-                <el-col :span="8" class="msgName">仓单编号：暂无</el-col>
+                <el-col :span="8" class="msgName">出库仓储机构：{{detailInfo.detailVoList[0].payeeRepoEnterpriseName | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">出库仓单编号：{{detailInfo.detailVoList[0].payeeRepoCertNo | nullSituation}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8" class="msgName">入库仓储机构：{{detailInfo.detailVoList[0].payerRepoEnterpriseName | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">入库仓单编号：{{detailInfo.detailVoList[0].payerRepoCertNo | nullSituation}}</el-col>
               </el-row>
             </div>
           </el-card>
