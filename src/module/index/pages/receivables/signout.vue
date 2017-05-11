@@ -141,6 +141,17 @@
       this.getOrderDetail()
     },
     data () {
+      var validatePass = (rule,value,callback)=>{
+        var reg = /^\d+(?:\.\d{1,2})?$/;
+        console.log(value);
+        if(!reg.test(value)){
+          callback(new Error("请输入正确的带息利率"));
+        }else if(value>100){
+          callback(new Error("请输入正确的带息利率"));
+        }else{
+          callback();
+        }
+      };
       return {
         pickerOptions: {
           disabledDate(time) {
@@ -189,7 +200,8 @@
             { type: 'date',required: true, message: '请选择账款到期日', trigger: 'blur' }
           ],
           rate: [
-            { required: true, message: '请输入带息利率', trigger: 'blur' }
+            { required: true, message: '请输入带息利率', trigger: 'blur' },
+            {validator:validatePass, trigger:'blur'}
           ],
           pyeeBank: [
             { required: true, message: '请选择开户行', trigger: 'blur' }

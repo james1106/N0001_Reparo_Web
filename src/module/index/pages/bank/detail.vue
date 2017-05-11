@@ -87,7 +87,7 @@
                 <el-col :span="8" class="msgName">签发人账号：{{receDetail.detailVoList[0].pyee}}</el-col>
                 <el-col :span="8" class="msgName">签发人开户行：{{receDetail.detailVoList[0].pyeeAcctSvcrName}}</el-col>
               </el-row>
-              <el-row class="cutoff">
+              <el-row>
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
                 <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
               </el-row>
@@ -104,21 +104,21 @@
             </div>
             <div class="box-card mycard1 detailContent">
               <el-row>
-                <el-col :span="8" class="msgName keynote">物流公司：{{orderDetail.wayBillOver.logisticCompany}}</el-col>
+                <el-col :span="8" class="msgName keynote">物流公司：{{wayBill.logisticsEnterpriseName}}</el-col>
                 <el-col :span="8" class="msgName">运单编号：{{orderDetail.wayBillOver.wayBillNo}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">
-                  物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus}}
+                  物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus | wayBillStatus}}
                 </el-col>
                 <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('logistics')" :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i></el-col>
               </el-row>
               <el-row v-show="isWayBillCollapse" class="collapseTop">
-                <!--<template v-for="(item,index) in wayBillHistory.operationRecordVo">-->
-                  <!--<el-row class="status-list" :class="{circleColor:index==(wayBillHistory.operationRecordVo.length-1)}">-->
-                    <!--<el-col :span="8" :class="{circleColor1:index==(wayBillHistory.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>-->
-                  <!--</el-row>-->
-                <!--</template>-->
+                <template v-for="(item,index) in wayBill.operationRecordVo">
+                  <el-row class="status-list" :class="{circleColor:index==(wayBill.operationRecordVo.length-1)}">
+                    <el-col :span="8" :class="{circleColor1:index==(wayBill.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
+                  </el-row>
+                </template>
               </el-row>
             </div>
           </el-card>
@@ -142,24 +142,26 @@
                   <el-col :span="8" class="msgName">入库仓单编号：{{orderDetail.repoOver.payerRepoCertNo}}</el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="8" class="msgName">最新仓储状态：入库-{{orderDetail.repoOver.payerRepoBusiState}} 出库-{{orderDetail.repoOver.payeeRepoBusiState}}</el-col>
+                  <el-col :span="8" class="msgName">出库最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}</el-col>
+                  <el-col :span="8" class="msgName">入库最新仓储状态：{{orderDetail.repoOver.payerRepoBusiState | repoStatus}}</el-col>
                   <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('repo')" :class="{rotate:isRepoCollapse, rotate1:!isRepoCollapse}"></i></el-col>
                 </el-row>
                 <el-row v-show="isRepoCollapse" class="collapseTop">
                   <el-col :span="8">
-                    <template v-for="(item,index) in innerRepoHistory">
-                      <el-row class="status-list" :class="{circleColor:index==(buyeeRepoHistory.length-1)}">
-                        <el-col :span="8" :class="{circleColor1:index==(buyeeRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
+                    <template v-for="(item,index) in outerRepoHistory">
+                      <el-row class="status-list" :class="{circleColor:index==(outerRepoHistory.length-1)}">
+                        <el-col :span="24" :class="{circleColor1:index==(outerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
                       </el-row>
                     </template>
                   </el-col>
                   <el-col :span="8">
-                    <template v-for="(item,index) in outerRepoHistory">
-                      <el-row class="status-list" :class="{circleColor:index==(buyeeRepoHistory.length-1)}">
-                        <el-col :span="8" :class="{circleColor1:index==(buyeeRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
+                    <template v-for="(item,index) in innerRepoHistory">
+                      <el-row class="status-list" :class="{circleColor:index==(innerRepoHistory.length-1)}">
+                        <el-col :span="24" :class="{circleColor1:index==(innerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
                       </el-row>
                     </template>
                   </el-col>
+
                 </el-row>
               </div>
             </div>
@@ -339,10 +341,7 @@
         },
         innerRepoHistory:[],//入库仓储历史
         outerRepoHistory:[],//出库仓储历史
-        wayBillHistory:{
-          operationRecordVo:[],
-          sendReqTime:''
-        },
+        wayBill:{},
         isOrderCollapse:false,
         isReceCollapse:false,
         isWayBillCollapse:false,
@@ -408,7 +407,6 @@
                 console.log(err);
               });
             }
-
 //          根据订单号查询运单详情
             if(this.orderDetail.wayBillOver.wayBillLatestStatus>0){
               this.$http.get("../v1/waybill/wayBillDetail?orderNo="+this.orderDetail.txDetail.orderId).then(function(res){
@@ -416,15 +414,7 @@
                   this.$message.error(res.body.message);
                   return;
                 }
-                this.wayBillHistory=res.body.data;
-                this.wayBillHistory.sendReqTime='';
-                for(var item in this.wayBillHistory.operationRecordVo){
-                  var temp=this.wayBillHistory.operationRecordVo[item];
-                  if(temp.state===constantData.SENDFORRESPONSE){/*筛选申请发货时间，即发货待响应时间*/
-                    this.wayBillHistory.sendReqTime=temp.operateTime;
-                    break;
-                  }
-                }
+                this.wayBill=res.body.data;
               },function(err){
                 console.log(err);
               });
@@ -474,14 +464,16 @@
           receivableNo:this.receDetail.detailVoList[0].receivableNo,
           replyerAcctId:LocalStore.fetchUserInfo().acctIds,
           response:0,
-          discountInHandAmount:this.amount
+          discountInHandAmount:this.amount,
+          discountRate:this.rate,
+          isseAmt:this.receDetail.detailVoList[0].isseAmt
         }
+        this.showModal = false;
         this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){
           if(res.body.code != 0){
             this.$message.error(res.body.message);
             return;
           }
-          this.showModal = false;
           this.$message.success('已贴现确认！');
           this.getDetail(true);
         },

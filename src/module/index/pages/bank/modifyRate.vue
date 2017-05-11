@@ -49,9 +49,9 @@
         var reg = /^\d+(?:\.\d{1,2})?$/;
         console.log(value);
         if(!reg.test(value)){
-          callback(new Error("请输入正确贴现金额,保留小数点后两位"));
+          callback(new Error("请输入正确贴现利率,保留小数点后两位"));
         }else if(value>100){
-          callback(new Error("请输入正确贴现金额"));
+          callback(new Error("请输入正确贴现利率"));
         }else{
           callback();
         }

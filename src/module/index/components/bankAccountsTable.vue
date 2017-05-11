@@ -39,7 +39,7 @@
           </el-col>
           <el-col :span="2">
             <el-col :span="24">
-              <el-button size="mini" type="text" class="buyerColor" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
+              <el-button size="mini" type="text" class="buyerColor" v-if="item.status===constantData.DISCOUNTED" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
             </el-col>
             <el-col :span="24" style="margin-left: -9px">
               <!--.native是子组件绑定原生事件而不是父控件响应子组件的方法 -->

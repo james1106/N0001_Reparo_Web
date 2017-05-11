@@ -196,14 +196,16 @@
           receivableNo:this.receDetail.detailVoList[0].receivableNo,
           replyerAcctId:LocalStore.fetchUserInfo().acctIds,
           response:0,
-          discountInHandAmount:this.amount
+          discountInHandAmount:this.amount,
+          discountRate:this.rate,
+          isseAmt:this.receDetail.detailVoList[0].isseAmt
         }
+        this.showModal = false;
         this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){
           if(res.body.code != 0){
             this.$message.error(res.body.message);
             return;
           }
-          this.showModal = false;
           this.$router.push("/bank/detail");
         },
         function (res) {
