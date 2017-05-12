@@ -1,5 +1,5 @@
 <template>
-  <div id="repoDataTable"   >
+  <div id="repoDataTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="4" style="margin-left: 19px">货品信息</el-col>
       <el-col :span="4">所在仓储</el-col>
@@ -65,15 +65,15 @@
 
   export default {
     name: 'repoDataTable',
-    props: ['repoList','status','pageSize'],
+    props: ['repoList', 'status', 'pageSize'],
     data(){
-      return{
-        tableData:this.repoList,
-        showData:[],
-        accountsStatus:this.status,
-        detailPath:'',
+      return {
+        tableData: this.repoList,
+        showData: [],
+        accountsStatus: this.status,
+        detailPath: '',
         imgUrl: {
-          default_0:default_0
+          default_0: default_0
         }
       }
     },
@@ -83,10 +83,10 @@
       this.getDataByStatus();
       this.getDataByPageNum(0);
     },
-    watch:{
+    watch: {
       repoList(curVal){
-          console.log(curVal);
-        this.tableData=curVal;
+        console.log(curVal);
+        this.tableData = curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
       }
@@ -102,73 +102,78 @@
         return this.pageSize;
       }
     },
-    methods:{
+    methods: {
       currentChange(val){
         this.getDataByPageNum(val - 1)
       },
       getDataByStatus(){/*筛选出各个Tab状态*/
-        switch(this.status){
-          case 'all':break;
+        switch (this.status) {
+          case 'all':
+            break;
           case 'inForResponse':/*入库待响应*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.INFORRESPONSE){
+              if (item.curRepoBusiStatus === constantData.INFORRESPONSE) {
                 res.push(item)
               }
             }
-            this.tableData = res;break;
+            this.tableData = res;
+            break;
           case 'forIn':/*待入库*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.FORIN){
+              if (item.curRepoBusiStatus === constantData.FORIN) {
                 res.push(item)
               }
             }
-            this.tableData = res;break;
+            this.tableData = res;
+            break;
           case 'alreadyIn':/*已入库*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.ALREADYIN){
+              if (item.curRepoBusiStatus === constantData.ALREADYIN) {
                 res.push(item)
               }
             }
-            this.tableData = res;break;
+            this.tableData = res;
+            break;
           case 'forOut':/*待出库*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.FOROUT){
+              if (item.curRepoBusiStatus === constantData.FOROUT) {
                 res.push(item)
               }
             }
-            this.tableData = res;break;
-            case 'alreadyOut':/*已出库*/
-            var res=[];
-            for(var i=0;i<this.tableData.length;i++ ){
+            this.tableData = res;
+            break;
+          case 'alreadyOut':/*已出库*/
+            var res = [];
+            for (var i = 0; i < this.tableData.length; i++) {
               var item = this.tableData[i];
-              if(item.curRepoBusiStatus===constantData.ALREADYOUT){
+              if (item.curRepoBusiStatus === constantData.ALREADYOUT) {
                 res.push(item)
               }
             }
-            this.tableData = res;break;
-          default:break;
+            this.tableData = res;
+            break;
+          default:
+            break;
         }
       },
       getDataByPageNum(pageNum){
-        if((pageNum + 1) * this.pageSize > this.tableData.length){
+        if ((pageNum + 1) * this.pageSize > this.tableData.length) {
           this.showData = this.tableData.slice(pageNum * this.pageSize);
-        }else {
-          this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
+        } else {
+          this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
 
       checkDetail (checkId) {
-//        alert(this.tableData);
-
-        store.commit('setCheckIdRepo',checkId);
+        store.commit('setCheckIdRepo', checkId);
         console.log(store.state.checkIdRepo);
         this.$router.push("/warehousing/repoDetails");
       },

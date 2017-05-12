@@ -17,43 +17,46 @@
     </template>
 
     <template v-else>
-    <template v-for="item in showData">
-      <el-row class="dataTable">
-        <el-row class="el-row-header">
-          <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receivableNo}}</el-col>
-          <el-col :span="10">融资申请时间：{{item.discountApplyTime | timeTransfer}}</el-col>
-        </el-row>
-        <el-row class="el-row-content">
-          <el-col :span="5" style="margin-left: 19px;">
-            <el-col :span="24">{{item.isseAmt}}元</el-col>
-          </el-col>
-          <el-col :span="5">
-            <el-col :span="24">持有人：{{item.firstOwnerName}}</el-col>
-            <el-col :span="24">承兑人：{{item.accptrName}}</el-col>
-          </el-col>
-          <el-col :span="5">
-            <el-col :span="24">{{item.dueDt | timeTransfer}}</el-col>
-          </el-col>
-          <el-col :span="5">
-            <el-col :span="24">{{item.status | receStatus}}</el-col>
-          </el-col>
-          <el-col :span="2">
-            <el-col :span="24">
-              <el-button size="mini" type="text" class="buyerColor" v-if="item.status===constantData.DISCOUNTED" @click.native.prevent="discount(item.receivableNo)">确认融资</el-button>
+      <template v-for="item in showData">
+        <el-row class="dataTable">
+          <el-row class="el-row-header">
+            <el-col :span="10" style="margin-left: 19px;">应收帐款编号：{{item.receivableNo}}</el-col>
+            <el-col :span="10">融资申请时间：{{item.discountApplyTime | timeTransfer}}</el-col>
+          </el-row>
+          <el-row class="el-row-content">
+            <el-col :span="5" style="margin-left: 19px;">
+              <el-col :span="24">{{item.isseAmt}}元</el-col>
             </el-col>
-            <el-col :span="24" style="margin-left: -9px">
-              <!--.native是子组件绑定原生事件而不是父控件响应子组件的方法 -->
-              <el-button size="small" type="default" @click.native.prevent="showDetail(item.receivableNo)">查看详情</el-button>
+            <el-col :span="5">
+              <el-col :span="24">持有人：{{item.firstOwnerName}}</el-col>
+              <el-col :span="24">承兑人：{{item.accptrName}}</el-col>
             </el-col>
-          </el-col>
+            <el-col :span="5">
+              <el-col :span="24">{{item.dueDt | timeTransfer}}</el-col>
+            </el-col>
+            <el-col :span="5">
+              <el-col :span="24">{{item.status | receStatus}}</el-col>
+            </el-col>
+            <el-col :span="2">
+              <el-col :span="24">
+                <el-button size="mini" type="text" class="buyerColor" v-if="item.status===constantData.DISCOUNTED"
+                           @click.native.prevent="discount(item.receivableNo)">确认融资
+                </el-button>
+              </el-col>
+              <el-col :span="24" style="margin-left: -9px">
+                <!--.native是子组件绑定原生事件而不是父控件响应子组件的方法 -->
+                <el-button size="small" type="default" @click.native.prevent="showDetail(item.receivableNo)">查看详情
+                </el-button>
+              </el-col>
+            </el-col>
+          </el-row>
         </el-row>
-      </el-row>
-    </template>
-    <el-pagination
-      layout="total,prev, pager, next,jumper"
-      @current-change="currentChange"
-      :total="tableData.length" :page-size="pageSize1">
-    </el-pagination>
+      </template>
+      <el-pagination
+        layout="total,prev, pager, next,jumper"
+        @current-change="currentChange"
+        :total="tableData.length" :page-size="pageSize1">
+      </el-pagination>
     </template>
   </div>
 </template>
@@ -65,16 +68,16 @@
 
   export default {
     name: 'accountTable',
-    props: ['accountInfo','status','pageSize','isBuyer'],
+    props: ['accountInfo', 'status', 'pageSize', 'isBuyer'],
     data(){
-        return{
-          tableData:this.accountInfo,
-          showData:[],
-          accountsStatus:this.status,
-          imgUrl: {
-            default_0:default_0
-          }
+      return {
+        tableData: this.accountInfo,
+        showData: [],
+        accountsStatus: this.status,
+        imgUrl: {
+          default_0: default_0
         }
+      }
     },
     computed: {
       state () {
@@ -87,43 +90,43 @@
         return this.pageSize;
       }
     },
-    watch:{
+    watch: {
       accountInfo(curVal){
         this.tableData = curVal
         this.getDataByStatus()
         this.getDataByPageNum(0)
       }
     },
-    methods:{
+    methods: {
       currentChange(val){
         this.getDataByPageNum(val - 1)
       },
       getDataByStatus(){
-          if(this.accountsStatus == 0){
-              return
+        if (this.accountsStatus == 0) {
+          return
+        }
+        var res = []
+        for (var i = 0; i < this.tableData.length; i++) {
+          var item = this.tableData[i];
+          if (item.status == this.accountsStatus) {
+            res.push(item)
           }
-          var res = []
-          for(var i=0;i<this.tableData.length;i++ ){
-            var item = this.tableData[i];
-            if(item.status == this.accountsStatus){
-              res.push(item)
-            }
-          }
-          this.tableData = res
+        }
+        this.tableData = res
       },
       getDataByPageNum(pageNum){
-          if((pageNum + 1) * this.pageSize > this.tableData.length){
-            this.showData = this.tableData.slice(pageNum * this.pageSize);
-          }else {
-            this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
-          }
+        if ((pageNum + 1) * this.pageSize > this.tableData.length) {
+          this.showData = this.tableData.slice(pageNum * this.pageSize);
+        } else {
+          this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
+        }
       },
       showDetail(receivableNo){
-        Store.commit('setCheckIdRece',receivableNo);
+        Store.commit('setCheckIdRece', receivableNo);
         this.$router.push("/bank/detail");
       },
       discount(receivableNo){
-        Store.commit('setCheckIdRece',receivableNo);
+        Store.commit('setCheckIdRece', receivableNo);
         this.$router.push("/bank/discount");
       }
     }

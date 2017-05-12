@@ -1,5 +1,5 @@
 <template>
-  <div id="orderDataTable"  >
+  <div id="orderDataTable">
     <el-row class="el-row-header" style="background-color: rgb(229,241,245)">
       <el-col :span="6" style="margin-left: 20px">货品信息</el-col>
       <el-col :span="6">付款信息</el-col>
@@ -16,77 +16,82 @@
     </template>
 
     <template v-else>
-    <template v-for="(item,index) in showData">
-      <div>
-        <el-row class="dataTable">
-          <el-row class="el-row-header">
-            <el-col :span="6" style="margin-left: 19px;">订单编号：{{item.orderNo}}</el-col>
-            <el-col :span="6">创建时间：{{item.orderGenerateTime | timeTransfer}}</el-col>
-            <el-col :span="8" v-if="state.isBuyer==='true'">卖家：{{item.payeeCompanyName}}</el-col>
-            <el-col :span="8" v-else>买家：{{item.payerCompanyName}}</el-col>
-            <el-col :span="2">操作</el-col>
-          </el-row>
-          <el-row class="el-row-content">
-            <el-col :span="6" style="margin-left: 19px;">
-              <el-row>货品名称：{{item.productName}}</el-row>
-              <el-row>货品数量：{{item.productQuantity}}</el-row>
-            </el-col>
-            <el-col :span="6">
-              <el-row>订单金额(元)：{{item.productTotalPrice | numTransfer}}</el-row>
-              <el-row>付款方式：{{item.payingMethod | payingMethod}}</el-row>
-            </el-col>
-            <el-col :span="2">
-              <el-row>交易状态</el-row>
-              <el-row>{{item.transactionStatus | transactionStatus}}</el-row>
-            </el-col>
-            <el-col :span="2">
-              <el-row>账款状态</el-row>
-              <el-row v-if="(item.transactionStatus>=constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)">{{constantData.CONFIRMED | receStatus}}
-              </el-row>
-              <el-row v-else>{{item.receStatus | receStatus}}</el-row>
-            </el-col>
-            <el-col :span="2">
-              <el-row>仓储状态</el-row>
-              <el-row>{{item.repoStatus | repoStatus}}</el-row>
-            </el-col>
-            <el-col :span="2">
-              <el-row>物流状态</el-row>
-              <el-row v-if="(item.receStatus>=constantData.ACCEPTED)&&(item.wayBillStatus===constantData.NOMESSAGE)">{{constantData.FORSEND | wayBillStatus}}
-              </el-row>
-              <el-row v-else>{{item.wayBillStatus | wayBillStatus}}</el-row>
-            </el-col>
-            <el-col :span="2">
-              <el-col :span="24" >
-                <el-button size="mini" type="text"
-                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
-                           @click.native.prevent="confirmOrder(item.orderNo)">确认订单
-                </el-button>
-                <el-button size="mini" type="text"
-                           v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)" @click.native.prevent="signBill(item.orderNo)">签发账款
-                </el-button>
-                <el-button size="mini" type="text"
-                           v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)&&(item.wayBillStatus===constantData.FORSEND)"
-                           @click.native.prevent="sendGood(item.orderNo)">发货
-                </el-button>
-                <el-button size="mini" type="text"
-                           v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
-                           @click.native.prevent="acceptBill(item.orderNo)">签收账款
-                </el-button>
+      <template v-for="(item,index) in showData">
+        <div>
+          <el-row class="dataTable">
+            <el-row class="el-row-header">
+              <el-col :span="6" style="margin-left: 19px;">订单编号：{{item.orderNo}}</el-col>
+              <el-col :span="6">创建时间：{{item.orderGenerateTime | timeTransfer}}</el-col>
+              <el-col :span="8" v-if="state.isBuyer==='true'">卖家：{{item.payeeCompanyName}}</el-col>
+              <el-col :span="8" v-else>买家：{{item.payerCompanyName}}</el-col>
+              <el-col :span="2">操作</el-col>
+            </el-row>
+            <el-row class="el-row-content">
+              <el-col :span="6" style="margin-left: 19px;">
+                <el-row>货品名称：{{item.productName}}</el-row>
+                <el-row>货品数量：{{item.productQuantity}}</el-row>
               </el-col>
-              <el-col :span="24">
-                <el-button size="small" style="text-align: center; margin-left: -9px"
-                           @click.native.prevent="checkDetail(item.orderNo)">查看详情</el-button>
+              <el-col :span="6">
+                <el-row>订单金额(元)：{{item.productTotalPrice | numTransfer}}</el-row>
+                <el-row>付款方式：{{item.payingMethod | payingMethod}}</el-row>
               </el-col>
-            </el-col>
+              <el-col :span="2">
+                <el-row>交易状态</el-row>
+                <el-row>{{item.transactionStatus | transactionStatus}}</el-row>
+              </el-col>
+              <el-col :span="2">
+                <el-row>账款状态</el-row>
+                <el-row
+                  v-if="(item.transactionStatus>=constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)">
+                  {{constantData.CONFIRMED | receStatus}}
+                </el-row>
+                <el-row v-else>{{item.receStatus | receStatus}}</el-row>
+              </el-col>
+              <el-col :span="2">
+                <el-row>仓储状态</el-row>
+                <el-row>{{item.repoStatus | repoStatus}}</el-row>
+              </el-col>
+              <el-col :span="2">
+                <el-row>物流状态</el-row>
+                <el-row v-if="(item.receStatus>=constantData.ACCEPTED)&&(item.wayBillStatus===constantData.NOMESSAGE)">
+                  {{constantData.FORSEND | wayBillStatus}}
+                </el-row>
+                <el-row v-else>{{item.wayBillStatus | wayBillStatus}}</el-row>
+              </el-col>
+              <el-col :span="2">
+                <el-col :span="24">
+                  <el-button size="mini" type="text"
+                             v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.UNCONFIRMED)"
+                             @click.native.prevent="confirmOrder(item.orderNo)">确认订单
+                  </el-button>
+                  <el-button size="mini" type="text"
+                             v-if="(state.isBuyer==='false')&&(item.transactionStatus===constantData.CONFIRMED)&&(item.receStatus===constantData.NOMESSAGE)"
+                             @click.native.prevent="signBill(item.orderNo)">签发账款
+                  </el-button>
+                  <el-button size="mini" type="text"
+                             v-if="(state.isBuyer==='false')&&(item.receStatus===constantData.ACCEPTED)&&(item.wayBillStatus===constantData.FORSEND)"
+                             @click.native.prevent="sendGood(item.orderNo)">发货
+                  </el-button>
+                  <el-button size="mini" type="text"
+                             v-if="(state.isBuyer==='true')&&(item.receStatus===constantData.FORACCEPT)"
+                             @click.native.prevent="acceptBill(item.orderNo)">签收账款
+                  </el-button>
+                </el-col>
+                <el-col :span="24">
+                  <el-button size="small" style="text-align: center; margin-left: -9px"
+                             @click.native.prevent="checkDetail(item.orderNo)">查看详情
+                  </el-button>
+                </el-col>
+              </el-col>
+            </el-row>
           </el-row>
-        </el-row>
-      </div>
-    </template>
-    <el-pagination
-      layout="total,prev, pager, next,jumper"
-      @current-change="currentChange"
-      :total="tableData.length" :page-size="pageSize1">
-    </el-pagination>
+        </div>
+      </template>
+      <el-pagination
+        layout="total,prev, pager, next,jumper"
+        @current-change="currentChange"
+        :total="tableData.length" :page-size="pageSize1">
+      </el-pagination>
     </template>
   </div>
 </template>
@@ -106,7 +111,7 @@
         accountsStatus: this.status,
         detailPath: '',
         imgUrl: {
-          default_0:default_0
+          default_0: default_0
         }
       }
     },
@@ -211,7 +216,7 @@
       acceptBill (checkId) {
         console.log("签收账款");
         this.$http.get("../v1/order/detail?orderNo=" + checkId).then(function (res) {//通过订单编号获取应收账款编号，再到签收页面
-          if(res.body.code != 0){
+          if (res.body.code != 0) {
             this.$message.error(res.body.message);
             return;
           }

@@ -15,36 +15,38 @@
       </el-row>
     </template>
     <template v-else>
-    <template v-for="(item,index) in showData">
-      <div>
-        <el-row class="dataTable">
-          <el-row class="el-row-header">
-            <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoCertNo | nullSituation}}</el-col>
+      <template v-for="(item,index) in showData">
+        <div>
+          <el-row class="dataTable">
+            <el-row class="el-row-header">
+              <el-col :span="8" style="margin-left: 19px;">仓单编号：{{item.repoCertNo | nullSituation}}</el-col>
+            </el-row>
+            <el-row class="el-row-content">
+              <el-col :span="6" style="margin-left: 19px;">
+                <el-row>货品名称：{{item.productName}}</el-row>
+                <el-row>货品数量：{{item.productQuantity}}</el-row>
+              </el-col>
+              <el-col :span="6">
+                <el-row>{{item.repoEnterpriseName}}</el-row>
+              </el-col>
+              <el-col :span="6">
+                <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
+              </el-col>
+              <el-col :span="4">
+                <el-button v-if="item.repoCertNo !== ''" size="small"
+                           @click.native.prevent="checkDetail(item.repoCertNo)">查看详情
+                </el-button>
+                <span v-else>暂无操作</span>
+              </el-col>
+            </el-row>
           </el-row>
-          <el-row class="el-row-content">
-            <el-col :span="6" style="margin-left: 19px;">
-              <el-row>货品名称：{{item.productName}}</el-row>
-              <el-row>货品数量：{{item.productQuantity}}</el-row>
-            </el-col>
-            <el-col :span="6">
-              <el-row>{{item.repoEnterpriseName}}</el-row>
-            </el-col>
-            <el-col :span="6">
-              <el-row>{{item.repoCertStatus | repoCertStatus}}</el-row>
-            </el-col>
-            <el-col :span="4">
-              <el-button v-if="item.repoCertNo !== ''" size="small" @click.native.prevent="checkDetail(item.repoCertNo)">查看详情</el-button>
-              <span v-else>暂无操作</span>
-            </el-col>
-          </el-row>
-        </el-row>
-      </div>
-    </template>
-    <el-pagination
-      layout="total,prev, pager, next,jumper"
-      @current-change="currentChange"
-      :total="tableData.length" :page-size="pageSize1">
-    </el-pagination>
+        </div>
+      </template>
+      <el-pagination
+        layout="total,prev, pager, next,jumper"
+        @current-change="currentChange"
+        :total="tableData.length" :page-size="pageSize1">
+      </el-pagination>
     </template>
   </div>
 </template>
@@ -56,14 +58,14 @@
 
   export default {
     name: 'receiptDataTable',
-    props: ['receiptList','status','pageSize'],
+    props: ['receiptList', 'status', 'pageSize'],
     data(){
-      return{
-        tableData:this.receiptList,
-        showData:[],
-        receiptStatus:this.status,
+      return {
+        tableData: this.receiptList,
+        showData: [],
+        receiptStatus: this.status,
         imgUrl: {
-          default_0:default_0
+          default_0: default_0
         }
       }
     },
@@ -72,9 +74,9 @@
       this.getDataByStatus();
       this.getDataByPageNum(0);
     },
-    watch:{
+    watch: {
       receiptList(curVal){
-        this.tableData=curVal;
+        this.tableData = curVal;
         this.getDataByStatus();
         this.getDataByPageNum(0);
       }
@@ -90,32 +92,32 @@
         return this.pageSize;
       }
     },
-    methods:{
+    methods: {
       currentChange(val){
         this.getDataByPageNum(val - 1)
       },
       getDataByStatus(){/*筛选出各个Tab状态*/
-        if(this.repoStatus == 0){
+        if (this.repoStatus == 0) {
           return
         }
-        var res=[];
-        for(var i=0;i<this.tableData.length;i++ ){
+        var res = [];
+        for (var i = 0; i < this.tableData.length; i++) {
           var item = this.tableData[i];
-          if(item.status == this.repoStatus){
+          if (item.status == this.repoStatus) {
             res.push(item)
           }
         }
         this.tableData = res;
       },
       getDataByPageNum(pageNum){
-        if((pageNum + 1) * this.pageSize > this.tableData.length){
+        if ((pageNum + 1) * this.pageSize > this.tableData.length) {
           this.showData = this.tableData.slice(pageNum * this.pageSize);
-        }else {
-          this.showData = this.tableData.slice(pageNum * this.pageSize,(pageNum + 1)*this.pageSize);
+        } else {
+          this.showData = this.tableData.slice(pageNum * this.pageSize, (pageNum + 1) * this.pageSize);
         }
       },
       checkDetail (checkId) {
-        store.commit('setCheckIdRepoCert',checkId);
+        store.commit('setCheckIdRepoCert', checkId);
         this.$router.push('/warehousingCompany/receiptDetails');
       },
     }

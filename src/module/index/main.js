@@ -20,6 +20,8 @@ const router = new VueRouter({
   routes: routerConfig
 })
 
+// Vue.http.
+
 /*****  设置http拦截器 start  ******/
 let loadingInstance;
 Vue.http.interceptors.push(function(request, next) {

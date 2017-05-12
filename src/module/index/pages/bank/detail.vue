@@ -1,7 +1,10 @@
 <template>
-  <div id="detail" class="receiveDetails"  >
+  <div id="detail" class="receiveDetails">
     <el-breadcrumb separator=">" class="bread">
-      <svg class="icon combinedShape" aria-hidden="true">   <use xlink:href="#icon-locate"></use> </svg>
+      <svg class="icon combinedShape" aria-hidden="true"> 
+        <use xlink:href="#icon-locate"></use>
+         
+      </svg>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>应收账款</el-breadcrumb-item>
       <el-breadcrumb-item>我的应收账款</el-breadcrumb-item>
@@ -10,16 +13,27 @@
     <el-card>
       <el-row>
         <el-row class="el-row-header statePosition">
-          <el-col class="detail_title_color stateShow"><svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-zhuangtai"></use> </svg>
-            账款状态:{{receDetail.detailVoList[0].status | receStatus}}</el-col>
-          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}%</span>&nbsp;<el-button size="small" v-if="receDetail.detailVoList[0].status === 41" @click="showReceDetail()">贴现确认</el-button></el-col>
+          <el-col class="detail_title_color stateShow">
+            <svg class="icon detailIcon" aria-hidden="true"> 
+              <use xlink:href="#icon-zhuangtai"></use>
+               
+            </svg>
+            账款状态:{{receDetail.detailVoList[0].status | receStatus}}
+          </el-col>
+          <el-col class="dotipRow"><span class="doTip">提示:当前贴现利率{{rate}}%</span>&nbsp;
+            <el-button size="small" v-if="receDetail.detailVoList[0].status === 41" @click="showReceDetail()">贴现确认
+            </el-button>
+          </el-col>
         </el-row>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-yszk_hui"></use> </svg>
+              <svg class="icon detailIcon" aria-hidden="true"> 
+                <use xlink:href="#icon-yszk_hui"></use>
+                 
+              </svg>
               <span class="keynote">应收账款基本信息</span>
             </div>
             <div class="box-card mycard1 detailContent">
@@ -40,15 +54,18 @@
                 <el-col :span="8" class="msgName">
                   最新应收账款状态：{{receDetail.detailVoList[0].status | receStatus}}
                 </el-col>
-                <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('rece')" :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i></el-col>
+                <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('rece')"
+                                                         :class="{rotate:isReceCollapse, rotate1:!isReceCollapse}"></i>
+                </el-col>
               </el-row>
-                <el-row class="collapseTop" v-show="isReceCollapse">
-                  <template v-for="(item,index) in receDetail.serialVoList">
-                    <el-row class="status-list" :class="{circleColor:index==(receDetail.serialVoList.length-1)}">
-                      <el-col :span="24" :class="{circleColor1:index==(receDetail.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receAction}}</span></el-col>
-                    </el-row>
-                  </template>
-                </el-row>
+              <el-row class="collapseTop" v-show="isReceCollapse">
+                <template v-for="(item,index) in receDetail.serialVoList">
+                  <el-row class="status-list" :class="{circleColor:index==(receDetail.serialVoList.length-1)}">
+                    <el-col :span="24" :class="{circleColor1:index==(receDetail.serialVoList.length-1)}"><span>{{item.time | timeTransfer}} {{item.receivableStatus | receAction}}</span>
+                    </el-col>
+                  </el-row>
+                </template>
+              </el-row>
             </div>
           </el-card>
         </el-col>
@@ -57,7 +74,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-qita"></use> </svg>
+              <svg class="icon detailIcon" aria-hidden="true"> 
+                <use xlink:href="#icon-qita"></use>
+                 
+              </svg>
               <span class="keynote">应收账款详细信息</span>
             </div>
             <div class="box-card mycard1 detailContent">
@@ -69,7 +89,8 @@
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
-                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}
+                </el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">付款人信息：</el-row>
               <el-row>
@@ -79,7 +100,8 @@
               </el-row>
               <el-row class="cutoff">
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
-                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyerLinkPhone | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyerLinkPhone | nullSituation}}
+                </el-col>
               </el-row>
               <el-row class="msgName keynote" style="margin-top: 10px">签发人信息：</el-row>
               <el-row>
@@ -89,7 +111,8 @@
               </el-row>
               <el-row>
                 <el-col :span="8" class="msgName">联系人：暂无</el-col>
-                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}</el-col>
+                <el-col :span="8" class="msgName">联系方式：{{receDetail.detailVoList[0].pyeeLinkPhone | nullSituation}}
+                </el-col>
               </el-row>
             </div>
           </el-card>
@@ -99,7 +122,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-wl_H"></use> </svg>
+              <svg class="icon detailIcon" aria-hidden="true"> 
+                <use xlink:href="#icon-wl_H"></use>
+                 
+              </svg>
               <span class="keynote">物流信息</span>
             </div>
             <div class="box-card mycard1 detailContent">
@@ -111,12 +137,16 @@
                 <el-col :span="8" class="msgName">
                   物流当前状态：{{orderDetail.wayBillOver.wayBillLatestStatus | wayBillStatus}}
                 </el-col>
-                <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('logistics')" :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i></el-col>
+                <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom"
+                                                         @click="handleHistoryList('logistics')"
+                                                         :class="{rotate:isWayBillCollapse, rotate1:!isWayBillCollapse}"></i>
+                </el-col>
               </el-row>
               <el-row v-show="isWayBillCollapse" class="collapseTop">
                 <template v-for="(item,index) in wayBill.operationRecordVo">
                   <el-row class="status-list" :class="{circleColor:index==(wayBill.operationRecordVo.length-1)}">
-                    <el-col :span="8" :class="{circleColor1:index==(wayBill.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span></el-col>
+                    <el-col :span="8" :class="{circleColor1:index==(wayBill.operationRecordVo.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | wayBillStatus}}</span>
+                    </el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -127,8 +157,11 @@
       <el-row>
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
-            <div slot="header" class="clearfix el-row-header" >
-              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-cc_H"></use> </svg>
+            <div slot="header" class="clearfix el-row-header">
+              <svg class="icon detailIcon" aria-hidden="true"> 
+                <use xlink:href="#icon-cc_H"></use>
+                 
+              </svg>
               <span class="keynote">仓储信息</span>
             </div>
             <div class="box-card mycard1 detailContent">
@@ -139,25 +172,33 @@
                 </el-row>
                 <el-row>
                   <el-col :span="8" class="msgName">入库仓储公司：{{orderDetail.txDetail.payerRepo | nullSituation}}</el-col>
-                  <el-col :span="8" class="msgName">入库仓单编号：{{orderDetail.repoOver.payerRepoCertNo | nullSituation}}</el-col>
+                  <el-col :span="8" class="msgName">入库仓单编号：{{orderDetail.repoOver.payerRepoCertNo | nullSituation}}
+                  </el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="8" class="msgName">出库最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}</el-col>
-                  <el-col :span="8" class="msgName">入库最新仓储状态：{{orderDetail.repoOver.payerRepoBusiState | repoStatus}}</el-col>
-                  <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('repo')" :class="{rotate:isRepoCollapse, rotate1:!isRepoCollapse}"></i></el-col>
+                  <el-col :span="8" class="msgName">出库最新仓储状态：{{orderDetail.repoOver.payeeRepoBusiState | repoStatus}}
+                  </el-col>
+                  <el-col :span="8" class="msgName">入库最新仓储状态：{{orderDetail.repoOver.payerRepoBusiState | repoStatus}}
+                  </el-col>
+                  <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom"
+                                                           @click="handleHistoryList('repo')"
+                                                           :class="{rotate:isRepoCollapse, rotate1:!isRepoCollapse}"></i>
+                  </el-col>
                 </el-row>
                 <el-row v-show="isRepoCollapse" class="collapseTop">
                   <el-col :span="8">
                     <template v-for="(item,index) in outerRepoHistory">
                       <el-row class="status-list" :class="{circleColor:index==(outerRepoHistory.length-1)}">
-                        <el-col :span="24" :class="{circleColor1:index==(outerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
+                        <el-col :span="24" :class="{circleColor1:index==(outerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span>
+                        </el-col>
                       </el-row>
                     </template>
                   </el-col>
                   <el-col :span="8">
                     <template v-for="(item,index) in innerRepoHistory">
                       <el-row class="status-list" :class="{circleColor:index==(innerRepoHistory.length-1)}">
-                        <el-col :span="24" :class="{circleColor1:index==(innerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span></el-col>
+                        <el-col :span="24" :class="{circleColor1:index==(innerRepoHistory.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | repoStatus}}</span>
+                        </el-col>
                       </el-row>
                     </template>
                   </el-col>
@@ -172,7 +213,10 @@
         <el-col :span="24">
           <el-card class="box-card mybox" style="width:100%">
             <div slot="header" class="clearfix el-row-header">
-              <svg class="icon detailIcon" aria-hidden="true">   <use xlink:href="#icon-order_H"></use> </svg>
+              <svg class="icon detailIcon" aria-hidden="true"> 
+                <use xlink:href="#icon-order_H"></use>
+                 
+              </svg>
               <span class="keynote">订单详情</span>
             </div>
             <div class="box-card mycard1 detailContent">
@@ -193,13 +237,22 @@
                 <el-col :span="8" class="msgName">货品数量：{{orderDetail.txDetail.productQuantity}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="6" class="msgName">最新交易状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state | transactionStatus}}</el-col>
-                <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom" @click="handleHistoryList('order')" :class="{rotate:isOrderCollapse, rotate1:!isOrderCollapse}"></i></el-col>
+                <el-col :span="6" class="msgName">
+                  最新交易状态：{{orderDetail.txDetail.operationRecordVoList[orderDetail.txDetail.operationRecordVoList.length-1].state
+                  | transactionStatus}}
+                </el-col>
+                <el-col :span="6" class="collapseBtn"><i class="el-icon-caret-bottom"
+                                                         @click="handleHistoryList('order')"
+                                                         :class="{rotate:isOrderCollapse, rotate1:!isOrderCollapse}"></i>
+                </el-col>
               </el-row>
               <el-row v-show="isOrderCollapse" class="collapseTop">
                 <template v-for="(item,index) in orderDetail.txDetail.operationRecordVoList">
-                  <el-row class="status-list" :class="{circleColor:index==(orderDetail.txDetail.operationRecordVoList.length-1)}">
-                    <el-col :span="8" :class="{circleColor1:index==(orderDetail.txDetail.operationRecordVoList.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | transactionStatus}}</span></el-col>
+                  <el-row class="status-list"
+                          :class="{circleColor:index==(orderDetail.txDetail.operationRecordVoList.length-1)}">
+                    <el-col :span="8"
+                            :class="{circleColor1:index==(orderDetail.txDetail.operationRecordVoList.length-1)}"><span>{{item.operateTime | timeTransfer}} {{item.state | transactionStatus}}</span>
+                    </el-col>
                   </el-row>
                 </template>
               </el-row>
@@ -213,7 +266,8 @@
       <div class="modal-mask" v-show="showModal">
         <div class="modal-confirm rece_modal">
           <el-row class="el-row-header">
-            <span class="confirm-header sellerColor">确认贴现</span><i class="el-icon-close closeBtn" @click="close" style="cursor: pointer"></i>
+            <span class="confirm-header sellerColor">确认贴现</span><i class="el-icon-close closeBtn" @click="close"
+                                                                   style="cursor: pointer"></i>
           </el-row>
           <div class="confirm-content">
             <el-form>
@@ -284,82 +338,81 @@
   import LocalStore from '../../../../common/store'
 
   export default {
-    name:'detail',
-    mounted:function () {
+    name: 'detail',
+    mounted: function () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       var userInfo = LocalStore.fetchUserInfo();
       this.rate = userInfo.rate;
       this.getDetail(false);
     },
-    computed:{
+    computed: {
       state () {
         return Store.state;
       },
       amount(){
-        var amount = this.receDetail.detailVoList[0].isseAmt * (1 - this.rate/100);
+        var amount = this.receDetail.detailVoList[0].isseAmt * (1 - this.rate / 100);
         return amount;
       }
     },
     data () {
       return {
-        rate:'',
+        rate: '',
         orderDetail: {
           txDetail: {
-            operationRecordVoList:[
-              {state:'',operateTime:''}
+            operationRecordVoList: [
+              {state: '', operateTime: ''}
             ],
           },
           receOver: {},
           repoOver: {},
           wayBillOver: {}
         },
-        receDetail:{
-          detailVoList:[{
-            receivableNo:'',
-            orderNo:'',
-            isseDt:'',
-            dueDt:'',
-            pyeeEnterpriseName:'',
-            pyerEnterpriseName:'',
-            isseAmt:'',
-            rate:'',
-            pyee:'',
-            pyeeAcctSvcrName:'',
-            pyeeLinkman:'',
-            pyeePhone:'',
-            pyer:'',
-            pyerAcctSvcrName:'',
-            pyerLinkMan:'',
-            pyerPhone:'',
-            contractNo:'',
-            invoiceNo:''
+        receDetail: {
+          detailVoList: [{
+            receivableNo: '',
+            orderNo: '',
+            isseDt: '',
+            dueDt: '',
+            pyeeEnterpriseName: '',
+            pyerEnterpriseName: '',
+            isseAmt: '',
+            rate: '',
+            pyee: '',
+            pyeeAcctSvcrName: '',
+            pyeeLinkman: '',
+            pyeePhone: '',
+            pyer: '',
+            pyerAcctSvcrName: '',
+            pyerLinkMan: '',
+            pyerPhone: '',
+            contractNo: '',
+            invoiceNo: ''
           }
           ],
-          serialVoList: [{
-          }]
+          serialVoList: [{}]
         },
-        innerRepoHistory:[],//入库仓储历史
-        outerRepoHistory:[],//出库仓储历史
-        wayBill:{},
-        isOrderCollapse:false,
-        isReceCollapse:false,
-        isWayBillCollapse:false,
-        isRepoCollapse:false,
-        showModal:false
+        innerRepoHistory: [],//入库仓储历史
+        outerRepoHistory: [],//出库仓储历史
+        wayBill: {},
+        isOrderCollapse: false,
+        isReceCollapse: false,
+        isWayBillCollapse: false,
+        isRepoCollapse: false,
+        showModal: false
       }
     },
-    methods:{
+    methods: {
       getDetail(isRefresh){
         this.rate = LocalStore.fetchUserInfo().rate;
         var detailParam = {
-          receivableNo:Store.state.checkIdRece,
-          operatorAcctId:LocalStore.fetchUserInfo().acctIds
+          receivableNo: Store.state.checkIdRece,
+          operatorAcctId: LocalStore.fetchUserInfo().acctIds
         }
         //获取应收账款详情
-        this.$http.post('../v1/receivable/receivableInfoWithSerial',detailParam,{emulateJSON:true}).then((res) => {
-          var data =  res.body.data;
-          if(res.body.code != 0){
+        this.$http.post('../v1/receivable/receivableInfoWithSerial', detailParam, {emulateJSON: true}).then((res) => {
+          var data = res.body.data;
+          if (res.body.code != 0) {
             this.$message.error(res.body.message);
             return;
           }
@@ -367,10 +420,10 @@
           this.receDetail = data;
 
           //获取订单详情
-          if(!isRefresh){
+          if (!isRefresh) {
             this.getOrderInfo(this.receDetail.detailVoList[0].orderNo);
           }
-        },(err) => {
+        }, (err) => {
           console.log(err);
         })
       },
@@ -378,44 +431,45 @@
         this.$http.get("../v1/order/detail?orderNo=" + orderId).then(
           function (res) {
             // 处理成功的结果
-            if(res.body.code != 0){
+            if (res.body.code != 0) {
               this.$message.error(res.body.message);
               return;
             }
             this.orderDetail = res.body.data;
 
-//          根据仓储业务编号查询仓储详情
-            if(this.orderDetail.repoOver.payerRepoBusinessNo!==''){
-              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payerRepoBusinessNo).then(function(res){
-                if(res.body.code != 0){
+            //根据仓储业务编号查询仓储详情
+            if (this.orderDetail.repoOver.payerRepoBusinessNo !== '') {
+              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo=" + this.orderDetail.repoOver.payerRepoBusinessNo).then(function (res) {
+                if (res.body.code != 0) {
                   this.$message.error(res.body.message);
                   return;
                 }
-                this.innerRepoHistory=res.body.data.operationRecordVoList;
-              },function (err) {
+                this.innerRepoHistory = res.body.data.operationRecordVoList;
+              }, function (err) {
                 console.log(err);
               });
             }
-            if(this.orderDetail.repoOver.payeeRepoBusinessNo!==''){
-              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo="+this.orderDetail.repoOver.payeeRepoBusinessNo).then(function(res){
-                if(res.body.code != 0){
+            if (this.orderDetail.repoOver.payeeRepoBusinessNo !== '') {
+              this.$http.get("../v1/repository/getRepoBusiHistoryList?repoBusinessNo=" + this.orderDetail.repoOver.payeeRepoBusinessNo).then(function (res) {
+                if (res.body.code != 0) {
                   this.$message.error(res.body.message);
                   return;
                 }
-                this.outerRepoHistory=res.body.data.operationRecordVoList;
-              },function (err) {
+                this.outerRepoHistory = res.body.data.operationRecordVoList;
+              }, function (err) {
                 console.log(err);
               });
             }
-//          根据订单号查询运单详情
-            if(this.orderDetail.wayBillOver.wayBillLatestStatus>0){
-              this.$http.get("../v1/waybill/wayBillDetail?orderNo="+this.orderDetail.txDetail.orderId).then(function(res){
-                if(res.body.code != 0){
+
+            //根据订单号查询运单详情
+            if (this.orderDetail.wayBillOver.wayBillLatestStatus > 0) {
+              this.$http.get("../v1/waybill/wayBillDetail?orderNo=" + this.orderDetail.txDetail.orderId).then(function (res) {
+                if (res.body.code != 0) {
                   this.$message.error(res.body.message);
                   return;
                 }
-                this.wayBill=res.body.data;
-              },function(err){
+                this.wayBill = res.body.data;
+              }, function (err) {
                 console.log(err);
               });
             }
@@ -426,7 +480,7 @@
         );
       },
       handleHistoryList(item){
-        switch (item){
+        switch (item) {
           case 'rece':
             this.isOrderCollapse = false;
             this.isReceCollapse = !this.isReceCollapse;
@@ -461,32 +515,32 @@
       },
       discountConfirm(){
         var params = {
-          receivableNo:this.receDetail.detailVoList[0].receivableNo,
-          replyerAcctId:LocalStore.fetchUserInfo().acctIds,
-          response:0,
-          discountInHandAmount:this.amount,
-          discountRate:this.rate,
-          discountApplyAmount:this.receDetail.detailVoList[0].isseAmt
+          receivableNo: this.receDetail.detailVoList[0].receivableNo,
+          replyerAcctId: LocalStore.fetchUserInfo().acctIds,
+          response: 0,
+          discountInHandAmount: this.amount,
+          discountRate: this.rate,
+          discountApplyAmount: this.receDetail.detailVoList[0].isseAmt
         }
         this.showModal = false;
-        this.$http.post("../v1/receivable/discountReply",params,{emulateJSON:true}).then(function(res){
-          if(res.body.code != 0){
-            this.$message.error(res.body.message);
-            return;
-          }
-          this.$message.success('已贴现确认！');
-          this.getDetail(true);
-        },
-        function (res) {
-          // 处理失败的结果
-          console.log(res);
-        });
+        this.$http.post("../v1/receivable/discountReply", params, {emulateJSON: true}).then(function (res) {
+            if (res.body.code != 0) {
+              this.$message.error(res.body.message);
+              return;
+            }
+            this.$message.success('已贴现确认！');
+            this.getDetail(true);
+          },
+          function (res) {
+            // 处理失败的结果
+            console.log(res);
+          });
       }
     }
   }
 </script>
 <style>
-  .rece_modal{
-    height: 235px!important;
+  .rece_modal {
+    height: 235px !important;
   }
 </style>
