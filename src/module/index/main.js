@@ -20,7 +20,8 @@ const router = new VueRouter({
   routes: routerConfig
 })
 
-// Vue.http.
+//设置请求参数为json类型
+Vue.http.options.emulateJSON = true;
 
 /*****  设置http拦截器 start  ******/
 let loadingInstance;
