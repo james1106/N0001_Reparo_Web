@@ -529,7 +529,11 @@
               return;
             }
             this.$message.success('已贴现确认！');
-            this.getDetail(true);
+            //刷新detail
+            var _this=this;
+            setTimeout(function () {
+              _this.getDetail(true);
+            }, 2000);
           },
           function (res) {
             // 处理失败的结果
